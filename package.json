@@ -1,0 +1,33 @@
+{
+  "name": "web-kit-monorepo-root",
+  "private": true,
+  "description": "TypeScript-based various types of solutions for Distributed Lab projects and not only.",
+  "contributors": [
+    {
+      "name" : "Semen Loktionov",
+      "email" : "loktionov.kh@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://distributed-lab.github.io/web-kit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/distributed-lab/web-kit.git"
+  },
+  "keywords": [
+    "distributed-lab",
+    "web-kit",
+    "sdk"
+  ],
+  "bugs": {
+    "url": "https://github.com/distributed-lab/web-kit/issues"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "publish-next": "yarn workspaces foreach --no-private exec yarn npm publish --tag next",
+    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
+  },
+  "packageManager": "yarn@3.4.1"
+}
