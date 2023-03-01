@@ -1,0 +1,252 @@
+{
+  "data": [
+    {
+      "id": "a80fbb70-917c-4593-bcc4-ad536a68389b",
+      "type": "meta-buy-order",
+      "attributes": {
+        "amount": 1,
+        "created_at": "2022-02-04T13:39:18.830123Z",
+        "email": "foo@bar.com",
+        "state": "created",
+        "verification_url": "https://my-fake-url.com/verification/1212ad13-607d-31e5-86af-73d74917ec83"
+      },
+      "relationships": {
+        "meta_sell_order": {
+          "data": {
+            "id": "b34bdfff-029e-416b-b7dd-1271f588130b",
+            "type": "meta-sell-order"
+          }
+        }
+      }
+    },
+    {
+      "id": "9b061c42-6d20-4657-9f7f-db157736c50f",
+      "type": "meta-buy-order",
+      "attributes": {
+        "amount": 1,
+        "created_at": "2022-02-04T13:39:07.51962Z",
+        "email": "foo@bar.com",
+        "state": "created",
+        "verification_url": "https://my-fake-url.com/verification/328ecdce-4bd8-340e-84f2-35de12180cb3"
+      },
+      "relationships": {
+        "meta_sell_order": {
+          "data": {
+            "id": "b34bdfff-029e-416b-b7dd-1271f588130b",
+            "type": "meta-sell-order"
+          }
+        }
+      }
+    },
+    {
+      "id": "03980a87-9afb-4952-86c6-674eaf555e51",
+      "type": "meta-buy-order",
+      "attributes": {
+        "amount": 1,
+        "claimable_at": "2022-01-25T14:29:17.230663Z",
+        "created_at": "2022-02-01T08:39:08.900574Z",
+        "email": "test@test.com",
+        "state": "receiver_pending",
+        "verification_url": ""
+      },
+      "relationships": {
+        "meta_sell_order": {
+          "data": {
+            "id": "c83891dd-7034-4b53-8da9-86dac5161fb1",
+            "type": "meta-sell-order"
+          }
+        }
+      }
+    },
+    {
+      "id": "497314c0-3d99-4a22-aebb-0c60913324da",
+      "type": "meta-buy-order",
+      "attributes": {
+        "amount": 1,
+        "claimable_at": "2022-01-25T14:29:17.230663Z",
+        "created_at": "2022-01-25T08:31:18.15616Z",
+        "email": "test@test.net",
+        "state": "receiver_pending",
+        "verification_url": ""
+      },
+      "relationships": {
+        "meta_sell_order": {
+          "data": {
+            "id": "c83891dd-7034-4b53-8da9-86dac5161fb1",
+            "type": "meta-sell-order"
+          }
+        }
+      }
+    },
+    {
+      "id": "c5b5ca54-1760-43a5-a8ef-b48aad0e30d7",
+      "type": "meta-buy-order",
+      "attributes": {
+        "amount": 1,
+        "claimable_at": "2022-01-25T14:29:17.230663Z",
+        "created_at": "2022-01-25T08:29:07.054527Z",
+        "email": "test@test.net",
+        "state": "receiver_pending",
+        "verification_url": ""
+      },
+      "relationships": {
+        "meta_sell_order": {
+          "data": {
+            "id": "c83891dd-7034-4b53-8da9-86dac5161fb1",
+            "type": "meta-sell-order"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "b66ce19f-f742-4e53-9d96-ff63d8c81bab",
+      "type": "metadata",
+      "attributes": {
+        "attributes": {},
+        "created_at": "2021-12-17T13:37:33.965001Z",
+        "description": "asdasd",
+        "image_url": "https://my-fake-url.com/example",
+        "name": "test",
+        "updated_at": "2021-12-17T13:37:33.965001Z"
+      },
+      "relationships": {
+        "network": {
+          "data": {
+            "id": "testnet",
+            "type": "networks"
+          }
+        },
+        "owner": {
+          "data": {
+            "id": "3d38fff3-847f-45f2-a267-891ba90dac37",
+            "type": "identities"
+          }
+        }
+      }
+    },
+    {
+      "id": "c4b6da1f-6ca1-43ce-bea8-515cdf29cd59",
+      "type": "metadata",
+      "attributes": {
+        "attributes": {},
+        "created_at": "2021-12-29T14:36:01.796775Z",
+        "description": "asd",
+        "image_url": "https://my-fake-url.com/2b3a17df-932d-4421-b03c-b05cebc7eae",
+        "name": "response",
+        "updated_at": "2021-12-29T14:36:01.796775Z"
+      },
+      "relationships": {
+        "network": {
+          "data": {
+            "id": "testnet",
+            "type": "networks"
+          }
+        },
+        "owner": {
+          "data": {
+            "id": "3d38fff3-847f-45f2-a267-891ba90dac37",
+            "type": "identities"
+          }
+        }
+      }
+    },
+    {
+      "id": "b34bdfff-029e-416b-b7dd-1271f588130b",
+      "type": "meta-sell-order",
+      "attributes": {
+        "amount": 100,
+        "available_amount": 71463,
+        "currency": "USD",
+        "price": 100,
+        "views_count": 0
+      },
+      "relationships": {
+        "owner": {
+          "data": {
+            "id": "3d38fff3-847f-45f2-a267-891ba90dac37",
+            "type": "identities"
+          }
+        },
+        "token": {
+          "data": {
+            "id": "db62ca5f-44d4-4cc5-9fed-3891cf4ae2b4",
+            "type": "tokens"
+          }
+        }
+      }
+    },
+    {
+      "id": "c83891dd-7034-4b53-8da9-86dac5161fb1",
+      "type": "meta-sell-order",
+      "attributes": {
+        "amount": 10,
+        "available_amount": 2,
+        "currency": "USD",
+        "price": 200,
+        "views_count": 0
+      },
+      "relationships": {
+        "owner": {
+          "data": {
+            "id": "3d38fff3-847f-45f2-a267-891ba90dac37",
+            "type": "identities"
+          }
+        },
+        "token": {
+          "data": {
+            "id": "7295410b-f0ac-437c-8781-75bf8496ed38",
+            "type": "tokens"
+          }
+        }
+      }
+    },
+    {
+      "id": "db62ca5f-44d4-4cc5-9fed-3891cf4ae2b4",
+      "type": "tokens",
+      "attributes": {
+        "created_at": "2021-12-17T13:37:34.508321Z",
+        "external_id": "0x1a725171cbe7dd52eecb2d1c7b7e23b991608bcdaf53f36b72dcedbc77ce27ff",
+        "updated_at": "2021-12-17T13:37:34.508321Z"
+      },
+      "relationships": {
+        "contract": {
+          "data": {
+            "id": "6b1658e4-d3cf-426d-a10d-8edad1055c3b",
+            "type": "contracts"
+          }
+        },
+        "metadata": {
+          "data": {
+            "id": "b66ce19f-f742-4e53-9d96-ff63d8c81bab",
+            "type": "metadata"
+          }
+        }
+      }
+    },
+    {
+      "id": "7295410b-f0ac-437c-8781-75bf8496ed38",
+      "type": "tokens",
+      "attributes": {
+        "created_at": "2021-12-29T14:36:02.065904Z",
+        "external_id": "0x5d40545cdc1cd0cc9961c2561e531e8a9ed0a9b44531b249dcd931bf1db09a",
+        "updated_at": "2021-12-29T14:36:02.065904Z"
+      },
+      "relationships": {
+        "contract": {
+          "data": {
+            "id": "6b1658e4-d3cf-426d-a10d-8edad1055c3b",
+            "type": "contracts"
+          }
+        },
+        "metadata": {
+          "data": {
+            "id": "c4b6da1f-6ca1-43ce-bea8-515cdf29cd59",
+            "type": "metadata"
+          }
+        }
+      }
+    }
+  ]
+}

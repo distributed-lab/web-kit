@@ -1,0 +1,7 @@
+packages/**/build/*
+jest.config.js
+jest.config.base.js
+node_modules/
+.yarn/
+scripts/*.js
+.eslintrc.js

@@ -2,12 +2,6 @@
   "name": "web-kit-monorepo-root",
   "private": true,
   "description": "TypeScript-based various types of solutions for Distributed Lab projects and not only.",
-  "contributors": [
-    {
-      "name" : "Semen Loktionov",
-      "email" : "loktionov.kh@gmail.com"
-    }
-  ],
   "license": "MIT",
   "homepage": "https://distributed-lab.github.io/web-kit",
   "repository": {
@@ -25,9 +19,34 @@
   "workspaces": [
     "packages/*"
   ],
+  "gitHooks": {
+    "pre-commit": "yarn lint",
+    "pre-push": "yarn test"
+  },
   "scripts": {
+    "build": "yarn workspaces foreach --parallel --topological-dev --verbose run build",
+    "docs": "typedoc --options typedoc.json",
+    "lint": "eslint . --ext .ts --fix --cache --max-warnings=0 && yarn workspaces foreach --parallel --verbose --no-private run typecheck",
+    "test": "yarn workspaces foreach --parallel --verbose --no-private run test",
     "publish-next": "yarn workspaces foreach --no-private exec yarn npm publish --tag next",
     "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "jest": "^29.4.3",
+    "prettier": "^2.8.4",
+    "ts-jest": "^29.0.5",
+    "typedoc": "^0.23.26",
+    "typescript": "^4.9.5",
+    "yorkie": "^2.0.0"
   },
   "packageManager": "yarn@3.4.1"
 }

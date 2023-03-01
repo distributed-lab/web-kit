@@ -2,7 +2,7 @@
 
 /node_modules/
 packages/**/build/
-
+/doc/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -10,6 +10,8 @@ package-lock.json
 *.log
 
 deprecated
+
+.eslintcache
 
 # Editor directories and files
 .idea

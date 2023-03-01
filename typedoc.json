@@ -1,0 +1,7 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "out": "doc",
+  "entryPointStrategy": "packages",
+  "entryPoints": ["./packages/**"],
+  "name": "Distributed Lab | Web-Kit"
+}

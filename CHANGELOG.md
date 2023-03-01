@@ -7,10 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - `CHANGELOG.md` file
-- `root`: Added `package.json`, `.editorconfig`, `.gitattributes`, `.gitignore` initial files
+- `root`: `package.json`, `.editorconfig`, `.gitattributes`, `.gitignore` initial files
 - `root`: Yarn Berry
+- `root`: Jest and configuration files
+- `root`: Prettier, ESLint and configuration files
+- `root`: Git hooks with Yorkie
+- `root`: TypeScript and configuration files
+- `root`: TypeDoc and configuration file
+- `root`: `@distributedlab/utilites` package particularly moved from the [old repo] `@distributedlab/utils` package
+- `root`: `@distributedlab/jac` package moved from the [old repo] `@distributedlab/json-api-client` package
+- `root`: GitHub Actions
 
 ### Changed
 - `root`: Updated `README.md`
+
+[old repo]: https://github.com/distributed-lab/web-kit-old
 
 [Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.1.0...HEAD
