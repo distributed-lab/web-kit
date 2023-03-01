@@ -76,22 +76,27 @@ yarn workspaces foreach -pt run add @distributedlab/package-to-add
 To test the packages, you need:
 
 1. Build the packages:
+
     ```bash
     yarn build
     ```
 2. Install a switch yarn to version berry in the project, to yarn be able to resolve workspace dependencies:
+
     ```bash
     yarn set version berry
     ```
 3. Add this to the `.yarnrc.yml` file:
+
     ```yaml
     nodeLinker: node-modules
     ```
 4. Install dependencies for testing:
+
     ```bash
     yarn add @distributedlab/jac
     ```
 5. Link the packages to the project:
+
     ```bash
     yarn link -p -A /path/to/web-kit/root/directory
     ```
