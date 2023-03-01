@@ -1,6 +1,7 @@
-import { JsonApiResponse } from '@/response'
 import { AxiosResponse } from 'axios'
+
 import { JsonApiClient } from '@/json-api'
+import { JsonApiResponse } from '@/response'
 import { JsonApiDefaultMeta } from '@/types'
 
 export const parseJsonApiResponse = <T, U = JsonApiDefaultMeta>(opts: {

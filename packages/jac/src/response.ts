@@ -1,16 +1,17 @@
+import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
+import { StatusCodes } from 'http-status-codes'
 import Jsona from 'jsona'
 import isEmpty from 'lodash/isEmpty'
 
-import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
+import { HTTP_METHODS } from '@/enums'
+import { JsonApiClient } from '@/json-api'
+
 import {
   Endpoint,
   JsonApiDefaultMeta,
   JsonApiLinkFields,
   JsonApiResponseLinks,
 } from './types'
-import { JsonApiClient } from '@/json-api'
-import { StatusCodes } from 'http-status-codes'
-import { HTTP_METHODS } from '@/enums'
 
 const formatter = new Jsona()
 

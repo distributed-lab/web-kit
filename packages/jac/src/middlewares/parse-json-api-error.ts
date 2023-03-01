@@ -1,7 +1,8 @@
+import { AxiosError } from 'axios'
+
+import { HTTP_STATUS_CODES } from '@/enums'
 import { errors } from '@/errors'
 import { JsonApiError } from '@/errors'
-import { AxiosError } from 'axios'
-import { HTTP_STATUS_CODES } from '@/enums'
 import { JsonApiResponseErrors } from '@/types'
 
 /*

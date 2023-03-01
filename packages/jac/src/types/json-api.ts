@@ -1,8 +1,9 @@
 import {
   AxiosInstance,
-  RawAxiosRequestHeaders,
   AxiosRequestConfig,
+  RawAxiosRequestHeaders,
 } from 'axios'
+
 import { HTTP_METHODS } from '@/enums'
 
 export enum JsonApiLinkFields {

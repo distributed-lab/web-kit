@@ -1,11 +1,11 @@
+import { JsonApiClient } from './json-api'
+import { parseJsonApiResponse } from './middlewares'
 import {
+  MockWrapper,
   PARSED_RESPONSE,
   RAW_RESPONSE,
   WITHOUT_LINKS_RAW_RESPONSE,
-  MockWrapper,
 } from './test'
-import { parseJsonApiResponse } from './middlewares'
-import { JsonApiClient } from './json-api'
 import { JsonApiLinkFields } from './types'
 
 jest.mock('./json-api')

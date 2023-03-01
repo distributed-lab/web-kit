@@ -1,6 +1,15 @@
 import axios, { AxiosError, AxiosInstance } from 'axios'
-import { HTTP_METHODS } from './enums'
+
 import { JsonApiResponse } from '@/response'
+
+import { HTTP_METHODS } from './enums'
+import { isUndefined } from './helpers'
+import {
+  flattenToAxiosJsonApiQuery,
+  parseJsonApiError,
+  parseJsonApiResponse,
+  setJsonApiHeaders,
+} from './middlewares'
 import {
   JsonApiClientConfig,
   JsonApiClientRequestConfig,
@@ -9,13 +18,6 @@ import {
   JsonApiResponseErrors,
   URL,
 } from './types'
-import {
-  flattenToAxiosJsonApiQuery,
-  parseJsonApiError,
-  parseJsonApiResponse,
-  setJsonApiHeaders,
-} from './middlewares'
-import { isUndefined } from './helpers'
 
 /**
  * Represents JsonApiClient that performs requests to backend

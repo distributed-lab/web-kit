@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse, AxiosResponseHeaders } from 'axios'
+
 import { JsonApiClient } from '../index'
 
 export class MockWrapper {

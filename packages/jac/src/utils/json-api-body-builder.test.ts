@@ -1,5 +1,5 @@
-import { JsonApiBodyBuilder } from './json-api-body-builder'
 import { JsonApiRecord } from '../types'
+import { JsonApiBodyBuilder } from './json-api-body-builder'
 
 describe('performs JsonApiBodyBuilder unit test', () => {
   describe('setData', () => {

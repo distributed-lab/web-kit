@@ -4,6 +4,8 @@
   },
   "extends": "./tsconfig.json",
   "include": [
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "src/**/*.ts",
+    "src/**/*.test.ts",
   ]
 }

@@ -1,4 +1,5 @@
 packages/**/build/*
+packages/**/build/*
 jest.config.js
 jest.config.base.js
 node_modules/

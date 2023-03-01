@@ -1,5 +1,5 @@
-import { flattenToAxiosJsonApiQuery } from './flatten-to-axios-json-api-query'
 import { JsonApiClientRequestConfig } from '../types'
+import { flattenToAxiosJsonApiQuery } from './flatten-to-axios-json-api-query'
 
 describe('flattenToAxiosJsonApiQuery', () => {
   it('should not modify object with primitive query parameters', () => {

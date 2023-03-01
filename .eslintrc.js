@@ -8,15 +8,16 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.eslint.json', './packages/*/tsconfig.json'],
+    project: ['./tsconfig.eslint.json', './packages/*/tsconfig.eslint.json'],
   },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended',
+    'plugin:import/typescript',
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'simple-import-sort'],
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'arrow-parens': 0,
@@ -41,6 +42,8 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
 };
 

@@ -1,2 +1,3 @@
-*.test.ts
+**/*.test.ts
 tsconfig.json
+src/test

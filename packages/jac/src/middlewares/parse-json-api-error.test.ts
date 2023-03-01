@@ -1,7 +1,8 @@
-import { errors } from '../errors'
-import { parseJsonApiError } from './parse-json-api-error'
 import { AxiosError } from 'axios'
+
+import { errors } from '../errors'
 import { JsonApiResponseErrors } from '../types'
+import { parseJsonApiError } from './parse-json-api-error'
 
 describe('errors', () => {
   const testCases = [

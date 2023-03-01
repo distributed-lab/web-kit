@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { RAW_RESPONSE, PARSED_RESPONSE } from './test'
+
 import { JsonApiClient } from './json-api'
+import { PARSED_RESPONSE, RAW_RESPONSE } from './test'
 import { MockWrapper } from './test'
 
 jest.mock('axios')

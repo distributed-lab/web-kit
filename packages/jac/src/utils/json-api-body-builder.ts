@@ -1,7 +1,7 @@
 import {
+  JsonApiAttributes,
   JsonApiRecord,
   JsonApiRecordData,
-  JsonApiAttributes,
   JsonApiRelationships,
 } from '@/types'
 
