@@ -6,3 +6,4 @@ node_modules/
 .yarn/
 scripts/*.js
 .eslintrc.js
+rollup.config.js

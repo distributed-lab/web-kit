@@ -1,0 +1,6 @@
+src/test/
+src/**/*.test.ts
+jest.config.js
+tsconfig.json
+tsconfig.eslint.json
+postbuild.js

@@ -15,22 +15,18 @@ module.exports = function postBuild(dirpath) {
     "type": "commonjs",
   })
 
-  fs.copyFile(`${dirpath}/package.json`, `${dirpath}/dist/package.json`, (err) => {
-    if (err) throw err;
-  })
-
   const tsconfigPath = `${dirpath}/tsconfig.json`
 
   replaceTscAliasPaths({
     tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}}/dist/esm`,
+    outDir: `${dirpath}/dist/esm`,
   })
   replaceTscAliasPaths({
     tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}}/dist/cjs`,
+    outDir: `${dirpath}/dist/cjs`,
   })
   replaceTscAliasPaths({
     tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}}/dist/types`,
+    outDir: `${dirpath}/dist/types`,
   })
 }
