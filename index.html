@@ -108,7 +108,7 @@
 <pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">build</span>
 </code></pre>
 </li>
-<li><p>Switch yarn to version berry in the project, to yarn be able to resolve workspace dependencies:</p>
+<li><p>Switch yarn to version berry in the project where you want to test package, to yarn be able to resolve workspace dependencies:</p>
 <pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">set</span><span class="hl-0"> </span><span class="hl-3">version</span><span class="hl-0"> </span><span class="hl-3">berry</span>
 </code></pre>
 </li>
@@ -116,12 +116,16 @@
 <pre><code class="language-yaml"><span class="hl-4">nodeLinker</span><span class="hl-0">: </span><span class="hl-5">node-modules</span>
 </code></pre>
 </li>
-<li><p>Install dependencies for testing:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">add</span><span class="hl-0"> </span><span class="hl-3">@distributedlab/jac</span>
-</code></pre>
-</li>
 <li><p>Link the packages to the project:</p>
 <pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">link</span><span class="hl-0"> </span><span class="hl-3">-p</span><span class="hl-0"> </span><span class="hl-3">-A</span><span class="hl-0"> </span><span class="hl-3">/path/to/web-kit/root/directory</span>
+</code></pre>
+</li>
+<li><p>Add dependencies to the package.json file:</p>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;dependencies&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-1">&quot;@distributedlab/jac&quot;</span><span class="hl-0">: </span><span class="hl-3">&quot;*&quot;</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">}</span>
+</code></pre>
+</li>
+<li><p>Install the dependencies:</p>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">install</span>
 </code></pre>
 </li>
 </ol>
