@@ -31,6 +31,6 @@ module.exports = function postBuild(dirpath) {
   })
   replaceTscAliasPaths({
     tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}}/dist/cjs`,
+    outDir: `${dirpath}}/dist/types`,
   })
 }
