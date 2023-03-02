@@ -7,15 +7,19 @@
 </div>
 
 # Distributed Lab | Web-Kit
+
 TypeScript-based various types of solutions for [Distributed Lab](https://distributedlab.com/) projects and not only.
 
 ## Changelog
+
 For the change log, see [CHANGELOG.md](https://github.com/rarimo/js-sdk/blob/main/CHANGELOG.md).
 
 
 ## Packages
+
 The Distributed Lab Web-Kit is a library that consists of many smaller NPM packages within the
 [@distributedlab namespace](https://www.npmjs.com/org/distributedlab), a so-called monorepo.
+
 Here are the packages in the namespace:
 
 | Package                                                                                             | Description                                                          | Latest                                                                                                                              |
@@ -26,7 +30,9 @@ Here are the packages in the namespace:
 ## Development
 
 ### Editors
+
 #### VSCode
+
 To get ESLint and Prettier working in VSCode, install [ESLint extension] and add the following to your settings.json:
 
 ```json
@@ -45,9 +51,11 @@ To get ESLint and Prettier working in VSCode, install [ESLint extension] and add
 }
 ```
 
+
 [ESLint extension]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 
 #### WebStorm
+
 To get ESLint and Prettier working in WebStorm, go to `Preferences > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint` and check the following:
 - `Run eslint --fix on save` enabled
 - `Automatic ESLint configuration` enabled
@@ -57,6 +65,7 @@ To get ESLint and Prettier working in WebStorm, go to `Preferences > Languages &
 ### Dependencies
 
 #### Local dependencies
+
 To install all dependencies, run:
 ```bash
 yarn install
@@ -73,6 +82,7 @@ yarn workspaces foreach -pt run add @distributedlab/package-to-add
 ```
 
 #### Testing dependencies
+
 To test the packages, you need:
 
 1. Build the packages:
@@ -102,17 +112,21 @@ To test the packages, you need:
     ```
 
 ### Basics
+
 #### Build
+
 ```bash
 yarn build
 ```
 
 #### Run tests
+
 ```bash
 yarn test
 ```
 
 #### Run linter
+
 ```bash
 yarn lint
 ```
