@@ -425,20 +425,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@distributedlab/testdep@workspace:packages/testdep":
-  version: 0.0.0-use.local
-  resolution: "@distributedlab/testdep@workspace:packages/testdep"
-  dependencies:
-    "@distributedlab/utilities": "workspace:^"
-    "@types/jest": ^29.4.0
-    "@types/node": ^18.14.2
-    jest: ^29.4.3
-    tsc-alias: ^1.8.2
-    tslib: ^2.5.0
-  languageName: unknown
-  linkType: soft
-
-"@distributedlab/utilities@workspace:^, @distributedlab/utilities@workspace:packages/utilities":
+"@distributedlab/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@distributedlab/utilities@workspace:packages/utilities"
   dependencies:
