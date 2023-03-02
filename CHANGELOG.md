@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: GitHub Actions
 - `all`: Build to CommonJS and ES modules
 - `all`: `tsc-alias` package to use aliases in TypeScript
+- `root`: `yarn rsc` Release Sanity Check script
 
 ### Changed
 - `root`: Updated `README.md`

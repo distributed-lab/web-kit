@@ -131,6 +131,12 @@ yarn test
 yarn lint
 ```
 
+#### Check release version
+
+```bash
+yarn rsc 0.1.0
+```
+
 ### Resources
 - [Yarn Berry](https://yarnpkg.com/cli/install)
 - [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
