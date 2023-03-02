@@ -21,7 +21,7 @@
   ],
   "gitHooks": {
     "pre-commit": "yarn lint",
-    "pre-push": "yarn test"
+    "pre-push": "yarn test && yarn rsc"
   },
   "scripts": {
     "build": "yarn workspaces foreach -pv --topological-dev run build",
@@ -29,7 +29,8 @@
     "lint": "eslint . --ext .ts --fix --cache --max-warnings=0 && yarn workspaces foreach -pv --no-private run typecheck",
     "test": "yarn workspaces foreach -pv --no-private run test",
     "publish-next": "yarn build && yarn workspaces foreach --no-private run publish-next",
-    "publish-latest": "yarn build && yarn workspaces foreach --no-private run publish-latest"
+    "publish-latest": "yarn build && yarn workspaces foreach --no-private run publish-latest",
+    "rsc": "node scripts/release-sanity-check.js"
   },
   "devDependencies": {
     "@types/eslint": "^8",
