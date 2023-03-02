@@ -28,8 +28,8 @@
     "docs": "typedoc --options typedoc.json",
     "lint": "eslint . --ext .ts --fix --cache --max-warnings=0 && yarn workspaces foreach -pv --no-private run typecheck",
     "test": "yarn workspaces foreach -pv --no-private run test",
-    "publish-next": "yarn workspaces foreach --no-private exec yarn npm publish --tag next",
-    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
+    "publish-next": "yarn build && yarn workspaces foreach --no-private run publish-next",
+    "publish-latest": "yarn build && yarn workspaces foreach --no-private run publish-latest"
   },
   "devDependencies": {
     "@types/eslint": "^8",

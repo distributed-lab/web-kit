@@ -90,7 +90,7 @@ To test the packages, you need:
     ```bash
     yarn build
     ```
-2. Install a switch yarn to version berry in the project, to yarn be able to resolve workspace dependencies:
+2. Switch yarn to version berry in the project, to yarn be able to resolve workspace dependencies:
 
     ```bash
     yarn set version berry
@@ -131,3 +131,8 @@ yarn test
 yarn lint
 ```
 
+### Resources
+- [Yarn Berry](https://yarnpkg.com/cli/install)
+- [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+- [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+- [Web-Kit TypeDoc](https://distributed-lab.github.io/web-kit)

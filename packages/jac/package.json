@@ -7,37 +7,53 @@
     "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/jac"
   },
   "license": "MIT",
-  "files": [
-    "build",
-    "*.md"
-  ],
   "sideEffects": false,
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "typesVersions": {
+    ">=4.2": {
+      "*": [
+        "./types/*"
+      ]
+    }
+  },
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "require": "./cjs/index.js",
+      "import": "./esm/index.js",
+      "default": "./esm/index.js"
+    }
+  },
   "scripts": {
-    "build": "yarn clean && tsc",
-    "clean": "rm -rf build",
+    "build": "yarn clean && yarn build:types && yarn build:cjs && yarn build:esm && node ./postbuild.js",
+    "build:types": "tsc -p tsconfig.json --outDir ./dist/types --declaration --emitDeclarationOnly",
+    "build:cjs": "tsc -p tsconfig.json --outDir ./dist/cjs --module commonjs",
+    "build:esm": "tsc -p tsconfig.json --outDir ./dist/esm --module esnext",
+    "clean": "rm -rf dist",
     "test": "yarn jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "publish-latest": "cd ./dist && npm publish",
+    "publish-next": "cd ./dist && npm publish --tag next"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "typedoc": {
-    "entryPoint": "./src/index.ts",
-    "readmeFile": "./README.md",
-    "displayName": "@distributedlab/jac"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/lodash": "^4",
     "@types/node": "^18.14.2",
-    "jest": "^29.4.3"
+    "jest": "^29.4.3",
+    "tsc-alias": "^1.8.2"
   },
   "dependencies": {
     "axios": "^1.3.4",
     "http-status-codes": "^2.2.0",
     "jsona": "^1.11.0",
     "lodash": "^4.17.21"
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "readmeFile": "./README.md",
+    "displayName": "@distributedlab/jac"
   }
 }

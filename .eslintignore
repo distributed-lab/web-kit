@@ -1,5 +1,5 @@
-packages/**/build/*
-packages/**/build/*
+packages/**/dist/*
+packages/**/*.js
 jest.config.js
 jest.config.base.js
 node_modules/

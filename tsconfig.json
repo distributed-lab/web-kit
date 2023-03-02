@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
     "lib": [
       "esnext",
       "dom"
@@ -11,7 +10,7 @@
       "@types/jest"
     ],
     "moduleResolution": "node",
-    "declaration": true,
+    "declaration": false,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,

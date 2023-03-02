@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: `@distributedlab/utilities` package particularly moved from the [old repo] `@distributedlab/utils` package
 - `root`: `@distributedlab/jac` package moved from the [old repo] `@distributedlab/json-api-client` package
 - `root`: GitHub Actions
+- `all`: Build to CommonJS and ES modules
+- `all`: `tsc-alias` package to use aliases in TypeScript
 
 ### Changed
 - `root`: Updated `README.md`
