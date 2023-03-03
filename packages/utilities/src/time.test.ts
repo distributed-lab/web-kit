@@ -26,20 +26,20 @@ describe('time testing', () => {
     expect(time.isValid).toStrictEqual(true)
   })
   test('test clone time', () => {
-    const time = new Time('2023-03-03')
-    const clone = time.clone()
-    expect(time.toDate()).toStrictEqual(clone.toDate())
+    const time1 = new Time('2023-03-03')
+    const clone = time1.clone()
+    expect(time1.toDate()).toStrictEqual(clone.toDate())
   })
   test('test diff func', () => {
-    const time = new Time('2023-03-03')
-    const secondTime = new Time('2023-03-04')
-    expect(time.diff(secondTime)).toStrictEqual(-86400000)
+    const time1 = new Time('2023-03-03')
+    const time2 = new Time('2023-03-04')
+    expect(time1.diff(time2)).toStrictEqual(-86400000)
   })
 
   test('test diff func', () => {
-    const time = new Time('2023-03-04')
-    const secondTime = new Time('2023-03-03')
-    expect(time.diff(secondTime)).toStrictEqual(86400000)
+    const time1 = new Time('2023-03-04')
+    const time2 = new Time('2023-03-03')
+    expect(time1.diff(time2)).toStrictEqual(86400000)
   })
 
   test('test timestamp', () => {
