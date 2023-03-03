@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `all`: `tsc-alias` package to use aliases in TypeScript
 - `root`: `yarn rsc` Release Sanity Check script
 - `root`: Rollup and configuration file to build packages for CDN
+- `utilities`: Add tests  for time.ts and duration.ts
 
 ### Changed
 - `root`: Updated `README.md`

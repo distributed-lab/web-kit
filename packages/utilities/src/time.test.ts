@@ -1,7 +1,5 @@
-// import {  } from './types'
-
 import { Time } from './time'
-describe('time testing', () => {
+describe('Performs time class unit test', () => {
   test('test constructor with params', () => {
     const time = new Time('2023-03-03')
     time.format('YYYY-MM-DD')
