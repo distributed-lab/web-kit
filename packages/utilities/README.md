@@ -45,14 +45,6 @@ console.log(currentDate.format('YYYY-MM-DD'))
 yarn test
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](../../LICENSE) file for details
