@@ -1,9 +1,8 @@
 import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
-import { StatusCodes } from 'http-status-codes'
 import Jsona from 'jsona'
 import isEmpty from 'lodash/isEmpty'
 
-import { HTTP_METHODS } from '@/enums'
+import { HTTP_METHODS, HTTP_STATUS_CODES } from '@/enums'
 import { JsonApiClient } from '@/json-api'
 
 import {
@@ -119,8 +118,8 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
    */
   private _parseResponse(raw: AxiosResponse, isNeedRaw: boolean) {
     if (
-      raw.status === StatusCodes.NO_CONTENT ||
-      raw.status === StatusCodes.RESET_CONTENT
+      raw.status === HTTP_STATUS_CODES.NO_CONTENT ||
+      raw.status === HTTP_STATUS_CODES.RESET_CONTENT
     ) {
       return
     }

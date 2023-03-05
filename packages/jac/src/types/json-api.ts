@@ -3,8 +3,7 @@ import {
   AxiosRequestConfig,
   RawAxiosRequestHeaders,
 } from 'axios'
-
-import { HTTP_METHODS } from '@/enums'
+import { HTTP_METHODS } from 'src/enums'
 
 export enum JsonApiLinkFields {
   first = 'first',

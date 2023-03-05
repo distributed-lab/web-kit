@@ -90,7 +90,7 @@ To test the packages, you need:
     ```bash
     yarn build
     ```
-2. Install a switch yarn to version berry in the project, to yarn be able to resolve workspace dependencies:
+2. Switch yarn to version berry in the project where you want to test package, to yarn be able to resolve workspace dependencies:
 
     ```bash
     yarn set version berry
@@ -100,15 +100,24 @@ To test the packages, you need:
     ```yaml
     nodeLinker: node-modules
     ```
-4. Install dependencies for testing:
-
-    ```bash
-    yarn add @distributedlab/jac
-    ```
-5. Link the packages to the project:
+4. Link the packages to the project:
 
     ```bash
     yarn link -p -A /path/to/web-kit/root/directory
+    ```
+5. Add dependencies to the package.json file:
+
+    ```json
+    {
+      "dependencies": {
+        "@distributedlab/jac": "*"
+      }
+    }
+    ```
+
+6. Install the dependencies:
+    ```bash
+    yarn install
     ```
 
 ### Basics
@@ -131,3 +140,14 @@ yarn test
 yarn lint
 ```
 
+#### Check release version
+
+```bash
+yarn rsc 0.1.0
+```
+
+### Resources
+- [Yarn Berry](https://yarnpkg.com/cli/install)
+- [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+- [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+- [Web-Kit TypeDoc](https://distributed-lab.github.io/web-kit)

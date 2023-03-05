@@ -6,7 +6,7 @@ import {
 } from '@/types'
 
 export class JsonApiBodyBuilder {
-  #body: JsonApiRecord
+  readonly #body: JsonApiRecord
 
   constructor() {
     this.#body = {
@@ -53,7 +53,6 @@ export class JsonApiBodyBuilder {
   }
 
   public build(): JsonApiRecord {
-    const result: JsonApiRecord = { ...this.#body }
-    return result
+    return { ...this.#body }
   }
 }

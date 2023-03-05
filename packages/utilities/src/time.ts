@@ -206,5 +206,5 @@ export class Time {
   }
 }
 
-export const time = (date: TimeDate, format?: TimeFormat): Time =>
+export const time = (date?: TimeDate, format?: TimeFormat): Time =>
   new Time(date, format)
