@@ -34,6 +34,7 @@
     "jest": "^29.4.3"
   },
   "dependencies": {
+    "bignumber.js": "^9.1.1",
     "dayjs": "^1.11.7"
   }
 }
