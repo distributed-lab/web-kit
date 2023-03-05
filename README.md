@@ -12,7 +12,7 @@ TypeScript-based various types of solutions for [Distributed Lab](https://distri
 
 ## Changelog
 
-For the change log, see [CHANGELOG.md](https://github.com/rarimo/js-sdk/blob/main/CHANGELOG.md).
+For the change log, see [CHANGELOG.md](https://github.com/distributed-lab/web-kit/blob/main/CHANGELOG.md).
 
 
 ## Packages
