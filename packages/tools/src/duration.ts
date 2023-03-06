@@ -1,8 +1,9 @@
 import dayjs from 'dayjs'
 import { Duration as _Duration } from 'dayjs/plugin/duration'
+import durationlib from 'dayjs/plugin/duration'
 
 import { DurationUnitsObject, DurationUnitType } from '@/types'
-
+dayjs.extend(durationlib)
 export class Duration {
   readonly #duration: _Duration
 
