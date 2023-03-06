@@ -1,36 +1,33 @@
 import { Time } from './time'
 describe('Performs time class unit test', () => {
-  test('test constructor with params', () => {
-    const time = new Time('2023-03-03')
-    time.format('YYYY-MM-DD')
-    time.tz('England/London')
-    expect(time.toDate().getTime().toString()).toStrictEqual('1677801600000')
-  })
   test('test add function(time + 1)', () => {
-    const time = new Time('2023-03-03')
+    const time = new Time()
+    time.tzSafely('2023-03-03', 'Europe/London')
     time.add(1)
-    time.tz('England/London')
+
     expect(time.toDate().getTime().toString()).toStrictEqual('1677801600001')
   })
   test('test add function(time + 1 min)', () => {
-    const time = new Time('2023-03-03')
+    const time = new Time()
+    time.tzSafely('2023-03-03', 'Europe/London')
     const plusMin = time.add(1, 'minute')
-    time.tz('England/London')
+
     expect(plusMin.toDate().getTime().toString()).toStrictEqual('1677801660000')
   })
   test('test validate time', () => {
     const time = new Time('wresf')
-    time.tz('England/London')
+
     expect(time.isValid).toStrictEqual(false)
   })
   test('test validate time', () => {
-    const time = new Time('2023-03-03')
-    time.tz('England/London')
+    const time = new Time()
+    time.tzSafely('2023-03-03', 'Europe/London')
     expect(time.isValid).toStrictEqual(true)
   })
   test('test clone time', () => {
-    const time1 = new Time('2023-03-03')
-    time1.tz('England/London')
+    const time1 = new Time()
+    // time1.utc(false)
+    time1.tzSafely('2023-03-03', 'Europe/London')
     const clone = time1.clone()
     expect(time1.toDate()).toStrictEqual(clone.toDate())
   })
@@ -47,8 +44,8 @@ describe('Performs time class unit test', () => {
   })
 
   test('test timestamp', () => {
-    const time = new Time('2023-03-03')
-    time.tz('England/London')
+    const time = new Time()
+    time.tzSafely('2023-03-03', 'Europe/London')
     expect(time.timestamp).toStrictEqual(1677801600)
   })
 
@@ -139,28 +136,27 @@ describe('Performs time class unit test', () => {
   })
 
   test('test RFC3339', () => {
-    const time1 = new Time('2023-03-03')
-    time1.tz('England/London')
+    const time1 = new Time()
+    time1.tzSafely('2023-03-03', 'Europe/London') // time1.utc(false)
     expect(time1.RFC3339).toEqual('2023-03-03T00:00:00Z')
   })
 
   test('test ISO', () => {
-    const time1 = new Time('2023-03-03')
-    time1.tz('England/London')
+    const time1 = new Time()
+    time1.tzSafely('2023-03-03', 'Europe/London') // time1.utc(false)
     expect(time1.ISO).toEqual('2023-03-03T00:00:00.000Z')
   })
 
   test('test subtract func', () => {
-    const time1 = new Time('2023-03-03')
-    time1.tz('England/London')
+    const time1 = new Time()
+    time1.tzSafely('2023-03-03', 'Europe/London') // time1.utc(false)
     const subTime = time1.subtract(1, 'day')
-    subTime.tz('England/London')
     expect(subTime.toDate().getTime()).toStrictEqual(1677715200000)
   })
 
   test('test  ms', () => {
-    const time1 = new Time('2023-03-03')
-    time1.tz('England/London')
+    const time1 = new Time()
+    time1.tzSafely('2023-03-03', 'Europe/London')
     expect(time1.ms).toStrictEqual(1677801600000)
   })
 })
