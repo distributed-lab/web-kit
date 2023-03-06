@@ -425,9 +425,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@distributedlab/utilities@workspace:packages/utilities":
+"@distributedlab/tools@workspace:packages/tools":
   version: 0.0.0-use.local
-  resolution: "@distributedlab/utilities@workspace:packages/utilities"
+  resolution: "@distributedlab/tools@workspace:packages/tools"
   dependencies:
     "@types/jest": ^29.4.0
     "@types/node": ^18.14.2
