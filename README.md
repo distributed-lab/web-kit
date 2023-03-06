@@ -22,10 +22,10 @@ The Distributed Lab Web-Kit is a library that consists of many smaller NPM packa
 
 Here are the packages in the namespace:
 
-| Package                                                                                             | Description                                                          | Latest                                                                                                                              |
-|-----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| [@distributedlab/jac](https://distributed-lab.github.io/web-kit/_distributedlab_jac.html)           | A library for constructing JSON-API compliant requests and responses | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)           |
-| [@distributedlab/utilities](https://distributed-lab.github.io/web-kit/_distributedlab_utilities.html) | Collection of common utility functions and classes                   | [![npm version](https://img.shields.io/npm/v/@distributedlab/utilities.svg)](https://www.npmjs.com/package/@distributedlab/utilities) |
+| Package                                                                                         | Description                                                          | Latest                                                                                                                        |
+|-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| [@distributedlab/jac](https://distributed-lab.github.io/web-kit/_distributedlab_jac.html)       | A library for constructing JSON-API compliant requests and responses | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)     |
+| [@distributedlab/tools](https://distributed-lab.github.io/web-kit/_distributedlab_tools.html)   | Collection of common utility functions and classes                   | [![npm version](https://img.shields.io/npm/v/@distributedlab/tools.svg)](https://www.npmjs.com/package/@distributedlab/tools) |
 
 ## Development
 
