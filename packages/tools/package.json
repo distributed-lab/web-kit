@@ -48,6 +48,7 @@
     "tsc-alias": "^1.8.2"
   },
   "dependencies": {
+    "bignumber.js": "^9.1.1",
     "dayjs": "^1.11.7",
     "tslib": "^2.5.0"
   },
