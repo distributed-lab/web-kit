@@ -1,11 +1,12 @@
 {
-  "name": "@distributedlab/utilities",
+  "name": "@distributedlab/tools",
   "version": "0.1.0",
   "description": "Collection of common utility functions and classes",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/utilities"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/tools"
   },
+  "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html",
   "license": "MIT",
   "sideEffects": false,
   "typesVersions": {
@@ -53,6 +54,6 @@
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "readmeFile": "./README.md",
-    "displayName": "@distributedlab/utilities"
+    "displayName": "@distributedlab/tools"
   }
 }
