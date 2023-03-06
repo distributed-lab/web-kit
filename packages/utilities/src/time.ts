@@ -77,11 +77,6 @@ export class Time {
     return this
   }
 
-  public tzSafely(date?: TimeDate, timezone?: string): Time {
-    this.#date = this._tz(date, timezone)
-    return this
-  }
-
   public utc(keepLocalTime?: boolean): Time {
     this.#date = this.#date.utc(keepLocalTime)
     return this

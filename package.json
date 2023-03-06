@@ -41,7 +41,6 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
-    "@types/babel__core": "^7",
     "@types/eslint": "^8",
     "@types/prettier": "^2",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
@@ -59,8 +58,5 @@
     "typescript": "^4.9.5",
     "yorkie": "^2.0.0"
   },
-  "packageManager": "yarn@3.4.1",
-  "dependencies": {
-    "@babel/core": "^7.21.0"
-  }
+  "packageManager": "yarn@3.4.1"
 }
