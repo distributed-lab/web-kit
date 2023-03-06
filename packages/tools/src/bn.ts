@@ -269,11 +269,9 @@ export class BN {
         ...fmt
       } = format || {}
       const groupSeparatorFormat: { [key: string]: string | number } = {
-        ...('groupSeparator' in fmt && fmt.groupSeparator
-          ? {
-              groupSeparator: noGroupSeparator ? '' : fmt?.groupSeparator ?? '',
-            }
-          : {}),
+        groupSeparator: noGroupSeparator
+          ? ''
+          : (fmt as BigNumber.Format)?.groupSeparator ?? '',
       }
 
       return this.#bn.toFormat(decimals, rounding, {
