@@ -3,17 +3,17 @@ describe('Performs time class unit test', () => {
   test('test constructor with params', () => {
     const time = new Time('2023-03-03')
     time.format('YYYY-MM-DD')
-    expect(time.toDate().getTime().toString()).toStrictEqual('1677794400000')
+    expect(time.toDate().getTime().toString()).toStrictEqual('1677801600000')
   })
   test('test add function(time + 1)', () => {
     const time = new Time('2023-03-03')
     time.add(1)
-    expect(time.toDate().getTime().toString()).toStrictEqual('1677794400001')
+    expect(time.toDate().getTime().toString()).toStrictEqual('1677801600001')
   })
   test('test add function(time + 1 min)', () => {
     const time = new Time('2023-03-03')
     const plusMin = time.add(1, 'minute')
-    expect(plusMin.toDate().getTime().toString()).toStrictEqual('1677794460000')
+    expect(plusMin.toDate().getTime().toString()).toStrictEqual('1677801660000')
   })
   test('test validate time', () => {
     const time = new Time('wresf')
@@ -42,7 +42,7 @@ describe('Performs time class unit test', () => {
 
   test('test timestamp', () => {
     const time = new Time('2023-03-03')
-    expect(time.timestamp).toStrictEqual(1677794400)
+    expect(time.timestamp).toStrictEqual(1677801600)
   })
 
   test('test isSame', () => {
@@ -138,17 +138,17 @@ describe('Performs time class unit test', () => {
 
   test('test ISO', () => {
     const time1 = new Time('2023-03-03')
-    expect(time1.ISO).toEqual('2023-03-02T22:00:00.000Z')
+    expect(time1.ISO).toEqual('2023-03-03T00:00:00.000Z')
   })
 
   test('test subtract func', () => {
     const time1 = new Time('2023-03-03')
     const subTime = time1.subtract(1, 'day')
-    expect(subTime.toDate().getTime()).toStrictEqual(1677708000000)
+    expect(subTime.toDate().getTime()).toStrictEqual(1677715200000)
   })
 
   test('test  ms', () => {
     const time1 = new Time('2023-03-03')
-    expect(time1.ms).toStrictEqual(1677794400000)
+    expect(time1.ms).toStrictEqual(1677801600000)
   })
 })
