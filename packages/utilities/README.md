@@ -1,6 +1,5 @@
 # @distributedlab/utilities
-These package aim to provide developers with a set of commonly used functions and features for building web applications,
-such as handling big numbers, parsing dates, subscribe to and receive notifications when certain events occur with event-emitter, and more.
+These packages aim to provide developers with a set of commonly used functions and features for building web applications, such as handling big numbers, date manipulation, subscribing to and receiving notifications when certain events occur with EventEmitter, and more.
 
 ![version (scoped package)](https://badgen.net/npm/v/@distributedlab/utilities)
 ![types](https://badgen.net/npm/types/@distributedlab/utilities)
@@ -32,9 +31,9 @@ console.log(amountA.add(amountB).format({
 
 #### Work with dates
 ```ts
-import { Time } from '@distributedlab/utilities';
+import { time } from '@distributedlab/utilities';
 
-const currentDate = new Time()
+const currentDate = time()
 
 console.log(currentDate.format('YYYY-MM-DD'))
 ```

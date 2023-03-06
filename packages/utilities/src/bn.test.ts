@@ -13,8 +13,12 @@ describe('performs BN unit test', () => {
 
     test('fromFraction should return correct value', () => {
       expect(
-        BN.fromFraction('1000000000000000000', 18).fromFraction(18).valueOf(),
+        BN.fromBigInt('1000000000000000000', 18).fromFraction(18).valueOf(),
       ).toBe('1')
+
+      expect(BN.fromBigInt('1000000000000000000', 18).valueOf()).toBe(
+        BN.fromRaw(1, 18).valueOf(),
+      )
     })
   })
 
@@ -45,6 +49,16 @@ describe('performs BN unit test', () => {
         '-1000000000000000000',
       )
     })
+    test('compare should return correct value', () => {
+      expect(BN.fromRaw(2, 18).isGreaterThan(BN.fromRaw(1, 18))).toBe(true)
+      expect(BN.fromRaw(1, 18).isLessThan(BN.fromRaw(2, 18))).toBe(true)
+      expect(BN.fromRaw(2, 18).isGreaterThanOrEqualTo(BN.fromRaw(2, 18))).toBe(
+        true,
+      )
+      expect(BN.fromRaw(2, 18).isLessThanOrEqualTo(BN.fromRaw(2, 18))).toBe(
+        true,
+      )
+    })
   })
 
   describe('performs formatting', () => {
@@ -73,7 +87,7 @@ describe('performs BN unit test', () => {
         BN.fromRaw(2, 18).mul(BN.fromRaw(3, 18)).format({
           decimals: 6,
           groupSeparator: '.',
-          decimalSeparator: ',', // FIXME: this is not working
+          decimalSeparator: ',',
         }),
       ).toBe('6.000.000.000.000.000.000,000000')
 
@@ -81,7 +95,7 @@ describe('performs BN unit test', () => {
         BN.fromRaw(2, 18).mul(BN.fromRaw(3, 18)).format({
           decimals: 6,
           groupSeparator: '.',
-          decimalSeparator: ',', // FIXME: this is not working
+          decimalSeparator: ',',
           groupSize: 2,
         }),
       ).toBe('6.00.00.00.00.00.00.00.00.00,000000')
