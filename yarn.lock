@@ -1131,9 +1131,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:^18.14.2":
-  version: 18.14.5
-  resolution: "@types/node@npm:18.14.5"
-  checksum: 415fb0edc132baa9580f1b7a381a3f10b662f5d7a7d11641917fa0961788ccede3272badc414aadc47306e9fc35c5f6c59159ac470b46d3f3a15fb0446224c8c
+  version: 18.14.2
+  resolution: "@types/node@npm:18.14.2"
+  checksum: 53c07e721f6ae33de71306f6a0b75dae6066a4f55bd5484c93bd59ff25f0c5f004ceafeef509a4d0cb9e24a247efc34d50489bcc1b05a53ecc68e2fc088e65cb
   languageName: node
   linkType: hard
 
@@ -1751,9 +1751,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001449":
-  version: 1.0.30001460
-  resolution: "caniuse-lite@npm:1.0.30001460"
-  checksum: dad91eb82aa65aecf33ad6a04ad620b9df6f0152020dc6c1874224e8c6f4aa50695f585201b3dfcd2760b3c43326a86c9505cc03af856698fbef67b267ef786f
+  version: 1.0.30001458
+  resolution: "caniuse-lite@npm:1.0.30001458"
+  checksum: 258cc5a25babbbfe483bf788c6f321a19400ff80b2bf156b360bac09a6f9f4da44516350d187a30395667cb142c682d9ea96577ea0df236d35f76234b07ccb41
   languageName: node
   linkType: hard
 
@@ -2107,9 +2107,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.284":
-  version: 1.4.317
-  resolution: "electron-to-chromium@npm:1.4.317"
-  checksum: 7b7765cdc28fe107f40c21952efd2dd62952d625a28b0700b7302b53b347f5f3c22ab7fae56088b6e32af0de4512a430bd5b1fd2edcc25fd7c5a7619987b38c8
+  version: 1.4.315
+  resolution: "electron-to-chromium@npm:1.4.315"
+  checksum: 9b1e9a43afe086aaed9af2a60076a409c0d6a0d9a9f4d0a293131763329c48c86198bda4020155c7ce53d2569840d49d51e8ce2405b6cd90000a77c1bd650ea5
   languageName: node
   linkType: hard
 
@@ -2459,11 +2459,11 @@ __metadata:
   linkType: hard
 
 "esquery@npm:^1.4.2":
-  version: 1.5.0
-  resolution: "esquery@npm:1.5.0"
+  version: 1.4.2
+  resolution: "esquery@npm:1.4.2"
   dependencies:
     estraverse: ^5.1.0
-  checksum: aefb0d2596c230118656cd4ec7532d447333a410a48834d80ea648b1e7b5c9bc9ed8b5e33a89cb04e487b60d622f44cf5713bf4abed7c97343edefdc84a35900
+  checksum: 2f4ad89c5aafaca61cc2c15e256190f0d6deb4791cae6552d3cb4b1eb8867958cdf27a56aaa3272ff17435e3eaa19ee0d4129fac336ca6373d7354d7b5da7966
   languageName: node
   linkType: hard
 
@@ -3155,13 +3155,13 @@ __metadata:
   linkType: hard
 
 "is-array-buffer@npm:^3.0.1":
-  version: 3.0.2
-  resolution: "is-array-buffer@npm:3.0.2"
+  version: 3.0.1
+  resolution: "is-array-buffer@npm:3.0.1"
   dependencies:
     call-bind: ^1.0.2
-    get-intrinsic: ^1.2.0
+    get-intrinsic: ^1.1.3
     is-typed-array: ^1.1.10
-  checksum: dcac9dda66ff17df9cabdc58214172bf41082f956eab30bb0d86bc0fab1e44b690fc8e1f855cf2481245caf4e8a5a006a982a71ddccec84032ed41f9d8da8c14
+  checksum: f26ab87448e698285daf707e52a533920449f7abf63714140ffab9d5571aa5a71ac2fa2677e8b793ad0d5d3e40078d4d2c8a0ab39c957e3cfc6513bb6c9dfdc9
   languageName: node
   linkType: hard
 
@@ -5687,7 +5687,6 @@ __metadata:
     ts-jest: ^29.0.5
     typedoc: ^0.23.26
     typescript: ^4.9.5
-    yarn: ^1.22.19
     yorkie: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -5832,16 +5831,6 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^21.1.1
   checksum: 3d8a43c336a4942bc68080768664aca85c7bd406f018bad362fd255c41c8f4e650277f42fd65d543fce99e084124ddafee7bbfc1a5c6a8fda4cec78609dcf8d4
-  languageName: node
-  linkType: hard
-
-"yarn@npm:^1.22.19":
-  version: 1.22.19
-  resolution: "yarn@npm:1.22.19"
-  bin:
-    yarn: bin/yarn.js
-    yarnpkg: bin/yarn.js
-  checksum: b43d2cc5fee7e933beb12a8aee7dfceca9e9ef2dd17c5d04d15a12ab7bec5f5744ea34a07b86e013da7f291a18c4e1ad8f70e150f5ed2f4666e6723c7f0a8452
   languageName: node
   linkType: hard
 
