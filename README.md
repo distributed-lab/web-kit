@@ -24,8 +24,8 @@ Here are the packages in the namespace:
 
 | Package                                                                                         | Description                                                          | Latest                                                                                                                        |
 |-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| [@distributedlab/jac](https://distributed-lab.github.io/web-kit/_distributedlab_jac.html)       | A library for constructing JSON-API compliant requests and responses | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)     |
-| [@distributedlab/tools](https://distributed-lab.github.io/web-kit/_distributedlab_tools.html)   | Collection of common utility functions and classes                   | [![npm version](https://img.shields.io/npm/v/@distributedlab/tools.svg)](https://www.npmjs.com/package/@distributedlab/tools) |
+| [@distributedlab/jac](https://distributed-lab.github.io/web-kit/modules/_distributedlab_jac.html)       | A library for constructing JSON-API compliant requests and responses | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)     |
+| [@distributedlab/tools](https://distributed-lab.github.io/web-kit/modules/_distributedlab_jac.html)   | Collection of common utility functions and classes                   | [![npm version](https://img.shields.io/npm/v/@distributedlab/tools.svg)](https://www.npmjs.com/package/@distributedlab/tools) |
 
 ## Development
 
