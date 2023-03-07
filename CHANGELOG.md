@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2023-03-07
+### Added
+- `@distributedlab/tools`: `isZero` getter to `BN` class
+
 ## [0.1.1] - 2023-03-07
 ### Fixed
 - `root`: Links to the packages in the `README.md` file
@@ -36,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/distributed-lab/web-kit/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/distributed-lab/web-kit/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/distributed-lab/web-kit/releases/tag/0.1.0

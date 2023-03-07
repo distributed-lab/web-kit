@@ -177,6 +177,10 @@ export class BN {
     return this.#bn
   }
 
+  public get isZero(): boolean {
+    return this.#bn.isZero()
+  }
+
   public mul(other: BN): BN {
     const numWithGreatestDecimals = BN.#getGreatestDecimal(this, other)
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
