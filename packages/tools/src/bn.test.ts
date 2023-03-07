@@ -101,4 +101,10 @@ describe('performs BN unit test', () => {
       ).toBe('6.00.00.00.00.00.00.00.00.00,000000')
     })
   })
+
+  test('MAX_UINT256 should return correct value', () => {
+    expect(BN.MAX_UINT256.valueOf()).toBe(
+      '115792089237316195423570985008687907853269984665640564039457584007913129639935',
+    )
+  })
 })

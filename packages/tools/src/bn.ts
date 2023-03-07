@@ -35,11 +35,12 @@ BigNumber.config({
 })
 
 export class BN {
-  #bn: BigNumber
-  #cfg: BnCfg
+  readonly #bn: BigNumber
+  readonly #cfg: BnCfg
 
   static ROUNDING = BN_ROUNDING
-  static MAX_UINT256 = BN.#instance(1).pow(256).minus(1)
+  static MAX_UINT256 = BN.fromBigInt(BN.#instance(2).pow(256).minus(1), 1) // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  static WEI_DECIMALS = WEI_DECIMALS
 
   protected constructor(bigLike: BnLike, cfg: BnCfg) {
     if (!cfg.decimals || cfg.decimals < 0) {
