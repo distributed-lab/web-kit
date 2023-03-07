@@ -1,3 +1,4 @@
+export * from '@/bn'
 export * from '@/duration'
 export * from '@/event-emitter'
 export * from '@/time'
