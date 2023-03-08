@@ -15,9 +15,6 @@ BigNumber.config({
   EXPONENTIAL_AT: 256,
 })
 
-const TEN_POWER = 10
-const ONE_TENTH_POWER = 0.1
-
 export class BN {
   readonly #bn: BigNumber
   readonly #cfg: BnCfg
@@ -54,7 +51,7 @@ export class BN {
    * @description @link{BN.fromBigInt} accepts uint number value
    * @example
    * ```ts
-   * enums oneEth = BN.fromBigInt('1000000000000000000', 18)
+   * const oneEth = BN.fromBigInt('1000000000000000000', 18)
    * ```
    */
   public static fromBigInt(
@@ -72,7 +69,7 @@ export class BN {
    * @description @link{BN.fromRaw} accepts number value and multiply it to 10**decimals
    * @example
    * ```ts
-   * enums oneEth = BN.fromBigInt(1, 18)
+   * const oneEth = BN.fromBigInt(1, 18)
    * ```
    */
   public static fromRaw(
@@ -101,12 +98,18 @@ export class BN {
 
     return args.map(el =>
       BN.fromBigInt(
-        el.bn.multipliedBy(
-          BN.#instance(TEN_POWER).pow(greatestDecimals - el.decimals),
-        ),
+        el.bn.multipliedBy(BN.#makeTenPower(greatestDecimals - el.decimals)),
         greatestDecimals,
       ),
     )
+  }
+
+  static #makeTenPower(decimals: BnLike): BigNumber {
+    return BN.#instance(10).pow(BN.isBn(decimals) ? decimals.bn : decimals)
+  }
+
+  static #makeOneTenthPower(decimals: BnLike): BigNumber {
+    return BN.#instance(0.1).pow(BN.isBn(decimals) ? decimals.bn : decimals)
   }
 
   static #instance(value: BnLike, config?: BnCfg): BigNumber {
@@ -178,7 +181,7 @@ export class BN {
     return new BN(
       numA.bn
         .multipliedBy(numB.bn)
-        .dividedBy(BN.#instance(TEN_POWER).pow(greatestDecimals)),
+        .dividedBy(BN.#makeTenPower(greatestDecimals)),
       {
         ...this.#cfg,
         decimals: greatestDecimals,
@@ -194,12 +197,15 @@ export class BN {
     const greatestDecimals = BN.#getGreatestDecimal(this, other).decimals
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
 
-    const fr = BN.#instance(TEN_POWER).pow(greatestDecimals)
-
-    return new BN(numA.bn.dividedBy(numB.bn).multipliedBy(fr), {
-      ...this.#cfg,
-      decimals: greatestDecimals,
-    })
+    return new BN(
+      numA.bn
+        .dividedBy(numB.bn)
+        .multipliedBy(BN.#makeTenPower(greatestDecimals)),
+      {
+        ...this.#cfg,
+        decimals: greatestDecimals,
+      },
+    )
   }
 
   public add(other: BN): BN {
@@ -222,7 +228,7 @@ export class BN {
 
   public pow(other: number): BN {
     const bn = BN.#instance
-    const fr = bn(TEN_POWER).pow(
+    const fr = BN.#makeTenPower(
       bn(this.#cfg.decimals).multipliedBy(bn(other - 1)),
     )
 
@@ -275,15 +281,18 @@ export class BN {
   }
 
   public toFraction(decimals?: number): BN {
-    const fr = BN.#instance(TEN_POWER).pow(decimals || DECIMALS.WEI)
+    const fr = BN.#makeTenPower(decimals || DECIMALS.WEI)
     return new BN(this.#bn.multipliedBy(fr), this.#cfg)
   }
 
   public fromFraction(decimals?: number): BN {
-    const fr = BN.#instance(ONE_TENTH_POWER).pow(decimals || DECIMALS.WEI)
+    const fr = BN.#makeOneTenthPower(decimals || DECIMALS.WEI)
     return new BN(this.#bn.multipliedBy(fr), this.#cfg)
   }
 
+  /**
+   * @description Converts uint value to float and returns human-readable string
+   */
   public toString(): string {
     return this.clone().fromFraction(this.decimals).#bn.toFormat({
       groupSeparator: '',
