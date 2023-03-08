@@ -89,7 +89,7 @@ export class BN {
 
   static #getGreatestDecimal(...args: BN[]): BN {
     return args.find(
-      el => el.cfg.decimals === Math.max(...args.map(el => el.cfg.decimals)),
+      el => el.decimals === Math.max(...args.map(el => el.decimals)),
     )!
   }
 
@@ -181,7 +181,8 @@ export class BN {
     return new BN(
       numA.bn
         .multipliedBy(numB.bn)
-        .dividedBy(BN.#makeTenPower(greatestDecimals)),
+        .dividedBy(BN.#makeTenPower(greatestDecimals))
+        .toFixed(0), // Remove decimal part after dividing on power of ten
       {
         ...this.#cfg,
         decimals: greatestDecimals,
@@ -200,7 +201,8 @@ export class BN {
     return new BN(
       numA.bn
         .dividedBy(numB.bn)
-        .multipliedBy(BN.#makeTenPower(greatestDecimals)),
+        .multipliedBy(BN.#makeTenPower(greatestDecimals))
+        .toFixed(0), // Remove decimal part after multiplying on power of ten
       {
         ...this.#cfg,
         decimals: greatestDecimals,

@@ -109,11 +109,19 @@ describe('performs BN unit test', () => {
   })
 
   describe('performs values', () => {
-    test('value getter should return correct uint value', () => {
-      expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
+    describe('performs value', () => {
+      test('value getter should return correct uint value', () => {
+        expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
+      })
+
+      test('value getter should drop decimal part if value overflows decimals after calculations', () => {
+        expect(
+          BN.fromBigInt('194287666397830', 18).mul(BN.fromRaw(1.02, 18)).value,
+        ).toBe('198173419725786')
+      })
     })
 
-    test('toString should return correct humanized value and not mutate value', () => {
+    test('preforms toString, should return correct humanized value and not mutate value', () => {
       expect(BN.fromRaw(1, 18).toString()).toBe('1')
       expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
     })
