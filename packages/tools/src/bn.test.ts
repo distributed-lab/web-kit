@@ -3,49 +3,49 @@ import { BN } from './bn'
 describe('performs BN unit test', () => {
   describe('performs constructor', () => {
     test('formRaw should return correct value', () => {
-      expect(BN.fromRaw(1, 1).valueOf()).toBe('10')
-      expect(BN.fromRaw(1, 2).valueOf()).toBe('100')
-      expect(BN.fromRaw(1, 3).valueOf()).toBe('1000')
-      expect(BN.fromRaw(1, 18).valueOf()).toBe('1000000000000000000')
-      expect(BN.fromRaw(0.1, 6).valueOf()).toBe('100000')
-      expect(BN.fromRaw(0.123, 6).valueOf()).toBe('123000')
+      expect(BN.fromRaw(1, 1).value).toBe('10')
+      expect(BN.fromRaw(1, 2).value).toBe('100')
+      expect(BN.fromRaw(1, 3).value).toBe('1000')
+      expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
+      expect(BN.fromRaw(0.1, 6).value).toBe('100000')
+      expect(BN.fromRaw(0.123, 6).value).toBe('123000')
     })
 
     test('fromFraction should return correct value', () => {
       expect(
-        BN.fromBigInt('1000000000000000000', 18).fromFraction(18).valueOf(),
+        BN.fromBigInt('1000000000000000000', 18).fromFraction(18).value,
       ).toBe('1')
 
-      expect(BN.fromBigInt('1000000000000000000', 18).valueOf()).toBe(
-        BN.fromRaw(1, 18).valueOf(),
+      expect(BN.fromBigInt('1000000000000000000', 18).value).toBe(
+        BN.fromRaw(1, 18).value,
       )
     })
   })
 
   describe('performs math operations', () => {
     test('multiply should return correct value', () => {
-      expect(BN.fromRaw(1, 1).mul(BN.fromRaw(0, 1)).valueOf()).toBe('0')
-      expect(BN.fromRaw(2, 1).mul(BN.fromRaw(3, 1)).valueOf()).toBe('60')
+      expect(BN.fromRaw(1, 1).mul(BN.fromRaw(0, 1)).value).toBe('0')
+      expect(BN.fromRaw(2, 1).mul(BN.fromRaw(3, 1)).value).toBe('60')
 
-      expect(BN.fromRaw(2, 18).mul(BN.fromRaw(3, 12)).valueOf()).toBe(
+      expect(BN.fromRaw(2, 18).mul(BN.fromRaw(3, 12)).value).toBe(
         '6000000000000000000',
       )
     })
     test('divide should return correct value', () => {
-      expect(BN.fromRaw(2, 1).div(BN.fromRaw(3, 1)).valueOf()).toBe('0.6')
-      expect(BN.fromRaw(2, 18).div(BN.fromRaw(3, 16)).valueOf()).toBe(
-        '0.666666666666666666',
+      expect(BN.fromRaw(2, 1).div(BN.fromRaw(3, 1)).value).toBe('6')
+      expect(BN.fromRaw(2, 18).div(BN.fromRaw(3, 16)).value).toBe(
+        '666666666666666666',
       )
     })
     test('adding should return correct value', () => {
-      expect(BN.fromRaw(2, 1).add(BN.fromRaw(3, 1)).valueOf()).toBe('50')
-      expect(BN.fromRaw(2, 18).add(BN.fromRaw(3, 6)).valueOf()).toBe(
+      expect(BN.fromRaw(2, 1).add(BN.fromRaw(3, 1)).value).toBe('50')
+      expect(BN.fromRaw(2, 18).add(BN.fromRaw(3, 6)).value).toBe(
         '5000000000000000000',
       )
     })
     test('subtract should return correct value', () => {
-      expect(BN.fromRaw(2, 1).sub(BN.fromRaw(3, 1)).valueOf()).toBe('-10')
-      expect(BN.fromRaw(2, 18).sub(BN.fromRaw(3, 6)).valueOf()).toBe(
+      expect(BN.fromRaw(2, 1).sub(BN.fromRaw(3, 1)).value).toBe('-10')
+      expect(BN.fromRaw(2, 18).sub(BN.fromRaw(3, 6)).value).toBe(
         '-1000000000000000000',
       )
     })
@@ -103,8 +103,19 @@ describe('performs BN unit test', () => {
   })
 
   test('MAX_UINT256 should return correct value', () => {
-    expect(BN.MAX_UINT256.valueOf()).toBe(
+    expect(BN.MAX_UINT256.value).toBe(
       '115792089237316195423570985008687907853269984665640564039457584007913129639935',
     )
+  })
+
+  describe('performs values', () => {
+    test('value getter should return correct uint value', () => {
+      expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
+    })
+
+    test('toString should return correct humanized value and not mutate value', () => {
+      expect(BN.fromRaw(1, 18).toString()).toBe('1')
+      expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
+    })
   })
 })

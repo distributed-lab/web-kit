@@ -1,28 +1,8 @@
 import BigNumber from 'bignumber.js'
 
-const WEI_DECIMALS = 18
-
-export enum BN_ROUNDING {
-  DEFAULT = 3,
-  UP = 0,
-  DOWN = 1,
-  CEIL = 2,
-  FLOOR = 3,
-  HALF_UP = 4,
-  HALF_DOWN = 5,
-  HALF_EVEN = 6,
-  HALF_CEIL = 7,
-  HALF_FLOOR = 8,
-}
-
-export interface BnCfg {
-  decimals: number
-  rounding?: BN_ROUNDING
-  noGroupSeparator?: boolean
-}
-
-export type BnFormatCfg = BigNumber.Format & BnCfg
-export type BnLike = string | number | BigNumber | BN
+import { DECIMALS } from '@/enums'
+import { BN_ROUNDING } from '@/enums'
+import { BnCfg, BnFormatCfg, BnLike } from '@/types'
 
 BigNumber.config({
   DECIMAL_PLACES: 0,
@@ -32,15 +12,20 @@ BigNumber.config({
     groupSeparator: ',',
     groupSize: 3,
   },
+  EXPONENTIAL_AT: 256,
 })
 
 export class BN {
   readonly #bn: BigNumber
   readonly #cfg: BnCfg
 
-  static ROUNDING = BN_ROUNDING
-  static MAX_UINT256 = BN.fromBigInt(BN.#instance(2).pow(256).minus(1), 1) // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  static WEI_DECIMALS = WEI_DECIMALS
+  public static ROUNDING = BN_ROUNDING
+  public static WEI_DECIMALS = DECIMALS.WEI
+  public static MAX_UINT256 = BN.fromBigInt(
+    BN.#instance(2).pow(256).minus(1),
+    1,
+  )
+  // 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 
   protected constructor(bigLike: BnLike, cfg: BnCfg) {
     if (!cfg.decimals || cfg.decimals < 0) {
@@ -55,7 +40,7 @@ export class BN {
     const finalCfg = {
       decimals: cfg.decimals,
       rounding: cfg.rounding || BN_ROUNDING.DEFAULT,
-      noGroupSeparator: cfg.noGroupSeparator || true,
+      noGroupSeparator: cfg.noGroupSeparator ?? true,
     } as BnCfg
 
     this.#bn = BN.#instance(bigLike, finalCfg)
@@ -109,18 +94,22 @@ export class BN {
   }
 
   static #toGreatestDecimals(...args: BN[]): BN[] {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(...args)
+    const greatestDecimals = BN.#getGreatestDecimal(...args).decimals
 
     return args.map(el =>
       BN.fromBigInt(
-        el!.bn.multipliedBy(
-          BN.#instance(10).pow(
-            numWithGreatestDecimals!.cfg.decimals - el.cfg.decimals,
-          ),
-        ),
-        numWithGreatestDecimals!.cfg.decimals,
+        el.bn.multipliedBy(BN.#makeTenPower(greatestDecimals - el.decimals)),
+        greatestDecimals,
       ),
     )
+  }
+
+  static #makeTenPower(decimals: BnLike): BigNumber {
+    return BN.#instance(10).pow(BN.isBn(decimals) ? decimals.bn : decimals)
+  }
+
+  static #makeOneTenthPower(decimals: BnLike): BigNumber {
+    return BN.#instance(0.1).pow(BN.isBn(decimals) ? decimals.bn : decimals)
   }
 
   static #instance(value: BnLike, config?: BnCfg): BigNumber {
@@ -133,13 +122,8 @@ export class BN {
       })
     }
 
-    if (BigNumber.isBigNumber(value)) {
-      return value
-    }
-
-    if (value instanceof BN) {
-      return value.#bn
-    }
+    if (BigNumber.isBigNumber(value)) return value
+    if (BN.isBn(value)) return value.#bn
 
     try {
       return new ctor(value)
@@ -149,29 +133,29 @@ export class BN {
   }
 
   public static min(...args: BN[]): BN {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(...args)
-
     return new BN(
       BigNumber.minimum(...BN.#toGreatestDecimals(...args).map(el => el.#bn)),
       {
-        decimals: numWithGreatestDecimals.cfg.decimals,
+        decimals: BN.#getGreatestDecimal(...args).decimals,
       },
     )
   }
 
   public static max(...args: BN[]): BN {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(...args)
-
     return new BN(
       BigNumber.maximum(...BN.#toGreatestDecimals(...args).map(el => el.#bn)),
       {
-        decimals: numWithGreatestDecimals.cfg.decimals,
+        decimals: BN.#getGreatestDecimal(...args).decimals,
       },
     )
   }
 
   public get cfg(): BnCfg {
     return this.#cfg
+  }
+
+  public get decimals(): number {
+    return this.#cfg.decimals
   }
 
   public get bn(): BigNumber {
@@ -182,67 +166,73 @@ export class BN {
     return this.#bn.isZero()
   }
 
+  public get value(): string {
+    return this.#bn.toString()
+  }
+
+  public clone(cfg?: BnCfg): BN {
+    return new BN(this.value, { ...this.#cfg, ...(cfg || {}) })
+  }
+
   public mul(other: BN): BN {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(this, other)
+    const greatestDecimals = BN.#getGreatestDecimal(this, other).decimals
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
 
     return new BN(
       numA.bn
         .multipliedBy(numB.bn)
-        .dividedBy(BN.#instance(10).pow(numWithGreatestDecimals.cfg.decimals)),
+        .dividedBy(BN.#makeTenPower(greatestDecimals)),
       {
         ...this.#cfg,
-        decimals: numWithGreatestDecimals.cfg.decimals,
+        decimals: greatestDecimals,
       },
     )
   }
 
   public div(other: BN): BN {
-    if (other.bn.isZero())
-      throw new TypeError(`Cannot divide ${other.valueOf()} by zero`)
+    if (other.isZero) {
+      throw new TypeError(`Cannot divide ${other.value} by zero`)
+    }
 
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(this, other)
+    const greatestDecimals = BN.#getGreatestDecimal(this, other).decimals
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
 
-    return new BN(numA.bn.dividedBy(numB.bn), {
-      ...this.#cfg,
-      decimals: numWithGreatestDecimals.cfg.decimals,
-    })
+    return new BN(
+      numA.bn
+        .dividedBy(numB.bn)
+        .multipliedBy(BN.#makeTenPower(greatestDecimals)),
+      {
+        ...this.#cfg,
+        decimals: greatestDecimals,
+      },
+    )
   }
 
   public add(other: BN): BN {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(this, other)
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
 
     return new BN(numA.bn.plus(numB.bn), {
       ...this.#cfg,
-      decimals: numWithGreatestDecimals.cfg.decimals,
+      decimals: BN.#getGreatestDecimal(this, other).decimals,
     })
   }
 
   public sub(other: BN): BN {
-    const numWithGreatestDecimals = BN.#getGreatestDecimal(this, other)
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
 
     return new BN(numA.bn.minus(numB.bn), {
       ...this.#cfg,
-      decimals: numWithGreatestDecimals.cfg.decimals,
+      decimals: BN.#getGreatestDecimal(this, other).decimals,
     })
   }
 
   public pow(other: number): BN {
-    return new BN(
-      this.#bn
-        .pow(BN.#instance(other))
-        .dividedBy(
-          BN.#instance(10).pow(
-            BN.#instance(this.#cfg.decimals).multipliedBy(
-              BN.#instance(other - 1),
-            ),
-          ),
-        ),
-      this.#cfg,
+    const bn = BN.#instance
+    const fr = BN.#makeTenPower(
+      bn(this.#cfg.decimals).multipliedBy(bn(other - 1)),
     )
+
+    return new BN(this.#bn.pow(bn(other)).dividedBy(fr), this.#cfg)
   }
 
   public isGreaterThan(other: BN): boolean {
@@ -272,21 +262,16 @@ export class BN {
         rounding = BigNumber.config({}).ROUNDING_MODE as BN_ROUNDING,
         noGroupSeparator,
         ...fmt
-      } = format || {}
-      const groupSeparatorFormat: { [key: string]: string | number } = {
-        groupSeparator: noGroupSeparator
-          ? ''
-          : (fmt as BigNumber.Format)?.groupSeparator ?? '',
-      }
+      } = format || ({} as BnFormatCfg)
 
       return this.#bn.toFormat(decimals, rounding, {
         ...BigNumber.config({}).FORMAT,
         ...fmt,
-        ...groupSeparatorFormat,
-      } as BigNumber.Format)
+        groupSeparator: noGroupSeparator ? '' : fmt?.groupSeparator ?? '',
+      })
     } catch (error) {
       throw new TypeError(
-        `Cannot format the given "${this.valueOf()}" with config ${JSON.stringify(
+        `Cannot format the given "${this.value}" with config ${JSON.stringify(
           format,
         )}!${
           error instanceof Error ? `: ${error.message ?? error.toString()}` : ''
@@ -296,35 +281,24 @@ export class BN {
   }
 
   public toFraction(decimals?: number): BN {
-    const fr = decimals
-      ? BN.#instance(10).pow(decimals)
-      : BN.#instance(10).pow(WEI_DECIMALS)
-
+    const fr = BN.#makeTenPower(decimals || DECIMALS.WEI)
     return new BN(this.#bn.multipliedBy(fr), this.#cfg)
   }
 
   public fromFraction(decimals?: number): BN {
-    const fr = decimals
-      ? BN.#instance(0.1).pow(decimals)
-      : BN.#instance(0.1).pow(WEI_DECIMALS)
-
+    const fr = BN.#makeOneTenthPower(decimals || DECIMALS.WEI)
     return new BN(this.#bn.multipliedBy(fr), this.#cfg)
   }
 
+  /**
+   * @description Converts uint value to float and returns human-readable string
+   */
   public toString(): string {
-    return this.#bn.toFormat({
+    return this.clone().fromFraction(this.decimals).#bn.toFormat({
       groupSeparator: '',
       decimalSeparator: '.',
       fractionGroupSeparator: '',
     })
-  }
-
-  public toJSON(): string {
-    return this.toString()
-  }
-
-  public valueOf(): string {
-    return this.toString()
   }
 
   /**
@@ -337,7 +311,6 @@ export class BN {
    */
   #compare(other: BN): number {
     const [numA, numB] = BN.#toGreatestDecimals(this, other)
-
     return numA.bn.comparedTo(numB.bn)
   }
 }
