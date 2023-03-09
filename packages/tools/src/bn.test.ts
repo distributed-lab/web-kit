@@ -31,6 +31,13 @@ describe('performs BN unit test', () => {
         '6000000000000000000',
       )
     })
+
+    test('multiply should drop decimal part if value overflows decimals', () => {
+      expect(
+        BN.fromBigInt('194287666397830', 18).mul(BN.fromRaw(1.02, 18)).value,
+      ).toBe('198173419725786')
+    })
+
     test('divide should return correct value', () => {
       expect(BN.fromRaw(2, 1).div(BN.fromRaw(3, 1)).value).toBe('6')
       expect(BN.fromRaw(2, 18).div(BN.fromRaw(3, 16)).value).toBe(
@@ -109,11 +116,11 @@ describe('performs BN unit test', () => {
   })
 
   describe('performs values', () => {
-    test('value getter should return correct uint value', () => {
+    test('performs value, getter should return correct uint value', () => {
       expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
     })
 
-    test('toString should return correct humanized value and not mutate value', () => {
+    test('preforms toString, should return correct humanized value and not mutate value', () => {
       expect(BN.fromRaw(1, 18).toString()).toBe('1')
       expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
     })
