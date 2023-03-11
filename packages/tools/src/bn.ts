@@ -167,7 +167,11 @@ export class BN {
   }
 
   public get value(): string {
-    return this.#bn.toString()
+    return this.#bn.toFormat({
+      groupSeparator: '',
+      decimalSeparator: '.',
+      fractionGroupSeparator: '',
+    })
   }
 
   public clone(cfg?: BnCfg): BN {
@@ -238,19 +242,23 @@ export class BN {
   }
 
   public isGreaterThan(other: BN): boolean {
-    return this.#compare(other) === 1
+    return this.#bn.isGreaterThan(other.bn)
   }
 
   public isGreaterThanOrEqualTo(other: BN): boolean {
-    return this.#compare(other) >= 0
+    return this.#bn.isGreaterThanOrEqualTo(other.bn)
   }
 
   public isLessThan(other: BN): boolean {
-    return this.#compare(other) === -1
+    return this.#bn.isLessThan(other.bn)
   }
 
   public isLessThanOrEqualTo(other: BN): boolean {
-    return this.#compare(other) <= 0
+    return this.#bn.isLessThanOrEqualTo(other.bn)
+  }
+
+  public isEqualTo(other: BN): boolean {
+    return this.#bn.isEqualTo(other.bn)
   }
 
   public round(precision: number, mode?: BN_ROUNDING): string {
@@ -301,18 +309,5 @@ export class BN {
       decimalSeparator: '.',
       fractionGroupSeparator: '',
     })
-  }
-
-  /**
-   * this > other => 1;
-   * this < other => -1;
-   * this === other => 0;
-   *
-   * @param {BnLike} other
-   * @returns {number}
-   */
-  #compare(other: BN): number {
-    const [numA, numB] = BN.#toGreatestDecimals(this, other)
-    return numA.bn.comparedTo(numB.bn)
   }
 }

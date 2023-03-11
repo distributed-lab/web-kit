@@ -9,6 +9,11 @@ describe('performs BN unit test', () => {
       expect(BN.fromRaw(1, 18).value).toBe('1000000000000000000')
       expect(BN.fromRaw(0.1, 6).value).toBe('100000')
       expect(BN.fromRaw(0.123, 6).value).toBe('123000')
+      expect(BN.fromRaw(9, 18).value).toBe('9000000000000000000')
+      expect(BN.fromRaw(99999, 18).value).toBe('99999000000000000000000')
+      expect(BN.fromBigInt('99999000000000000000000', 18).toString()).toBe(
+        '99999',
+      )
     })
 
     test('fromFraction should return correct value', () => {
@@ -65,6 +70,12 @@ describe('performs BN unit test', () => {
       expect(BN.fromRaw(2, 18).isLessThanOrEqualTo(BN.fromRaw(2, 18))).toBe(
         true,
       )
+      expect(BN.fromRaw(2, 18).isEqualTo(BN.fromRaw(2, 18))).toBe(true)
+      expect(
+        BN.fromBigInt('2000000000000000000', 18).isEqualTo(
+          BN.fromBigInt('2000000000000000000', 18),
+        ),
+      ).toBe(true)
     })
   })
 
