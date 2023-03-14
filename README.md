@@ -24,11 +24,11 @@ TypeScript-based various types of solutions for [Distributed Lab](https://distri
       - [Run tests](#run-tests)
       - [Run linter](#run-linter)
       - [Check release version](#check-release-version)
-    + [Contribute](#contribute)
+  * [Contribute](#contribute)
     + [Reporting Issues](#reporting-issues)
     + [Submitting pull requests](#submitting-pull-requests)
-    + [License](#license)
-    + [Resources](#resources)
+  * [License](#license)
+  * [Resources](#resources)
 
 ## Changelog
 
@@ -166,7 +166,7 @@ yarn lint
 yarn rsc 0.1.0
 ```
 
-### Contribute
+## Contribute
 
 First off, thanks for taking the time to contribute!
 Now, take a moment to be sure your contributions make sense to everyone else.
@@ -190,11 +190,11 @@ Pull requests are the greatest contributions, so be sure they are focused in sco
 -   Push to the branch: `git push origin feature/my-new-feature`
 -   Submit a pull request with full remarks documenting your changes.
 
-### License
+## License
 
 [MIT License](https://opensource.org/licenses/MIT) © [Distributed Lab](https://distributedlab.com)
 
-### Resources
+## Resources
 - [Yarn Berry](https://yarnpkg.com/cli/install)
 - [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
