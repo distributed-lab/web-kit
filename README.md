@@ -7,8 +7,28 @@
 </div>
 
 # Distributed Lab | Web-Kit
-
 TypeScript-based various types of solutions for [Distributed Lab](https://distributedlab.com/) projects and not only.
+
+- [Distributed Lab | Web-Kit](#distributed-lab---web-kit)
+  * [Changelog](#changelog)
+  * [Packages](#packages)
+  * [Development](#development)
+    + [Editors](#editors)
+      - [VSCode](#vscode)
+      - [WebStorm](#webstorm)
+    + [Dependencies](#dependencies)
+      - [Local dependencies](#local-dependencies)
+      - [Testing dependencies](#testing-dependencies)
+    + [Basics](#basics)
+      - [Build](#build)
+      - [Run tests](#run-tests)
+      - [Run linter](#run-linter)
+      - [Check release version](#check-release-version)
+    + [Contribute](#contribute)
+    + [Reporting Issues](#reporting-issues)
+    + [Submitting pull requests](#submitting-pull-requests)
+    + [License](#license)
+    + [Resources](#resources)
 
 ## Changelog
 
@@ -145,6 +165,34 @@ yarn lint
 ```bash
 yarn rsc 0.1.0
 ```
+
+### Contribute
+
+First off, thanks for taking the time to contribute!
+Now, take a moment to be sure your contributions make sense to everyone else.
+
+### Reporting Issues
+
+Found a problem? Want a new feature? First of all see if your issue or idea has [already been reported](../../issues).
+If don't, just open a [new clear and descriptive issue](../../issues/new).
+
+### Submitting pull requests
+
+Pull requests are the greatest contributions, so be sure they are focused in scope, and do avoid unrelated commits.
+
+-   Fork it!
+-   Clone your fork: `git clone https://github.com/<your-username>/web-kit`
+-   Navigate to the newly cloned directory: `cd web-kit`
+-   Create a new branch for the new feature: `git checkout -b feature/my-new-feature`
+-   Install the tools necessary for development: `yarn install`
+-   Make your changes.
+-   Commit your changes: `git commit -am 'Add some feature'`
+-   Push to the branch: `git push origin feature/my-new-feature`
+-   Submit a pull request with full remarks documenting your changes.
+
+### License
+
+[MIT License](https://opensource.org/licenses/MIT) © [Distributed Lab](https://distributedlab.com)
 
 ### Resources
 - [Yarn Berry](https://yarnpkg.com/cli/install)
