@@ -1,34 +1,34 @@
 <h1><p align="center"><img alt="Distributed Lab | Web-Kit" src="https://raw.githubusercontent.com/distributed-lab/web-kit/main/assets/logo.png" width="876" /></p></h1>
 
+<p align="center">TypeScript-based various types of solutions for [Distributed Lab](https://distributedlab.com/) projects and not only.</p>
+
 <div align="center">
   <a href="https://github.com/distributed-lab/web-kit/blob/main/LICENSE">
     <img alt="License: MIT" src="https://img.shields.io/github/license/distributed-lab/web-kit.svg" />
   </a>
 </div>
 
-# Distributed Lab | Web-Kit
-TypeScript-based various types of solutions for [Distributed Lab](https://distributedlab.com/) projects and not only.
+## Table of Contents
 
-- [Distributed Lab | Web-Kit](#distributed-lab---web-kit)
-  * [Changelog](#changelog)
-  * [Packages](#packages)
-  * [Development](#development)
-    + [Editors](#editors)
-      - [VSCode](#vscode)
-      - [WebStorm](#webstorm)
-    + [Dependencies](#dependencies)
-      - [Local dependencies](#local-dependencies)
-      - [Testing dependencies](#testing-dependencies)
-    + [Basics](#basics)
-      - [Build](#build)
-      - [Run tests](#run-tests)
-      - [Run linter](#run-linter)
-      - [Check release version](#check-release-version)
-  * [Contribute](#contribute)
-    + [Reporting Issues](#reporting-issues)
-    + [Submitting pull requests](#submitting-pull-requests)
-  * [License](#license)
-  * [Resources](#resources)
+- [Changelog](#changelog)
+- [Packages](#packages)
+- [Development](#development)
+  * [Editors](#editors)
+    + [VSCode](#vscode)
+    + [WebStorm](#webstorm)
+  * [Dependencies](#dependencies)
+    + [Local dependencies](#local-dependencies)
+    + [Testing dependencies](#testing-dependencies)
+  * [Basics](#basics)
+    + [Build](#build)
+    + [Run tests](#run-tests)
+    + [Run linter](#run-linter)
+    + [Check release version](#check-release-version)
+- [Contribute](#contribute)
+  * [Reporting Issues](#reporting-issues)
+  * [Submitting pull requests](#submitting-pull-requests)
+- [License](#license)
+- [Resources](#resources)
 
 ## Changelog
 
