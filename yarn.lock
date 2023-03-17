@@ -422,6 +422,8 @@ __metadata:
     jsona: ^1.11.0
     lodash: ^4.17.21
     tsc-alias: ^1.8.2
+  peerDependencies:
+    jsona: "*"
   languageName: unknown
   linkType: soft
 
