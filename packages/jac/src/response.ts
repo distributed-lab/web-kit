@@ -1,5 +1,5 @@
+import Jsona from '@distributedlab/jsona'
 import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
-import Jsona from 'jsona'
 import isEmpty from 'lodash/isEmpty'
 
 import { HTTP_METHODS, HTTP_STATUS_CODES } from '@/enums'
@@ -18,14 +18,14 @@ const formatter = new Jsona()
  * API response wrapper.
  */
 export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
-  private _raw: AxiosResponse
-  private _rawData!: Record<string, unknown>
+  private readonly _raw: AxiosResponse
+  private readonly _rawData!: Record<string, unknown>
   private _data!: T
-  private _links: JsonApiResponseLinks
+  private readonly _links: JsonApiResponseLinks
   private _apiClient: JsonApiClient
-  private _isNeedRaw: boolean
-  private _withCredentials: boolean
-  private _meta: U
+  private readonly _isNeedRaw: boolean
+  private readonly _withCredentials: boolean
+  private readonly _meta: U
 
   constructor(opts: {
     raw: AxiosResponse
