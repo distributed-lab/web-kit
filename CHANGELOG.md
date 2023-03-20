@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2023-03-20
+### Added
+- `@distributedlab/jac` - Example if user use a refresh token functionality
+
 ## [0.1.7-rc.1] - 2023-03-17
 ### Changed
 - `@distributedlab/jac` - migrate from `jsona` dependency to the `@distributedlab/jsona`
@@ -83,7 +87,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.1.7-rc.1...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.1.7...HEAD
+[0.1.7]: https://github.com/distributed-lab/web-kit/compare/0.1.7-rc.1...0.1.7
 [0.1.7-rc.1]: https://github.com/distributed-lab/web-kit/compare/0.1.7-rc.0...0.1.7-rc.1
 [0.1.7-rc.0]: https://github.com/distributed-lab/web-kit/compare/0.1.6...0.1.7-rc.0
 [0.1.6]: https://github.com/distributed-lab/web-kit/compare/0.1.5...0.1.6

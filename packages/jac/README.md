@@ -44,7 +44,10 @@ export function attachStaleTokenHandler(axios: AxiosInstance): void {
       )
 
       // If error isn't unauthorized or request was already retried - return error
-      if (!isUnauthorized) return Promise.reject(error)
+      if (!isUnauthorized
+        // Add if you use a refresh token (as 'refresh_token_url' there should be refresh token endpoint)
+        // && error.config.url !== 'refresh_token_url'
+      ) return Promise.reject(error)
 
       // Some authentication store in the client app
       const authStore = useAuthStore()
