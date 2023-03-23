@@ -29,6 +29,7 @@
 <ul>
 <li><a href="#changelog">Changelog</a></li>
 <li><a href="#packages">Packages</a></li>
+<li><a href="#using-in-the-projects-made-by-create-react-app">Using in the projects made by create-react-app</a></li>
 <li><a href="#development">Development</a><ul>
 <li><a href="#editors">Editors</a><ul>
 <li><a href="#vscode">VSCode</a></li>
@@ -89,6 +90,20 @@
 </tr>
 </tbody></table>
 
+<a href="#using-in-the-projects-made-by-create-react-app" id="using-in-the-projects-made-by-create-react-app" style="color: inherit; text-decoration: none;">
+  <h2>Using in the projects made by create-react-app</h2>
+</a>
+<p>To use any of the packages in React project, created with <a href="https://create-react-app.dev/">create-react-app</a> you need to add <a href="https://craco.js.org/">craco</a> package and config to resolve the ESM version:</p>
+<pre><code class="language-shell"><span class="hl-0">yarn </span><span class="hl-1">add</span><span class="hl-0"> </span><span class="hl-1">-D</span><span class="hl-0"> </span><span class="hl-1">@craco/craco</span>
+</code></pre>
+<p>Next, in the root of your project (where <code>package.json</code> is located) create a file named <code>craco.config.js</code> with the following content:</p>
+<pre><code class="language-js"><span class="hl-2">module</span><span class="hl-0">.</span><span class="hl-2">exports</span><span class="hl-0"> = {</span><br/><span class="hl-0">  </span><span class="hl-3">webpack:</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-3">configure:</span><span class="hl-0"> {</span><br/><span class="hl-0">      </span><span class="hl-3">module:</span><span class="hl-0"> {</span><br/><span class="hl-0">        </span><span class="hl-3">rules:</span><span class="hl-0"> [</span><br/><span class="hl-0">          {</span><br/><span class="hl-0">            </span><span class="hl-3">test:</span><span class="hl-4"> /</span><span class="hl-5">\.</span><span class="hl-4">m</span><span class="hl-6">?</span><span class="hl-4">js</span><span class="hl-7">$</span><span class="hl-4">/</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-3">resolve:</span><span class="hl-0"> {</span><br/><span class="hl-0">              </span><span class="hl-3">fullySpecified:</span><span class="hl-0"> </span><span class="hl-8">false</span><span class="hl-0">,</span><br/><span class="hl-0">            },</span><br/><span class="hl-0">          },</span><br/><span class="hl-0">        ],</span><br/><span class="hl-0">      },</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">}</span>
+</code></pre>
+<p>This config disables the breaking change that causes <a href="https://stackoverflow.com/questions/70964723/webpack-5-in-ceate-react-app-cant-resolve-not-fully-specified-routes">this error</a>.</p>
+<p>Then change the <code>start</code>/<code>build</code>/<code>test</code> commands in <code>package.json</code> replacing <code>react-scripts</code> to <code>craco</code>:</p>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;scripts&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-9">&quot;start&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;craco start&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-9">&quot;build&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;craco build&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-9">&quot;test&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;craco test&quot;</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">}</span>
+</code></pre>
+
 <a href="#development" id="development" style="color: inherit; text-decoration: none;">
   <h2>Development</h2>
 </a>
@@ -101,7 +116,7 @@
   <h4>VSCode</h4>
 </a>
 <p>To get ESLint and Prettier working in VSCode, install <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint extension</a> and add the following to your settings.json:</p>
-<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;editor.codeActionsOnSave&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-1">&quot;source.fixAll.eslint&quot;</span><span class="hl-0">: </span><span class="hl-2">true</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;editor.formatOnSave&quot;</span><span class="hl-0">: </span><span class="hl-2">true</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;eslint.validate&quot;</span><span class="hl-0">: [</span><br/><span class="hl-0">    </span><span class="hl-3">&quot;javascript&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">&quot;typescript&quot;</span><br/><span class="hl-0">  ],</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;eslint.alwaysShowStatus&quot;</span><span class="hl-0">: </span><span class="hl-2">true</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;eslint.packageManager&quot;</span><span class="hl-0">: </span><span class="hl-3">&quot;yarn&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;eslint.workingDirectories&quot;</span><span class="hl-0">: [{ </span><span class="hl-1">&quot;mode&quot;</span><span class="hl-0">: </span><span class="hl-3">&quot;auto&quot;</span><span class="hl-0"> }]</span><br/><span class="hl-0">}</span>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;editor.codeActionsOnSave&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-9">&quot;source.fixAll.eslint&quot;</span><span class="hl-0">: </span><span class="hl-8">true</span><br/><span class="hl-0">  },</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;editor.formatOnSave&quot;</span><span class="hl-0">: </span><span class="hl-8">true</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;eslint.validate&quot;</span><span class="hl-0">: [</span><br/><span class="hl-0">    </span><span class="hl-1">&quot;javascript&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-1">&quot;typescript&quot;</span><br/><span class="hl-0">  ],</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;eslint.alwaysShowStatus&quot;</span><span class="hl-0">: </span><span class="hl-8">true</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;eslint.packageManager&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;yarn&quot;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;eslint.workingDirectories&quot;</span><span class="hl-0">: [{ </span><span class="hl-9">&quot;mode&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;auto&quot;</span><span class="hl-0"> }]</span><br/><span class="hl-0">}</span>
 </code></pre>
 
 <a href="#webstorm" id="webstorm" style="color: inherit; text-decoration: none;">
@@ -122,13 +137,13 @@
   <h4>Local dependencies</h4>
 </a>
 <p>To install all dependencies, run:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">install</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">install</span>
 </code></pre>
 <p>If you are implementing a new package which needs to depend on the local package, you can use the following command to install it:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">workspace</span><span class="hl-0"> </span><span class="hl-3">@distributedlab/target-package</span><span class="hl-0"> </span><span class="hl-3">add</span><span class="hl-0"> </span><span class="hl-3">@distributedlab/package-to-add</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">workspace</span><span class="hl-0"> </span><span class="hl-1">@distributedlab/target-package</span><span class="hl-0"> </span><span class="hl-1">add</span><span class="hl-0"> </span><span class="hl-1">@distributedlab/package-to-add</span>
 </code></pre>
 <p>To install a dependency to all packages, use the following command:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">workspaces</span><span class="hl-0"> </span><span class="hl-3">foreach</span><span class="hl-0"> </span><span class="hl-3">-pt</span><span class="hl-0"> </span><span class="hl-3">run</span><span class="hl-0"> </span><span class="hl-3">add</span><span class="hl-0"> </span><span class="hl-3">@distributedlab/package-to-add</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">workspaces</span><span class="hl-0"> </span><span class="hl-1">foreach</span><span class="hl-0"> </span><span class="hl-1">-pt</span><span class="hl-0"> </span><span class="hl-1">run</span><span class="hl-0"> </span><span class="hl-1">add</span><span class="hl-0"> </span><span class="hl-1">@distributedlab/package-to-add</span>
 </code></pre>
 
 <a href="#testing-dependencies" id="testing-dependencies" style="color: inherit; text-decoration: none;">
@@ -137,27 +152,27 @@
 <p>To test the packages, you need:</p>
 <ol>
 <li><p>Build the packages:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">build</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">build</span>
 </code></pre>
 </li>
 <li><p>Switch yarn to version berry in the project where you want to test package, to yarn be able to resolve workspace dependencies:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">set</span><span class="hl-0"> </span><span class="hl-3">version</span><span class="hl-0"> </span><span class="hl-3">berry</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">set</span><span class="hl-0"> </span><span class="hl-1">version</span><span class="hl-0"> </span><span class="hl-1">berry</span>
 </code></pre>
 </li>
 <li><p>Add this to the <code>.yarnrc.yml</code> file:</p>
-<pre><code class="language-yaml"><span class="hl-4">nodeLinker</span><span class="hl-0">: </span><span class="hl-5">node-modules</span>
+<pre><code class="language-yaml"><span class="hl-10">nodeLinker</span><span class="hl-0">: </span><span class="hl-11">node-modules</span>
 </code></pre>
 </li>
 <li><p>Link the packages to the project:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">link</span><span class="hl-0"> </span><span class="hl-3">-p</span><span class="hl-0"> </span><span class="hl-3">-A</span><span class="hl-0"> </span><span class="hl-3">/path/to/web-kit/root/directory</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">link</span><span class="hl-0"> </span><span class="hl-1">-p</span><span class="hl-0"> </span><span class="hl-1">-A</span><span class="hl-0"> </span><span class="hl-1">/path/to/web-kit/root/directory</span>
 </code></pre>
 </li>
 <li><p>Add dependencies to the package.json file:</p>
-<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;dependencies&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-1">&quot;@distributedlab/jac&quot;</span><span class="hl-0">: </span><span class="hl-3">&quot;*&quot;</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">}</span>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-9">&quot;dependencies&quot;</span><span class="hl-0">: {</span><br/><span class="hl-0">    </span><span class="hl-9">&quot;@distributedlab/jac&quot;</span><span class="hl-0">: </span><span class="hl-1">&quot;*&quot;</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">}</span>
 </code></pre>
 </li>
 <li><p>Install the dependencies:</p>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">install</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">install</span>
 </code></pre>
 </li>
 </ol>
@@ -169,25 +184,25 @@
 <a href="#build" id="build" style="color: inherit; text-decoration: none;">
   <h4>Build</h4>
 </a>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">build</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">build</span>
 </code></pre>
 
 <a href="#run-tests" id="run-tests" style="color: inherit; text-decoration: none;">
   <h4>Run tests</h4>
 </a>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">test</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">test</span>
 </code></pre>
 
 <a href="#run-linter" id="run-linter" style="color: inherit; text-decoration: none;">
   <h4>Run linter</h4>
 </a>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">lint</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">lint</span>
 </code></pre>
 
 <a href="#check-release-version" id="check-release-version" style="color: inherit; text-decoration: none;">
   <h4>Check release version</h4>
 </a>
-<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-3">rsc</span><span class="hl-0"> </span><span class="hl-3">0.1.0</span>
+<pre><code class="language-bash"><span class="hl-0">yarn </span><span class="hl-1">rsc</span><span class="hl-0"> </span><span class="hl-1">0.1.0</span>
 </code></pre>
 
 <a href="#contribute" id="contribute" style="color: inherit; text-decoration: none;">
