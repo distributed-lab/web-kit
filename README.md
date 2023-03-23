@@ -12,6 +12,7 @@
 
 - [Changelog](#changelog)
 - [Packages](#packages)
+- [Using in the projects made by create-react-app](#using-in-the-projects-made-by-create-react-app)
 - [Development](#development)
   * [Editors](#editors)
     + [VSCode](#vscode)
@@ -46,6 +47,50 @@ Here are the packages in the namespace:
 |-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | [@distributedlab/jac](https://distributed-lab.github.io/web-kit/modules/_distributedlab_jac.html)     | A library for constructing JSON-API compliant requests and responses | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)     |
 | [@distributedlab/tools](https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html) | Collection of common utility functions and classes                   | [![npm version](https://img.shields.io/npm/v/@distributedlab/tools.svg)](https://www.npmjs.com/package/@distributedlab/tools) |
+
+## Using in the projects made by create-react-app
+
+To use any of the packages in React project, created with [create-react-app](https://create-react-app.dev/) you need to add [craco](https://craco.js.org/) package and config to resolve the ESM version:
+
+```shell
+yarn add -D @craco/craco
+```
+
+Next, in the root of your project (where `package.json` is located) create a file named `craco.config.js` with the following content:
+
+```js
+module.exports = {
+  webpack: {
+    configure: {
+      module: {
+        rules: [
+          {
+            test: /\.m?js$/,
+            resolve: {
+              fullySpecified: false,
+            },
+          },
+        ],
+      },
+    },
+  },
+}
+```
+
+This config disables the breaking change that causes [this error](https://stackoverflow.com/questions/70964723/webpack-5-in-ceate-react-app-cant-resolve-not-fully-specified-routes).
+
+Then change the `start`/`build`/`test` commands in `package.json` replacing `react-scripts` to `craco`:
+
+```json
+{
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
+  }
+}
+```
+
 
 ## Development
 
