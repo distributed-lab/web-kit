@@ -44,7 +44,7 @@ function applyVersion() {
       if (err) issuesFound.push(`[${ORGANIZATION_NAME}/${pkg}]: Version apply failed: ${err.toString()}`)
     })
 
-    if (!issuesFound.length) break
+    if (issuesFound.length) break
   }
 }
 
