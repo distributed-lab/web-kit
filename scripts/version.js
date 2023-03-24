@@ -23,7 +23,7 @@ function validateSemverCompatibility() {
   }
 
   if (!VERSION_REGEX.test(VERSION)) {
-    issuesFound.push(`Version ${VERSION} is not semver compatible, should match https://semver.org/ specification`)
+    issuesFound.push(`Version ${VERSION} not semver compatible, should match https://semver.org/ specification`)
   }
 }
 
@@ -34,8 +34,7 @@ function applyVersion() {
     const packageJson = require(packageJsonPath)
 
     if (packageJson.version === VERSION) {
-      issuesFound.push(`[${ORGANIZATION_NAME}/${pkg}]: Package is already has ${VERSION} version`)
-      break
+      continue
     }
 
     packageJson.version = VERSION
