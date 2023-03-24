@@ -2,7 +2,7 @@ const fs = require("fs")
 const path = require("path")
 const chalk = require("chalk")
 
-const ORGANIZATION_NAME = "@rarimo"
+const ORGANIZATION_NAME = "@distributedlab"
 const VERSION_REGEX = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
 const VERSION = process.argv[2]
 
