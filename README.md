@@ -211,6 +211,12 @@ yarn lint
 yarn rsc 0.1.0
 ```
 
+#### Bump version for all packages
+
+```bash
+yarn apply-version 0.1.0
+```
+
 ## Contribute
 
 First off, thanks for taking the time to contribute!

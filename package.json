@@ -32,7 +32,8 @@
     "test:watch": "jest --watch",
     "publish-next": "yarn build && yarn workspaces foreach --no-private exec yarn npm publish --tag next",
     "publish-latest": "yarn build && yarn workspaces foreach --no-private exec yarn npm publish",
-    "rsc": "node scripts/release-sanity-check.js"
+    "rsc": "node scripts/release-sanity-check.js",
+    "apply-version": "node scripts/version.js"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.3",
