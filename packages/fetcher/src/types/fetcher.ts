@@ -12,13 +12,15 @@ export type FetcherConfig = {
 
 export type FetcherRequestOpts = {
   headers?: HeadersInit
-  requestId?: string
+  id?: string
 }
+
+export type FetcherRequestQuery = Record<string, string | number | boolean>
 
 export type FetcherRequestConfig = FetcherRequestOpts & {
   endpoint: string
   method: HTTP_METHODS
-  query?: Record<string, unknown>
+  query?: FetcherRequestQuery
 }
 
 export type FetcherResponse<T> = {

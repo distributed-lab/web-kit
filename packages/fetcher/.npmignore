@@ -1,5 +1,5 @@
-/src/test/
-src/**/*.test.ts
+/src/trying/
+src/**/*.trying.ts
 jest.config.js
 tsconfig.json
 tsconfig.eslint.json

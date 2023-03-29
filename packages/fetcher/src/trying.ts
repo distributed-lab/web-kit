@@ -1,4 +1,4 @@
-import { Fetcher } from '@/index'
+import { Fetcher } from '@/fetcher'
 
 type resp = {
   count: number
@@ -16,7 +16,7 @@ type resp = {
 const BASE_URL = 'https://api.publicapis.org/'
 const ENDPOINT = '/entries'
 
-const test = async () => {
+const trying = async () => {
   const fetcher = new Fetcher({
     baseUrl: BASE_URL,
   })
@@ -27,4 +27,4 @@ const test = async () => {
   console.log(response.data)
 }
 
-test()
+trying()
