@@ -2,6 +2,7 @@ import { FetcherAbortManager } from '@/abort-manager'
 import { isPlainObject } from '@/helpers/is-object'
 import {
   FetcherConfig,
+  FetcherRequest,
   FetcherRequestBody,
   FetcherRequestConfig,
   FetcherRequestQuery,
@@ -11,7 +12,7 @@ export const buildRequest = (
   cfg: FetcherConfig,
   requestCfg: FetcherRequestConfig,
   abortManager: FetcherAbortManager,
-): { url: string; config: RequestInit } => {
+): FetcherRequest => {
   const url = buildRequestURL(
     cfg.baseUrl,
     requestCfg.endpoint,
@@ -20,8 +21,8 @@ export const buildRequest = (
   const config = buildRequestConfig(cfg, requestCfg, abortManager)
 
   return {
+    ...config,
     url,
-    config,
   }
 }
 
