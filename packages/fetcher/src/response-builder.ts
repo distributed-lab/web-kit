@@ -10,7 +10,7 @@ export class FetcherResponseBuilder<T> {
       ok: false,
       status: 0,
       statusText: '',
-      headers: new Headers(),
+      headers: {} as Headers,
       url: '',
       request: request || { url: '' },
     }

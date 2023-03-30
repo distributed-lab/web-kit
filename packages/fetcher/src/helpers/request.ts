@@ -66,7 +66,6 @@ export const buildRequestBody = (
 ): BodyInit | null => {
   if (!body) return null
 
-  // TODO: Add support for FormData, Blob, ArrayBuffer, ArrayBufferView
   if (isObject(body)) {
     return JSON.stringify(body)
   }

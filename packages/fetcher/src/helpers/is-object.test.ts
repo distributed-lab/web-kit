@@ -21,6 +21,18 @@ describe('performs isObject unit test', () => {
     expect(isObject(new String(''))).toBe(false)
   })
 
+  test('returns false for FormData instance', () => {
+    expect(isObject(new FormData())).toBe(false)
+  })
+
+  test('returns false for ArrayBuffer instance', () => {
+    expect(isObject(new ArrayBuffer(1))).toBe(false)
+  })
+
+  test('returns false for ReadableStream instance', () => {
+    expect(isObject(new ReadableStream())).toBe(false)
+  })
+
   test('returns false for Function instance', () => {
     const x = function () {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
