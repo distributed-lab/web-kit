@@ -8,6 +8,7 @@ export type FetcherConfig = {
   mode?: RequestMode
   referrer?: string
   referrerPolicy?: ReferrerPolicy
+  timeout?: number
 }
 
 export type FetcherRequestOpts = {
@@ -17,11 +18,22 @@ export type FetcherRequestOpts = {
 
 export type FetcherRequestQuery = Record<string, string | number | boolean>
 
+export type FetcherRequestBody =
+  | ReadableStream
+  | Blob
+  | BufferSource
+  | FormData
+  | string
+  | object
+
 export type FetcherRequestConfig = FetcherRequestOpts & {
   endpoint: string
   method: HTTP_METHODS
   query?: FetcherRequestQuery
+  body?: FetcherRequestBody
 }
+
+export type FetcherRequest = { url: string } & RequestInit
 
 export type FetcherResponse<T> = {
   ok: boolean
@@ -29,6 +41,6 @@ export type FetcherResponse<T> = {
   statusText: string
   headers: Headers
   url: string
-  request: RequestInit & { url: string }
+  request: FetcherRequest
   data?: T
 }

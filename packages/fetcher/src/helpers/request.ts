@@ -1,6 +1,8 @@
 import { FetcherAbortManager } from '@/abort-manager'
+import { isPlainObject } from '@/helpers/is-object'
 import {
   FetcherConfig,
+  FetcherRequestBody,
   FetcherRequestConfig,
   FetcherRequestQuery,
 } from '@/types'
@@ -44,9 +46,8 @@ const buildRequestConfig = (
   requestCfg: FetcherRequestConfig,
   abortManager: FetcherAbortManager,
 ): RequestInit => {
-  // TODO Add body
-
   return {
+    body: buildRequestBody(requestCfg.body),
     credentials: cfg.credentials,
     cache: cfg.cache,
     referrer: cfg.referrer,
@@ -57,4 +58,14 @@ const buildRequestConfig = (
       ...requestCfg.headers,
     },
   }
+}
+
+const buildRequestBody = (body?: FetcherRequestBody): BodyInit | null => {
+  if (!body) return null
+
+  if (isPlainObject(body)) {
+    return JSON.stringify(body)
+  }
+
+  return body as BodyInit
 }

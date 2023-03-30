@@ -1,23 +1,18 @@
 import { isEmptyBodyStatusCode } from '@/helpers'
-import { FetcherResponse } from '@/types'
-
-type ResponseParser<T> = () => Promise<T>
+import { FetcherRequest, FetcherResponse } from '@/types'
 
 export class FetcherResponseBuilder<T> {
   #response?: Response
   readonly #result: FetcherResponse<T>
 
-  constructor(
-    request?: { url: string; config: RequestInit },
-    response?: Response,
-  ) {
+  constructor(request?: FetcherRequest, response?: Response) {
     this.#result = {
       ok: false,
       status: 0,
       statusText: '',
       headers: new Headers(),
       url: '',
-      request: request ? { url: request.url, ...request.config } : { url: '' },
+      request: request || { url: '' },
     }
 
     if (response) {
@@ -46,15 +41,14 @@ export class FetcherResponseBuilder<T> {
   }
 
   async #extractData() {
-    if (!this.#response) return
+    if (!this.#response || !this.#response.ok) return
     if (isEmptyBodyStatusCode(this.#response.status)) return
 
     const parsers = [
-      this.#tryToParseJson,
-      this.#tryToParseText,
-      this.#tryToParseBlob,
-      this.#tryToParseFormData,
-      this.#tryToParseArrayBuffer,
+      this.#tryToParseJson.bind(this),
+      this.#tryToParseText.bind(this),
+      this.#tryToParseFormData.bind(this),
+      this.#tryToParseBlob.bind(this),
     ]
 
     for (const parser of parsers) {
@@ -64,28 +58,24 @@ export class FetcherResponseBuilder<T> {
   }
 
   async #tryToParseJson(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.json as ResponseParser<T>)
+    return this.#tryToWrapper(this.#response?.json() as Promise<T>)
   }
 
   async #tryToParseText(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.text as ResponseParser<T>)
+    return this.#tryToWrapper(this.#response?.text() as Promise<T>)
   }
 
   async #tryToParseBlob(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.blob as ResponseParser<T>)
+    return this.#tryToWrapper(this.#response?.blob() as Promise<T>)
   }
 
   async #tryToParseFormData(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.formData as ResponseParser<T>)
+    return this.#tryToWrapper(this.#response?.formData() as Promise<T>)
   }
 
-  async #tryToParseArrayBuffer(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.arrayBuffer as ResponseParser<T>)
-  }
-
-  async #tryToWrapper(handler: () => Promise<T>): Promise<boolean> {
+  async #tryToWrapper(promise: Promise<T>): Promise<boolean> {
     try {
-      this.#result.data = (await handler()) as T
+      this.#result.data = (await promise) as T
       return true
     } catch (e) {
       return false

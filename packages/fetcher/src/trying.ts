@@ -13,15 +13,29 @@ type resp = {
   }[]
 }
 
-const BASE_URL = 'https://api.publicapis.org/'
-const ENDPOINT = '/entries'
+const BASE_URL = 'https://jsonplaceholder.typicode.com'
 
 const trying = async () => {
   const fetcher = new Fetcher({
     baseUrl: BASE_URL,
   })
 
-  const response = await fetcher.get<resp>(ENDPOINT)
+  fetcher.useInterceptor({
+    request: async config => {
+      // eslint-disable-next-line no-param-reassign
+      config.url = 'https://jsonplaceholder.typicode.com/todos/1'
+      return config
+    },
+    // error: async response => {
+    //   if (response.status === 404) {
+    //     return fetcher.get<resp>('/todos/1')
+    //   }
+    //
+    //   return response
+    // },
+  })
+
+  const response = await fetcher.get<resp>('/todos/0')
 
   // eslint-disable-next-line no-console
   console.log(response.data)

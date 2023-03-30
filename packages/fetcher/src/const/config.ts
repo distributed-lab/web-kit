@@ -5,4 +5,5 @@ export const DEFAULT_CONFIG: Omit<FetcherConfig, 'baseUrl'> = {
   cache: 'no-store',
   referrerPolicy: 'no-referrer',
   mode: 'cors',
+  timeout: 60000,
 }
