@@ -19,7 +19,7 @@ export class FetcherInterceptorManager {
 
   public eject(interceptor: FetcherInterceptor): void {
     const index = this.#interceptors.indexOf(interceptor)
-    if (~index) return
+    if (!~index) return
     this.#interceptors.splice(index, 1)
   }
 

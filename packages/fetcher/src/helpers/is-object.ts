@@ -9,7 +9,7 @@ const getTag = (value: unknown): string => {
   return toString.call(value)
 }
 
-export const isPlainObject = (value: unknown): boolean => {
+export const isObject = (value: unknown): boolean => {
   if (!isObjectLike(value) || getTag(value) != '[object Object]') return false
   if (Object.getPrototypeOf(value) === null) return true
 

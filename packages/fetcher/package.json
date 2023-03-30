@@ -35,7 +35,8 @@
     "build:cjs": "tsc -p tsconfig.json --outDir ./dist/cjs --module commonjs",
     "build:esm": "tsc -p tsconfig.json --outDir ./dist/esm --module esnext",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "yarn jest"
   },
   "publishConfig": {
     "access": "public"

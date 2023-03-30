@@ -16,7 +16,12 @@ export type FetcherRequestOpts = {
   id?: string
 }
 
-export type FetcherRequestQuery = Record<string, string | number | boolean>
+export type FetcherRequestQueryValue = string | number | boolean
+
+export type FetcherRequestQuery = Record<
+  string,
+  FetcherRequestQueryValue | FetcherRequestQueryValue[]
+>
 
 export type FetcherRequestBody =
   | ReadableStream

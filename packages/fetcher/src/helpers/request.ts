@@ -1,5 +1,5 @@
 import { FetcherAbortManager } from '@/abort-manager'
-import { isPlainObject } from '@/helpers/is-object'
+import { isObject } from '@/helpers/is-object'
 import {
   FetcherConfig,
   FetcherRequest,
@@ -26,7 +26,7 @@ export const buildRequest = (
   }
 }
 
-const buildRequestURL = (
+export const buildRequestURL = (
   baseUrl: string,
   endpoint: string,
   query?: FetcherRequestQuery,
@@ -42,7 +42,7 @@ const buildRequestURL = (
   return url.toString()
 }
 
-const buildRequestConfig = (
+export const buildRequestConfig = (
   cfg: FetcherConfig,
   requestCfg: FetcherRequestConfig,
   abortManager: FetcherAbortManager,
@@ -61,10 +61,13 @@ const buildRequestConfig = (
   }
 }
 
-const buildRequestBody = (body?: FetcherRequestBody): BodyInit | null => {
+export const buildRequestBody = (
+  body?: FetcherRequestBody,
+): BodyInit | null => {
   if (!body) return null
 
-  if (isPlainObject(body)) {
+  // TODO: Add support for FormData, Blob, ArrayBuffer, ArrayBufferView
+  if (isObject(body)) {
     return JSON.stringify(body)
   }
 

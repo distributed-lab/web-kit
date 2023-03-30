@@ -4,9 +4,10 @@ export type FetcherRequestInterceptor = (
   config: FetcherRequest,
 ) => Promise<FetcherRequest>
 
-export type FetcherResponseInterceptor = (
-  response: FetcherResponse<unknown>,
-) => Promise<FetcherResponse<unknown>>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FetcherResponseInterceptor<T = any> = (
+  response: FetcherResponse<T>,
+) => Promise<FetcherResponse<T>>
 
 export type FetcherErrorResponseInterceptor = FetcherResponseInterceptor
 
