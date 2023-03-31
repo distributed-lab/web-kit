@@ -1,5 +1,5 @@
 # @distributedlab/fetcher
-Promise based HTTP client
+Fetch API wrapper with the extended functionality and simple interface.
 
 ![version (scoped package)](https://badgen.net/npm/v/@distributedlab/fetcher)
 ![types](https://badgen.net/npm/types/@distributedlab/fetcher)

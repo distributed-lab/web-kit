@@ -1,7 +1,7 @@
 {
   "name": "@distributedlab/fetcher",
   "version": "0.1.7",
-  "description": "Promise based HTTP client",
+  "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",
     "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/fetcher"
