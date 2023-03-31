@@ -31,7 +31,7 @@ export class FetcherResponseBuilder<T> {
   }
 
   public populateResponse(response: Response): this {
-    this.#response = response
+    this.#response = response.clone()
     this.#result.ok = response.ok
     this.#result.status = response.status
     this.#result.statusText = response.statusText
@@ -46,8 +46,7 @@ export class FetcherResponseBuilder<T> {
 
     const parsers = [
       this.#tryToParseJson.bind(this),
-      this.#tryToParseText.bind(this),
-      this.#tryToParseFormData.bind(this),
+      this.#tryToParseFormData.bind(this), // TODO: check if it's possible to parse formData
       this.#tryToParseBlob.bind(this),
     ]
 
@@ -58,19 +57,17 @@ export class FetcherResponseBuilder<T> {
   }
 
   async #tryToParseJson(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.json() as Promise<T>)
-  }
-
-  async #tryToParseText(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.text() as Promise<T>)
+    // Clone response to be able to read response body multiple times
+    // https://developer.mozilla.org/en-US/docs/Web/API/Response/bodyUsed
+    return this.#tryToWrapper(this.#response?.clone()?.json() as Promise<T>)
   }
 
   async #tryToParseBlob(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.blob() as Promise<T>)
+    return this.#tryToWrapper(this.#response?.clone()?.blob() as Promise<T>)
   }
 
   async #tryToParseFormData(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.formData() as Promise<T>)
+    return this.#tryToWrapper(this.#response?.clone()?.formData() as Promise<T>)
   }
 
   async #tryToWrapper(promise: Promise<T>): Promise<boolean> {

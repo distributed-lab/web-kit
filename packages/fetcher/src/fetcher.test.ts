@@ -104,9 +104,14 @@ describe('performs Fetcher unit test', () => {
     let fetcher: Fetcher
 
     const mockedEmptyResponse = {
-      status: 200,
       ok: true,
-      json: () => Promise.resolve({}),
+      clone: () => ({
+        status: 200,
+        ok: true,
+        clone: () => ({
+          json: () => Promise.resolve({}),
+        }),
+      }),
     }
 
     const mockedBody = {
@@ -174,9 +179,14 @@ describe('performs Fetcher unit test', () => {
 
     test('should return correct object response', async () => {
       const mockedResponse = {
-        status: 200,
         ok: true,
-        json: () => Promise.resolve(mockedBody),
+        clone: () => ({
+          status: 200,
+          ok: true,
+          clone: () => ({
+            json: () => Promise.resolve(mockedBody),
+          }),
+        }),
       }
 
       mockFetchResponse(mockedResponse)
@@ -188,13 +198,16 @@ describe('performs Fetcher unit test', () => {
 
     test('should return correct Blob response', async () => {
       const mockedResponse = {
-        status: 200,
         ok: true,
-        json: () => Promise.reject(),
-        text: () => Promise.reject(),
-        formData: () => Promise.reject(),
-        arrayBuffer: () => Promise.reject(),
-        blob: () => Promise.resolve(new Blob()),
+        clone: () => ({
+          status: 200,
+          ok: true,
+          clone: () => ({
+            json: () => Promise.reject(),
+            formData: () => Promise.reject(),
+            blob: () => Promise.resolve(new Blob()),
+          }),
+        }),
       }
 
       const blob = new Blob()
