@@ -172,7 +172,7 @@ const api = new Fetcher({
   baseURL: 'https://api.example.com',
 })
 
-api.useInterceptor({
+api.addInterceptor({
   request: async request => {
     // Do something before request is sent
     return { ...request, url: `${request.url}?foo=bar` }
