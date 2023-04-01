@@ -74,15 +74,22 @@ export class Fetcher {
   /**
    * Sets new interceptor to the current instance.
    */
-  public useInterceptor(interceptor: FetcherInterceptor): void {
-    this.#interceptorManager.use(interceptor)
+  public addInterceptor(interceptor: FetcherInterceptor): void {
+    this.#interceptorManager.add(interceptor)
   }
 
   /**
    * Removes the existing interceptor from the current instance.
    */
-  public ejectInterceptor(interceptor: FetcherInterceptor): void {
-    this.#interceptorManager.eject(interceptor)
+  public removeInterceptor(interceptor: FetcherInterceptor): void {
+    this.#interceptorManager.remove(interceptor)
+  }
+
+  /**
+   * Clears all existing interceptors from the current instance.
+   */
+  public clearInterceptors(): void {
+    this.#interceptorManager.clear()
   }
 
   /**

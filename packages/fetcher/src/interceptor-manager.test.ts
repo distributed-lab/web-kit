@@ -7,7 +7,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
     const interceptor: FetcherInterceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
-    manager.use(interceptor)
+    manager.add(interceptor)
     expect(manager.interceptors.length).toBe(1)
     expect(manager.interceptors[0]).toBe(interceptor)
   })
@@ -17,8 +17,8 @@ describe('performs FetcherInterceptorManager unit test', () => {
     const interceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
-    manager.use(interceptor)
-    manager.eject(interceptor)
+    manager.add(interceptor)
+    manager.remove(interceptor)
     expect(manager.interceptors.length).toBe(0)
   })
 
@@ -27,8 +27,8 @@ describe('performs FetcherInterceptorManager unit test', () => {
     const interceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
-    manager.use(interceptor)
-    manager.eject({
+    manager.add(interceptor)
+    manager.remove({
       request: (config: FetcherRequest) => Promise.resolve(config),
     })
     expect(manager.interceptors.length).toBe(1)
@@ -43,8 +43,8 @@ describe('performs FetcherInterceptorManager unit test', () => {
       const interceptor2 = {
         request: (config: FetcherRequest) => Promise.resolve(config),
       }
-      manager.use(interceptor1)
-      manager.use(interceptor2)
+      manager.add(interceptor1)
+      manager.add(interceptor2)
       const config = { url: 'http://localhost' }
       const result = await manager.runRequestInterceptors(config)
       expect(result).toBe(config)
@@ -56,7 +56,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
         request: (config: FetcherRequest) =>
           Promise.resolve({ ...config, url: 'http://localhost/1' }),
       }
-      manager.use(interceptor1)
+      manager.add(interceptor1)
       const config = { url: 'http://localhost' }
       const result = await manager.runRequestInterceptors(config)
       expect(result).toStrictEqual({ url: 'http://localhost/1' })
@@ -85,7 +85,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
         Promise.resolve({ ...response, data: 'data1' }),
     }
 
-    manager.use(interceptor)
+    manager.add(interceptor)
 
     const result = await manager.runResponseInterceptors<T>(response)
     expect(result).toStrictEqual({ ...response, data: 'data1' })
@@ -110,7 +110,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
       error: (response: FetcherResponse<object>) =>
         Promise.resolve({ ...response, data: 'data1' }),
     }
-    manager.use(interceptor1)
+    manager.add(interceptor1)
     const result = await manager.runErrorInterceptors({
       ...response,
       data: 'data',

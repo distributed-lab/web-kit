@@ -59,7 +59,7 @@ describe('performs Fetcher unit test', () => {
       const interceptor = {
         request: (cfg: FetcherRequest) => Promise.resolve(cfg),
       }
-      fetcher.useInterceptor(interceptor)
+      fetcher.addInterceptor(interceptor)
       expect(fetcher.interceptorManager.interceptors.length).toBe(1)
       expect(fetcher.interceptorManager.interceptors[0]).toBe(interceptor)
     })
@@ -69,8 +69,8 @@ describe('performs Fetcher unit test', () => {
       const interceptor = {
         request: (cfg: FetcherRequest) => Promise.resolve(cfg),
       }
-      fetcher.useInterceptor(interceptor)
-      fetcher.ejectInterceptor(interceptor)
+      fetcher.addInterceptor(interceptor)
+      fetcher.removeInterceptor(interceptor)
       expect(fetcher.interceptorManager.interceptors.length).toBe(0)
     })
 

@@ -1,7 +1,7 @@
 import { FetcherInterceptor, FetcherRequest, FetcherResponse } from '@/types'
 
 export class FetcherInterceptorManager {
-  readonly #interceptors: FetcherInterceptor[] = []
+  #interceptors: FetcherInterceptor[] = []
 
   constructor(interceptors?: FetcherInterceptor[]) {
     if (interceptors) {
@@ -13,14 +13,18 @@ export class FetcherInterceptorManager {
     return this.#interceptors
   }
 
-  public use(interceptor: FetcherInterceptor): void {
+  public add(interceptor: FetcherInterceptor): void {
     this.#interceptors.push(interceptor)
   }
 
-  public eject(interceptor: FetcherInterceptor): void {
+  public remove(interceptor: FetcherInterceptor): void {
     const index = this.#interceptors.indexOf(interceptor)
     if (!~index) return
     this.#interceptors.splice(index, 1)
+  }
+
+  public clear(): void {
+    this.#interceptors = []
   }
 
   public async runRequestInterceptors(
