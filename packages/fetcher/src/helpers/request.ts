@@ -1,5 +1,6 @@
 import { FetcherAbortManager } from '@/abort-manager'
-import { isObject } from '@/helpers/is-object'
+import { HEADER_CONTENT_TYPE } from '@/const'
+import { isObject, normalizeHeadersCase } from '@/helpers'
 import {
   FetcherConfig,
   FetcherRequest,
@@ -35,6 +36,12 @@ export const buildRequestURL = (
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
+      if (isObject(value)) {
+        throw new TypeError(
+          "Fetcher: query parameters can't have nested objects.",
+        )
+      }
+
       url.searchParams.append(key, value.toString())
     })
   }
@@ -47,17 +54,28 @@ export const buildRequestConfig = (
   requestCfg: FetcherRequestConfig,
   abortManager: FetcherAbortManager,
 ): RequestInit => {
+  const body = buildRequestBody(requestCfg.body)
+
+  const headers = normalizeHeadersCase({
+    ...cfg.headers,
+    ...requestCfg.headers,
+  }) as Record<string, string>
+
+  if (body instanceof FormData && headers[HEADER_CONTENT_TYPE]) {
+    // FormData will set the Content-Type header automatically
+    // https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post
+    delete headers[HEADER_CONTENT_TYPE]
+  }
+
   return {
-    body: buildRequestBody(requestCfg.body),
+    body,
+    headers,
+    method: requestCfg.method,
     credentials: cfg.credentials,
     cache: cfg.cache,
-    referrer: cfg.referrer,
     referrerPolicy: cfg.referrerPolicy,
     signal: abortManager.setSafe(requestCfg.id),
-    headers: {
-      ...cfg.headers,
-      ...requestCfg.headers,
-    },
+    ...(cfg.referrer ? { referrer: cfg.referrer } : {}),
   }
 }
 

@@ -4,7 +4,7 @@ import { FetcherAbortManager } from '@/abort-manager'
 import { DEFAULT_CONFIG } from '@/const'
 import { HTTP_METHODS } from '@/enums'
 import { FetcherError } from '@/error'
-import { buildRequest } from '@/helpers'
+import { buildRequest, validateBaseUrl } from '@/helpers'
 import { FetcherInterceptorManager } from '@/interceptor-manager'
 import { FetcherResponseBuilder } from '@/response-builder'
 import {
@@ -25,10 +25,12 @@ export class Fetcher {
   #config: FetcherConfig
 
   constructor(config: FetcherConfig, interceptors?: FetcherInterceptor[]) {
+    validateBaseUrl(config.baseUrl)
+
     this.#config = {
       ...DEFAULT_CONFIG,
       ...config,
-      baseUrl: new URL(config.baseUrl).toString(),
+      baseUrl: config.baseUrl,
     }
 
     this.#abortManager = new FetcherAbortManager()
@@ -87,7 +89,8 @@ export class Fetcher {
    * Assigns new base URL to the current instance.
    */
   public useBaseUrl(baseUrl: string): Fetcher {
-    this.#config.baseUrl = new URL(baseUrl).toString()
+    validateBaseUrl(baseUrl)
+    this.#config.baseUrl = baseUrl
     return this
   }
 
