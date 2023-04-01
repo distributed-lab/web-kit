@@ -29,8 +29,8 @@ const RESULT = {
   body: null,
   cache: 'no-store',
   credentials: 'include',
-  referrer: undefined,
-  referrerPolicy: 'no-referrer',
+  method: 'GET',
+  referrerPolicy: 'strict-origin-when-cross-origin',
   signal: ABORT_MANAGER.setSafe(REQUEST_CFG.id),
   headers: {
     'Content-Type': 'application/json',
