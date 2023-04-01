@@ -28,6 +28,7 @@ export class Fetcher {
     this.#config = {
       ...DEFAULT_CONFIG,
       ...config,
+      baseUrl: new URL(config.baseUrl).toString(),
     }
 
     this.#abortManager = new FetcherAbortManager()
@@ -38,28 +39,63 @@ export class Fetcher {
     return this.#config
   }
 
+  /**
+   *  Base URL will be prepended to `url` unless `url` is absolute.
+   *  It can be convenient to set `baseURL` for an instance of Fetcher to pass
+   *  relative URLs to methods of that instance.
+   */
   public get baseUrl(): string {
     return this.#config.baseUrl
   }
 
+  /**
+   * Returns the {@link FetcherAbortManager} instance.
+   */
   public get abortManager(): FetcherAbortManager {
     return this.#abortManager
   }
 
+  /**
+   * Returns the {@link FetcherInterceptorManager} instance.
+   */
   public get interceptorManager(): FetcherInterceptorManager {
     return this.#interceptorManager
   }
 
+  /**
+   * Clones current Fetcher instance.
+   */
+  public clone(): Fetcher {
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+  }
+
+  /**
+   * Sets new interceptor to the current instance.
+   */
   public useInterceptor(interceptor: FetcherInterceptor): void {
     this.#interceptorManager.use(interceptor)
   }
 
+  /**
+   * Removes the existing interceptor from the current instance.
+   */
   public ejectInterceptor(interceptor: FetcherInterceptor): void {
     this.#interceptorManager.eject(interceptor)
   }
 
-  public useBaseUrl(baseUrl: string): void {
-    this.#config.baseUrl = baseUrl
+  /**
+   * Assigns new base URL to the current instance.
+   */
+  public useBaseUrl(baseUrl: string): Fetcher {
+    this.#config.baseUrl = new URL(baseUrl).toString()
+    return this
+  }
+
+  /**
+   * Creates new instance Fetcher instance with given base URL.
+   */
+  withBaseUrl(baseUrl: string): Fetcher {
+    return this.clone().useBaseUrl(baseUrl)
   }
 
   public updateConfig(config: Partial<FetcherConfig>): void {
@@ -69,14 +105,23 @@ export class Fetcher {
     }
   }
 
+  /**
+   * Interrupts the request by given `requestId`, if request is not found returns `false`.
+   */
   public abort(requestId?: string): boolean {
     return this.#abortManager.abort(requestId)
   }
 
+  /**
+   * Generates new request id in the UUID format.
+   */
   public createRequestId(): string {
     return uuid()
   }
 
+  /**
+   * Performs a http request.
+   */
   public async request<T = unknown>(
     cfg: FetcherRequestConfig,
   ): Promise<FetcherResponse<T>> {
@@ -103,6 +148,9 @@ export class Fetcher {
     return result
   }
 
+  /**
+   * Makes a `GET` to a target `endpoint` with the provided `query` params.
+   */
   public get<T>(
     endpoint: string,
     query?: FetcherRequestQuery,
@@ -116,6 +164,9 @@ export class Fetcher {
     })
   }
 
+  /**
+   * Makes a `POST` to a target `endpoint` with the provided `body`.
+   */
   public post<T>(
     endpoint: string,
     body?: FetcherRequestBody,
@@ -129,6 +180,9 @@ export class Fetcher {
     })
   }
 
+  /**
+   * Makes a `PATCH` to a target `endpoint` with the provided `body`.
+   */
   public patch<T>(
     endpoint: string,
     body?: FetcherRequestBody,
@@ -142,6 +196,9 @@ export class Fetcher {
     })
   }
 
+  /**
+   * Makes a `PUT` to a target `endpoint` with the provided `body`.
+   */
   public put<T>(
     endpoint: string,
     body?: FetcherRequestBody,
@@ -155,6 +212,9 @@ export class Fetcher {
     })
   }
 
+  /**
+   * Makes a `DELETE` to a target `endpoint` with the provided `body`.
+   */
   public delete<T>(
     endpoint: string,
     body?: FetcherRequestBody,

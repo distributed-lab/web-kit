@@ -11,7 +11,7 @@ beforeEach(() => {
 })
 
 const cfg = {
-  baseUrl: 'https://example.com',
+  baseUrl: 'https://example.com/',
 }
 
 describe('performs Fetcher unit test', () => {
@@ -76,7 +76,7 @@ describe('performs Fetcher unit test', () => {
 
     test('should use base url', () => {
       const fetcher = new Fetcher(cfg)
-      const newBaseUrl = 'http://localhost:8080'
+      const newBaseUrl = 'http://localhost:8080/'
       fetcher.useBaseUrl(newBaseUrl)
       expect(fetcher.baseUrl).toBe(newBaseUrl)
     })
