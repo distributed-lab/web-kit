@@ -410,6 +410,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@distributedlab/fetcher@workspace:packages/fetcher":
+  version: 0.0.0-use.local
+  resolution: "@distributedlab/fetcher@workspace:packages/fetcher"
+  dependencies:
+    "@types/jest": ^29.4.0
+    "@types/node": ^18.14.2
+    "@types/uuid": ^9
+    jest: ^29.4.3
+    tsc-alias: ^1.8.2
+    uuid: ^9.0.0
+  languageName: unknown
+  linkType: soft
+
 "@distributedlab/jac@workspace:packages/jac":
   version: 0.0.0-use.local
   resolution: "@distributedlab/jac@workspace:packages/jac"
@@ -1172,6 +1185,13 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: 205fdbe3326b7046d7eaf5e494d8084f2659086a266f3f9cf00bccc549c8e36e407f88168ad4383c8b07099957ad669f75f2532ed4bc70be2b037330f7bae019
+  languageName: node
+  linkType: hard
+
+"@types/uuid@npm:^9":
+  version: 9.0.1
+  resolution: "@types/uuid@npm:9.0.1"
+  checksum: c472b8a77cbeded4bc529220b8611afa39bd64677f507838f8083d8aac8033b1f88cb9ddaa2f8589e0dcd2317291d0f6e1379f82d5ceebd6f74f3b4825288e00
   languageName: node
   linkType: hard
 
@@ -5633,6 +5653,15 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 
