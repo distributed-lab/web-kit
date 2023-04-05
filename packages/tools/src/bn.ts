@@ -37,6 +37,15 @@ export class BN {
       )
     }
 
+    if (cfg.decimals > 1 && cfg.decimals % 2 !== 0) {
+      throw new TypeError(
+        `Decimals must be even number, ${JSON.stringify({
+          number: bigLike,
+          cfg,
+        })}`,
+      )
+    }
+
     const finalCfg = {
       decimals: cfg.decimals,
       rounding: cfg.rounding || BN_ROUNDING.DEFAULT,

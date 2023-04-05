@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: Package `@distributedlab/fetcher`
 - `@distributedlab/tools`: `BN` `sqrt` method
 
+### Changed
+- `all`: Drop support for node < 18 versions
+
 ## [0.1.7] - 2023-03-20
 ### Added
 - `@distributedlab/jac` - Example if user use a refresh token functionality

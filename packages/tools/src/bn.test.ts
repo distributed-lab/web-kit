@@ -25,6 +25,12 @@ describe('performs BN unit test', () => {
         BN.fromRaw(1, 18).value,
       )
     })
+
+    test('not even number should throw error', () => {
+      expect(() => BN.fromRaw(1, 3)).toThrowError(
+        'Decimals must be even number, {"number":1,"cfg":{"decimals":3}}',
+      )
+    })
   })
 
   describe('performs math operations', () => {
