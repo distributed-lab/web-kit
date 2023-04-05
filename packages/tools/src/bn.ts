@@ -241,6 +241,13 @@ export class BN {
     return new BN(this.#bn.pow(bn(other)).dividedBy(fr), this.#cfg)
   }
 
+  public sqrt(): BN {
+    const bn = BN.#instance
+    const fr = BN.#makeTenPower(bn(this.#cfg.decimals / 2))
+
+    return new BN(this.#bn.sqrt().multipliedBy(fr), this.#cfg)
+  }
+
   public isGreaterThan(other: BN): boolean {
     return this.#bn.isGreaterThan(other.bn)
   }
