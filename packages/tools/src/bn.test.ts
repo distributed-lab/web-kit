@@ -25,12 +25,6 @@ describe('performs BN unit test', () => {
         BN.fromRaw(1, 18).value,
       )
     })
-
-    test('not even number should throw error', () => {
-      expect(() => BN.fromRaw(1, 3)).toThrowError(
-        'Decimals must be even number, {"number":1,"cfg":{"decimals":3}}',
-      )
-    })
   })
 
   describe('performs math operations', () => {
@@ -90,6 +84,10 @@ describe('performs BN unit test', () => {
 
       expect(BN.fromRaw(0.25, 6).sqrt().value).toBe('500000')
       expect(BN.fromRaw(0.25, 6).sqrt().toString()).toBe('0.5')
+
+      expect(() => BN.fromRaw(0.25, 5).sqrt()).toThrowError(
+        'SQRT requires decimals to be even number, {"number":"25000","decimals":5}',
+      )
     })
   })
 

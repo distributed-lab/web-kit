@@ -37,15 +37,6 @@ export class BN {
       )
     }
 
-    if (cfg.decimals > 1 && cfg.decimals % 2 !== 0) {
-      throw new TypeError(
-        `Decimals must be even number, ${JSON.stringify({
-          number: bigLike,
-          cfg,
-        })}`,
-      )
-    }
-
     const finalCfg = {
       decimals: cfg.decimals,
       rounding: cfg.rounding || BN_ROUNDING.DEFAULT,
@@ -251,6 +242,15 @@ export class BN {
   }
 
   public sqrt(): BN {
+    if (this.#cfg.decimals > 1 && this.#cfg.decimals % 2 !== 0) {
+      throw new TypeError(
+        `SQRT requires decimals to be even number, ${JSON.stringify({
+          number: this.#bn,
+          decimals: this.#cfg.decimals,
+        })}`,
+      )
+    }
+
     const bn = BN.#instance
     const fr = BN.#makeTenPower(bn(this.#cfg.decimals / 2))
 
