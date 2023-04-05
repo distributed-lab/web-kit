@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root` - "Using in the projects made by create-react-app" section in the `README.md`
 - `root`: `apply-version` script to easier bump version
 - `root`: Package `@distributedlab/fetcher`
+- `@distributedlab/jac` - `@distributedlab/fetcher` dependency
+
+### Removed
+- `@distributedlab/jac` - `axios` dependency
 
 ## [0.1.7] - 2023-03-20
 ### Added

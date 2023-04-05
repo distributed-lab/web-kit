@@ -168,7 +168,7 @@ export class Fetcher {
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      query: query || {},
+      query,
       method: HTTP_METHODS.GET,
       ...(opts || {}),
     })

@@ -1,30 +1,30 @@
 import cloneDeep from 'lodash/cloneDeep'
 
 import { isDeeperThanOneNesting, isObject, isObjectOrArray } from '@/helpers'
-import { JsonApiClientRequestConfig, JsonApiClientRequestParams } from '@/types'
+import { JsonApiClientRequestQuery } from '@/types'
 
 /**
- * flattenToAxiosJsonApiQuery is needed to provide easier interface for complex query
+ * flatJsonApiQuery is needed to provide easier interface for complex query
  * params.
  */
-export const flattenToAxiosJsonApiQuery = (
-  requestConfig: JsonApiClientRequestConfig,
-): JsonApiClientRequestParams => {
-  const config = cloneDeep(requestConfig)
+export const flatJsonApiQuery = (
+  q?: JsonApiClientRequestQuery,
+): JsonApiClientRequestQuery | undefined => {
+  if (!q) return
 
-  if (isDeeperThanOneNesting(config.params)) {
-    throw new Error(
+  const query = cloneDeep(q)
+
+  if (isDeeperThanOneNesting(query)) {
+    throw new TypeError(
       'Nested arrays or objects are not allowed for using in query params',
     )
   }
 
-  config.params = {
-    ...flattenArraysOnly(config.params),
-    ...flattenObjectsOnly(config.params),
-    ...flattenPrimitivesOnly(config.params),
+  return {
+    ...flattenArraysOnly<JsonApiClientRequestQuery>(query),
+    ...flattenObjectsOnly<JsonApiClientRequestQuery>(query),
+    ...flattenPrimitivesOnly<JsonApiClientRequestQuery>(query),
   }
-
-  return config.params
 }
 
 function flattenArraysOnly<T extends object>(object: T) {

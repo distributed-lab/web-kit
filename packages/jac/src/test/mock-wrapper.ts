@@ -1,20 +1,24 @@
-import { AxiosRequestConfig, AxiosResponse, AxiosResponseHeaders } from 'axios'
+import {
+  FetcherRequest,
+  FetcherRequestConfig,
+  FetcherResponse,
+} from '@distributedlab/fetcher'
 
 import { JsonApiClient } from '../index'
 
 export class MockWrapper {
-  static makeAxiosResponse<T>(
+  static makeFetcherResponse<T>(
     data: T,
     status = 200,
-    config?: AxiosRequestConfig,
-  ): AxiosResponse<T> {
+    request?: FetcherRequestConfig,
+  ): FetcherResponse<T> {
     return {
       data,
       status,
       statusText: 'ok',
-      headers: {} as AxiosResponseHeaders,
-      config: config || ({} as AxiosRequestConfig),
-    } as AxiosResponse
+      headers: {} as HeadersInit,
+      request: request || ({} as FetcherRequest),
+    } as FetcherResponse<T>
   }
 
   static getMockedApi(): jest.Mocked<JsonApiClient> {

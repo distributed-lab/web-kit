@@ -1,11 +1,11 @@
 import { FetcherRequest, FetcherResponse } from '@/types'
 
-export class FetcherError extends Error {
+export class FetcherError<T = undefined> extends Error {
   public name = 'FetcherError'
-  public response: FetcherResponse<undefined>
+  public response: FetcherResponse<T>
   public request: FetcherRequest
 
-  constructor(resp: FetcherResponse<undefined>) {
+  constructor(resp: FetcherResponse<T>) {
     super(resp.statusText)
     this.response = resp
     this.request = resp.request

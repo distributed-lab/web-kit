@@ -21,7 +21,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should return correctly parsed response', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
     const response = parseJsonApiResponse({
       raw: rawResponse,
       isNeedRaw: false,
@@ -32,7 +32,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should return undefined if data is empty', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse({})
+    const rawResponse = MockWrapper.makeFetcherResponse({})
     const response = parseJsonApiResponse({
       raw: rawResponse,
       isNeedRaw: false,
@@ -43,7 +43,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should have correct raw response and raw data', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
     const response = parseJsonApiResponse({
       raw: rawResponse,
       isNeedRaw: false,
@@ -58,7 +58,7 @@ describe('JsonApi response data parsing unit test', () => {
   test('should create correct link from response', () => {
     const { JsonApiClient } = jest.requireActual('./json-api')
 
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
 
     const api = new JsonApiClient({ baseUrl: 'https://localhost:8095/core' })
 
@@ -77,7 +77,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should return raw response', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
     const response = parseJsonApiResponse({
       raw: rawResponse,
       isNeedRaw: true,
@@ -89,7 +89,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should have links object', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
     const response = parseJsonApiResponse({
       raw: rawResponse,
       isNeedRaw: false,
@@ -102,7 +102,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should have valid page limit', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE, 200, {
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE, 200, {
       params: {
         'page[limit]': 100,
       },
@@ -119,7 +119,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should throw exception if "links" is empty', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(
+    const rawResponse = MockWrapper.makeFetcherResponse(
       WITHOUT_LINKS_RAW_RESPONSE,
     )
 
@@ -136,7 +136,7 @@ describe('JsonApi response data parsing unit test', () => {
   })
 
   test('should fetch next page', async () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE, 200, {
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE, 200, {
       method: 'GET',
       headers: {},
     })

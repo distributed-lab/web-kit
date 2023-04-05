@@ -410,7 +410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@distributedlab/fetcher@workspace:packages/fetcher":
+"@distributedlab/fetcher@workspace:^, @distributedlab/fetcher@workspace:packages/fetcher":
   version: 0.0.0-use.local
   resolution: "@distributedlab/fetcher@workspace:packages/fetcher"
   dependencies:
@@ -427,6 +427,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@distributedlab/jac@workspace:packages/jac"
   dependencies:
+    "@distributedlab/fetcher": "workspace:^"
     "@distributedlab/jsona": ^1.13.0
     "@types/jest": ^29.4.0
     "@types/lodash": ^4
