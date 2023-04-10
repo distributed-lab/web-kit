@@ -1,4 +1,3 @@
-import Jsona from '@distributedlab/jsona'
 import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
 import isEmpty from 'lodash/isEmpty'
 
@@ -11,8 +10,7 @@ import {
   JsonApiLinkFields,
   JsonApiResponseLinks,
 } from './types'
-
-const formatter = new Jsona()
+import { deserialize } from './utils'
 
 /**
  * API response wrapper.
@@ -124,9 +122,7 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
       return
     }
 
-    this._data = isNeedRaw
-      ? (raw.data as T)
-      : (formatter.deserialize(raw.data) as T)
+    this._data = isNeedRaw ? (raw.data as T) : (deserialize(raw.data) as T)
   }
 
   private _createLink(link: Endpoint): Endpoint {
