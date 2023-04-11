@@ -51,7 +51,6 @@
   "dependencies": {
     "@distributedlab/fetcher": "workspace:^",
     "@distributedlab/jsona": "^1.13.0",
-    "axios": "^1.3.4",
     "lodash": "^4.17.21"
   },
   "typedoc": {
