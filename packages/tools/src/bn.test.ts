@@ -36,13 +36,11 @@ describe('performs BN unit test', () => {
         '6000000000000000000',
       )
     })
-
     test('multiply should drop decimal part if value overflows decimals', () => {
       expect(
         BN.fromBigInt('194287666397830', 18).mul(BN.fromRaw(1.02, 18)).value,
       ).toBe('198173419725786')
     })
-
     test('divide should return correct value', () => {
       expect(BN.fromRaw(2, 1).div(BN.fromRaw(3, 1)).value).toBe('6')
       expect(BN.fromRaw(2, 18).div(BN.fromRaw(3, 16)).value).toBe(
@@ -76,6 +74,20 @@ describe('performs BN unit test', () => {
           BN.fromBigInt('2000000000000000000', 18),
         ),
       ).toBe(true)
+    })
+    test('sqrt should return correct value', () => {
+      expect(BN.fromRaw(4, 6).sqrt().value).toBe('2000000')
+      expect(BN.fromRaw(4, 6).sqrt().toString()).toBe('2')
+
+      expect(BN.fromRaw(9, 18).sqrt().value).toBe('3000000000000000000')
+      expect(BN.fromRaw(9, 18).sqrt().toString()).toBe('3')
+
+      expect(BN.fromRaw(0.25, 6).sqrt().value).toBe('500000')
+      expect(BN.fromRaw(0.25, 6).sqrt().toString()).toBe('0.5')
+
+      expect(() => BN.fromRaw(0.25, 5).sqrt()).toThrowError(
+        'SQRT requires decimals to be even number, {"number":"25000","decimals":5}',
+      )
     })
   })
 
