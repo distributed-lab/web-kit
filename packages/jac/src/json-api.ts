@@ -2,6 +2,7 @@ import {
   Fetcher,
   FetcherError,
   FetcherInterceptor,
+  FetcherRequestQuery,
   HTTP_METHODS,
 } from '@distributedlab/fetcher'
 
@@ -43,7 +44,10 @@ export class JsonApiClient {
    * Clones current JsonApiClient instance
    */
   public clone(): JsonApiClient {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+    return new JsonApiClient(
+      this.#fetcher.config,
+      this.#fetcher.interceptorManager.interceptors,
+    )
   }
 
   /**
@@ -131,7 +135,7 @@ export class JsonApiClient {
     const config: JsonApiClientRequestConfig = {
       body: opts.body,
       method: opts.method,
-      query: flatJsonApiQuery(opts.query),
+      query: flatJsonApiQuery(opts.query) as FetcherRequestQuery,
       headers: setJsonApiHeaders(opts?.headers ?? {}),
       endpoint: opts.endpoint,
     }
@@ -161,7 +165,7 @@ export class JsonApiClient {
     return this.request<T, U>({
       method: HTTP_METHODS.GET,
       endpoint,
-      query,
+      query: query as FetcherRequestQuery,
       ...(opts || {}),
     })
   }

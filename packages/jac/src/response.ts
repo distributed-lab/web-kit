@@ -122,7 +122,7 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
       : (formatter.deserialize(raw.data) as T)
   }
 
-  #createLink(link: Endpoint): Endpoint {
+  public createLink(link: Endpoint): Endpoint {
     const baseUrl = this.#apiClient?.baseUrl
 
     if (!baseUrl) return link
@@ -148,7 +148,7 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
       throw new TypeError('There are no links in response')
     }
 
-    const link = this.#createLink(this.links[page] as string)
+    const link = this.createLink(this.links[page] as string)
 
     const jsonApiClientRequestOpts = {
       endpoint: link,
