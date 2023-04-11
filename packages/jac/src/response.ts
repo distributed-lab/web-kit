@@ -65,7 +65,7 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
   get pageLimit(): number | undefined {
     const requestConfig = this.#raw.request
     const decodedUrl = decodeURIComponent(requestConfig.url || '')
-    const limit = new URLSearchParams(decodedUrl).get(PAGE_LIMIT_KEY)
+    const limit = new URL(decodedUrl).searchParams.get(PAGE_LIMIT_KEY)
     return Number(limit)
   }
 

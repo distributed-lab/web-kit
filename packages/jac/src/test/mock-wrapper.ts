@@ -1,8 +1,4 @@
-import {
-  FetcherRequest,
-  FetcherRequestConfig,
-  FetcherResponse,
-} from '@distributedlab/fetcher'
+import { FetcherRequest, FetcherResponse } from '@distributedlab/fetcher'
 
 import { JsonApiClient } from '../index'
 
@@ -10,7 +6,7 @@ export class MockWrapper {
   static makeFetcherResponse<T>(
     data: T,
     status = 200,
-    request?: FetcherRequestConfig,
+    request?: FetcherRequest,
   ): FetcherResponse<T> {
     return {
       data,

@@ -97,21 +97,22 @@ describe('JsonApi response data parsing unit test', () => {
     expect(response.isLinksExist).toBeTruthy()
   })
 
-  // test('should have valid page limit', () => {
-  //   const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE, 200, {
-  //     params: {
-  //       'page[limit]': 100,
-  //     },
-  //   })
-  //
-  //   const response = parseJsonApiResponse({
-  //     raw: rawResponse,
-  //     isNeedRaw: false,
-  //     apiClient: mockedApi,
-  //   })
-  //
-  //   expect(response.pageLimit).toBe(100)
-  // })
+  test('should have valid page limit', () => {
+    const url = new URL('http://localhost')
+    url.searchParams.set('page[limit]', '100')
+
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE, 200, {
+      url: url.toString(),
+    })
+
+    const response = parseJsonApiResponse({
+      raw: rawResponse,
+      isNeedRaw: false,
+      apiClient: mockedApi,
+    })
+
+    expect(response.pageLimit).toBe(100)
+  })
 
   test('should throw exception if "links" is empty', () => {
     const rawResponse = MockWrapper.makeFetcherResponse(
@@ -131,7 +132,7 @@ describe('JsonApi response data parsing unit test', () => {
 
   test('should fetch next page', async () => {
     const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE, 200, {
-      endpoint: '',
+      url: '',
       method: HTTP_METHODS.GET,
       headers: {},
     })
