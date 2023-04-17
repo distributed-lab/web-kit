@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Fixed
+- `root` - CI prebuild packages to resolve `@distributedlab/fetcher` dependency in the `@distributedlab/jac` package
+- `root` - Prevent typedoc from detecting every index file as a module
+
 ## [0.2.0-rc.1] - 2023-04-17
 ### Added
 - `@distributedlab/jac` - `@distributedlab/fetcher` dependency
