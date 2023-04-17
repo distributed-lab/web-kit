@@ -1,4 +1,4 @@
-import { isObjectOrArray } from '@/helpers/type-checks'
+import { isObjectOrArray } from './type-checks'
 
 export function isDeeperThanOneNesting<T extends object>(
   object = {} as T,

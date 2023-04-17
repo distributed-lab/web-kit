@@ -33,9 +33,10 @@ In HTML:
 ```
 
 In code:
+
 ```js
 const api = new DL_fetcher.Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 ```
 
@@ -45,7 +46,7 @@ const api = new DL_fetcher.Fetcher({
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -59,7 +60,7 @@ const api = new Fetcher({
 const { data } = await api.get<{ name: string }>('/data', {}, {
   headers: {
     'Content-Type': 'text/html',
-  }
+  },
 })
 ```
 
@@ -73,7 +74,7 @@ const { data } = await api.get<{ name: string }>('/data', {}, {
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const getData = async () => {
@@ -88,15 +89,15 @@ const getData = async () => {
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const getDataWithQuery = async () => {
   const { data } = await api.get<{ name: string }>('/data', {
-      filter: 'John',
-      exists: true,
-      'page[number]': 1,
-      include: ['comments', 'posts'],
+    filter: 'John',
+    exists: true,
+    'page[number]': 1,
+    include: ['comments', 'posts'],
   })
   return data
 }
@@ -108,12 +109,12 @@ const getDataWithQuery = async () => {
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const postData = async () => {
   const { data } = await api.post<{ name: string }>('/data', {
-      name: 'John',
+    name: 'John',
   })
   return data
 }
@@ -125,7 +126,7 @@ Posting the `FormData`:
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const postFormData = async () => {
@@ -147,7 +148,7 @@ Abort the request:
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const abortRequest = async () => {
@@ -158,7 +159,7 @@ const abortRequest = async () => {
   }, 1000)
 
   const { data } = await api.get<{ name: string }>('/data', {}, {
-      id: requestId,
+    id: requestId,
   })
 }
 ```
@@ -169,13 +170,13 @@ Using the interceptors:
 import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-  baseURL: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 api.addInterceptor({
   request: async request => {
     // Do something before request is sent
-    return { ...request, url: `${request.url}?foo=bar` }
+    return {...request, url: `${request.url}?foo=bar`}
   },
   response: async response => {
     // Do something with response

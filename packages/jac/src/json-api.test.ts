@@ -1,87 +1,73 @@
-import axios from 'axios'
+import { Fetcher } from '@distributedlab/fetcher'
 
 import { JsonApiClient } from './json-api'
 import { PARSED_RESPONSE, RAW_RESPONSE } from './test'
 import { MockWrapper } from './test'
 
-jest.mock('axios')
+const VALID_BASE_URL_1 = 'http://localhost'
+const VALID_BASE_URL_2 = 'http://foo.bar'
+const VALID_CFG = {
+  baseUrl: VALID_BASE_URL_1,
+}
 
-const mockedAxios = axios as jest.MockedFunction<typeof axios>
-
-const mockedData = {
+const mockedBody = {
   foo: {
     bar: 'string',
   },
 }
 
-beforeEach(() => {
-  jest.resetModules()
-  jest.clearAllMocks()
-})
-
 describe('performs JsonApiClient request unit test', () => {
-  describe('performs constructor', () => {
-    test('should set base url if provided', () => {
-      const api = new JsonApiClient({ baseUrl: 'foo' })
-      expect(api.baseUrl).toBe('foo')
-    })
-
-    test('should set base url and auth token if provided', () => {
-      const api = new JsonApiClient({ baseUrl: 'foo' })
-      expect(api.baseUrl).toBe('foo')
-    })
-
-    test('base url and auth token should be empty if not provided', () => {
-      const api = new JsonApiClient()
-      expect(api.baseUrl).toBe('')
-    })
+  test('performs constructor, should set base url if provided', () => {
+    const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
+    expect(api.baseUrl).toBe(VALID_BASE_URL_1)
   })
 
   describe('performs helper methods', () => {
-    test('should throw exception "baseUrl" argument not provided', () =>
-      expect(() => new JsonApiClient().useBaseUrl('')).toThrow(
-        'Arg "baseUrl" not passed',
-      ))
-
-    test('should change base url', () => {
-      const api = new JsonApiClient({ baseUrl: 'foo' })
-
-      expect(api.baseUrl).toBe('foo')
-
-      api.useBaseUrl('bar')
-
-      expect(api.baseUrl).toBe('bar')
+    test('should throw exception "baseUrl" argument not provided', () => {
+      const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
+      expect(() => api.useBaseUrl('')).toThrow(
+        'Fetcher: invalid base URL. TypeError [ERR_INVALID_URL]: Invalid URL',
+      )
     })
 
-    test('should throw exception if "baseUrl" argument not provided', () =>
-      expect(() => new JsonApiClient().withBaseUrl('')).toThrow(
-        'Arg "baseUrl" not passed',
-      ))
+    test('should change base url', () => {
+      const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
+
+      expect(api.baseUrl).toBe(VALID_BASE_URL_1)
+
+      api.useBaseUrl(VALID_BASE_URL_2)
+
+      expect(api.baseUrl).toBe(VALID_BASE_URL_2)
+    })
+
+    test('should throw exception if "baseUrl" argument not provided', () => {
+      const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
+      expect(() => api.withBaseUrl('')).toThrow(
+        'Fetcher: invalid base URL. TypeError [ERR_INVALID_URL]: Invalid URL',
+      )
+    })
 
     test('should return new client with new base url', () => {
-      const api = new JsonApiClient({ baseUrl: 'foo' })
-      const apiWithNewBaseUrl = api.withBaseUrl('bar')
+      const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
+      const apiWithNewBaseUrl = api.withBaseUrl(VALID_BASE_URL_2)
 
-      expect(api.baseUrl).toBe('foo')
+      expect(api.baseUrl).toBe(VALID_BASE_URL_1)
       expect(apiWithNewBaseUrl).toBeInstanceOf(JsonApiClient)
-      expect(apiWithNewBaseUrl.baseUrl).toBe('bar')
+      expect(apiWithNewBaseUrl.baseUrl).toBe(VALID_BASE_URL_2)
     })
   })
 
   describe('performs "request()"', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
 
     let api: JsonApiClient
 
     beforeEach(() => {
-      mockedAxios.mockResolvedValue(rawResponse)
-
-      api = new JsonApiClient({
-        baseUrl: 'http://localhost:8095',
-        axios: mockedAxios,
-      })
-
+      jest.resetModules()
+      jest.clearAllMocks()
+      api = new JsonApiClient(VALID_CFG)
       jest.spyOn(api, 'request')
+      jest.spyOn(Fetcher.prototype, 'request').mockResolvedValue(rawResponse)
     })
 
     test('"get()" should call "request()" with correct params', async () => {
@@ -97,37 +83,36 @@ describe('performs JsonApiClient request unit test', () => {
         method: 'GET',
         endpoint: '/foo',
         query,
-        isEmptyBodyAllowed: true,
       })
     })
 
     test('"post()" should call "request()" with correct params', async () => {
-      await api.post('/foo', mockedData)
+      await api.post('/foo', mockedBody)
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'POST',
         endpoint: '/foo',
-        data: mockedData,
+        body: mockedBody,
       })
     })
 
     test('"patch()" should call "request()" with correct params', async () => {
-      await api.patch('/foo', mockedData)
+      await api.patch('/foo', mockedBody)
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'PATCH',
         endpoint: '/foo',
-        data: mockedData,
+        body: mockedBody,
       })
     })
 
     test('"put()" should call "request()" with correct params', async () => {
-      await api.put('/foo', mockedData)
+      await api.put('/foo', mockedBody)
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'PUT',
         endpoint: '/foo',
-        data: mockedData,
+        body: mockedBody,
       })
     })
 
@@ -137,20 +122,16 @@ describe('performs JsonApiClient request unit test', () => {
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'DELETE',
         endpoint: '/foo',
-        data: undefined,
-        isEmptyBodyAllowed: true,
+        body: undefined,
       })
     })
   })
 
   test('should return correct data', () => {
-    const rawResponse = MockWrapper.makeAxiosResponse(RAW_RESPONSE)
-    mockedAxios.mockResolvedValueOnce(rawResponse)
+    const rawResponse = MockWrapper.makeFetcherResponse(RAW_RESPONSE)
+    jest.spyOn(Fetcher.prototype, 'request').mockResolvedValue(rawResponse)
 
-    const api = new JsonApiClient({
-      baseUrl: 'http://localhost:8095',
-      axios: mockedAxios,
-    })
+    const api = new JsonApiClient(VALID_CFG)
 
     return api.get('').then(({ data }) => expect(data).toEqual(PARSED_RESPONSE))
   })

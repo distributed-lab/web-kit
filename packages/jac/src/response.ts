@@ -1,136 +1,129 @@
+import { HTTP_METHODS, HTTP_STATUS_CODES } from '@distributedlab/fetcher'
 import Jsona from '@distributedlab/jsona'
-import { AxiosResponse, RawAxiosResponseHeaders } from 'axios'
 import isEmpty from 'lodash/isEmpty'
 
-import { HTTP_METHODS, HTTP_STATUS_CODES } from '@/enums'
 import { JsonApiClient } from '@/json-api'
 
 import {
   Endpoint,
+  JsonApiClientRequestConfigHeaders,
   JsonApiDefaultMeta,
   JsonApiLinkFields,
   JsonApiResponseLinks,
+  JsonApiResponseRaw,
+  JsonApiResponseRawData,
 } from './types'
 
 const formatter = new Jsona()
 
+const PAGE_LIMIT_KEY = 'page[limit]'
+
 /**
- * API response wrapper.
+ * JSON API response wrapper.
  */
 export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
-  private readonly _raw: AxiosResponse
-  private readonly _rawData!: Record<string, unknown>
-  private _data!: T
-  private readonly _links: JsonApiResponseLinks
-  private _apiClient: JsonApiClient
-  private readonly _isNeedRaw: boolean
-  private readonly _withCredentials: boolean
-  private readonly _meta: U
+  readonly #raw: JsonApiResponseRaw
+  readonly #rawData?: JsonApiResponseRawData
+  readonly #links: JsonApiResponseLinks
+  readonly #isNeedRaw: boolean
+  readonly #meta: U
+  #data: T
+  #apiClient: JsonApiClient
 
   constructor(opts: {
-    raw: AxiosResponse
+    raw: JsonApiResponseRaw
     isNeedRaw: boolean
     apiClient: JsonApiClient
-    withCredentials: boolean
   }) {
-    this._raw = opts.raw
-    this._rawData = opts.raw?.data
-    this._links = opts.raw?.data?.links ?? {}
-    this._apiClient = opts.apiClient
-    this._isNeedRaw = opts.isNeedRaw
-    this._withCredentials = opts.withCredentials
-    this._parseResponse(opts.raw, opts.isNeedRaw)
-    this._meta = opts.raw?.data?.meta || {}
+    const response = opts.raw
+    const data = response.data
+    this.#raw = response
+    this.#data = {} as T
+    this.#rawData = data || {}
+    this.#links = data?.links ?? {}
+    this.#apiClient = opts.apiClient
+    this.#isNeedRaw = opts.isNeedRaw
+
+    this.#parseResponse(opts.raw, opts.isNeedRaw)
+    this.#meta = (data?.meta || {}) as U
   }
 
   get meta(): U {
-    return this._meta
+    return this.#meta
   }
 
   /**
    * Get raw response.
    */
-  get rawResponse(): AxiosResponse {
-    return this._raw
+  get rawResponse(): JsonApiResponseRaw {
+    return this.#raw
   }
 
   /**
    * Get request page limit.
    */
   get pageLimit(): number | undefined {
-    const requestConfig = this._raw.config
-    const pageLimitKey = 'page[limit]'
-
-    if (!isEmpty(requestConfig.params)) {
-      return requestConfig.params[pageLimitKey]
-    }
-
+    const requestConfig = this.#raw.request
     const decodedUrl = decodeURIComponent(requestConfig.url || '')
-    const limit = new URLSearchParams(decodedUrl).get(pageLimitKey)
-
+    const limit = new URL(decodedUrl).searchParams.get(PAGE_LIMIT_KEY)
     return Number(limit)
   }
 
   /**
    * Get raw response data.
    */
-  get rawData(): Record<string, unknown> {
-    return this._rawData || {}
+  get rawData(): JsonApiResponseRawData {
+    return this.#rawData || {}
   }
 
   /**
    * Get response data.
    */
   get data(): T {
-    return this._data
+    return this.#data
   }
 
   /**
    * Get response HTTP status.
    */
-  get status(): number {
-    return this._raw.status
+  get status(): HTTP_STATUS_CODES {
+    return this.#raw.status
   }
 
   /**
    * Get response headers.
    */
-  get headers(): RawAxiosResponseHeaders {
-    return this._raw.headers
+  get headers(): JsonApiClientRequestConfigHeaders {
+    return this.#raw.headers
   }
 
   /**
    * Get response links.
    */
   get links(): JsonApiResponseLinks {
-    return this._links
+    return this.#links
   }
 
   /**
    * Is response links exist.
    */
   get isLinksExist(): boolean {
-    return Boolean(this._links) && !isEmpty(this._links)
+    return Boolean(this.#links) && !isEmpty(this.#links)
   }
 
   /**
    * Parses and unwraps response data.
    */
-  private _parseResponse(raw: AxiosResponse, isNeedRaw: boolean) {
-    if (
-      raw.status === HTTP_STATUS_CODES.NO_CONTENT ||
-      raw.status === HTTP_STATUS_CODES.RESET_CONTENT
-    ) {
-      return
-    }
+  #parseResponse(raw: JsonApiResponseRaw, isNeedRaw: boolean) {
+    if (!raw.data) return
 
-    this._data = isNeedRaw
+    this.#data = isNeedRaw
       ? (raw.data as T)
       : (formatter.deserialize(raw.data) as T)
   }
 
-  private _createLink(link: Endpoint): Endpoint {
-    const baseUrl = this._apiClient?.baseUrl
+  public createLink(link: Endpoint): Endpoint {
+    const baseUrl = this.#apiClient?.baseUrl
 
     if (!baseUrl) return link
 
@@ -155,16 +148,15 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
       throw new TypeError('There are no links in response')
     }
 
-    const link = this._createLink(this.links[page] as string)
+    const link = this.createLink(this.links[page] as string)
 
-    const JsonApiClientRequestOpts = {
+    const jsonApiClientRequestOpts = {
       endpoint: link,
-      method: this._raw.config.method?.toUpperCase() as HTTP_METHODS,
-      headers: this._raw.config.headers,
-      isNeedRaw: this._isNeedRaw,
-      withCredentials: this._withCredentials,
+      method: this.#raw.request.method as HTTP_METHODS,
+      headers: this.#raw.request.headers,
+      isNeedRaw: this.#isNeedRaw,
     }
 
-    return this._apiClient.request<T, U>(JsonApiClientRequestOpts)
+    return this.#apiClient.request<T, U>(jsonApiClientRequestOpts)
   }
 }

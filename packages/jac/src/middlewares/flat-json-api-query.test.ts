@@ -1,16 +1,15 @@
-import { JsonApiClientRequestConfig } from '../types'
-import { flattenToAxiosJsonApiQuery } from './flatten-to-axios-json-api-query'
+import { JsonApiClientRequestQuery } from '@/types'
 
-describe('flattenToAxiosJsonApiQuery', () => {
+import { flatJsonApiQuery } from './flat-json-api-query'
+
+describe('flatJsonApiQuery', () => {
   it('should not modify object with primitive query parameters', () => {
     const query = {
       foo: 'bar',
       fizz: 'buzz',
     }
 
-    const params = flattenToAxiosJsonApiQuery({
-      params: query,
-    } as JsonApiClientRequestConfig)
+    const params = flatJsonApiQuery(query)
 
     expect(params).toStrictEqual(query)
   })
@@ -21,9 +20,7 @@ describe('flattenToAxiosJsonApiQuery', () => {
       param2: ['abc', 123, 'qqq'],
     }
 
-    const params = flattenToAxiosJsonApiQuery({
-      params: query,
-    } as JsonApiClientRequestConfig)
+    const params = flatJsonApiQuery(query)
 
     expect(params).toStrictEqual({
       param: 'fizz,bar,buzz',
@@ -43,9 +40,7 @@ describe('flattenToAxiosJsonApiQuery', () => {
       },
     }
 
-    const params = flattenToAxiosJsonApiQuery({
-      params: query,
-    } as JsonApiClientRequestConfig)
+    const params = flatJsonApiQuery(query)
 
     expect(params).toStrictEqual({
       'filter[first_name]': 'John',
@@ -58,13 +53,9 @@ describe('flattenToAxiosJsonApiQuery', () => {
   it('should throw the proper error when query has nested array param', () => {
     const query = {
       param: [1, 2, [3, 4]],
-    }
+    } as JsonApiClientRequestQuery
 
-    expect(() =>
-      flattenToAxiosJsonApiQuery({
-        params: query,
-      } as JsonApiClientRequestConfig),
-    ).toThrow(
+    expect(() => flatJsonApiQuery(query)).toThrow(
       'Nested arrays or objects are not allowed for using in query params',
     )
   })
@@ -76,13 +67,9 @@ describe('flattenToAxiosJsonApiQuery', () => {
           key: 'value',
         },
       },
-    }
+    } as unknown as JsonApiClientRequestQuery
 
-    expect(() =>
-      flattenToAxiosJsonApiQuery({
-        params: query,
-      } as JsonApiClientRequestConfig),
-    ).toThrow(
+    expect(() => flatJsonApiQuery(query)).toThrow(
       'Nested arrays or objects are not allowed for using in query params',
     )
   })
