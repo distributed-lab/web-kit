@@ -31,7 +31,7 @@ export class JsonApiError extends Error {
     this.#meta = unwrappedError?.meta ?? {}
 
     if (errors.length > 1) {
-      this.message = 'Request contains some errors. Check "nestedErrors"'
+      this.message = 'Request contains multiple errors. Check "nestedErrors"'
     }
 
     this.#nestedErrors = errors.map(err => ({

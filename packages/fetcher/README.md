@@ -36,31 +36,31 @@ In code:
 
 ```js
 const api = new DL_fetcher.Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 ```
 
 ## Configuration
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    mode: 'cors',
-    timeout: 10000,
-    credentials: 'include',
-    referrerPolicy: 'no-referrer',
+  baseUrl: 'https://api.example.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  mode: 'cors',
+  timeout: 10000,
+  credentials: 'include',
+  referrerPolicy: 'no-referrer',
 })
 
 // Override request headers for one request via request options argument:
-const {data} = await api.get<{ name: string }>('/data', {}, {
-    headers: {
-        'Content-Type': 'text/html',
-    }
+const { data } = await api.get<{ name: string }>('/data', {}, {
+  headers: {
+    'Content-Type': 'text/html',
+  },
 })
 ```
 
@@ -71,72 +71,72 @@ const {data} = await api.get<{ name: string }>('/data', {}, {
 `GET` request:
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const getData = async () => {
-    const {data} = await api.get<{ name: string }>('/data')
-    return data
+  const { data } = await api.get<{ name: string }>('/data')
+  return data
 }
 ```
 
 `GET` request with the query params:
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const getDataWithQuery = async () => {
-    const {data} = await api.get<{ name: string }>('/data', {
-        filter: 'John',
-        exists: true,
-        'page[number]': 1,
-        include: ['comments', 'posts'],
-    })
-    return data
+  const { data } = await api.get<{ name: string }>('/data', {
+    filter: 'John',
+    exists: true,
+    'page[number]': 1,
+    include: ['comments', 'posts'],
+  })
+  return data
 }
 ```
 
 `POST` request (`PUT`, `PATCH` request has pretty much the same interface, just use `put` or `patch` method instead of `post`):
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const postData = async () => {
-    const {data} = await api.post<{ name: string }>('/data', {
-        name: 'John',
-    })
-    return data
+  const { data } = await api.post<{ name: string }>('/data', {
+    name: 'John',
+  })
+  return data
 }
 ```
 
 Posting the `FormData`:
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const postFormData = async () => {
-    const formData = new FormData()
+  const formData = new FormData()
 
-    formData.append('name', 'John')
-    formData.append('age', '25')
+  formData.append('name', 'John')
+  formData.append('age', '25')
 
-    const {data} = await api.post<{ name: string, age: string }>('/data', formData)
-    return data
+  const { data } = await api.post<{ name: string, age: string }>('/data', formData)
+  return data
 }
 ```
 
@@ -145,55 +145,55 @@ const postFormData = async () => {
 Abort the request:
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 const abortRequest = async () => {
-    const requestId = api.createRequestId()
+  const requestId = api.createRequestId()
 
-    setTimeout(() => {
-        api.abort(requestId)
-    }, 1000)
+  setTimeout(() => {
+    api.abort(requestId)
+  }, 1000)
 
-    const {data} = await api.get<{ name: string }>('/data', {}, {
-        id: requestId,
-    })
+  const { data } = await api.get<{ name: string }>('/data', {}, {
+    id: requestId,
+  })
 }
 ```
 
 Using the interceptors:
 
 ```ts
-import {Fetcher} from '@distributedlab/fetcher'
+import { Fetcher } from '@distributedlab/fetcher'
 
 const api = new Fetcher({
-    baseUrl: 'https://api.example.com',
+  baseUrl: 'https://api.example.com',
 })
 
 api.addInterceptor({
-    request: async request => {
-        // Do something before request is sent
-        return {...request, url: `${request.url}?foo=bar`}
-    },
-    response: async response => {
-        // Do something with response
-        if (response.ok) {
-            return response
-        }
+  request: async request => {
+    // Do something before request is sent
+    return {...request, url: `${request.url}?foo=bar`}
+  },
+  response: async response => {
+    // Do something with response
+    if (response.ok) {
+      return response
+    }
 
-        return api.get('/auth/refresh')
-    },
-    error: async response => {
-        // Do something if response errored
-        if (response.status === 401) {
-            return api.get('/auth/refresh')
-        }
+    return api.get('/auth/refresh')
+  },
+  error: async response => {
+    // Do something if response errored
+    if (response.status === 401) {
+      return api.get('/auth/refresh')
+    }
 
-        return response
-    },
+    return response
+  },
 })
 
 ```
