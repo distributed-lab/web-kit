@@ -23,6 +23,7 @@ jobs:
           node-version: '18'
           cache: 'yarn'
       - run: yarn install
+      - run: yarn build
       - run: yarn docs
 
       - run: touch doc/.nojekyll
