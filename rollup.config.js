@@ -25,8 +25,8 @@ export default packages.map((pkg) => ({
       browser: true,
       preferBuiltins: false,
     }),
-    ...(pkg === "w3p" ? [
       nodePolyfills(),
+    ...(pkg === "w3p" ? [
       alias({
         entries: [
           { find: 'ethers', replacement: 'node_modules/ethers/dist/ethers.esm.js' },
