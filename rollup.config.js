@@ -19,18 +19,18 @@ export default packages.map((pkg) => ({
     name: `DL_${pkg}`,
     format: 'iife'
   },
-  plugins:[
+  plugins: [
     commonjs(),
     resolve({
       browser: true,
       preferBuiltins: false,
     }),
-      nodePolyfills(),
+    nodePolyfills(),
     ...(pkg === "w3p" ? [
       alias({
         entries: [
-          { find: 'ethers', replacement: 'node_modules/ethers/dist/ethers.esm.js' },
-          { find: 'near-api-js', replacement: 'node_modules/near-api-js/dist/near-api-js.js' },
+          {find: 'ethers', replacement: 'node_modules/ethers/dist/ethers.esm.js'},
+          {find: 'near-api-js', replacement: 'node_modules/near-api-js/dist/near-api-js.js'},
         ]
       }),
     ] : []),
