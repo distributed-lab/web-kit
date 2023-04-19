@@ -35,7 +35,7 @@
     "build:cjs": "tsc -p tsconfig.json --outDir ./dist/cjs --module commonjs",
     "build:esm": "tsc -p tsconfig.json --outDir ./dist/esm --module esnext",
     "clean": "rm -rf dist",
-    "test": "yarn jest",
+    "test": "yarn jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
@@ -50,14 +50,13 @@
     "@solana/web3.js": "^1.73.2",
     "bs58": "^5.0.0",
     "ethers": "^5.7.2",
-    "near-api-js": "^1.1.0",
-    "web3-core": "^1.8.2"
+    "near-api-js": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
     "@types/node": "^18.14.0",
-    "tsc-alias": "^1.8.2",
-    "web3": "^1.7.4"
+    "jest": "^29.4.3",
+    "tsc-alias": "^1.8.2"
   },
   "typedoc": {
     "entryPoint": "./src/index.ts",
