@@ -21,6 +21,14 @@ export type ProviderAfterTxSentEventPayload = {
 
 export type ProviderAfterTxConfirmedEventPayload = TransactionResponse
 
+export type ProviderEventPayload =
+  | ProviderConnectRelatedEventPayload
+  | ProviderChainChangedEventPayload
+  | ProviderInitiatedEventPayload
+  | ProviderBeforeTxSentEventPayload
+  | ProviderAfterTxSentEventPayload
+  | ProviderAfterTxConfirmedEventPayload
+
 export type ProviderEventMap = {
   [PROVIDER_EVENT_BUS_EVENTS.Connect]: ProviderConnectRelatedEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.Disconnect]: ProviderConnectRelatedEventPayload
@@ -28,16 +36,34 @@ export type ProviderEventMap = {
   [PROVIDER_EVENT_BUS_EVENTS.ChainChanged]: ProviderChainChangedEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.Initiated]: ProviderInitiatedEventPayload
 
-  [PROVIDER_EVENT_BUS_EVENTS.beforeTxSent]: ProviderBeforeTxSentEventPayload
-  [PROVIDER_EVENT_BUS_EVENTS.afterTxSent]: ProviderAfterTxSentEventPayload
-  [PROVIDER_EVENT_BUS_EVENTS.afterTxConfirmed]: ProviderAfterTxConfirmedEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent]: ProviderBeforeTxSentEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.AfterTxSent]: ProviderAfterTxSentEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed]: ProviderAfterTxConfirmedEventPayload
 }
 
+export type ProviderEventCallback = (e: ProviderEventPayload) => void
+
 export interface ProviderSubscriber {
-  onInitiated(cb: (e: ProviderInitiatedEventPayload) => void): void
-  onConnect(cb: (e: ProviderConnectRelatedEventPayload) => void): void
-  onDisconnect(cb: (e: ProviderConnectRelatedEventPayload) => void): void
-  onAccountChanged(cb: (e: ProviderConnectRelatedEventPayload) => void): void
-  onChainChanged?(cb: (e: ProviderChainChangedEventPayload) => void): void
+  onInitiated(cb: (e: ProviderEventPayload) => void): void
+  onConnect(cb: (e: ProviderEventPayload) => void): void
+  onDisconnect(cb: (e: ProviderEventPayload) => void): void
+  onAccountChanged(cb: (e: ProviderEventPayload) => void): void
+  onChainChanged?(cb: (e: ProviderEventPayload) => void): void
   clearHandlers(): void
+
+  onBeforeTxSent(cb: (e: ProviderEventPayload) => void): void
+  onAfterTxSent(cb: (e: ProviderEventPayload) => void): void
+  onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void): void
+}
+
+export type ProviderListeners = {
+  onInitiated?: ProviderEventCallback
+  onConnect?: ProviderEventCallback
+  onDisconnect?: ProviderEventCallback
+  onAccountChanged?: ProviderEventCallback
+  onChainChanged?: ProviderEventCallback
+
+  onBeforeTxSent?: ProviderEventCallback
+  onAfterTxSent?: ProviderEventCallback
+  onAfterTxConfirmed?: ProviderEventCallback
 }

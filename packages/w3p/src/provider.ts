@@ -6,10 +6,9 @@ import {
   Chain,
   ChainId,
   IProvider,
-  ProviderChainChangedEventPayload,
-  ProviderConnectRelatedEventPayload,
-  ProviderInitiatedEventPayload,
+  ProviderEventPayload,
   ProviderInstance,
+  ProviderListeners,
   ProviderProxy,
   ProviderProxyConstructor,
   TransactionResponse,
@@ -18,6 +17,7 @@ import {
 
 export type CreateProviderOpts = {
   web3Instance?: ProviderDetector
+  listeners?: ProviderListeners
 }
 
 /**
@@ -69,10 +69,17 @@ export class Provider implements IProvider {
     return this.#proxy?.chainId
   }
 
-  public async init(provider: ProviderInstance) {
+  public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
     if (provider.instance) {
       this.#proxy = new this.#proxyConstructor(provider.instance)
+
+      Object.entries(listeners || {}).forEach(([key, value]) => {
+        this.#proxy?.[key as keyof ProviderListeners]?.(
+          value as (e: ProviderEventPayload) => void,
+        )
+      })
     }
+
     this.#selectedProvider = provider.name
     await this.#proxy?.init()
     return this
@@ -114,50 +121,56 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  public getRawProvider() {
+  public get getRawProvider() {
     if (this.#proxy?.getRawProvider) {
-      return this.#proxy?.getRawProvider?.()
+      return this.#proxy?.getRawProvider
     }
 
     throw new errors.ProviderMethodNotSupported()
   }
 
-  public getRawSigner() {
+  public get getRawSigner() {
     if (this.#proxy?.getRawSigner) {
-      return this.#proxy?.getRawSigner?.()
+      return this.#proxy?.getRawSigner
     }
 
     throw new errors.ProviderMethodNotSupported()
   }
 
-  public onAccountChanged(
-    cb: (e: ProviderConnectRelatedEventPayload) => void,
-  ): void {
+  public onAccountChanged(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onAccountChanged(cb)
   }
 
-  public onChainChanged(
-    cb: (e: ProviderChainChangedEventPayload) => void,
-  ): void {
+  public onChainChanged(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onChainChanged?.(cb)
   }
 
-  public onConnect(cb: (e: ProviderConnectRelatedEventPayload) => void): void {
+  public onConnect(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onConnect(cb)
   }
 
-  public onDisconnect(
-    cb: (e: ProviderConnectRelatedEventPayload) => void,
-  ): void {
+  public onDisconnect(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onDisconnect(cb)
   }
 
-  public onInitiated(cb: (e: ProviderInitiatedEventPayload) => void): void {
+  public onInitiated(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onInitiated(cb)
   }
 
   public clearHandlers(): void {
     this.#proxy?.clearHandlers()
+  }
+
+  public onBeforeTxSent(cb: (e: ProviderEventPayload) => void) {
+    this.#proxy?.onBeforeTxSent(cb)
+  }
+
+  public onAfterTxSent(cb: (e: ProviderEventPayload) => void) {
+    this.#proxy?.onAfterTxSent(cb)
+  }
+
+  public onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void) {
+    this.#proxy?.onAfterTxConfirmed(cb)
   }
 }
 
@@ -175,7 +188,7 @@ export const createProvider = async (
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts = {},
 ): Promise<Provider> => {
-  const { web3Instance } = opts
+  const { web3Instance, listeners } = opts
 
   const provider = new Provider(proxy)
   const web3 = web3Instance || new ProviderDetector()
@@ -188,5 +201,5 @@ export const createProvider = async (
 
   if (!injected) throw new errors.ProviderInjectedInstanceNotFoundError()
 
-  return provider.init(injected)
+  return provider.init(injected, listeners)
 }

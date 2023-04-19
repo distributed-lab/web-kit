@@ -5,7 +5,7 @@ import {
   Transaction as SolTransaction,
 } from '@solana/web3.js'
 
-import { PROVIDERS } from '@/enums'
+import { PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import { decodeSolanaTx, handleSolError } from '@/helpers'
 import {
   ProviderProxy,
@@ -55,6 +55,8 @@ export class SolflareProvider
           ? decodeSolanaTx(txRequestBody)
           : txRequestBody
 
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txBody)
+
       const signedTx = await this.provider.signTransaction(
         txBody as SolTransaction,
       )
@@ -64,7 +66,17 @@ export class SolflareProvider
       const signature = await connection.sendRawTransaction(
         signedTx.serialize(),
       )
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, {
+        txHash: signature,
+      })
+
       await connection.confirmTransaction(signature)
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
+        txHash: signature,
+      })
+
       return signature
     } catch (error) {
       handleSolError(error as SolanaProviderRpcError)

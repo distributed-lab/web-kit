@@ -5,7 +5,7 @@ import {
   Transaction as SolTransaction,
 } from '@solana/web3.js'
 
-import { PROVIDERS } from '@/enums'
+import { PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import { decodeSolanaTx, handleSolError } from '@/helpers'
 import {
   ProviderProxy,
@@ -55,12 +55,24 @@ export class PhantomProvider
           ? decodeSolanaTx(txRequestBody)
           : txRequestBody
 
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txBody)
+
       const connection = new Connection(clusterApiUrl(this.chainId as Cluster))
 
       const { signature } = await this.provider.signAndSendTransaction(
         txBody as SolTransaction,
       )
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, {
+        txHash: signature,
+      })
+
       await connection.confirmTransaction(signature)
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
+        txHash: signature,
+      })
+
       return signature
     } catch (error) {
       handleSolError(error as SolanaProviderRpcError)

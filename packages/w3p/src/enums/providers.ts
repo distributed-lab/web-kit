@@ -14,7 +14,6 @@ export enum PROVIDER_CHECKS {
 
   // Not implemented yet
   Coinbase = 'isCoinbaseWallet',
-  WalletConnect = 'isWalletConnect',
   Phantom = 'isPhantom',
   Solflare = 'isSolflare',
   Near = 'isNear',
@@ -35,7 +34,7 @@ export enum PROVIDER_EVENT_BUS_EVENTS {
   AccountChanged = 'account-changed',
   Initiated = 'initiated',
 
-  beforeTxSent = 'before-tx-sent',
-  afterTxSent = 'after-tx-sent',
-  afterTxConfirmed = 'after-tx-confirmed',
+  BeforeTxSent = 'before-tx-sent',
+  AfterTxSent = 'after-tx-sent',
+  AfterTxConfirmed = 'after-tx-confirmed',
 }

@@ -2,7 +2,11 @@ import { TransactionRequest } from '@ethersproject/abstract-provider'
 import { Deferrable } from '@ethersproject/properties'
 import { ethers, providers } from 'ethers'
 
-import { CHAIN_TYPES, PROVIDER_EVENTS } from '@/enums'
+import {
+  CHAIN_TYPES,
+  PROVIDER_EVENT_BUS_EVENTS,
+  PROVIDER_EVENTS,
+} from '@/enums'
 import {
   connectEthAccounts,
   getEthExplorerAddressUrl,
@@ -54,24 +58,31 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     return this.#address
   }
 
-  getRawProvider(): providers.Web3Provider {
+  get getRawProvider(): providers.Web3Provider {
     return this.#provider
   }
 
-  getRawSigner(): providers.JsonRpcSigner {
+  get getRawSigner(): providers.JsonRpcSigner {
     return this.#provider.getSigner()
+  }
+
+  get #defaultEventPayload() {
+    return {
+      address: this.#address,
+      chainId: this.#chainId,
+      isConnected: this.isConnected,
+    }
   }
 
   async init(): Promise<void> {
     await this.#setListeners()
     const currentAccounts = await this.#provider.listAccounts()
-    this.#address = currentAccounts[0]
+    const network = await this.#provider.getNetwork()
 
-    this.emitInitiated({
-      chainId: this.#chainId,
-      address: this.#address,
-      isConnected: this.isConnected,
-    })
+    this.#address = currentAccounts[0]
+    this.#chainId = hexToDecimal(network.chainId as ChainId)
+
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
   }
 
   async switchChain(chainId: ChainId): Promise<void> {
@@ -113,18 +124,18 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {
     try {
-      this.emitBeforeTxSent(tx)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, tx)
       const transactionResponse = await this.#provider
         .getSigner()
         .sendTransaction(tx as Deferrable<TransactionRequest>)
 
-      this.emitAfterTxSent({
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, {
         txHash: transactionResponse.hash,
       })
 
       const receipt = await transactionResponse.wait()
 
-      this.emitAfterTxConfirmed(receipt)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, receipt)
 
       return receipt
     } catch (error) {
@@ -137,41 +148,29 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   async #setListeners() {
     const stubProvider = this.#provider.provider as providers.BaseProvider
 
-    stubProvider.on(PROVIDER_EVENTS.Connect, async () => {
-      const currentAccounts = await this.#provider.listAccounts()
-      this.#address = currentAccounts[0] ?? ''
-
-      this.emitConnect({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
-    })
-
-    stubProvider.on(PROVIDER_EVENTS.Disconnect, () => {
-      this.#address = ''
-
-      this.emitDisconnect({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
-    })
-
     stubProvider.on(PROVIDER_EVENTS.AccountsChanged, async () => {
       const currentAccounts = await this.#provider.listAccounts()
       this.#address = currentAccounts[0] ?? ''
 
-      this.emitAccountChanged({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+      this.emit(
+        PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
+        this.#defaultEventPayload,
+      )
+      this.emit(
+        this.isConnected
+          ? PROVIDER_EVENT_BUS_EVENTS.Connect
+          : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
+        this.#defaultEventPayload,
+      )
     })
 
     stubProvider.on(PROVIDER_EVENTS.ChainChanged, (chainId: ChainId) => {
       this.#chainId = hexToDecimal(chainId)
 
-      this.emitChainChanged({
-        chainId: this.#chainId,
-      })
+      this.emit(
+        PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
+        this.#defaultEventPayload,
+      )
     })
   }
 }

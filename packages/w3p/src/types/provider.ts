@@ -57,8 +57,8 @@ export interface ProviderBase {
   getAddressUrl?: (chain: Chain, address: string) => string
 
   // EVM specific methods
-  getRawProvider?: () => ethers.providers.Web3Provider
-  getRawSigner?: () => ethers.providers.JsonRpcSigner
+  getRawProvider?: ethers.providers.Web3Provider
+  getRawSigner?: ethers.providers.JsonRpcSigner
 }
 
 export interface ProviderProxy extends ProviderBase, ProviderSubscriber {

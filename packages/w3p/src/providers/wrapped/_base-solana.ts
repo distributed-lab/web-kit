@@ -1,6 +1,11 @@
 import { PublicKey } from '@solana/web3.js'
 
-import { CHAIN_TYPES, PROVIDER_EVENTS, SOLANA_CHAINS } from '@/enums'
+import {
+  CHAIN_TYPES,
+  PROVIDER_EVENT_BUS_EVENTS,
+  PROVIDER_EVENTS,
+  SOLANA_CHAINS,
+} from '@/enums'
 import {
   getSolExplorerAddressUrl,
   getSolExplorerTxUrl,
@@ -59,22 +64,29 @@ export class BaseSolanaProvider
     return this.#provider
   }
 
+  get #defaultEventPayload() {
+    return {
+      chainId: this.#chainId,
+      address: this.#address,
+      isConnected: this.isConnected,
+    }
+  }
+
   async init(): Promise<void> {
     this.#setListeners()
     this.#address = getAddress(this.#provider.publicKey)
     this.#chainId = SOLANA_CHAINS.DevNet
 
-    this.emitInitiated({
-      chainId: this.#chainId,
-      address: this.#address,
-      isConnected: this.isConnected,
-    })
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
   }
 
   async switchChain(chainId: ChainId) {
     try {
       this.#chainId = chainId
-      this.emitChainChanged({ chainId })
+      this.emit(
+        PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
+        this.#defaultEventPayload,
+      )
     } catch (error) {
       handleSolError(error as SolanaProviderRpcError)
     }
@@ -113,28 +125,22 @@ export class BaseSolanaProvider
     this.#provider.on(PROVIDER_EVENTS.Connect, () => {
       this.#address = getAddress(this.#provider.publicKey)
 
-      this.emitConnect({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Connect, this.#defaultEventPayload)
     })
 
     this.#provider.on(PROVIDER_EVENTS.Disconnect, () => {
       this.#address = getAddress(this.#provider.publicKey)
 
-      this.emitDisconnect({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
     })
 
     this.#provider.on(PROVIDER_EVENTS.AccountChanged, () => {
       this.#address = getAddress(this.#provider.publicKey)
 
-      this.emitAccountChanged({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+      this.emit(
+        PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
+        this.#defaultEventPayload,
+      )
     })
   }
 }

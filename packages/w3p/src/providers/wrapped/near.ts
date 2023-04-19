@@ -1,4 +1,4 @@
-import { NEAR_CHAINS, PROVIDERS } from '@/enums'
+import { NEAR_CHAINS, PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import {
   getNearExplorerAddressUrl,
   getNearExplorerTxUrl,
@@ -44,16 +44,20 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
     return this.#address
   }
 
+  get #defaultEventPayload() {
+    return {
+      chainId: this.#chainId,
+      address: this.#address,
+      isConnected: this.isConnected,
+    }
+  }
+
   async init(): Promise<void> {
     try {
       await this.#provider.init()
       this.#updateProviderState()
 
-      this.emitInitiated({
-        chainId: this.#chainId,
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
     } catch (error) {
       handleNearError(error as NearProviderRpcError)
     }
@@ -68,17 +72,16 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
 
   async switchChain(chainId: ChainId): Promise<void> {
     this.#chainId = chainId
-    this.emitChainChanged({ chainId })
+
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.ChainChanged, this.#defaultEventPayload)
   }
 
   async connect(): Promise<void> {
     try {
       await this.#provider.signIn()
       await this.#updateProviderState()
-      this.emitConnect({
-        address: this.#address,
-        isConnected: this.isConnected,
-      })
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Connect, this.#defaultEventPayload)
     } catch (error) {
       handleNearError(error as NearProviderRpcError)
     }
@@ -88,6 +91,8 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
     try {
       await this.#provider.signOut()
       this.#updateProviderState()
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
     } catch (error) {
       handleNearError(error as NearProviderRpcError)
     }
@@ -111,9 +116,15 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
     txRequestBody: TxRequestBody,
   ): Promise<TransactionResponse> {
     try {
-      return await this.#provider.signAndSendTx(
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txRequestBody)
+
+      const txResponse = await this.#provider.signAndSendTx(
         txRequestBody as NearTxRequestBody,
       )
+
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, txResponse)
+
+      return txResponse
     } catch (error) {
       handleNearError(error as NearProviderRpcError)
     }
