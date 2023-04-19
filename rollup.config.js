@@ -6,22 +6,34 @@ import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import json from '@rollup/plugin-json'
+import alias from "@rollup/plugin-alias";
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 const packages = fs.readdirSync(path.resolve(__dirname, './packages'))
 
 export default packages.map((pkg) => ({
   input: `./packages/${pkg}/src/index.ts`,
   output: {
-    sourcemap: pkg !== "w3p",
+    sourcemap: true,
     file: `./packages/${pkg}/dist/index.js`,
     name: `DL_${pkg}`,
     format: 'iife'
   },
   plugins:[
+    commonjs(),
     resolve({
       browser: true,
+      preferBuiltins: false,
     }),
-    commonjs(),
+    ...(pkg === "w3p" ? [
+      nodePolyfills(),
+      alias({
+        entries: [
+          { find: 'ethers', replacement: 'node_modules/ethers/dist/ethers.esm.js' },
+          { find: 'near-api-js', replacement: 'node_modules/near-api-js/dist/near-api-js.js' },
+        ]
+      }),
+    ] : []),
     babel({
       babelHelpers: 'bundled',
       exclude: ['./packages/**/src/test', './packages/**/src/*.test.ts']
@@ -32,14 +44,4 @@ export default packages.map((pkg) => ({
     json(),
     terser(),
   ],
-  ...(pkg === "w3p" ? {
-    resolve: {
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
-      alias: {
-        '@ethersproject/abstract-provider': '@ethersproject/abstract-provider/lib/index.js',
-        '@ethersproject/properties': '@ethersproject/properties/lib/index.js',
-        'near-api-js': 'near-api-js/dist/near-api-js.js',
-      },
-    },
-  } : {})
 }))
