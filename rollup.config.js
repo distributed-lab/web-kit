@@ -12,7 +12,7 @@ const packages = fs.readdirSync(path.resolve(__dirname, './packages'))
 export default packages.map((pkg) => ({
   input: `./packages/${pkg}/src/index.ts`,
   output: {
-    sourcemap: true,
+    sourcemap: pkg !== "w3p",
     file: `./packages/${pkg}/dist/index.js`,
     name: `DL_${pkg}`,
     format: 'iife'
@@ -31,5 +31,15 @@ export default packages.map((pkg) => ({
     }),
     json(),
     terser(),
-  ]
+  ],
+  ...(pkg === "w3p" ? {
+    resolve: {
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
+      alias: {
+        '@ethersproject/abstract-provider': '@ethersproject/abstract-provider/lib/index.js',
+        '@ethersproject/properties': '@ethersproject/properties/lib/index.js',
+        'near-api-js': 'near-api-js/dist/near-api-js.js',
+      },
+    },
+  } : {})
 }))
