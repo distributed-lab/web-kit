@@ -58,14 +58,6 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     return this.#address
   }
 
-  get rawProvider(): providers.Web3Provider {
-    return this.#provider
-  }
-
-  get rawSigner(): providers.JsonRpcSigner {
-    return this.#provider.getSigner()
-  }
-
   get #defaultEventPayload() {
     return {
       address: this.#address,

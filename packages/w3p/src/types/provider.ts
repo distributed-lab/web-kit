@@ -56,10 +56,6 @@ export interface ProviderBase {
   getTxUrl?: (chain: Chain, txHash: string) => string
   getAddressUrl?: (chain: Chain, address: string) => string
 
-  // EVM specific methods
-  rawProvider?: ethers.providers.Web3Provider
-  rawSigner?: ethers.providers.JsonRpcSigner
-
   disconnect?: () => Promise<void>
 }
 

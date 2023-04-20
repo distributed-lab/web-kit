@@ -121,22 +121,6 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  public get rawProvider() {
-    if (this.#proxy?.rawProvider) {
-      return this.#proxy?.rawProvider
-    }
-
-    throw new errors.ProviderMethodNotSupported()
-  }
-
-  public get rawSigner() {
-    if (this.#proxy?.rawSigner) {
-      return this.#proxy?.rawSigner
-    }
-
-    throw new errors.ProviderMethodNotSupported()
-  }
-
   public onAccountChanged(cb: (e: ProviderEventPayload) => void): void {
     this.#proxy?.onAccountChanged(cb)
   }
