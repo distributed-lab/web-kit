@@ -58,11 +58,11 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     return this.#address
   }
 
-  get getRawProvider(): providers.Web3Provider {
+  get rawProvider(): providers.Web3Provider {
     return this.#provider
   }
 
-  get getRawSigner(): providers.JsonRpcSigner {
+  get rawSigner(): providers.JsonRpcSigner {
     return this.#provider.getSigner()
   }
 
@@ -124,7 +124,9 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {
     try {
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, tx)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
+        txBody: tx,
+      })
       const transactionResponse = await this.#provider
         .getSigner()
         .sendTransaction(tx as Deferrable<TransactionRequest>)
@@ -135,7 +137,9 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
 
       const receipt = await transactionResponse.wait()
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, receipt)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
+        txResponse: receipt,
+      })
 
       return receipt
     } catch (error) {

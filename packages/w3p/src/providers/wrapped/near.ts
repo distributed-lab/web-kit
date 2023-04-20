@@ -116,13 +116,15 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
     txRequestBody: TxRequestBody,
   ): Promise<TransactionResponse> {
     try {
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txRequestBody)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
+        txBody: txRequestBody,
+      })
 
       const txResponse = await this.#provider.signAndSendTx(
         txRequestBody as NearTxRequestBody,
       )
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, txResponse)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, { txResponse })
 
       return txResponse
     } catch (error) {

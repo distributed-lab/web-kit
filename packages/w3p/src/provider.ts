@@ -16,7 +16,7 @@ import {
 } from './types'
 
 export type CreateProviderOpts = {
-  web3Instance?: ProviderDetector
+  providerDetectorInstance?: ProviderDetector
   listeners?: ProviderListeners
 }
 
@@ -30,7 +30,7 @@ export type CreateProviderOpts = {
  * import { createProvider, MetamaskProvider } from '@rarimo/provider'
  *
  * const getMetamaskWalletAddress = async () => {
- *   // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
+ *   // Connect to the Metamask wallet in the browser using ethers.js, using the MetamaskProvider interface to limit bundle size.
  *   const provider = await createProvider(MetamaskProvider)
  *
  *   // Get the address of the wallet
@@ -121,17 +121,17 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  public get getRawProvider() {
-    if (this.#proxy?.getRawProvider) {
-      return this.#proxy?.getRawProvider
+  public get rawProvider() {
+    if (this.#proxy?.rawProvider) {
+      return this.#proxy?.rawProvider
     }
 
     throw new errors.ProviderMethodNotSupported()
   }
 
-  public get getRawSigner() {
-    if (this.#proxy?.getRawSigner) {
-      return this.#proxy?.getRawSigner
+  public get rawSigner() {
+    if (this.#proxy?.rawSigner) {
+      return this.#proxy?.rawSigner
     }
 
     throw new errors.ProviderMethodNotSupported()
@@ -172,6 +172,14 @@ export class Provider implements IProvider {
   public onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void) {
     this.#proxy?.onAfterTxConfirmed(cb)
   }
+
+  public async disconnect() {
+    if (this.#proxy?.disconnect) {
+      await this.#proxy?.disconnect()
+    }
+
+    throw new errors.ProviderMethodNotSupported()
+  }
 }
 
 /**
@@ -180,26 +188,27 @@ export class Provider implements IProvider {
  * @example
  * const provider = await createProvider(MetamaskProvider)
  * // or
- * const web3Instance = await new Web3().init()
- * const metamaskProvider = await createProvider(MetamaskProvider, { web3Instance })
- * const phantomProvider = await createProvider(PhantomProvider, { web3Instance })
+ * const providerDetectorInstance = await new providerDetector().init()
+ * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
+ * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
  */
 export const createProvider = async (
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts = {},
 ): Promise<Provider> => {
-  const { web3Instance, listeners } = opts
+  const { providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
-  const web3 = web3Instance || new ProviderDetector()
+  const providerDetector = providerDetectorInstance || new ProviderDetector()
 
-  if (!web3.initiated) {
-    await web3.init()
+  if (!providerDetector.initiated) {
+    await providerDetector.init()
   }
 
-  const injected = web3.getProvider(proxy.providerType)
+  const providerInstance = providerDetector.getProvider(proxy.providerType)
 
-  if (!injected) throw new errors.ProviderInjectedInstanceNotFoundError()
+  if (!providerInstance)
+    throw new errors.ProviderInjectedInstanceNotFoundError()
 
-  return provider.init(injected, listeners)
+  return provider.init(providerInstance, listeners)
 }

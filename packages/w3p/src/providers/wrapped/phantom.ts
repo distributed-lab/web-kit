@@ -55,7 +55,7 @@ export class PhantomProvider
           ? decodeSolanaTx(txRequestBody)
           : txRequestBody
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txBody)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, { txBody })
 
       const connection = new Connection(clusterApiUrl(this.chainId as Cluster))
 
@@ -70,7 +70,7 @@ export class PhantomProvider
       await connection.confirmTransaction(signature)
 
       this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
-        txHash: signature,
+        txResponse: signature,
       })
 
       return signature

@@ -55,7 +55,7 @@ export class SolflareProvider
           ? decodeSolanaTx(txRequestBody)
           : txRequestBody
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, txBody)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, { txBody })
 
       const signedTx = await this.provider.signTransaction(
         txBody as SolTransaction,
@@ -74,7 +74,7 @@ export class SolflareProvider
       await connection.confirmTransaction(signature)
 
       this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
-        txHash: signature,
+        txResponse: signature,
       })
 
       return signature

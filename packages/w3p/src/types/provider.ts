@@ -12,7 +12,7 @@ import { CHAIN_TYPES, PROVIDERS } from '@/enums'
 import { Chain, ChainId } from './chain'
 import { EthereumProvider } from './ethereum'
 import { NearProviderType } from './near'
-import { ProviderSubscriber } from './provider-event-bus'
+import { ProviderListeners, ProviderSubscriber } from './provider-event-bus'
 import { SolanaProvider } from './solana'
 
 export type RawProvider = EthereumProvider | SolanaProvider | NearProviderType
@@ -57,8 +57,10 @@ export interface ProviderBase {
   getAddressUrl?: (chain: Chain, address: string) => string
 
   // EVM specific methods
-  getRawProvider?: ethers.providers.Web3Provider
-  getRawSigner?: ethers.providers.JsonRpcSigner
+  rawProvider?: ethers.providers.Web3Provider
+  rawSigner?: ethers.providers.JsonRpcSigner
+
+  disconnect?: () => Promise<void>
 }
 
 export interface ProviderProxy extends ProviderBase, ProviderSubscriber {
@@ -67,7 +69,10 @@ export interface ProviderProxy extends ProviderBase, ProviderSubscriber {
 
 export interface IProvider extends ProviderBase, ProviderSubscriber {
   providerType?: PROVIDERS
-  init: (provider: ProviderInstance) => Promise<this>
+  init: (
+    provider: ProviderInstance,
+    listeners?: ProviderListeners,
+  ) => Promise<this>
 }
 
 export interface ProviderProxyConstructor {
