@@ -1,12 +1,11 @@
-import {
-  Fetcher,
+import type {
   FetcherError,
   FetcherInterceptor,
   FetcherRequestQuery,
-  HTTP_METHODS,
 } from '@distributedlab/fetcher'
+import { Fetcher, HTTP_METHODS } from '@distributedlab/fetcher'
 
-import { JsonApiResponse } from '@/response'
+import type { JsonApiResponse } from '@/response'
 
 import {
   flatJsonApiQuery,
@@ -14,7 +13,7 @@ import {
   parseJsonApiResponse,
   setJsonApiHeaders,
 } from './middlewares'
-import {
+import type {
   Endpoint,
   JsonApiClientConfig,
   JsonApiClientRequestBody,

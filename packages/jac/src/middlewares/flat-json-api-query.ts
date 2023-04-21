@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 
 import { isDeeperThanOneNesting, isObject, isObjectOrArray } from '@/helpers'
-import { JsonApiClientRequestQuery } from '@/types'
+import type { JsonApiClientRequestQuery } from '@/types'
 
 /**
  * flatJsonApiQuery is needed to provide easier interface for complex query

@@ -1,4 +1,4 @@
-import { FetcherRequest, FetcherResponse } from '@/types'
+import type { FetcherRequest, FetcherResponse } from '@/types'
 
 export class FetcherError<T = undefined> extends Error {
   public name = 'FetcherError'

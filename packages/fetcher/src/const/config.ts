@@ -1,4 +1,4 @@
-import { FetcherConfig } from '@/types'
+import type { FetcherConfig } from '@/types'
 
 export const DEFAULT_CONFIG: Omit<FetcherConfig, 'baseUrl'> = {
   credentials: 'include',

@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 
 import { DECIMALS } from '@/enums'
 import { BN_ROUNDING } from '@/enums'
-import { BnCfg, BnFormatCfg, BnLike } from '@/types'
+import type { BnCfg, BnFormatCfg, BnLike } from '@/types'
 
 BigNumber.config({
   DECIMAL_PLACES: 0,
