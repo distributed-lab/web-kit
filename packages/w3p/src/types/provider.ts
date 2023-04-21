@@ -49,7 +49,7 @@ export interface ProviderBase {
   addChain?: (chain: Chain) => Promise<void>
   switchChain: (chainId: ChainId) => Promise<void>
 
-  signAndSendTx: (txRequestBody: TxRequestBody) => Promise<TransactionResponse>
+  signAndSendTx?: (txRequestBody: TxRequestBody) => Promise<TransactionResponse>
   signMessage?: (message: string) => Promise<string>
 
   getHashFromTx?: (txResponse: TransactionResponse) => string
@@ -69,6 +69,9 @@ export interface IProvider extends ProviderBase, ProviderSubscriber {
     provider: ProviderInstance,
     listeners?: ProviderListeners,
   ) => Promise<this>
+
+  chainDetails?: Chain
+  setChainDetails?: (chain: Chain) => void
 }
 
 export interface ProviderProxyConstructor {

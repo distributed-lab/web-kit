@@ -43,6 +43,8 @@ export class Provider implements IProvider {
   #selectedProvider?: PROVIDERS
   #proxy?: ProviderProxy
 
+  #chainDetails?: Chain
+
   constructor(proxyConstructor: ProviderProxyConstructor) {
     this.#selectedProvider = undefined
     this.#proxy = undefined
@@ -67,6 +69,10 @@ export class Provider implements IProvider {
 
   public get chainId() {
     return this.#proxy?.chainId
+  }
+
+  public get chainDetails() {
+    return this.#chainDetails
   }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
@@ -99,10 +105,18 @@ export class Provider implements IProvider {
     await this.#proxy?.addChain?.(chain)
   }
 
+  public setChainDetails(chain: Chain) {
+    this.#chainDetails = chain
+  }
+
   public async signAndSendTx(txRequestBody: TxRequestBody) {
-    return this.#proxy?.signAndSendTx?.(
-      txRequestBody,
-    ) as Promise<TransactionResponse>
+    if (this.#proxy?.signAndSendTx) {
+      return this.#proxy?.signAndSendTx?.(
+        txRequestBody,
+      ) as Promise<TransactionResponse>
+    }
+
+    throw new errors.ProviderMethodNotSupported()
   }
 
   public getHashFromTx(txResponse: TransactionResponse) {
@@ -126,6 +140,8 @@ export class Provider implements IProvider {
   }
 
   public onChainChanged(cb: (e: ProviderEventPayload) => void): void {
+    this.#chainDetails = undefined
+
     this.#proxy?.onChainChanged?.(cb)
   }
 

@@ -20,8 +20,10 @@ import {
   Chain,
   ChainId,
   EthProviderRpcError,
+  EthTransactionResponse,
   ProviderProxy,
   RawProvider,
+  SolanaTransactionResponse,
   TransactionResponse,
   TxRequestBody,
 } from '@/types'
@@ -112,6 +114,11 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
 
   getTxUrl(chain: Chain, txHash: string): string {
     return getEthExplorerTxUrl(chain, txHash)
+  }
+
+  getHashFromTx(txResponse: TransactionResponse): string {
+    return (txResponse as EthTransactionResponse)
+      .transactionHash as SolanaTransactionResponse
   }
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {

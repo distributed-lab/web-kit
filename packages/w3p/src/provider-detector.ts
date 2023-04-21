@@ -62,6 +62,10 @@ export class ProviderDetector {
     return this.providers[provider]
   }
 
+  public addProvider(provider: ProviderInstance): void {
+    this.#providers.push(provider)
+  }
+
   #detectRawProviders(): void {
     const ethProviders = window?.ethereum
       ? window?.ethereum?.providers || [window?.ethereum]
