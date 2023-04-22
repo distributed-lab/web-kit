@@ -1,4 +1,3 @@
-// Values must be lowercase because we lowercase them in Web3.init
 export enum PROVIDERS {
   Fallback = 'fallback',
   Metamask = 'metamask',
@@ -11,8 +10,6 @@ export enum PROVIDERS {
 export enum PROVIDER_CHECKS {
   Fallback = 'isWeb3',
   Metamask = 'isMetaMask',
-
-  // Not implemented yet
   Coinbase = 'isCoinbaseWallet',
   Phantom = 'isPhantom',
   Solflare = 'isSolflare',
@@ -35,6 +32,6 @@ export enum PROVIDER_EVENT_BUS_EVENTS {
   Initiated = 'initiated',
 
   BeforeTxSent = 'before-tx-sent',
-  AfterTxSent = 'after-tx-sent',
-  AfterTxConfirmed = 'after-tx-confirmed',
+  TxSent = 'after-tx-sent',
+  TxConfirmed = 'after-tx-confirmed',
 }

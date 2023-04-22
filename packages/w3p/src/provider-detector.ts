@@ -22,7 +22,7 @@ declare global {
 export class ProviderDetector {
   #providers: ProviderInstance[]
   #rawProviders: RawProvider[]
-  #initiated = false
+  #isInitiated = false
 
   constructor() {
     this.#providers = []
@@ -30,16 +30,14 @@ export class ProviderDetector {
   }
 
   public async init(): Promise<ProviderDetector> {
-    await sleep(500)
     this.#detectRawProviders()
     await this.#defineProviders()
-    await sleep(500)
-    this.#initiated = true
+    this.#isInitiated = true
     return this
   }
 
-  get initiated(): boolean {
-    return this.#initiated
+  get isInitiated(): boolean {
+    return this.#isInitiated
   }
 
   public get providers(): Record<PROVIDERS, ProviderInstance> {

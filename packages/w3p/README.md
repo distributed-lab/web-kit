@@ -1,5 +1,6 @@
 # @distributedlab/w3p
-These packages aim to provide developers with a set of commonly used functions and features for building web applications, such as handling big numbers, date manipulation, subscribing to and receiving notifications when certain events occur with EventEmitter, and more.
+
+The Web3 provider wrapper with a common interface to easily interact with different types of blockchains.
 
 ![version (scoped package)](https://badgen.net/npm/v/@distributedlab/w3p)
 ![types](https://badgen.net/npm/types/@distributedlab/w3p)

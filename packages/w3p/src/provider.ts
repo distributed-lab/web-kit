@@ -16,7 +16,7 @@ import type {
 } from './types'
 
 export type CreateProviderOpts = {
-  providerDetectorInstance?: ProviderDetector
+  providerDetector?: ProviderDetector
   listeners?: ProviderListeners
 }
 
@@ -76,15 +76,16 @@ export class Provider implements IProvider {
   }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
-    if (provider.instance) {
-      this.#proxy = new this.#proxyConstructor(provider.instance)
+    if (!provider.instance)
+      throw new errors.ProviderInjectedInstanceNotFoundError()
 
-      Object.entries(listeners || {}).forEach(([key, value]) => {
-        this.#proxy?.[key as keyof ProviderListeners]?.(
-          value as (e: ProviderEventPayload) => void,
-        )
-      })
-    }
+    this.#proxy = new this.#proxyConstructor(provider.instance)
+
+    Object.entries(listeners || {}).forEach(([key, value]) => {
+      this.#proxy?.[key as keyof ProviderListeners]?.(
+        value as (e: ProviderEventPayload) => void,
+      )
+    })
 
     this.#selectedProvider = provider.name
     await this.#proxy?.init()
@@ -165,20 +166,16 @@ export class Provider implements IProvider {
     this.#proxy?.onBeforeTxSent(cb)
   }
 
-  public onAfterTxSent(cb: (e: ProviderEventPayload) => void) {
-    this.#proxy?.onAfterTxSent(cb)
+  public onTxSent(cb: (e: ProviderEventPayload) => void) {
+    this.#proxy?.onTxSent(cb)
   }
 
-  public onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void) {
-    this.#proxy?.onAfterTxConfirmed(cb)
+  public onTxConfirmed(cb: (e: ProviderEventPayload) => void) {
+    this.#proxy?.onTxConfirmed(cb)
   }
 
   public async disconnect() {
-    if (this.#proxy?.disconnect) {
-      await this.#proxy?.disconnect()
-    }
-
-    throw new errors.ProviderMethodNotSupported()
+    await this.#proxy?.disconnect?.()
   }
 }
 
@@ -187,8 +184,9 @@ export class Provider implements IProvider {
  *
  * @example
  * const provider = await createProvider(MetamaskProvider)
+ * await provider.init()
  * // or
- * const providerDetectorInstance = await new providerDetector().init()
+ * const providerDetectorInstance = await new ProviderDetector().init()
  * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
  * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
  */
@@ -196,12 +194,12 @@ export const createProvider = async (
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts = {},
 ): Promise<Provider> => {
-  const { providerDetectorInstance, listeners } = opts
+  const { providerDetector: providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
 
-  if (!providerDetector.initiated) {
+  if (!providerDetector.isInitiated) {
     await providerDetector.init()
   }
 

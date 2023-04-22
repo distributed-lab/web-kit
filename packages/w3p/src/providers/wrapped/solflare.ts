@@ -67,13 +67,13 @@ export class SolflareProvider
         signedTx.serialize(),
       )
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, {
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, {
         txHash: signature,
       })
 
       await connection.confirmTransaction(signature)
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, {
         txResponse: signature,
       })
 

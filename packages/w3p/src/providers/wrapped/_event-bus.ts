@@ -21,12 +21,12 @@ export class ProviderEventBus {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, cb)
   }
 
-  public onAfterTxSent(cb: (e: ProviderEventPayload) => void): void {
-    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, cb)
+  public onTxSent(cb: (e: ProviderEventPayload) => void): void {
+    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.TxSent, cb)
   }
 
-  public onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void): void {
-    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, cb)
+  public onTxConfirmed(cb: (e: ProviderEventPayload) => void): void {
+    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, cb)
   }
 
   public onInitiated(cb: (e: ProviderEventPayload) => void): void {

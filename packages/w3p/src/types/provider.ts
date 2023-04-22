@@ -11,7 +11,7 @@ import type { CHAIN_TYPES, PROVIDERS } from '@/enums'
 
 import type { Chain, ChainId } from './chain'
 import type { EthereumProvider } from './ethereum'
-import type { NearProviderType } from './near'
+import type { NearProviderType, NearTxRequestBody } from './near'
 import type {
   ProviderListeners,
   ProviderSubscriber,
@@ -28,6 +28,7 @@ export type ProviderInstance = {
 export type TxRequestBody =
   | Deferrable<TransactionRequest>
   | SolTransaction
+  | NearTxRequestBody
   | string
 
 export type EthTransactionResponse = ethers.providers.TransactionReceipt

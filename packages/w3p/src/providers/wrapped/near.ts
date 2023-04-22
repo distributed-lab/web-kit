@@ -124,7 +124,7 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
         txRequestBody as NearTxRequestBody,
       )
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, { txResponse })
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, { txResponse })
 
       return txResponse
     } catch (error) {

@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `@distributedlab/jac` - Re-export `@distributedlab/fetcher` `HTTP_METHODS, HTTP_STATUS_CODES` enums
-- `@distributedlab/w3p` - wrapper for web3 providers
+- `root`: Package `@distributedlab/w3p` - wrapper for web3 providers
   - `EVN based`:
     - `MetamaskProvider`
     - `CoinbaseProvider`

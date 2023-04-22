@@ -1,9 +1,9 @@
 import { RuntimeError } from './runtime'
 
 export class ProviderNotInitializedError extends RuntimeError {
-  constructor(message?: string) {
-    super(message || 'Provider is not initialized')
-    this.name = 'ProviderNotInitializedError'
+  public name = 'ProviderNotInitializedError'
+  constructor(message = 'Provider is not initialized') {
+    super(message)
   }
 }
 

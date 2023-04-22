@@ -130,13 +130,13 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
         .getSigner()
         .sendTransaction(tx as Deferrable<TransactionRequest>)
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxSent, {
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, {
         txHash: transactionResponse.hash,
       })
 
       const receipt = await transactionResponse.wait()
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed, {
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, {
         txResponse: receipt,
       })
 

@@ -1,4 +1,4 @@
-src/test/
+src/tests/
 src/**/*.test.ts
 jest.config.js
 tsconfig.json

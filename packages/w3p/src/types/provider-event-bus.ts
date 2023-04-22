@@ -20,8 +20,8 @@ export type ProviderEventMap = {
   [PROVIDER_EVENT_BUS_EVENTS.Initiated]: ProviderEventPayload
 
   [PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent]: ProviderEventPayload
-  [PROVIDER_EVENT_BUS_EVENTS.AfterTxSent]: ProviderEventPayload
-  [PROVIDER_EVENT_BUS_EVENTS.AfterTxConfirmed]: ProviderEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.TxSent]: ProviderEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.TxConfirmed]: ProviderEventPayload
 }
 
 export type ProviderEventCallback = (e: ProviderEventPayload) => void
@@ -35,8 +35,8 @@ export interface ProviderSubscriber {
   clearHandlers(): void
 
   onBeforeTxSent(cb: (e: ProviderEventPayload) => void): void
-  onAfterTxSent(cb: (e: ProviderEventPayload) => void): void
-  onAfterTxConfirmed(cb: (e: ProviderEventPayload) => void): void
+  onTxSent(cb: (e: ProviderEventPayload) => void): void
+  onTxConfirmed(cb: (e: ProviderEventPayload) => void): void
 }
 
 export type ProviderListeners = {
@@ -47,6 +47,6 @@ export type ProviderListeners = {
   onChainChanged?: ProviderEventCallback
 
   onBeforeTxSent?: ProviderEventCallback
-  onAfterTxSent?: ProviderEventCallback
-  onAfterTxConfirmed?: ProviderEventCallback
+  onTxSent?: ProviderEventCallback
+  onTxConfirmed?: ProviderEventCallback
 }
