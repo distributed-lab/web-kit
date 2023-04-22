@@ -1,4 +1,4 @@
-import { FetcherRequest, FetcherResponse } from '@distributedlab/fetcher'
+import type { FetcherRequest, FetcherResponse } from '@distributedlab/fetcher'
 
 import { JsonApiClient } from '../index'
 

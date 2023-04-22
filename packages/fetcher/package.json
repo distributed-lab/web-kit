@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "yarn clean && yarn build:types && yarn build:cjs && yarn build:esm && node ./postbuild.js",
-    "build:types": "tsc -p tsconfig.json --outDir ./dist/types --declaration --emitDeclarationOnly",
+    "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
     "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",

@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root` - Prevent typedoc from detecting every index file as a module
 - `all` - Replace type imports with `import type` syntax according to the [SWC tsc migration guide]
 - `all` - Set "browser": to "./dist/esm/index.js" to correctly resolve the package by the Webpack
+- `all` - Moved exclude tests to the `tsconfig.build.json` file to make ESLint work in the tests
 
 [SWC tsc migration guide]: https://swc.rs/docs/migrating-from-tsc
 
