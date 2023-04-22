@@ -7,7 +7,7 @@ import { FetcherError } from '@/error'
 import { buildRequest, validateBaseUrl } from '@/helpers'
 import { FetcherInterceptorManager } from '@/interceptor-manager'
 import { FetcherResponseBuilder } from '@/response-builder'
-import {
+import type {
   FetcherConfig,
   FetcherInterceptor,
   FetcherRequest,

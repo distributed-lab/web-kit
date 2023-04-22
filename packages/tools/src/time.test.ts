@@ -1,4 +1,5 @@
 import { Time } from './time'
+
 describe('Performs time class unit test', () => {
   test('test add function(time + 1) should return correct value', () => {
     const time = new Time('2023-03-03')

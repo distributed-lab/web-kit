@@ -1,8 +1,8 @@
 import { FetcherError, HTTP_STATUS_CODES } from '@distributedlab/fetcher'
 
+import type { JsonApiError } from '@/errors'
 import { errors } from '@/errors'
-import { JsonApiError } from '@/errors'
-import { JsonApiResponseErrors } from '@/types'
+import type { JsonApiResponseErrors } from '@/types'
 
 /*
  * Parses server error and returns corresponding error instance.

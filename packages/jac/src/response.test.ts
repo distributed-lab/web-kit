@@ -1,13 +1,13 @@
 import { HTTP_METHODS } from '@distributedlab/fetcher'
 
-import { JsonApiClient } from './json-api'
+import type { JsonApiClient } from './json-api'
 import { parseJsonApiResponse } from './middlewares'
 import {
   MockWrapper,
   PARSED_RESPONSE,
   RAW_RESPONSE,
   WITHOUT_LINKS_RAW_RESPONSE,
-} from './test'
+} from './tests'
 import { JsonApiLinkFields } from './types'
 
 jest.mock('./json-api')

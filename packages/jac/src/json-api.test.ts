@@ -1,8 +1,8 @@
 import { Fetcher } from '@distributedlab/fetcher'
 
 import { JsonApiClient } from './json-api'
-import { PARSED_RESPONSE, RAW_RESPONSE } from './test'
-import { MockWrapper } from './test'
+import { PARSED_RESPONSE, RAW_RESPONSE } from './tests'
+import { MockWrapper } from './tests'
 
 const VALID_BASE_URL_1 = 'http://localhost'
 const VALID_BASE_URL_2 = 'http://foo.bar'

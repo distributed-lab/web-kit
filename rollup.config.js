@@ -24,7 +24,7 @@ export default packages.map((pkg) => ({
     commonjs(),
     babel({
       babelHelpers: 'bundled',
-      exclude: ['./packages/**/src/test', './packages/**/src/*.test.ts']
+      exclude: ['./packages/**/src/tests', './packages/**/src/*.test.ts']
     }),
     typescript({
       tsconfig: `./packages/${pkg}/tsconfig.json`,

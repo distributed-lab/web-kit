@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep'
 
-import { JsonApiClientRequestConfigHeaders } from '@/types'
+import type { JsonApiClientRequestConfigHeaders } from '@/types'
 
 const MIME_TYPE_JSON_API = 'application/vnd.api+json'
 const HEADER_CONTENT_TYPE = 'Content-Type'

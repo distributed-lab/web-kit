@@ -1,4 +1,4 @@
-import { JsonApiClientRequestQuery } from '@/types'
+import type { JsonApiClientRequestQuery } from '@/types'
 
 import { flatJsonApiQuery } from './flat-json-api-query'
 

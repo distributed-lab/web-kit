@@ -1,5 +1,5 @@
 import { isEmptyBodyStatusCode } from '@/helpers'
-import { FetcherRequest, FetcherResponse } from '@/types'
+import type { FetcherRequest, FetcherResponse } from '@/types'
 
 export class FetcherResponseBuilder<T> {
   #response?: Response

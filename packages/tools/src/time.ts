@@ -10,7 +10,7 @@ import timezone from 'dayjs/plugin/timezone'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import utc from 'dayjs/plugin/utc'
 
-import {
+import type {
   Inclusivity,
   IsoDate,
   TimeCalendar,

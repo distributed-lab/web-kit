@@ -1,7 +1,7 @@
-import { FetcherError } from '@distributedlab/fetcher'
+import type { FetcherError } from '@distributedlab/fetcher'
 
 import { errors } from '@/errors'
-import { JsonApiResponseErrors } from '@/types'
+import type { JsonApiResponseErrors } from '@/types'
 
 import { parseJsonApiError } from './parse-json-api-error'
 
