@@ -1,7 +1,8 @@
-import type { FetcherAbortManager } from '../abort-manager'
-import { DEFAULT_CONFIG } from '../const'
-import type { HTTP_METHODS } from '../enums'
-import type { FetcherConfig, FetcherRequestConfig } from '../types'
+import type { FetcherAbortManager } from '@/abort-manager'
+import { DEFAULT_CONFIG } from '@/const'
+import type { HTTP_METHODS } from '@/enums'
+import type { FetcherConfig, FetcherRequestConfig } from '@/types'
+
 import { buildRequestConfig, buildRequestURL } from './request'
 
 const CFG: FetcherConfig = {
