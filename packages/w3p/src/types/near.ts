@@ -1,6 +1,6 @@
-import { Wallet, WalletSelector } from '@near-wallet-selector/core'
+import type { Wallet, WalletSelector } from '@near-wallet-selector/core'
 
-import { TransactionResponse, TxRequestBody } from './provider'
+import type { TransactionResponse, TxRequestBody } from './provider'
 
 export enum ENearWalletId {
   MyNearWallet = 'my-near-wallet',

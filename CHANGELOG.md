@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `@distributedlab/w3p` - wrapper for web3 providers
+  - `EVN based`:
+    - `MetamaskProvider`
+    - `CoinbaseProvider`
+  - `Solana based`:
+    - `PhantomProvider`
+    - `SolflareProvider`
+  - `Near based`:
+    - `NearProvider`
+
 ### Fixed
 - `root` - CI prebuild packages to resolve `@distributedlab/fetcher` dependency in the `@distributedlab/jac` package
 - `root` - Prevent typedoc from detecting every index file as a module

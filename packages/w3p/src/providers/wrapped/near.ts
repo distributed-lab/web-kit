@@ -4,7 +4,7 @@ import {
   getNearExplorerTxUrl,
   handleNearError,
 } from '@/helpers'
-import {
+import type {
   Chain,
   ChainId,
   NearProviderRpcError,

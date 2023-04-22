@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import type { ethers } from 'ethers'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface EthereumProvider extends ethers.providers.ExternalProvider {

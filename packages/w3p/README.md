@@ -1,30 +1,64 @@
-# @web-kit/w3p
-Features of the Rarimo SDK that provide access to users' wallets and map extensions for multiple types of wallets (EVM and non-EVM) to a common wallet interface.
+# @distributedlab/w3p
+These packages aim to provide developers with a set of commonly used functions and features for building web applications, such as handling big numbers, date manipulation, subscribing to and receiving notifications when certain events occur with EventEmitter, and more.
 
-![version (scoped package)](https://badgen.net/npm/v/@rarimo/provider)
-![types](https://badgen.net/npm/types/@rarimo/provider)
-![tree-shaking](https://badgen.net/bundlephobia/tree-shaking/@rarimo/provider)
-![checks](https://badgen.net/github/checks/rarimo/js-sdk/main)
+![version (scoped package)](https://badgen.net/npm/v/@distributedlab/w3p)
+![types](https://badgen.net/npm/types/@distributedlab/w3p)
+![tree-shaking](https://badgen.net/bundlephobia/tree-shaking/@distributedlab/w3p)
+![checks](https://badgen.net/github/checks/distributed-lab/web-kit/main)
+
+## Getting Started
+
+### Installing
+
+```
+yarn add @distributedlab/w3p
+```
 
 ## Example
 
-For example applications, see [@distributedlab/js-sdk-examples](https://github.com/rarimo/js-sdk-examples/) on GitHub.
+In the case, when you need to check which injected providers do user have in his browser
 
-Here is an example that creates a `MetamaskProvider` object for a MetaMask wallet and prints its address:
+```ts
+import {
+  ProviderDetector,
+  MetamaskProvider,
+  CoinbaseProvider,
+  ProviderProxyConstructor,
+  PROVIDERS,
+  createProvider,
+} from "@distributedlab/w3p"
 
-```js
-import { createProvider, MetamaskProvider } from '@rarimo/provider'
+const providerDetector = new ProviderDetector()
 
-const getMetamaskWalletAddress = async () => {
-  // Connect to the Metamask wallet in the browser using Web3.js, using the MetamaskProvider interface to limit bundle size.
-  const provider = await createProvider(MetamaskProvider)
-  await provider.connect()
+await providerDetector.init()
 
-  // Get the address of the wallet
-  console.log(provider.address)
-}
+const supportedProviders = {
+  [PROVIDERS.Metamask]: MetamaskProvider as ProviderProxyConstructor,
+  [PROVIDERS.Coinbase]: CoinbaseProvider as ProviderProxyConstructor,
+} as Record<PROVIDERS, ProviderProxyConstructor>
+
+const providerProxyConstructor = supportedProviders[providerType] as ProviderProxyConstructor
+
+const provider = await createProvider(providerProxyConstructor, {
+  providerDetectorInstance: providerDetector,
+  listeners: {
+    ...yourListeners,
+  },
+})
+
+await provider.connect()
 ```
 
-## Changelog
+Or if you sure, that you will use only one provider, e.g. Metamask
 
-For the change log, see [CHANGELOG.md](https://github.com/rarimo/js-sdk/blob/main/CHANGELOG.md).
+```ts
+import { MetamaskProvider } from "@distributedlab/w3p"
+
+const provider = await createProvider(MetamaskProvider)
+
+await provider.connect()
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](../../LICENSE) file for details

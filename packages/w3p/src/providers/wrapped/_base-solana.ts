@@ -12,7 +12,7 @@ import {
   handleEthError,
   handleSolError,
 } from '@/helpers'
-import {
+import type {
   Chain,
   ChainId,
   EthProviderRpcError,

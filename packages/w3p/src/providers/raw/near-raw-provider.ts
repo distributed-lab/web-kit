@@ -1,14 +1,14 @@
 import {
   setupWalletSelector,
-  Wallet,
-  WalletSelector,
+  type Wallet,
+  type WalletSelector,
 } from '@near-wallet-selector/core'
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet'
 import { providers } from 'near-api-js'
 
 import { NEAR_CHAINS, NEAR_WALLET_ACTION_TYPE } from '@/enums'
 import { MAX_GAS_LIMIT, NO_DEPOSIT } from '@/helpers'
-import { ENearWalletId, NearTxRequestBody } from '@/types'
+import { ENearWalletId, type NearTxRequestBody } from '@/types'
 
 export class NearRawProvider {
   selector: WalletSelector | null = null

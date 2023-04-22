@@ -1,4 +1,4 @@
-import { CHAIN_TYPES } from '@/enums'
+import type { CHAIN_TYPES } from '@/enums'
 
 export type ChainId = string | number
 

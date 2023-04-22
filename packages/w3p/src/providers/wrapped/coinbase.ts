@@ -1,5 +1,5 @@
 import { PROVIDERS } from '@/enums'
-import { ProviderProxy, RawProvider } from '@/types'
+import type { ProviderProxy, RawProvider } from '@/types'
 
 import { BaseEVMProvider } from './_base-evm'
 

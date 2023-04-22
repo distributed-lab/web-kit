@@ -1,13 +1,13 @@
 import {
-  Cluster,
+  type Cluster,
   clusterApiUrl,
   Connection,
-  Transaction as SolTransaction,
+  type Transaction as SolTransaction,
 } from '@solana/web3.js'
 
 import { PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import { decodeSolanaTx, handleSolError } from '@/helpers'
-import {
+import type {
   ProviderProxy,
   RawProvider,
   SolanaProviderRpcError,

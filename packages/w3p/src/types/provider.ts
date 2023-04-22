@@ -1,19 +1,22 @@
-import { TransactionRequest } from '@ethersproject/abstract-provider'
-import { Deferrable } from '@ethersproject/properties'
-import {
+import type { TransactionRequest } from '@ethersproject/abstract-provider'
+import type { Deferrable } from '@ethersproject/properties'
+import type {
   Transaction as SolTransaction,
   TransactionSignature,
 } from '@solana/web3.js'
-import { ethers } from 'ethers'
-import { providers as nearProviders } from 'near-api-js'
+import type { ethers } from 'ethers'
+import type { providers as nearProviders } from 'near-api-js'
 
-import { CHAIN_TYPES, PROVIDERS } from '@/enums'
+import type { CHAIN_TYPES, PROVIDERS } from '@/enums'
 
-import { Chain, ChainId } from './chain'
-import { EthereumProvider } from './ethereum'
-import { NearProviderType } from './near'
-import { ProviderListeners, ProviderSubscriber } from './provider-event-bus'
-import { SolanaProvider } from './solana'
+import type { Chain, ChainId } from './chain'
+import type { EthereumProvider } from './ethereum'
+import type { NearProviderType } from './near'
+import type {
+  ProviderListeners,
+  ProviderSubscriber,
+} from './provider-event-bus'
+import type { SolanaProvider } from './solana'
 
 export type RawProvider = EthereumProvider | SolanaProvider | NearProviderType
 

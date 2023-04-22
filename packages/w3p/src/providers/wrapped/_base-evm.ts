@@ -1,6 +1,6 @@
 import { TransactionRequest } from '@ethersproject/abstract-provider'
 import { Deferrable } from '@ethersproject/properties'
-import { ethers, providers } from 'ethers'
+import { ethers, type providers } from 'ethers'
 
 import {
   CHAIN_TYPES,
@@ -16,7 +16,7 @@ import {
   requestAddEthChain,
   requestSwitchEthChain,
 } from '@/helpers'
-import {
+import type {
   Chain,
   ChainId,
   EthProviderRpcError,

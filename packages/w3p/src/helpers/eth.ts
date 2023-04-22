@@ -1,8 +1,8 @@
-import { ethers, providers } from 'ethers'
+import { ethers, type providers } from 'ethers'
 
 import { EIP1193, EIP1474 } from '@/enums'
 import { errors } from '@/errors'
-import { Chain, ChainId, EthProviderRpcError } from '@/types'
+import type { Chain, ChainId, EthProviderRpcError } from '@/types'
 
 export const getEthExplorerTxUrl = (chain: Chain, txHash: string): string => {
   return `${chain.explorerUrl}/tx/${txHash}`

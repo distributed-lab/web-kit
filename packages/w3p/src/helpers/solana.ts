@@ -3,7 +3,7 @@ import bs58 from 'bs58'
 
 import { EIP1193, EIP1474, SOLANA_CHAINS } from '@/enums'
 import { errors } from '@/errors'
-import { Chain, SolanaProviderRpcError } from '@/types'
+import type { Chain, SolanaProviderRpcError } from '@/types'
 
 export function handleSolError(error: SolanaProviderRpcError) {
   const ErrorCode = error?.error?.code || error?.code
