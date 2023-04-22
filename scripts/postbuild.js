@@ -15,18 +15,8 @@ module.exports = function postBuild(dirpath) {
     "type": "commonjs",
   })
 
-  const tsconfigPath = `${dirpath}/tsconfig.json`
-
   replaceTscAliasPaths({
-    tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}/dist/esm`,
-  })
-  replaceTscAliasPaths({
-    tsconfigPath: tsconfigPath,
-    outDir: `${dirpath}/dist/cjs`,
-  })
-  replaceTscAliasPaths({
-    tsconfigPath: tsconfigPath,
+    tsconfigPath: `${dirpath}/tsconfig.json`,
     outDir: `${dirpath}/dist/types`,
   })
 }

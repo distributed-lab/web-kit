@@ -1,4 +1,4 @@
-import { HTTP_METHODS } from '@/enums'
+import type { HTTP_METHODS } from '@/enums'
 
 export type FetcherConfig = {
   baseUrl: string

@@ -1,10 +1,10 @@
-import { HTTP_METHODS, HTTP_STATUS_CODES } from '@distributedlab/fetcher'
+import type { HTTP_METHODS, HTTP_STATUS_CODES } from '@distributedlab/fetcher'
 import Jsona from '@distributedlab/jsona'
 import isEmpty from 'lodash/isEmpty'
 
-import { JsonApiClient } from '@/json-api'
+import type { JsonApiClient } from '@/json-api'
 
-import {
+import type {
   Endpoint,
   JsonApiClientRequestConfigHeaders,
   JsonApiDefaultMeta,

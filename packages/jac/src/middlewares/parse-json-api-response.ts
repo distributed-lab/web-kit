@@ -1,6 +1,6 @@
-import { JsonApiClient } from '@/json-api'
+import type { JsonApiClient } from '@/json-api'
 import { JsonApiResponse } from '@/response'
-import { JsonApiDefaultMeta, JsonApiResponseRaw } from '@/types'
+import type { JsonApiDefaultMeta, JsonApiResponseRaw } from '@/types'
 
 export const parseJsonApiResponse = <T, U = JsonApiDefaultMeta>(opts: {
   raw: JsonApiResponseRaw

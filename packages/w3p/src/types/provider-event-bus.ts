@@ -1,5 +1,5 @@
 import { PROVIDER_EVENT_BUS_EVENTS } from '@/enums'
-import { TransactionResponse, TxRequestBody } from '@/types'
+import type { TransactionResponse, TxRequestBody } from '@/types'
 
 import type { ChainId } from './chain'
 

@@ -1,6 +1,6 @@
-import { FetcherError } from '@distributedlab/fetcher'
+import type { FetcherError } from '@distributedlab/fetcher'
 
-import {
+import type {
   JsonApiErrorMetaType,
   JsonApiResponseErrors,
   JsonApiResponseNestedErrors,

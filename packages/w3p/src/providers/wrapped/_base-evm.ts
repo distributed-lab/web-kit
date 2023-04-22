@@ -1,5 +1,5 @@
-import { TransactionRequest } from '@ethersproject/abstract-provider'
-import { Deferrable } from '@ethersproject/properties'
+import type { TransactionRequest } from '@ethersproject/abstract-provider'
+import type { Deferrable } from '@ethersproject/properties'
 import { ethers, type providers } from 'ethers'
 
 import {

@@ -2,7 +2,7 @@ import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
 import { sleep } from '@/helpers'
 
 import { NearRawProvider } from './providers'
-import {
+import type {
   EthereumProvider,
   ProviderInstance,
   RawProvider,

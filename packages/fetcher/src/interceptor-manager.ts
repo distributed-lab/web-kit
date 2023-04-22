@@ -1,4 +1,8 @@
-import { FetcherInterceptor, FetcherRequest, FetcherResponse } from '@/types'
+import type {
+  FetcherInterceptor,
+  FetcherRequest,
+  FetcherResponse,
+} from '@/types'
 
 export class FetcherInterceptorManager {
   #interceptors: FetcherInterceptor[] = []

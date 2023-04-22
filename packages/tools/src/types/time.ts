@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs'
+import type { Dayjs } from 'dayjs'
 
 export type IsoDate = string // RFC3339Nano ISO Date String
 
