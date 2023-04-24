@@ -1,4 +1,9 @@
-import type { Wallet, WalletSelector } from '@near-wallet-selector/core'
+import type {
+  Optional,
+  Transaction,
+  Wallet,
+  WalletSelector,
+} from '@near-wallet-selector/core'
 
 import type { TransactionResponse, TxRequestBody } from './provider'
 
@@ -7,11 +12,7 @@ export enum ENearWalletId {
 }
 
 export type NearTxRequestBody = {
-  contractId: string
-  method: string
-  args?: Record<string, unknown>
-  gas?: string
-  deposit?: string
+  transactions: Array<Optional<Transaction, 'signerId'>>
 }
 
 export type NearProviderType = {

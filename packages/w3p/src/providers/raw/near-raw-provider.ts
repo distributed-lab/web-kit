@@ -6,8 +6,7 @@ import {
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet'
 import { providers } from 'near-api-js'
 
-import { NEAR_ACTIONS, NEAR_CHAINS } from '@/enums'
-import { MAX_GAS_LIMIT, NO_DEPOSIT } from '@/helpers'
+import { NEAR_CHAINS } from '@/enums'
 import { ENearWalletId, type NearTxRequestBody } from '@/types'
 
 export class NearRawProvider {
@@ -58,33 +57,15 @@ export class NearRawProvider {
   }
 
   // Call a method that changes the contract's state
-  async signAndSendTx({
-    contractId,
-    method,
-    args = {},
-    gas = MAX_GAS_LIMIT,
-    deposit = NO_DEPOSIT,
-  }: NearTxRequestBody) {
+  async signAndSendTx(txBody: NearTxRequestBody) {
     if (!this.wallet) return
 
     // Sign a transaction with the "FunctionCall" action
-    const outcome = await this.wallet.signAndSendTransaction({
-      signerId: this.accountId,
-      receiverId: contractId,
-      actions: [
-        {
-          type: NEAR_ACTIONS.FunctionCall,
-          params: {
-            methodName: method,
-            args,
-            gas,
-            deposit,
-          },
-        },
-      ],
-    })
+    const outcome = await this.wallet.signAndSendTransactions(txBody)
 
-    return outcome ? providers.getTransactionLastResult(outcome) : null
+    return outcome
+      ? outcome.map(el => providers.getTransactionLastResult(el))
+      : null
   }
 
   // Get transaction result from the network
