@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0-rc.4] - 2023-04-24
 ### Added
 - `@distributedlab/jac` - `deserialize` helper to deserialize JSON API structures
+- `@distributedlab/w3p` - Examples and use-cases
+
 ### Removed
 - `@distributedlab/jac` - Dependency `@distributedlab/jsona`
 
