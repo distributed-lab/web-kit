@@ -61,6 +61,13 @@ const provider = await createProvider(MetamaskProvider)
 await provider.connect()
 ```
 
+## More examples
+Check out more examples and use-cases:
+
+- [Vue useProvider hook implementation](./examples/vue-use-provider-hook.ts)
+- [Multiple providers with the current selected one](./examples/vue-use-provider-hook.ts)
+- [Ethereum contract interaction without provider](./examples/eth-contract-call.ts)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](../../LICENSE) file for details
