@@ -1,12 +1,12 @@
 {
-  "name": "@distributedlab/tools",
+  "name": "@distributedlab/w3p",
   "version": "0.2.0-rc.3",
-  "description": "Collection of common utility functions and classes",
+  "description": "Wrapper for Web3 Providers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/tools"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/w3p"
   },
-  "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html",
+  "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_w3p.html",
   "license": "MIT",
   "sideEffects": false,
   "typesVersions": {
@@ -35,11 +35,22 @@
     "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
-    "test": "yarn jest",
+    "test": "yarn jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@distributedlab/tools": "workspace:^",
+    "@ethersproject/abstract-provider": "^5.7.0",
+    "@ethersproject/properties": "^5.7.0",
+    "@near-wallet-selector/core": "^7.8.2",
+    "@near-wallet-selector/my-near-wallet": "^7.8.2",
+    "@solana/web3.js": "^1.73.2",
+    "bs58": "^5.0.0",
+    "ethers": "^5.7.2",
+    "near-api-js": "^1.1.0"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",
@@ -50,14 +61,9 @@
     "jest": "^29.5.0",
     "tsc-alias": "^1.8.2"
   },
-  "dependencies": {
-    "bignumber.js": "^9.1.1",
-    "dayjs": "^1.11.7",
-    "tslib": "^2.5.0"
-  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "readmeFile": "./README.md",
-    "displayName": "@distributedlab/tools"
+    "displayName": "@distributedlab/w3p"
   }
 }

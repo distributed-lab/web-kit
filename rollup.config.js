@@ -6,6 +6,8 @@ import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import json from '@rollup/plugin-json'
+import alias from "@rollup/plugin-alias";
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 const packages = fs.readdirSync(path.resolve(__dirname, './packages'))
 
@@ -17,11 +19,21 @@ export default packages.map((pkg) => ({
     name: `DL_${pkg}`,
     format: 'iife'
   },
-  plugins:[
+  plugins: [
+    commonjs(),
     resolve({
       browser: true,
+      preferBuiltins: false,
     }),
-    commonjs(),
+    nodePolyfills(),
+    ...(pkg === "w3p" ? [
+      alias({
+        entries: [
+          {find: 'ethers', replacement: 'node_modules/ethers/dist/ethers.esm.js'},
+          {find: 'near-api-js', replacement: 'node_modules/near-api-js/dist/near-api-js.js'},
+        ]
+      }),
+    ] : []),
     babel({
       babelHelpers: 'bundled',
       exclude: ['./packages/**/src/tests', './packages/**/src/*.test.ts']
@@ -31,5 +43,5 @@ export default packages.map((pkg) => ({
     }),
     json(),
     terser(),
-  ]
+  ],
 }))
