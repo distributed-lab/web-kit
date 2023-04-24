@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+## [0.2.0-rc.5] - 2023-04-24
+### Fixed
+- `@distributedlab/fetcher` - `clone` method
+-
+### Removed
+- `@distributedlab/jac` - Dependency `@distributedlab/jsona`
+
 ## [0.2.0-rc.4] - 2023-04-24
 ### Added
 - `@distributedlab/jac` - `deserialize` helper to deserialize JSON API structures
@@ -146,7 +153,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.4...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.5...HEAD
+[0.2.0-rc.5]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.4...0.2.0-rc.5
 [0.2.0-rc.4]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.3...0.2.0-rc.4
 [0.2.0-rc.3]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.2...0.2.0-rc.3
 [0.2.0-rc.2]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.1...0.2.0-rc.2
