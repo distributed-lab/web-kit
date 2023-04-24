@@ -26,6 +26,7 @@ import {
   CoinbaseProvider,
   ProviderProxyConstructor,
   PROVIDERS,
+  ProviderConstructorMap,
   createProvider,
 } from "@distributedlab/w3p"
 
@@ -33,10 +34,10 @@ const providerDetector = new ProviderDetector()
 
 await providerDetector.init()
 
-const supportedProviders = {
-  [PROVIDERS.Metamask]: MetamaskProvider as ProviderProxyConstructor,
-  [PROVIDERS.Coinbase]: CoinbaseProvider as ProviderProxyConstructor,
-} as Record<PROVIDERS, ProviderProxyConstructor>
+const supportedProviders: ProviderConstructorMap = {
+  [PROVIDERS.Metamask]: MetamaskProvider,
+  [PROVIDERS.Coinbase]: CoinbaseProvider,
+}
 
 const providerProxyConstructor = supportedProviders[providerType] as ProviderProxyConstructor
 

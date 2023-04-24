@@ -1,4 +1,4 @@
-import { ethers, type providers } from 'ethers'
+import { type providers, utils } from 'ethers'
 
 import { EIP1193, EIP1474 } from '@/enums'
 import { errors } from '@/errors'
@@ -20,7 +20,7 @@ export const requestSwitchEthChain = async (
   chainId: ChainId,
 ): Promise<void> => {
   await provider.send('wallet_switchEthereumChain', [
-    { chainId: ethers.utils.hexValue(chainId) },
+    { chainId: utils.hexValue(chainId) },
   ])
 }
 
@@ -32,7 +32,7 @@ export const requestAddEthChain = async (
 ): Promise<void> => {
   await provider.send('wallet_addEthereumChain', [
     {
-      chainId: ethers.utils.hexValue(chainId),
+      chainId: utils.hexValue(chainId),
       chainName,
       rpcUrls: [chainRpcUrl],
     },

@@ -1,6 +1,6 @@
 import type { TransactionRequest } from '@ethersproject/abstract-provider'
 import type { Deferrable } from '@ethersproject/properties'
-import { ethers, type providers } from 'ethers'
+import { providers } from 'ethers'
 
 import {
   CHAIN_TYPES,
@@ -38,8 +38,8 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
 
   constructor(provider: RawProvider) {
     super()
-    this.#provider = new ethers.providers.Web3Provider(
-      provider as ethers.providers.ExternalProvider,
+    this.#provider = new providers.Web3Provider(
+      provider as providers.ExternalProvider,
       'any',
     )
   }

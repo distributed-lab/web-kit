@@ -4,25 +4,32 @@ import type {
   Transaction as SolTransaction,
   TransactionSignature,
 } from '@solana/web3.js'
-import type { ethers } from 'ethers'
-import type { providers as nearProviders } from 'near-api-js'
+import type { providers } from 'ethers'
 
 import type { CHAIN_TYPES, PROVIDERS } from '@/enums'
 
 import type { Chain, ChainId } from './chain'
 import type { EthereumProvider } from './ethereum'
-import type { NearProviderType, NearTxRequestBody } from './near'
+import type {
+  NearRawProvider,
+  NearTransactionResponse,
+  NearTxRequestBody,
+} from './near'
 import type {
   ProviderListeners,
   ProviderSubscriber,
 } from './provider-event-bus'
 import type { SolanaProvider } from './solana'
 
-export type RawProvider = EthereumProvider | SolanaProvider | NearProviderType
+export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
 
 export type ProviderInstance = {
   name: PROVIDERS
   instance?: RawProvider
+}
+
+export type ProviderConstructorMap = {
+  [key in PROVIDERS]?: ProviderProxyConstructor
 }
 
 export type TxRequestBody =
@@ -31,11 +38,9 @@ export type TxRequestBody =
   | NearTxRequestBody
   | string
 
-export type EthTransactionResponse = ethers.providers.TransactionReceipt
+export type EthTransactionResponse = providers.TransactionReceipt
 
 export type SolanaTransactionResponse = TransactionSignature
-
-export type NearTransactionResponse = nearProviders.FinalExecutionOutcome
 
 export type TransactionResponse =
   | EthTransactionResponse

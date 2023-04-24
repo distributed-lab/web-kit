@@ -4,7 +4,7 @@ import {
   type WalletSelector,
 } from '@near-wallet-selector/core'
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet'
-import { providers } from 'near-api-js'
+import type { providers } from 'near-api-js'
 
 import { NEAR_CHAINS } from '@/enums'
 import { ENearWalletId, type NearTxRequestBody } from '@/types'
@@ -56,27 +56,13 @@ export class NearRawProvider {
     this.accountId = ''
   }
 
-  // Call a method that changes the contract's state
-  async signAndSendTx(txBody: NearTxRequestBody) {
-    if (!this.wallet) return
+  async signAndSendTxs(
+    txBody: NearTxRequestBody,
+  ): Promise<providers.FinalExecutionOutcome[]> {
+    if (!this.wallet) return []
 
-    // Sign a transaction with the "FunctionCall" action
     const outcome = await this.wallet.signAndSendTransactions(txBody)
 
-    return outcome
-      ? outcome.map(el => providers.getTransactionLastResult(el))
-      : null
-  }
-
-  // Get transaction result from the network
-  async getTransactionResult(txhash: string) {
-    if (!this.selector) return
-
-    const { network } = this.selector.options
-    const provider = new providers.JsonRpcProvider({ url: network.nodeUrl })
-
-    // Retrieve transaction result from the network
-    const transaction = await provider.txStatus(txhash, 'unnused')
-    return providers.getTransactionLastResult(transaction)
+    return outcome || []
   }
 }

@@ -27,26 +27,21 @@ export type ProviderEventMap = {
 export type ProviderEventCallback = (e: ProviderEventPayload) => void
 
 export interface ProviderSubscriber {
-  onInitiated(cb: (e: ProviderEventPayload) => void): void
-  onConnect(cb: (e: ProviderEventPayload) => void): void
-  onDisconnect(cb: (e: ProviderEventPayload) => void): void
-  onAccountChanged(cb: (e: ProviderEventPayload) => void): void
-  onChainChanged?(cb: (e: ProviderEventPayload) => void): void
+  onInitiated(cb: ProviderEventCallback): void
+  onConnect(cb: ProviderEventCallback): void
+  onDisconnect(cb: ProviderEventCallback): void
+  onAccountChanged(cb: ProviderEventCallback): void
+  onChainChanged?(cb: ProviderEventCallback): void
   clearHandlers(): void
 
-  onBeforeTxSent(cb: (e: ProviderEventPayload) => void): void
-  onTxSent(cb: (e: ProviderEventPayload) => void): void
-  onTxConfirmed(cb: (e: ProviderEventPayload) => void): void
+  onBeforeTxSent(cb: ProviderEventCallback): void
+  onTxSent(cb: ProviderEventCallback): void
+  onTxConfirmed(cb: ProviderEventCallback): void
 }
 
 export type ProviderListeners = {
-  onInitiated?: ProviderEventCallback
-  onConnect?: ProviderEventCallback
-  onDisconnect?: ProviderEventCallback
-  onAccountChanged?: ProviderEventCallback
-  onChainChanged?: ProviderEventCallback
-
-  onBeforeTxSent?: ProviderEventCallback
-  onTxSent?: ProviderEventCallback
-  onTxConfirmed?: ProviderEventCallback
+  [key in keyof Omit<
+    ProviderSubscriber,
+    'clearHandlers'
+  >]?: ProviderEventCallback
 }

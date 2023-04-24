@@ -8,7 +8,7 @@ import type {
   Chain,
   ChainId,
   NearProviderRpcError,
-  NearProviderType,
+  NearRawProvider,
   NearTransactionResponse,
   NearTxRequestBody,
   ProviderProxy,
@@ -20,14 +20,14 @@ import type {
 import { ProviderEventBus } from './_event-bus'
 
 export class NearProvider extends ProviderEventBus implements ProviderProxy {
-  readonly #provider: NearProviderType
+  readonly #provider: NearRawProvider
 
   #chainId?: ChainId
   #address?: string
 
   constructor(provider: RawProvider) {
     super()
-    this.#provider = provider as NearProviderType
+    this.#provider = provider as NearRawProvider
   }
   static get providerType(): PROVIDERS {
     return PROVIDERS.Near
@@ -101,7 +101,7 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
   getHashFromTxResponse(txResponse: TransactionResponse): string {
     const transactionResponse = txResponse as NearTransactionResponse
 
-    return transactionResponse.transaction.hash
+    return transactionResponse.map(el => el.transaction.hash).join(',')
   }
 
   getTxUrl(chain: Chain, txHash: string): string {
@@ -120,9 +120,9 @@ export class NearProvider extends ProviderEventBus implements ProviderProxy {
         txBody: txRequestBody,
       })
 
-      const txResponse = await this.#provider.signAndSendTx(
+      const txResponse = (await this.#provider.signAndSendTxs(
         txRequestBody as NearTxRequestBody,
-      )
+      )) as TransactionResponse
 
       this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, { txResponse })
 

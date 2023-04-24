@@ -32,6 +32,6 @@ export enum PROVIDER_EVENT_BUS_EVENTS {
   Initiated = 'initiated',
 
   BeforeTxSent = 'before-tx-sent',
-  TxSent = 'after-tx-sent',
-  TxConfirmed = 'after-tx-confirmed',
+  TxSent = 'tx-sent',
+  TxConfirmed = 'tx-confirmed',
 }
