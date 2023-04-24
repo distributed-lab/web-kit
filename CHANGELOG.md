@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: `apply-version` script to easier bump version
 - `root`: Package `@distributedlab/fetcher`
 
+### Removed
+- Dependency `@distributedlab/jsona`
+
 ## [0.1.7] - 2023-03-20
 ### Added
 - `@distributedlab/jac` - Example if user use a refresh token functionality
