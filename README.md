@@ -48,6 +48,7 @@ Here are the packages in the namespace:
 | [@distributedlab/jac](https://distributed-lab.github.io/web-kit/modules/_distributedlab_jac.html)         | A library for constructing JSON-API compliant requests and responses   | [![npm version](https://img.shields.io/npm/v/@distributedlab/jac.svg)](https://www.npmjs.com/package/@distributedlab/jac)         |
 | [@distributedlab/tools](https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html)     | Collection of common utility functions and classes                     | [![npm version](https://img.shields.io/npm/v/@distributedlab/tools.svg)](https://www.npmjs.com/package/@distributedlab/tools)     |
 | [@distributedlab/fetcher](https://distributed-lab.github.io/web-kit/modules/_distributedlab_fetcher.html) | Fetch API wrapper with the extended functionality and simple interface | [![npm version](https://img.shields.io/npm/v/@distributedlab/fetcher.svg)](https://www.npmjs.com/package/@distributedlab/fetcher) |
+| [@distributedlab/w3p](https://distributed-lab.github.io/web-kit/modules/_distributedlab_w3p.html)         | The wrapper for web3 providers                                         | [![npm version](https://img.shields.io/npm/v/@distributedlab/w3p.svg)](https://www.npmjs.com/package/@distributedlab/w3p)         |
 
 ## Using in the projects made by create-react-app
 

@@ -1,4 +1,5 @@
 jest.config.js
 tsconfig.json
-tsconfig.eslint.json
+tsconfig.build.json
 postbuild.js
+/src/tests

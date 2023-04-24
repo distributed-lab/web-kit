@@ -7,7 +7,7 @@ import { FetcherError } from '@/error'
 import { buildRequest, validateBaseUrl } from '@/helpers'
 import { FetcherInterceptorManager } from '@/interceptor-manager'
 import { FetcherResponseBuilder } from '@/response-builder'
-import {
+import type {
   FetcherConfig,
   FetcherInterceptor,
   FetcherRequest,
@@ -168,7 +168,7 @@ export class Fetcher {
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      query: query || {},
+      query,
       method: HTTP_METHODS.GET,
       ...(opts || {}),
     })

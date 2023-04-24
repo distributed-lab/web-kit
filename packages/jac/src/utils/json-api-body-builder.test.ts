@@ -1,4 +1,5 @@
-import { JsonApiRecord } from '../types'
+import type { JsonApiRecord } from '@/types'
+
 import { JsonApiBodyBuilder } from './json-api-body-builder'
 
 describe('performs JsonApiBodyBuilder unit test', () => {

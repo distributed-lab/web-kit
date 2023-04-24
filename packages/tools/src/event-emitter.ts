@@ -1,4 +1,9 @@
-import { EventHandler, EventHandlersMap, EventMap, EventMapKey } from '@/types'
+import type {
+  EventHandler,
+  EventHandlersMap,
+  EventMap,
+  EventMapKey,
+} from '@/types'
 
 export class EventEmitter<T extends EventMap> {
   #handlers: EventHandlersMap<T> = {}

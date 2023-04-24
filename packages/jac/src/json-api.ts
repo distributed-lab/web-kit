@@ -1,21 +1,28 @@
-import axios, { AxiosError, AxiosInstance } from 'axios'
+import type {
+  FetcherError,
+  FetcherInterceptor,
+  FetcherRequestQuery,
+} from '@distributedlab/fetcher'
+import { Fetcher, HTTP_METHODS } from '@distributedlab/fetcher'
 
-import { JsonApiResponse } from '@/response'
+import type { JsonApiResponse } from '@/response'
 
-import { HTTP_METHODS } from './enums'
-import { isUndefined } from './helpers'
 import {
-  flattenToAxiosJsonApiQuery,
+  flatJsonApiQuery,
   parseJsonApiError,
   parseJsonApiResponse,
   setJsonApiHeaders,
 } from './middlewares'
-import {
+import type {
+  Endpoint,
   JsonApiClientConfig,
+  JsonApiClientRequestBody,
   JsonApiClientRequestConfig,
   JsonApiClientRequestOpts,
+  JsonApiClientRequestQuery,
   JsonApiDefaultMeta,
   JsonApiResponseErrors,
+  JsonApiResponseRaw,
   URL,
 } from './types'
 
@@ -23,54 +30,54 @@ import {
  * Represents JsonApiClient that performs requests to backend
  */
 export class JsonApiClient {
-  private _baseUrl: URL
-  private _axios: AxiosInstance
+  #fetcher: Fetcher
 
-  constructor(config = {} as JsonApiClientConfig) {
-    this._baseUrl = config.baseUrl ?? ''
-    this._axios = config.axios ?? axios.create()
+  constructor(
+    config: JsonApiClientConfig,
+    interceptors?: FetcherInterceptor[],
+  ) {
+    this.#fetcher = new Fetcher(config, interceptors)
   }
 
   /**
    * Clones current JsonApiClient instance
    */
-  private _clone(): JsonApiClient {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+  public clone(): JsonApiClient {
+    return new JsonApiClient(
+      this.#fetcher.config,
+      this.#fetcher.interceptorManager.interceptors,
+    )
   }
 
   /**
-   * Sets axios instance to the client instance.
+   * Sets Fetcher instance to the client instance.
    */
-  public get axios(): AxiosInstance {
-    return this._axios
+  public get fetcher(): Fetcher {
+    return this.#fetcher
   }
 
   /**
-   * Sets axios instance to the client instance.
+   * Sets Fetcher instance to the client instance.
    */
-  public useAxios(axiosInstance: AxiosInstance): JsonApiClient {
-    this._axios = axiosInstance
+  public useFetcher(fetcher: Fetcher): JsonApiClient {
+    this.#fetcher = fetcher
     return this
   }
 
   /**
    *  Base URL will be prepended to `url` unless `url` is absolute.
-   *  It can be convenient to set `baseURL` for an instance of axios to pass
+   *  It can be convenient to set `baseUrl` for an instance of fetcher to pass
    *  relative URLs to methods of that instance.
-   *
-   *  For more details look Axios Request config:
-   *  {@link https://github.com/axios/axios#request-config}
    */
   public get baseUrl(): URL {
-    return this._baseUrl
+    return this.#fetcher.baseUrl
   }
 
   /**
    * Assigns new base URL to the current instance.
    */
   useBaseUrl(baseUrl: URL): JsonApiClient {
-    if (!baseUrl) throw new TypeError('Arg "baseUrl" not passed')
-    this._baseUrl = baseUrl
+    this.#fetcher.useBaseUrl(baseUrl)
     return this
   }
 
@@ -78,9 +85,42 @@ export class JsonApiClient {
    * Creates new instance JsonApiClient instance with given base URL.
    */
   withBaseUrl(baseUrl: URL): JsonApiClient {
-    if (!baseUrl) throw new TypeError('Arg "baseUrl" not passed')
+    return this.clone().useBaseUrl(baseUrl)
+  }
 
-    return this._clone().useBaseUrl(baseUrl)
+  /**
+   * Sets new interceptor to the current Fetcher instance.
+   */
+  public addInterceptor(interceptor: FetcherInterceptor): void {
+    this.#fetcher.addInterceptor(interceptor)
+  }
+
+  /**
+   * Removes the existing interceptor from the Fetcher instance.
+   */
+  public removeInterceptor(interceptor: FetcherInterceptor): void {
+    this.#fetcher.removeInterceptor(interceptor)
+  }
+
+  /**
+   * Clears all existing interceptors from the Fetcher instance.
+   */
+  public clearInterceptors(): void {
+    this.#fetcher.clearInterceptors()
+  }
+
+  /**
+   * Generates new request id in the UUID format.
+   */
+  public createRequestId(): string {
+    return this.#fetcher.createRequestId()
+  }
+
+  /**
+   * Interrupts the request by given `requestId`, if request is not found returns `false`.
+   */
+  public abort(requestId?: string): boolean {
+    return this.#fetcher.abort(requestId)
   }
 
   /**
@@ -89,41 +129,26 @@ export class JsonApiClient {
   async request<T, U = JsonApiDefaultMeta>(
     opts: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
-    let response
+    let raw: JsonApiResponseRaw
 
     const config: JsonApiClientRequestConfig = {
-      baseURL: this.baseUrl,
-      params: opts.query ?? {},
-      data: opts.isEmptyBodyAllowed && !opts.data ? undefined : opts.data || {},
+      body: opts.body,
       method: opts.method,
-      headers: opts?.headers ?? {},
-      url: opts.endpoint,
-      withCredentials: isUndefined(opts.withCredentials)
-        ? true
-        : opts.withCredentials,
-      maxContentLength: 100000000000,
-      maxBodyLength: 1000000000000,
-    }
-
-    config.params = flattenToAxiosJsonApiQuery(config)
-
-    if (!opts.headers) {
-      config.headers = setJsonApiHeaders(config)
-
-      if (opts.contentType) config.headers['Content-Type'] = opts.contentType
+      query: flatJsonApiQuery(opts.query) as FetcherRequestQuery,
+      headers: setJsonApiHeaders(opts?.headers ?? {}),
+      endpoint: opts.endpoint,
     }
 
     try {
-      response = await this._axios(config)
+      raw = await this.#fetcher.request(config)
     } catch (e) {
-      throw parseJsonApiError(e as AxiosError<JsonApiResponseErrors>)
+      throw parseJsonApiError(e as FetcherError<JsonApiResponseErrors>)
     }
 
     return parseJsonApiResponse<T, U>({
-      raw: response,
+      raw,
       isNeedRaw: Boolean(opts?.isNeedRaw),
       apiClient: this,
-      withCredentials: Boolean(opts?.withCredentials),
     })
   }
 
@@ -132,16 +157,15 @@ export class JsonApiClient {
    * Parses the response in JsonApi format.
    */
   get<T, U = JsonApiDefaultMeta>(
-    endpoint: string,
-    query: Record<string, unknown> = {},
-    isNeedRaw?: boolean,
+    endpoint: Endpoint,
+    query?: JsonApiClientRequestQuery,
+    opts?: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.GET,
       endpoint,
-      query,
-      isEmptyBodyAllowed: true,
-      isNeedRaw,
+      query: query as FetcherRequestQuery,
+      ...(opts || {}),
     })
   }
 
@@ -150,15 +174,15 @@ export class JsonApiClient {
    * Parses the response in JsonApi format.
    */
   post<T, U = JsonApiDefaultMeta>(
-    endpoint: string,
-    data: unknown,
-    isNeedRaw?: boolean,
+    endpoint: Endpoint,
+    body?: JsonApiClientRequestBody,
+    opts?: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.POST,
       endpoint,
-      data,
-      isNeedRaw,
+      body,
+      ...(opts || {}),
     })
   }
 
@@ -169,12 +193,14 @@ export class JsonApiClient {
    */
   patch<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    data?: unknown,
+    body?: JsonApiClientRequestBody,
+    opts?: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.PATCH,
       endpoint,
-      data,
+      body,
+      ...(opts || {}),
     })
   }
 
@@ -184,12 +210,14 @@ export class JsonApiClient {
    */
   put<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    data: unknown,
+    body?: JsonApiClientRequestBody,
+    opts?: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.PUT,
       endpoint,
-      data,
+      body,
+      ...(opts || {}),
     })
   }
 
@@ -199,13 +227,14 @@ export class JsonApiClient {
    */
   delete<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    data?: unknown,
+    body?: JsonApiClientRequestBody,
+    opts?: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.DELETE,
       endpoint,
-      data,
-      isEmptyBodyAllowed: true,
+      body,
+      ...(opts || {}),
     })
   }
 }

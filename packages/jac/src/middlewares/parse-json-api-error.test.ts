@@ -1,7 +1,8 @@
-import { AxiosError } from 'axios'
+import type { FetcherError } from '@distributedlab/fetcher'
 
-import { errors } from '../errors'
-import { JsonApiResponseErrors } from '../types'
+import { errors } from '@/errors'
+import type { JsonApiResponseErrors } from '@/types'
+
 import { parseJsonApiError } from './parse-json-api-error'
 
 describe('errors', () => {
@@ -51,13 +52,13 @@ describe('errors', () => {
   ]
 
   testCases.forEach(testCase => {
-    it(`should parse "${testCase.name}" error.`, () => {
+    test(`should parse "${testCase.name}" error.`, () => {
       const error = parseJsonApiError({
         response: {
           status: testCase.status,
           data: testCase.data,
         },
-      } as AxiosError<JsonApiResponseErrors>)
+      } as FetcherError<JsonApiResponseErrors>)
 
       expect(error).toBeInstanceOf(testCase.expectedError)
     })

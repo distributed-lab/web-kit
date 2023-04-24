@@ -1,7 +1,7 @@
-import { FetcherAbortManager } from '@/abort-manager'
+import type { FetcherAbortManager } from '@/abort-manager'
 import { HEADER_CONTENT_TYPE } from '@/const'
 import { isObject, normalizeHeadersCase } from '@/helpers'
-import {
+import type {
   FetcherConfig,
   FetcherRequest,
   FetcherRequestBody,

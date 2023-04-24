@@ -1,5 +1,9 @@
 import { FetcherInterceptorManager } from './interceptor-manager'
-import { FetcherInterceptor, FetcherRequest, FetcherResponse } from './types'
+import type {
+  FetcherInterceptor,
+  FetcherRequest,
+  FetcherResponse,
+} from './types'
 
 describe('performs FetcherInterceptorManager unit test', () => {
   test('should add a new interceptor', () => {

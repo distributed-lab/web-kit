@@ -3,7 +3,7 @@ import { DEFAULT_CONFIG } from './const'
 import { Fetcher } from './fetcher'
 import { FetcherInterceptorManager } from './interceptor-manager'
 import { mockFetchResponse } from './tests'
-import { FetcherRequest } from './types'
+import type { FetcherRequest } from './types'
 
 beforeEach(() => {
   jest.resetModules()

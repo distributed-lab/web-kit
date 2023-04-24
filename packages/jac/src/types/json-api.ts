@@ -1,9 +1,10 @@
-import {
-  AxiosInstance,
-  AxiosRequestConfig,
-  RawAxiosRequestHeaders,
-} from 'axios'
-import { HTTP_METHODS } from 'src/enums'
+import type {
+  FetcherConfig,
+  FetcherRequestBody,
+  FetcherRequestConfig,
+  FetcherRequestQueryValue,
+  FetcherResponse,
+} from '@distributedlab/fetcher'
 
 export enum JsonApiLinkFields {
   first = 'first',
@@ -14,21 +15,26 @@ export enum JsonApiLinkFields {
 }
 
 export type URL = string
-
 export type Endpoint = string // e.g. `/users`
 
-export type JsonApiClientConfig = {
-  baseUrl?: URL
-  axios?: AxiosInstance
-}
-
-export type JsonApiClientRequestConfigHeaders = RawAxiosRequestHeaders
-
-export type JsonApiClientRequestParams = unknown
-
-export type JsonApiClientRequestConfig = AxiosRequestConfig
-
+export type JsonApiClientConfig = FetcherConfig
+export type JsonApiClientRequestConfig = FetcherRequestConfig
+export type JsonApiClientRequestConfigHeaders = HeadersInit
+export type JsonApiClientRequestBody = FetcherRequestBody
 export type JsonApiErrorMetaType = Record<string, unknown> | unknown[] | unknown
+export type JsonApiResponseRawData = Record<string, unknown>
+export type JsonApiResponseRaw = FetcherResponse<JsonApiResponseRawData>
+export type JsonApiClientRequestQueryValue = FetcherRequestQueryValue
+export type JsonApiClientRequestQueryValueUnion =
+  | JsonApiClientRequestQueryValue
+  | JsonApiClientRequestQueryValue[]
+  | JsonApiClientRequestQueryValue[][]
+
+export type JsonApiClientRequestQuery = Record<
+  string,
+  | JsonApiClientRequestQueryValueUnion
+  | Record<string, JsonApiClientRequestQueryValueUnion>
+>
 
 export type JsonApiRelationship<T extends string> = Record<
   string,
@@ -55,16 +61,8 @@ export type JsonApiResponseLinks = {
   self?: Endpoint
 }
 
-export type JsonApiClientRequestOpts = {
-  endpoint: Endpoint
-  method: HTTP_METHODS
-  headers?: JsonApiClientRequestConfigHeaders
-  data?: unknown
-  query?: unknown
-  contentType?: string
-  isEmptyBodyAllowed?: boolean
+export type JsonApiClientRequestOpts = FetcherRequestConfig & {
   isNeedRaw?: boolean
-  withCredentials?: boolean
 }
 
 export type JsonApiResponseError = {

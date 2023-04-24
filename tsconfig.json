@@ -28,6 +28,9 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "newLine": "lf"
+    "newLine": "lf",
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
   }
 }

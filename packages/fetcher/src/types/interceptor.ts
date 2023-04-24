@@ -1,4 +1,4 @@
-import { FetcherRequest, FetcherResponse } from './fetcher'
+import type { FetcherRequest, FetcherResponse } from './fetcher'
 
 export type FetcherRequestInterceptor = (
   config: FetcherRequest,

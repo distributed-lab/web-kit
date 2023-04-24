@@ -1,133 +1,136 @@
-import { AxiosError } from 'axios'
+import type { FetcherError } from '@distributedlab/fetcher'
 
-import {
+import type {
   JsonApiErrorMetaType,
   JsonApiResponseErrors,
   JsonApiResponseNestedErrors,
 } from '@/types'
 
 /**
- * Base class for server errors.
+ * Generic server error response.
  */
-export class JsonApiErrorBase extends Error {
-  originalError: AxiosError<JsonApiResponseErrors>
-  _meta: JsonApiErrorMetaType
-  _detail: string
-  _title: string | undefined
-  _nestedErrors: JsonApiResponseNestedErrors
 
-  constructor(originalError: AxiosError<JsonApiResponseErrors>) {
+export class JsonApiError extends Error {
+  public name = 'JsonApiError'
+  public message: string
+  readonly #originalError: FetcherError<JsonApiResponseErrors>
+  readonly #meta: JsonApiErrorMetaType
+  readonly #nestedErrors: JsonApiResponseNestedErrors
+
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
     super()
 
-    this.originalError = originalError
-    this._meta = {}
-    this._nestedErrors = []
-    this._title = ''
-    this._detail = ''
+    const errors = originalError?.response?.data?.errors || []
+    const unwrappedError = errors?.[0]
+    const detail = unwrappedError?.detail ?? ''
+    const title = unwrappedError?.title ?? ''
+
+    this.message = `${title}: ${detail}`
+
+    this.#originalError = originalError
+    this.#meta = unwrappedError?.meta ?? {}
+
+    if (errors.length > 1) {
+      this.message = 'Request contains multiple errors. Check "nestedErrors"'
+    }
+
+    this.#nestedErrors = errors.map(err => ({
+      title: err?.title ?? '',
+      detail: err?.detail ?? '',
+      meta: err?.meta ?? {},
+    }))
   }
 
   /**
    * Response HTTP status.
    */
   get httpStatus(): number | undefined {
-    return this.originalError?.response?.status
+    return this.#originalError?.response?.status
   }
 
   /**
    * Error meta.
    */
   get meta(): JsonApiErrorMetaType {
-    return this._meta
-  }
-
-  /**
-   * A short, human-readable summary of the problem.
-   */
-  get title(): string | undefined {
-    return this._title
-  }
-
-  /**
-   * A human-readable explanation specific to this occurrence of the problem.
-   */
-  get detail(): string {
-    return this._detail
+    return this.#meta
   }
 
   get requestPath(): string | undefined {
-    return this.originalError?.response?.request?.path
-  }
-}
-
-/**
- * Generic server error response.
- */
-export class JsonApiError extends JsonApiErrorBase {
-  constructor(originalError: AxiosError<JsonApiResponseErrors>) {
-    super(originalError)
-
-    const unwrappedError = originalError?.response?.data?.errors?.[0]
-    this.name = unwrappedError?.title ?? ''
-    this._title = unwrappedError?.title ?? ''
-    this._detail = unwrappedError?.detail ?? ''
-    this._meta = unwrappedError?.meta || {}
-  }
-}
-
-export class BadRequestError extends JsonApiError {
-  /**
-   * Wrap a raw API error response.
-   */
-  constructor(originalError: AxiosError<JsonApiResponseErrors>) {
-    super(originalError)
-    const errors = originalError?.response?.data?.errors || []
-
-    if (errors.length > 1) {
-      this._title = 'Request contains some errors.'
-      this._detail = 'Request contains some errors. Check "nestedErrors"'
-      this._nestedErrors = errors.map(err => ({
-        title: err?.title,
-        detail: err?.detail,
-        meta: err?.meta,
-      }))
-    }
+    return new URL(this.#originalError?.response?.request?.url).pathname
   }
 
   /**
    * Errors for every invalid field.
    */
   get nestedErrors(): JsonApiResponseNestedErrors {
-    return this._nestedErrors
+    return this.#nestedErrors
+  }
+}
+
+export class BadRequestError extends JsonApiError {
+  public name = 'BadRequestError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
   }
 }
 
 /**
  * 401(Unauthorized) error.
  */
-export class UnauthorizedError extends JsonApiError {}
+export class UnauthorizedError extends JsonApiError {
+  public name = 'UnauthorizedError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}
 
 /**
  * 403(Forbidden) error.
  */
-export class ForbiddenError extends JsonApiError {}
+export class ForbiddenError extends JsonApiError {
+  public name = 'ForbiddenError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}
 
 /**
  * (404)The requested resource was not found.
  */
-export class NotFoundError extends JsonApiError {}
+export class NotFoundError extends JsonApiError {
+  public name = 'NotFoundError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}
 
 /**
  * The request could not be completed due to a conflict with the current state
  * of the target resource.
  */
-export class ConflictError extends JsonApiError {}
+export class ConflictError extends JsonApiError {
+  public name = 'ConflictError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}
 
 /**
  * 500(Internal server) error
  */
-export class InternalServerError extends JsonApiError {}
+export class InternalServerError extends JsonApiError {
+  public name = 'InternalServerError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}
 
 /**
  * Network error.
  */
-export class NetworkError extends JsonApiError {}
+export class NetworkError extends JsonApiError {
+  public name = 'NetworkError'
+  constructor(originalError: FetcherError<JsonApiResponseErrors>) {
+    super(originalError)
+  }
+}

@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 
 import { DECIMALS } from '@/enums'
 import { BN_ROUNDING } from '@/enums'
-import { BnCfg, BnFormatCfg, BnLike } from '@/types'
+import type { BnCfg, BnFormatCfg, BnLike } from '@/types'
 
 BigNumber.config({
   DECIMAL_PLACES: 0,
@@ -239,6 +239,22 @@ export class BN {
     )
 
     return new BN(this.#bn.pow(bn(other)).dividedBy(fr), this.#cfg)
+  }
+
+  public sqrt(): BN {
+    if (this.#cfg.decimals > 1 && this.#cfg.decimals % 2 !== 0) {
+      throw new TypeError(
+        `SQRT requires decimals to be even number, ${JSON.stringify({
+          number: this.#bn,
+          decimals: this.#cfg.decimals,
+        })}`,
+      )
+    }
+
+    const bn = BN.#instance
+    const fr = BN.#makeTenPower(bn(this.#cfg.decimals / 2))
+
+    return new BN(this.#bn.sqrt().multipliedBy(fr), this.#cfg)
   }
 
   public isGreaterThan(other: BN): boolean {
