@@ -65,8 +65,9 @@ await provider.connect()
 Check out more examples and use-cases:
 
 - [Vue useProvider hook implementation](./examples/vue-use-provider-hook.ts)
-- [Multiple providers with the current selected one](./examples/vue-use-provider-hook.ts)
-- [Ethereum contract interaction without provider](./examples/eth-contract-call.ts)
+- [React useProvider hook implementation](./examples/react-use-provider-hook.ts)
+- [Multiple providers with the current selected one](./examples/multiple-providers.ts)
+- [Ethereum contract interaction](./examples/eth-contract-call.ts)
 
 ## License
 
