@@ -4,13 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-## Removed
-- `root` - Unused `tsconfig.eslint.json`
-
-## [0.2.0-rc.2] - 2023-04-24
-### Added
-- `@distributedlab/jac` - Re-export `@distributedlab/fetcher` `HTTP_METHODS, HTTP_STATUS_CODES` enums
+## [0.2.0-rc.3] - 2023-04-24
+## Added
 - `root`: Package `@distributedlab/w3p` - wrapper for web3 providers
   - `EVN based`:
     - `MetamaskProvider`
@@ -20,6 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `SolflareProvider`
   - `Near based`:
     - `NearProvider`
+
+## Removed
+- `root` - Unused `tsconfig.eslint.json`
+
+## [0.2.0-rc.2] - 2023-04-24
+### Added
+- `@distributedlab/jac` - Re-export `@distributedlab/fetcher` `HTTP_METHODS, HTTP_STATUS_CODES` enums
 
 ### Changed
 - `all` - Migrate from `tsc` to `swc` to build packages
@@ -134,7 +136,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.2...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.3...HEAD
+[0.2.0-rc.3]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.2...0.2.0-rc.3
 [0.2.0-rc.2]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.1...0.2.0-rc.2
 [0.2.0-rc.1]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.0...0.2.0-rc.1
 [0.2.0-rc.0]: https://github.com/distributed-lab/web-kit/compare/0.1.7...0.2.0-rc.0
