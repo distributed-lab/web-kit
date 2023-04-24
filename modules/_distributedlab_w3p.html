@@ -16,7 +16,7 @@
 <li><a href="_distributedlab_w3p.html">@distributedlab/w3p</a></li></ul>
 <h1>Module @distributedlab/w3p</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/8ff8472/packages/w3p/src/index.ts#L1">packages/w3p/src/index.ts:1</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/a5df244/packages/w3p/src/index.ts#L1">packages/w3p/src/index.ts:1</a></li></ul></aside>
 <section class="tsd-panel-group">
 <section class="tsd-panel tsd-typography">
 <a href="#distributedlabw3p" id="distributedlabw3p" style="color: inherit; text-decoration: none;">
@@ -47,6 +47,16 @@
 <p>Or if you sure, that you will use only one provider, e.g. Metamask</p>
 <pre><code class="language-ts"><span class="hl-12">import</span><span class="hl-0"> { </span><span class="hl-3">MetamaskProvider</span><span class="hl-0"> } </span><span class="hl-12">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@distributedlab/w3p&quot;</span><br/><br/><span class="hl-8">const</span><span class="hl-0"> </span><span class="hl-13">provider</span><span class="hl-0"> = </span><span class="hl-12">await</span><span class="hl-0"> </span><span class="hl-14">createProvider</span><span class="hl-0">(</span><span class="hl-3">MetamaskProvider</span><span class="hl-0">)</span><br/><br/><span class="hl-12">await</span><span class="hl-0"> </span><span class="hl-3">provider</span><span class="hl-0">.</span><span class="hl-14">connect</span><span class="hl-0">()</span>
 </code></pre>
+
+<a href="#more-examples" id="more-examples" style="color: inherit; text-decoration: none;">
+  <h2>More examples</h2>
+</a>
+<p>Check out more examples and use-cases:</p>
+<ul>
+<li><a href="./examples/vue-use-provider-hook.ts">Vue useProvider hook implementation</a></li>
+<li><a href="./examples/vue-use-provider-hook.ts">Multiple providers with the current selected one</a></li>
+<li><a href="./examples/eth-contract-call.ts">Ethereum contract interaction without provider</a></li>
+</ul>
 
 <a href="#license" id="license" style="color: inherit; text-decoration: none;">
   <h2>License</h2>
