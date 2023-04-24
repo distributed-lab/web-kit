@@ -118,7 +118,7 @@ class DeserializeCache {
     data: TJsonApiData,
     resourceIdObject?: TResourceIdObj,
   ): string {
-    // resourceIdObject.meta sets to model in simplePropertyMappers.ts, so it should be used here too
+    // resourceIdObject.meta sets to model in simplePropertyMappers.ts, so it should be used here to
     // cache in this case probably will be redundant
     if (!data.id || !data.type) {
       return ''

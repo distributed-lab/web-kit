@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 
 import type { JsonApiClient } from '@/json-api'
 
+import { deserialize } from './helpers'
 import type {
   Endpoint,
   JsonApiClientRequestConfigHeaders,
@@ -12,7 +13,6 @@ import type {
   JsonApiResponseRaw,
   JsonApiResponseRawData,
 } from './types'
-import { deserialize } from './utils'
 
 const PAGE_LIMIT_KEY = 'page[limit]'
 
