@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/w3p",
-  "version": "0.2.0-rc.3",
+  "version": "0.2.0-rc.4",
   "description": "Wrapper for Web3 Providers",
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
-    "test": "yarn jest --passWithNoTests",
+    "test": "yarn jest --verbose --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
