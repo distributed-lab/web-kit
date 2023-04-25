@@ -81,6 +81,9 @@ describe('performs EventEmitter unit test', () => {
       expect(
         eventEmitter?.handlers?.foo?.find(i => i === handler),
       ).toBeUndefined()
+      expect(
+        eventEmitter?.handlers?.bar?.find(i => i === barHandler),
+      ).toBeUndefined()
     })
   })
 })
