@@ -12,6 +12,16 @@ describe('performs EventEmitter unit test', () => {
       eventEmitter.emit('foo', 'bar')
     })
 
+    test('should call registered handler with no params', () => {
+      const eventEmitter = new EventEmitter<{ foo: undefined }>()
+
+      eventEmitter.on('foo', () => {
+        expect(true).toBe(true)
+      })
+
+      eventEmitter.emit('foo')
+    })
+
     test('should call multiple registered handlers', () => {
       const eventEmitter = new EventEmitter<{ foo: string }>()
 
@@ -35,7 +45,7 @@ describe('performs EventEmitter unit test', () => {
     test('should call handler once', () => {
       const eventEmitter = new EventEmitter<{ foo: string }>()
 
-      const handler = (data: string) => {
+      const handler = (data?: string) => {
         expect(data).toBe('bar')
       }
 
@@ -49,18 +59,28 @@ describe('performs EventEmitter unit test', () => {
   })
 
   describe('performs off, should unregister handler', () => {
-    const eventEmitter = new EventEmitter<{ foo: string }>()
+    test('should off events', () => {
+      const eventEmitter = new EventEmitter<{ foo: string; bar: undefined }>()
 
-    const handler = (data: string) => {
-      expect(data).toBe('bar')
-    }
+      const handler = (data?: string) => {
+        expect(data).toBe('bar')
+      }
 
-    eventEmitter.on('foo', handler)
-    eventEmitter.emit('foo', 'bar')
-    eventEmitter.off('foo', handler)
+      const barHandler = () => {
+        expect(true).toBe(true)
+      }
 
-    expect(
-      eventEmitter?.handlers?.foo?.find(i => i === handler),
-    ).toBeUndefined()
+      eventEmitter.on('foo', handler)
+      eventEmitter.emit('foo', 'bar')
+      eventEmitter.off('foo', handler)
+
+      eventEmitter.on('bar', barHandler)
+      eventEmitter.emit('bar')
+      eventEmitter.off('bar', barHandler)
+
+      expect(
+        eventEmitter?.handlers?.foo?.find(i => i === handler),
+      ).toBeUndefined()
+    })
   })
 })

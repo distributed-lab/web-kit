@@ -17,7 +17,7 @@ export class EventEmitter<T extends EventMap> {
   }
 
   public once<K extends EventMapKey<T>>(key: K, fn: EventHandler<T[K]>): void {
-    const handler = (data: T[K]) => {
+    const handler = (data?: T[K]) => {
       fn(data)
       this.off(key, handler)
     }
@@ -28,7 +28,7 @@ export class EventEmitter<T extends EventMap> {
     this.#handlers[key] = (this.#handlers[key] || [])?.filter(f => f !== fn)
   }
 
-  public emit<K extends EventMapKey<T>>(key: K, data: T[K]): void | never {
+  public emit<K extends EventMapKey<T>>(key: K, data?: T[K]): void | never {
     ;(this.#handlers[key] || [])?.forEach((fn: EventHandler<T[K]>) => {
       fn(data)
     })
