@@ -68,7 +68,7 @@ export class Fetcher {
    * Clones current Fetcher instance.
    */
   public clone(): Fetcher {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+    return new Fetcher(this.#config, this.#interceptorManager.interceptors)
   }
 
   /**

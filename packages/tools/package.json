@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/tools",
-  "version": "0.2.0-rc.3",
+  "version": "0.2.0-rc.5",
   "description": "Collection of common utility functions and classes",
   "repository": {
     "type": "git",
@@ -35,7 +35,7 @@
     "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
-    "test": "yarn jest",
+    "test": "yarn jest --verbose",
     "typecheck": "tsc --noEmit"
   },
   "publishConfig": {

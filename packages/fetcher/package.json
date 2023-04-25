@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/fetcher",
-  "version": "0.2.0-rc.3",
+  "version": "0.2.0-rc.5",
   "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-    "test": "yarn jest"
+    "test": "yarn jest --verbose"
   },
   "publishConfig": {
     "access": "public"

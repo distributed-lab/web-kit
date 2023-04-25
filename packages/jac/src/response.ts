@@ -1,9 +1,9 @@
 import type { HTTP_METHODS, HTTP_STATUS_CODES } from '@distributedlab/fetcher'
-import Jsona from '@distributedlab/jsona'
 import isEmpty from 'lodash/isEmpty'
 
 import type { JsonApiClient } from '@/json-api'
 
+import { deserialize } from './helpers'
 import type {
   Endpoint,
   JsonApiClientRequestConfigHeaders,
@@ -13,8 +13,6 @@ import type {
   JsonApiResponseRaw,
   JsonApiResponseRawData,
 } from './types'
-
-const formatter = new Jsona()
 
 const PAGE_LIMIT_KEY = 'page[limit]'
 
@@ -117,9 +115,7 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
   #parseResponse(raw: JsonApiResponseRaw, isNeedRaw: boolean) {
     if (!raw.data) return
 
-    this.#data = isNeedRaw
-      ? (raw.data as T)
-      : (formatter.deserialize(raw.data) as T)
+    this.#data = isNeedRaw ? (raw.data as T) : (deserialize(raw.data) as T)
   }
 
   public createLink(link: Endpoint): Endpoint {

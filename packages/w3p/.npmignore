@@ -1,4 +1,5 @@
 src/**/*.test.ts
+examples
 jest.config.js
 tsconfig.json
 tsconfig.build.json

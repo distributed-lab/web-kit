@@ -25,7 +25,7 @@
       "@/*": ["src/*"]
     }
   },
-  "exclude": ["src/tests", ".test.ts"],
+  "exclude": ["examples","src/tests", ".test.ts"],
   "minify": false,
   "sourceMaps": true
 }
