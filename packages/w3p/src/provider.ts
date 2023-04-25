@@ -83,7 +83,7 @@ export class Provider implements IProvider {
 
     Object.entries(listeners || {}).forEach(([key, value]) => {
       this.#proxy?.[key as keyof ProviderListeners]?.(
-        value as (e: ProviderEventPayload) => void,
+        value as (e?: ProviderEventPayload) => void,
       )
     })
 
@@ -136,25 +136,25 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  public onAccountChanged(cb: (e: ProviderEventPayload) => void): void {
+  public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onAccountChanged(cb)
   }
 
-  public onChainChanged(cb: (e: ProviderEventPayload) => void): void {
+  public onChainChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#chainDetails = undefined
 
     this.#proxy?.onChainChanged?.(cb)
   }
 
-  public onConnect(cb: (e: ProviderEventPayload) => void): void {
+  public onConnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onConnect(cb)
   }
 
-  public onDisconnect(cb: (e: ProviderEventPayload) => void): void {
+  public onDisconnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onDisconnect(cb)
   }
 
-  public onInitiated(cb: (e: ProviderEventPayload) => void): void {
+  public onInitiated(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onInitiated(cb)
   }
 
@@ -162,15 +162,15 @@ export class Provider implements IProvider {
     this.#proxy?.clearHandlers()
   }
 
-  public onBeforeTxSent(cb: (e: ProviderEventPayload) => void) {
+  public onBeforeTxSent(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onBeforeTxSent(cb)
   }
 
-  public onTxSent(cb: (e: ProviderEventPayload) => void) {
+  public onTxSent(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onTxSent(cb)
   }
 
-  public onTxConfirmed(cb: (e: ProviderEventPayload) => void) {
+  public onTxConfirmed(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onTxConfirmed(cb)
   }
 
