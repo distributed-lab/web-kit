@@ -66,15 +66,22 @@ describe('performs buildRequest unit test', () => {
 
   describe('performs buildRequestURL', () => {
     test('should return valid URL', () => {
-      const baseUrl = 'https://example.com'
-      const endpoint = '/api/v1/users'
-      const url = 'https://example.com/api/v1/users'
+      const baseUrl = 'https://example.com/_/api/'
+      const endpoint = '/v1/users/'
+      const url = 'https://example.com/_/api/v1/users'
+      expect(buildRequestURL(baseUrl, endpoint)).toEqual(url)
+    })
+
+    test('should return valid URL (with port)', () => {
+      const baseUrl = 'https://localhost:8095/_/api/'
+      const endpoint = '/v1/users/'
+      const url = 'https://localhost:8095/_/api/v1/users'
       expect(buildRequestURL(baseUrl, endpoint)).toEqual(url)
     })
 
     test('should handle double slashes', () => {
-      const baseUrl = 'https://example.com/'
-      const endpoint = '/api/v1/users'
+      const baseUrl = 'https://example.com//'
+      const endpoint = '//api//v1//users//'
       const url = 'https://example.com/api/v1/users'
       expect(buildRequestURL(baseUrl, endpoint)).toEqual(url)
     })

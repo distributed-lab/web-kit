@@ -32,7 +32,11 @@ export const buildRequestURL = (
   endpoint: string,
   query?: FetcherRequestQuery,
 ): string => {
-  const url = new URL(endpoint, baseUrl)
+  const url = new URL(baseUrl)
+  url.pathname = [url.pathname, endpoint]
+    .join('/')
+    .replace(/\/\/+/g, '/') // replace doubled slashes
+    .replace(/\/+$/, '') // remove slash in the end
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {
