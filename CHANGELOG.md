@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-rc.7] - 2023-04-25
+### Fixed
+- `@distributedlab/fetcher` - `buildRequestURL` helper
+
 ## [0.2.0-rc.6] - 2023-04-25
 ### Changed
 - `@distributedlab/tools` - `EventEmitter` Make emit second parameter optional
