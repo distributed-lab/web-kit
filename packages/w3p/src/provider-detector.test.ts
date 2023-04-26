@@ -1,4 +1,6 @@
 import { ProviderDetector } from '@/provider-detector'
+// import { CoinbaseProvider, MetamaskProvider } from '@/providers'
+import { clearWindowMock, mockWindow } from '@/tests'
 
 describe('performs provider detector unit test', () => {
   describe('performs init', () => {
@@ -8,21 +10,15 @@ describe('performs provider detector unit test', () => {
       providerDetector = new ProviderDetector()
     })
 
+    afterEach(clearWindowMock)
+
     test('should initialize the provider detector', async () => {
-      const spyDetectRawProviders = jest.spyOn(
-        providerDetector,
-        '#detectRawProviders',
-      )
-      const spyDefineProviders = jest.spyOn(
-        providerDetector,
-        '#defineProviders',
-      )
+      mockWindow({ ethereum: {} })
 
       await providerDetector.init()
 
-      expect(spyDetectRawProviders).toHaveBeenCalledTimes(1)
-      expect(spyDefineProviders).toHaveBeenCalledTimes(1)
-      expect(providerDetector.isInitiated).toBe(true)
+      expect(providerDetector.isInitiated).toBeTruthy()
+      expect(providerDetector.isEnabled).toBeTruthy()
     })
   })
 })
