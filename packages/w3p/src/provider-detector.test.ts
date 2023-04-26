@@ -1,5 +1,4 @@
 import { ProviderDetector } from '@/provider-detector'
-import { CoinbaseProvider, MetamaskProvider } from '@/providers'
 
 describe('performs provider detector unit test', () => {
   describe('performs init', () => {
