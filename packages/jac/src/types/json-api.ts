@@ -61,7 +61,11 @@ export type JsonApiResponseLinks = {
   self?: Endpoint
 }
 
-export type JsonApiClientRequestOpts = FetcherRequestConfig & {
+export type JsonApiClientRequestOpts = Omit<
+  JsonApiClientRequestConfig,
+  'query'
+> & {
+  query?: JsonApiClientRequestQuery
   isNeedRaw?: boolean
 }
 

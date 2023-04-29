@@ -22,9 +22,7 @@ export type FetcherRequestQueryValue = string | number | boolean
 
 export type FetcherRequestQuery = Record<
   string,
-  | FetcherRequestQueryValue
-  | FetcherRequestQueryValue[]
-  | Record<string, FetcherRequestQueryValue | FetcherRequestQueryValue[]>
+  FetcherRequestQueryValue | FetcherRequestQueryValue[]
 >
 
 export type FetcherRequestBody =
