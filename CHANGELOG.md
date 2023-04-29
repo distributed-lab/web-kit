@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `@distributedlab/fetcher` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
 - `@distributedlab/jac` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
+- `root` - Workspace dependency version to be strict equal
 
 ## [0.2.0-rc.7] - 2023-04-27
 ### Fixed

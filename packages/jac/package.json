@@ -52,7 +52,7 @@
     "tsc-alias": "^1.8.2"
   },
   "dependencies": {
-    "@distributedlab/fetcher": "workspace:^",
+    "@distributedlab/fetcher": "workspace:*",
     "lodash": "^4.17.21"
   },
   "typedoc": {
