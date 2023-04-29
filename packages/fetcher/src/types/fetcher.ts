@@ -14,13 +14,17 @@ export type FetcherConfig = {
 export type FetcherRequestOpts = {
   headers?: HeadersInit
   id?: string
+  query?: FetcherRequestQuery
+  body?: FetcherRequestBody
 }
 
 export type FetcherRequestQueryValue = string | number | boolean
 
 export type FetcherRequestQuery = Record<
   string,
-  FetcherRequestQueryValue | FetcherRequestQueryValue[]
+  | FetcherRequestQueryValue
+  | FetcherRequestQueryValue[]
+  | Record<string, FetcherRequestQueryValue | FetcherRequestQueryValue[]>
 >
 
 export type FetcherRequestBody =
@@ -34,8 +38,6 @@ export type FetcherRequestBody =
 export type FetcherRequestConfig = FetcherRequestOpts & {
   endpoint: string
   method: HTTP_METHODS
-  query?: FetcherRequestQuery
-  body?: FetcherRequestBody
 }
 
 export type FetcherRequest = { url: string } & RequestInit

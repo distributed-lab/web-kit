@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-rc.8] - 2023-04-29
+### Changed
+- `@distributedlab/fetcher` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
+- `@distributedlab/jac` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
+
 ## [0.2.0-rc.7] - 2023-04-27
 ### Fixed
 - `@distributedlab/fetcher` - Base URL cropping in the case when it has a path
@@ -159,7 +164,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.7...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.8...HEAD
+[0.2.0-rc.8]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.7...0.2.0-rc.8
 [0.2.0-rc.7]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.6...0.2.0-rc.7
 [0.2.0-rc.6]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.5...0.2.0-rc.6
 [0.2.0-rc.5]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.4...0.2.0-rc.5
