@@ -9,10 +9,11 @@ const HEADER_ACCEPT = 'Accept'
 export const setJsonApiHeaders = (
   h: JsonApiClientRequestConfigHeaders,
 ): JsonApiClientRequestConfigHeaders => {
-  const headers = cloneDeep(h) as Record<string, string>
-
-  headers[HEADER_CONTENT_TYPE] = MIME_TYPE_JSON_API
-  headers[HEADER_ACCEPT] = MIME_TYPE_JSON_API
-
-  return headers
+  return Object.assign(
+    {
+      [HEADER_CONTENT_TYPE]: MIME_TYPE_JSON_API,
+      [HEADER_ACCEPT]: MIME_TYPE_JSON_API,
+    },
+    cloneDeep(h),
+  )
 }

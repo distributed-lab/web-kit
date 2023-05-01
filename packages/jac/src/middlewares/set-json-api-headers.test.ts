@@ -9,4 +9,16 @@ describe('setJsonapiHeaders', () => {
       Accept: 'application/vnd.api+json',
     })
   })
+
+  test('should set proper set of headers (overriding existing defaults)', () => {
+    const headers = setJsonApiHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    })
+
+    expect(headers).toStrictEqual({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    })
+  })
 })
