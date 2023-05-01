@@ -94,11 +94,13 @@ const api = new Fetcher({
 
 const getDataWithQuery = async () => {
   const { data } = await api.get<{ name: string }>('/data', {
-    filter: 'John',
-    exists: true,
-    'page[number]': 1,
-    include: ['comments', 'posts'],
-  })
+  query: {
+    filter: "John",
+      exists: true,
+      "page[number]": 1,
+      include: ["comments", "posts"],
+  }
+})
   return data
 }
 ```
@@ -114,8 +116,10 @@ const api = new Fetcher({
 
 const postData = async () => {
   const { data } = await api.post<{ name: string }>('/data', {
-    name: 'John',
-  })
+  body: {
+    name: "John",
+  }
+})
   return data
 }
 ```
@@ -135,7 +139,7 @@ const postFormData = async () => {
   formData.append('name', 'John')
   formData.append('age', '25')
 
-  const { data } = await api.post<{ name: string, age: string }>('/data', formData)
+  const { data } = await api.post<{ name: string, age: string }>('/data', { body: formData })
   return data
 }
 ```
@@ -158,7 +162,7 @@ const abortRequest = async () => {
     api.abort(requestId)
   }, 1000)
 
-  const { data } = await api.get<{ name: string }>('/data', {}, {
+  const { data } = await api.get<{ name: string }>('/data', {
     id: requestId,
   })
 }
