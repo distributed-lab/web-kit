@@ -68,12 +68,6 @@ export type JsonApiClientRequestOpts = Omit<
   query?: JsonApiClientRequestQuery
   isNeedRaw?: boolean
 }
-// export type JsonApiClientRequestOpts =
-//   | JsonApiClientRequestConfig
-//   | {
-//       query?: JsonApiClientRequestQuery
-//       isNeedRaw?: boolean
-//     }
 
 export type JsonApiResponseError = {
   id?: string | number
