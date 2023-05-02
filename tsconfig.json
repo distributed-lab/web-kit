@@ -32,5 +32,6 @@
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "useDefineForClassFields": true,
+    "ignoreDeprecations": "5.0",
   }
 }

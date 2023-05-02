@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/jac",
-  "version": "0.2.0-rc.7",
+  "version": "0.2.0-rc.8",
   "description": "A library for constructing JSON-API compliant requests and responses",
   "repository": {
     "type": "git",
@@ -52,7 +52,7 @@
     "tsc-alias": "^1.8.2"
   },
   "dependencies": {
-    "@distributedlab/fetcher": "workspace:^",
+    "@distributedlab/fetcher": "workspace:*",
     "lodash": "^4.17.21"
   },
   "typedoc": {

@@ -129,7 +129,7 @@ describe('performs Fetcher unit test', () => {
     test('"get()" should call "request()" with correct params', async () => {
       const query = { foo: 'bar' }
 
-      await fetcher.get('/get', query)
+      await fetcher.get('/get', { query })
 
       expect(fetcher.request).toHaveBeenLastCalledWith({
         method: 'GET',
@@ -139,7 +139,7 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('"post()" should call "request()" with correct params', async () => {
-      await fetcher.post('/post', mockedBody)
+      await fetcher.post('/post', { body: mockedBody })
 
       expect(fetcher.request).toHaveBeenLastCalledWith({
         method: 'POST',
@@ -149,7 +149,7 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('"put()" should call "request()" with correct params', async () => {
-      await fetcher.put('/put', mockedBody)
+      await fetcher.put('/put', { body: mockedBody })
 
       expect(fetcher.request).toHaveBeenLastCalledWith({
         method: 'PUT',
@@ -159,7 +159,7 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('"patch()" should call "request()" with correct params', async () => {
-      await fetcher.patch('/patch', mockedBody)
+      await fetcher.patch('/patch', { body: mockedBody })
 
       expect(fetcher.request).toHaveBeenLastCalledWith({
         method: 'PATCH',
