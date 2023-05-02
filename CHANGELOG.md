@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@distributedlab/fetcher` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
 - `@distributedlab/jac` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
 - `root` - Workspace dependency version to be strict equal
+- `all` - Migrate to TypeScript 5.0.4
+
+### Fixed
+- `@distributedlab/fetcher` - Circular dependencies in the helpers
 
 ## [0.2.0-rc.7] - 2023-04-27
 ### Fixed
@@ -21,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0-rc.5] - 2023-04-24
 ### Fixed
 - `@distributedlab/fetcher` - `clone` method
--
+
 ### Removed
 - `@distributedlab/jac` - Dependency `@distributedlab/jsona`
 

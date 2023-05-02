@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": [
       "esnext",
       "dom",
@@ -25,13 +25,10 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
     "resolveJsonModule": true,
     "sourceMap": true,
     "newLine": "lf",
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
     "useDefineForClassFields": true,
-    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true
   }
 }

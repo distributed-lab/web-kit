@@ -1,6 +1,5 @@
 import type { FetcherAbortManager } from '@/abort-manager'
 import { HEADER_CONTENT_TYPE } from '@/const'
-import { isObject, normalizeHeadersCase } from '@/helpers'
 import type {
   FetcherConfig,
   FetcherRequest,
@@ -8,6 +7,9 @@ import type {
   FetcherRequestConfig,
   FetcherRequestQuery,
 } from '@/types'
+
+import { isObject } from './is-object'
+import { normalizeHeadersCase } from './normalize-header-case'
 
 export const buildRequest = (
   cfg: FetcherConfig,
