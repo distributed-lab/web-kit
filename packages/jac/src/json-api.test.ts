@@ -77,7 +77,7 @@ describe('performs JsonApiClient request unit test', () => {
         },
       }
 
-      await api.get('/foo', query)
+      await api.get('/foo', { query })
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'GET',
@@ -87,7 +87,7 @@ describe('performs JsonApiClient request unit test', () => {
     })
 
     test('"post()" should call "request()" with correct params', async () => {
-      await api.post('/foo', mockedBody)
+      await api.post('/foo', { body: mockedBody })
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'POST',
@@ -97,7 +97,7 @@ describe('performs JsonApiClient request unit test', () => {
     })
 
     test('"patch()" should call "request()" with correct params', async () => {
-      await api.patch('/foo', mockedBody)
+      await api.patch('/foo', { body: mockedBody })
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'PATCH',
@@ -107,7 +107,7 @@ describe('performs JsonApiClient request unit test', () => {
     })
 
     test('"put()" should call "request()" with correct params', async () => {
-      await api.put('/foo', mockedBody)
+      await api.put('/foo', { body: mockedBody })
 
       expect(api.request).toHaveBeenLastCalledWith({
         method: 'PUT',
