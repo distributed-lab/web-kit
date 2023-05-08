@@ -48,7 +48,7 @@ describe('performs provider detector unit test', () => {
       mockWindow({ ethereum: { providers: [MetamaskProvider] } })
       providerDetector.addProvider({ name: PROVIDERS.Metamask })
       expect(providerDetector.getProvider(PROVIDERS.Metamask)).toEqual({
-        metamask: { name: 'metamask' },
+        name: 'metamask',
       })
     })
   })
