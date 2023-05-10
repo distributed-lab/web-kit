@@ -1,7 +1,6 @@
 import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
 import { sleep } from '@/helpers'
 
-import { NearRawProvider } from './providers'
 import type {
   EthereumProvider,
   ProviderInstance,
@@ -12,6 +11,7 @@ import type {
 declare global {
   interface Window {
     ethereum?: EthereumProvider
+    tokene?: RawProvider // FIXME: temp
     solana?: SolanaProvider
     solflare?: SolanaProvider & {
       isSolflare: boolean
@@ -19,8 +19,8 @@ declare global {
   }
 }
 
-export class ProviderDetector {
-  #providers: ProviderInstance[]
+export class ProviderDetector<T extends keyof Record<string, string> = never> {
+  #providers: ProviderInstance<T>[]
   #rawProviders: RawProvider[]
   #isInitiated = false
 
@@ -29,7 +29,7 @@ export class ProviderDetector {
     this.#rawProviders = []
   }
 
-  public async init(): Promise<ProviderDetector> {
+  public async init(): Promise<ProviderDetector<T>> {
     this.#detectRawProviders()
     await this.#defineProviders()
     this.#isInitiated = true
@@ -40,7 +40,7 @@ export class ProviderDetector {
     return this.#isInitiated
   }
 
-  public get providers(): Record<PROVIDERS, ProviderInstance> {
+  public get providers(): Record<PROVIDERS | T, ProviderInstance> {
     return this.#providers.reduce((acc, el) => {
       const name = el.name.toLowerCase() as PROVIDERS
 
@@ -49,18 +49,18 @@ export class ProviderDetector {
         name,
       }
       return acc
-    }, {} as Record<PROVIDERS, ProviderInstance>)
+    }, {} as Record<PROVIDERS | T, ProviderInstance>)
   }
 
   public get isEnabled(): boolean {
     return Boolean(this.#providers.length)
   }
 
-  public getProvider(provider: PROVIDERS): ProviderInstance | undefined {
+  public getProvider(provider: PROVIDERS | T): ProviderInstance | undefined {
     return this.providers[provider]
   }
 
-  public addProvider(provider: ProviderInstance): void {
+  public addProvider(provider: ProviderInstance<T>): void {
     this.#providers.push(provider)
   }
 
@@ -70,11 +70,9 @@ export class ProviderDetector {
       : undefined
     const phantomProvider = window?.solana
     const solflareProvider = window?.solflare
-    const nearProvider = new NearRawProvider({})
 
     this.#rawProviders = [
       ...(ethProviders ? ethProviders : []),
-      ...(nearProvider ? [nearProvider] : []),
       ...(phantomProvider ? [phantomProvider] : []),
       ...(solflareProvider ? [solflareProvider] : []),
     ] as RawProvider[]

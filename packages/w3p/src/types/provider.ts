@@ -23,8 +23,8 @@ import type { SolanaProvider } from './solana'
 
 export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
 
-export type ProviderInstance = {
-  name: PROVIDERS
+export type ProviderInstance<T extends keyof Record<string, string> = never> = {
+  name: T | PROVIDERS
   instance?: RawProvider
 }
 
