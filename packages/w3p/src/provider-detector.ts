@@ -11,7 +11,6 @@ import type {
 declare global {
   interface Window {
     ethereum?: EthereumProvider
-    tokene?: RawProvider // FIXME: temp
     solana?: SolanaProvider
     solflare?: SolanaProvider & {
       isSolflare: boolean

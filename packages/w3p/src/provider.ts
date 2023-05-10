@@ -203,7 +203,9 @@ export const createProvider = async (
     await providerDetector.init()
   }
 
-  const providerInstance = providerDetector.getProvider(proxy.providerType)
+  const providerInstance = providerDetector.getProvider(
+    proxy.providerType as PROVIDERS,
+  )
 
   if (!providerInstance)
     throw new errors.ProviderInjectedInstanceNotFoundError()

@@ -73,7 +73,7 @@ export interface ProviderProxy extends ProviderBase, ProviderSubscriber {
 }
 
 export interface IProvider extends ProviderBase, ProviderSubscriber {
-  providerType?: PROVIDERS
+  providerType?: string
   init: (
     provider: ProviderInstance,
     listeners?: ProviderListeners,
@@ -85,5 +85,5 @@ export interface IProvider extends ProviderBase, ProviderSubscriber {
 
 export interface ProviderProxyConstructor {
   new (provider: RawProvider): ProviderProxy
-  providerType: PROVIDERS
+  providerType: string
 }
