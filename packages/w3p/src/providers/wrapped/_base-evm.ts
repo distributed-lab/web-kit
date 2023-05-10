@@ -39,7 +39,7 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   constructor(provider: RawProvider) {
     super()
     this.#provider = new providers.Web3Provider(
-      provider as providers.ExternalProvider,
+      wrapExternalProvider(provider as providers.ExternalProvider),
       'any',
     )
   }
@@ -177,3 +177,23 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     })
   }
 }
+
+const wrapExternalProvider = (
+  provider: providers.ExternalProvider,
+): providers.ExternalProvider => ({
+  ...provider,
+  sendAsync: provider?.sendAsync?.bind(provider),
+  send: provider?.send?.bind(provider),
+  async request(request: {
+    method: string
+    params?: Array<unknown>
+  }): Promise<unknown> {
+    let result: unknown
+    try {
+      result = await provider?.request?.(request)
+    } catch (e) {
+      handleEthError(e as EthProviderRpcError)
+    }
+    return result
+  },
+})
