@@ -1,11 +1,6 @@
-// @ts-nocheck
 import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import {
-  useNotifications,
-  useProvider,
-  useUniversalStorage,
-} from '@/composables'
+import { useNotifications, useUniversalStorage } from '@/composables'
 import { config } from '@config'
 import { FallbackProvider } from '@/helpers'
 import { useAuthStore } from '@/store'
@@ -15,25 +10,34 @@ import {
   MetamaskProvider,
   ProviderDetector,
   ProviderInstance,
-  ProviderProxyConstructor,
   PROVIDERS,
   CHAIN_TYPES,
   ProviderEventPayload,
-  ProviderConstructorMap,
+  RawProvider,
+  ProviderProxyConstructor,
 } from '@distributedlab/w3p'
+import {
+  TokenEProvider,
+  useProvider,
+  EXTERNAL_PROVIDERS,
+} from '@tokene/vue-web3-provider'
 import { ethers } from 'ethers'
 
 import { DECIMALS } from '@/enums'
 
 const STORE_NAME = 'web3-providers-store'
 
+type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
+
 export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
   const provider = useProvider()
 
-  const providerDetector = computed(() => new ProviderDetector())
+  const providerDetector = computed(
+    () => new ProviderDetector<EXTERNAL_PROVIDERS>(),
+  )
 
   const storageState = useUniversalStorage<{
-    providerType?: PROVIDERS
+    providerType?: SUPPORTED_PROVIDERS
   }>(
     STORE_NAME,
     {
@@ -63,7 +67,7 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
       config.SUPPORTED_CHAIN_ID.toLowerCase(),
   )
 
-  function handleTxSent(e: ProviderEventPayload) {
+  function handleTxSent(e?: ProviderEventPayload) {
     if (!e?.txHash || !provider?.chainDetails) return
 
     const txLink = provider?.getTxUrl(provider.chainDetails.value!, e.txHash)
@@ -71,7 +75,7 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
     lastToastId.value = showTxToast('pending', txLink!)
   }
 
-  function handleTxConfirmed(e: ProviderEventPayload) {
+  function handleTxConfirmed(e?: ProviderEventPayload) {
     if (!e?.txResponse || !provider?.getHashFromTx || !provider?.chainDetails)
       return
 
@@ -84,9 +88,14 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
     showTxToast('success', txLink!)
   }
 
-  async function init(providerType?: PROVIDERS) {
+  async function init(providerType?: SUPPORTED_PROVIDERS) {
     try {
       await providerDetector.value.init()
+
+      await providerDetector.value.addProvider({
+        name: EXTERNAL_PROVIDERS.TokenE,
+        instance: window.tokene as RawProvider,
+      })
 
       if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
         addProvider({
@@ -98,15 +107,20 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         })
       }
 
-      const supportedProviders = {
+      const supportedProviders: {
+        [key in SUPPORTED_PROVIDERS]?: ProviderProxyConstructor
+      } = {
         [PROVIDERS.Fallback]: FallbackProvider,
         [PROVIDERS.Metamask]: MetamaskProvider,
         [PROVIDERS.Coinbase]: CoinbaseProvider,
-      } as ProviderConstructorMap
+        [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider,
+      }
 
-      const providerProxyConstructor = supportedProviders[
-      providerType ?? storageState.value.providerType ?? PROVIDERS.Fallback
-        ] as ProviderProxyConstructor
+      const currentProviderType: SUPPORTED_PROVIDERS =
+        providerType ?? storageState.value.providerType ?? PROVIDERS.Fallback
+
+      const providerProxyConstructor: ProviderProxyConstructor =
+        supportedProviders[currentProviderType]!
 
       await provider.init(providerProxyConstructor, {
         providerDetector: providerDetector.value,

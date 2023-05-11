@@ -23,8 +23,8 @@ import type { SolanaProvider } from './solana'
 
 export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
 
-export type ProviderInstance = {
-  name: PROVIDERS
+export type ProviderInstance<T extends keyof Record<string, string> = never> = {
+  name: T | PROVIDERS
   instance?: RawProvider
 }
 
@@ -73,7 +73,7 @@ export interface ProviderProxy extends ProviderBase, ProviderSubscriber {
 }
 
 export interface IProvider extends ProviderBase, ProviderSubscriber {
-  providerType?: PROVIDERS
+  providerType?: string
   init: (
     provider: ProviderInstance,
     listeners?: ProviderListeners,
@@ -85,5 +85,5 @@ export interface IProvider extends ProviderBase, ProviderSubscriber {
 
 export interface ProviderProxyConstructor {
   new (provider: RawProvider): ProviderProxy
-  providerType: PROVIDERS
+  providerType: string
 }

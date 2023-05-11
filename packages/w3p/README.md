@@ -51,6 +51,58 @@ const provider = await createProvider(providerProxyConstructor, {
 await provider.connect()
 ```
 
+or when you need to implement a custom provider outside of the library
+
+```ts
+import {
+  ProviderDetector,
+  MetamaskProvider,
+  CoinbaseProvider,
+  ProviderProxyConstructor,
+  PROVIDERS,
+  ProviderConstructorMap,
+  createProvider,
+} from "@distributedlab/w3p"
+
+enum EXTERNAL_PROVIDERS {
+    TokenE = 'tokene',
+}
+
+type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
+
+const providerDetector = new ProviderDetector<EXTERNAL_PROVIDERS>()
+
+const init = async (providerType: SUPPORTED_PROVIDERS) => {
+  await providerDetector.init()
+
+  const supportedProviders: {
+    [key in SUPPORTED_PROVIDERS]?: ProviderProxyConstructor
+  } = {
+    [PROVIDERS.Fallback]: FallbackProvider,
+    [PROVIDERS.Metamask]: MetamaskProvider,
+    [PROVIDERS.Coinbase]: CoinbaseProvider,
+    [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider,
+  }
+
+  const currentProviderType: SUPPORTED_PROVIDERS =
+    providerType ?? storageState.value.providerType ?? PROVIDERS.Fallback
+
+  const providerProxyConstructor: ProviderProxyConstructor =
+    supportedProviders[currentProviderType]!
+
+  const provider = await createProvider(providerProxyConstructor, {
+    providerDetectorInstance: providerDetector,
+    listeners: {
+      ...yourListeners,
+    },
+  })
+
+  await provider.connect()
+}
+
+init()
+```
+
 Or if you sure, that you will use only one provider, e.g. Metamask
 
 ```ts
