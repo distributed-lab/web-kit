@@ -1,6 +1,6 @@
 packages/**/dist/*
 packages/**/*.js
-/packages/**/examples/
+packages/**/examples/
 jest.config.js
 jest.config.base.js
 node_modules/
