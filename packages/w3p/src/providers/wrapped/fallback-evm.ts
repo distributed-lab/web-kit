@@ -74,12 +74,13 @@ export class FallbackEvmProvider
     this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async switchChain(chainId: ChainId): Promise<void> {
     this.#provider = new providers.JsonRpcProvider(
       String(chainId),
       'any',
     ) as unknown as providers.Web3Provider
+
+    await this.init()
   }
 
   async connect(): Promise<void> {
