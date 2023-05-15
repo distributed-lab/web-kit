@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- `@distributeedlab/w3p` - EVM fallback provider
+- `@distributeedlab/w3p` - EVM fallback provider, readme details about custom provider implementation
 
 ### Changed
-- `@distributeedlab/w3p` - docs
+- `@distributeedlab/w3p` - `multiple-providers` examples about adding details for supported chains
 
 ## [0.2.0-rc.10] - 2023-05-11
 ### Changed

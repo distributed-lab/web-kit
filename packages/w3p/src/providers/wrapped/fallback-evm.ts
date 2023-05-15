@@ -6,7 +6,6 @@ import {
   PROVIDER_EVENTS,
   PROVIDERS,
 } from '@/enums'
-import { ProviderMethodNotSupported } from '@/errors'
 import {
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
@@ -81,10 +80,6 @@ export class FallbackEvmProvider
     ) as unknown as providers.Web3Provider
 
     await this.init()
-  }
-
-  async connect(): Promise<void> {
-    throw new ProviderMethodNotSupported()
   }
 
   getAddressUrl(chain: Chain, address: string): string {

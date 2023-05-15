@@ -53,7 +53,7 @@ export interface ProviderBase {
   address?: string
   isConnected: boolean
 
-  connect: () => Promise<void>
+  connect?: () => Promise<void>
 
   addChain?: (chain: Chain) => Promise<void>
   switchChain: (chainId: ChainId) => Promise<void>
@@ -79,8 +79,8 @@ export interface IProvider extends ProviderBase, ProviderSubscriber {
     listeners?: ProviderListeners,
   ) => Promise<this>
 
+  connect: () => Promise<void>
   chainDetails?: Chain
-  setChainDetails?: (chain: Chain) => void
 }
 
 export interface ProviderProxyConstructor {
