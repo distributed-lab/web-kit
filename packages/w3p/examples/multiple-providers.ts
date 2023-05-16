@@ -98,6 +98,10 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         instance: window.tokene as RawProvider,
       })
 
+      /**
+       * Some platform need handle a multiple chains connection, so if it is, for the fallback providers
+       * you just need to define all of them in supportedProvidersMap, every fallBack provider instance per chain
+       */
       if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
         addProvider({
           name: PROVIDERS.Fallback,

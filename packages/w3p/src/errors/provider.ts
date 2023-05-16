@@ -161,3 +161,11 @@ export class ProviderJsonRpcVersionNotSupported extends RuntimeError {
     super(message)
   }
 }
+
+export class ProviderJsonRpcInvalid extends RuntimeError {
+  public name = 'ProviderJsonRpcInvalid'
+
+  constructor(message?: string) {
+    super(message)
+  }
+}

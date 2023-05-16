@@ -56,7 +56,7 @@ export interface ProviderBase {
   connect?: () => Promise<void>
 
   addChain?: (chain: Chain) => Promise<void>
-  switchChain: (chainId: ChainId) => Promise<void>
+  switchChain?: (chainId: ChainId) => Promise<void>
 
   signAndSendTx?: (txRequestBody: TxRequestBody) => Promise<TransactionResponse>
   signMessage?: (message: string) => Promise<string>

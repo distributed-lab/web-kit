@@ -1,11 +1,6 @@
 import { providers } from 'ethers'
 
-import {
-  CHAIN_TYPES,
-  PROVIDER_EVENT_BUS_EVENTS,
-  PROVIDER_EVENTS,
-  PROVIDERS,
-} from '@/enums'
+import { CHAIN_TYPES, PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import {
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
@@ -65,21 +60,11 @@ export class FallbackEvmProvider
   }
 
   async init(): Promise<void> {
-    await this.#setListeners()
     const network = await this.#provider.getNetwork()
 
     this.#chainId = hexToDecimal(network.chainId as ChainId)
 
     this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
-  }
-
-  async switchChain(chainId: ChainId): Promise<void> {
-    this.#provider = new providers.JsonRpcProvider(
-      String(chainId),
-      'any',
-    ) as unknown as providers.Web3Provider
-
-    await this.init()
   }
 
   getAddressUrl(chain: Chain, address: string): string {
@@ -93,18 +78,5 @@ export class FallbackEvmProvider
   getHashFromTx(txResponse: TransactionResponse): string {
     return (txResponse as EthTransactionResponse)
       .transactionHash as SolanaTransactionResponse
-  }
-
-  async #setListeners() {
-    const stubProvider = this.#provider as providers.BaseProvider
-
-    stubProvider.on(PROVIDER_EVENTS.ChainChanged, (chainId: ChainId) => {
-      this.#chainId = hexToDecimal(chainId)
-
-      this.emit(
-        PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
-        this.#defaultEventPayload,
-      )
-    })
   }
 }
