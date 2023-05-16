@@ -113,6 +113,24 @@ const provider = await createProvider(MetamaskProvider)
 await provider.connect()
 ```
 
+To create your own custom provider, you will need to develop a class that implements the `ProviderProxyConstructor` interface.
+
+#### If your provider is fully EVM-compatible, similar to Metamask or Coinbase, you can extends the `BaseEVMProvider` class as in example.
+```ts
+export class TokenEProvider extends BaseEVMProvider implements ProviderProxy {
+  constructor(provider: RawProvider) {
+    super(provider)
+  }
+
+  static get providerType() {
+    return EXTERNAL_PROVIDERS.TokenE
+  }
+}
+```
+
+
+If your provider has additional functionalities or different implementation of switching, adding a chain, signing and sending transactions methods, and more, you can create a custom class that extends the [`ProviderEventBus`](./src/providers/wrapped/_event-bus.ts) and implements the [`ProviderProxy`](./src/types/provider.ts?plain=71) interface. This allows you to override functions according to your specific requirements.
+
 ## More examples
 Check out more examples and use-cases:
 

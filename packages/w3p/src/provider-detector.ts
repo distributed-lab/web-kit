@@ -1,5 +1,5 @@
 import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
-import { sleep } from '@/helpers'
+import { sleep, wrapExternalProvider } from '@/helpers'
 
 import type {
   EthereumProvider,
@@ -70,8 +70,10 @@ export class ProviderDetector<T extends keyof Record<string, string> = never> {
     const phantomProvider = window?.solana
     const solflareProvider = window?.solflare
 
+    const proxyEthProviders = ethProviders?.map(el => wrapExternalProvider(el))
+
     this.#rawProviders = [
-      ...(ethProviders ? ethProviders : []),
+      ...(proxyEthProviders ? proxyEthProviders : []),
       ...(phantomProvider ? [phantomProvider] : []),
       ...(solflareProvider ? [solflareProvider] : []),
     ] as RawProvider[]

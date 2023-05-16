@@ -9,13 +9,11 @@ import {
 import {
   getSolExplorerAddressUrl,
   getSolExplorerTxUrl,
-  handleEthError,
   handleSolError,
 } from '@/helpers'
 import type {
   Chain,
   ChainId,
-  EthProviderRpcError,
   ProviderProxy,
   RawProvider,
   SolanaProvider,
@@ -96,7 +94,7 @@ export class BaseSolanaProvider
     try {
       await this.#provider.connect()
     } catch (error) {
-      handleEthError(error as EthProviderRpcError)
+      handleSolError(error as SolanaProviderRpcError)
     }
   }
 

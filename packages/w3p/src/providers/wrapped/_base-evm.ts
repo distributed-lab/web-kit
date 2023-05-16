@@ -11,7 +11,6 @@ import {
   connectEthAccounts,
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
-  handleEthError,
   hexToDecimal,
   requestAddEthChain,
   requestSwitchEthChain,
@@ -19,7 +18,6 @@ import {
 import type {
   Chain,
   ChainId,
-  EthProviderRpcError,
   EthTransactionResponse,
   ProviderProxy,
   RawProvider,
@@ -80,32 +78,15 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   }
 
   async switchChain(chainId: ChainId): Promise<void> {
-    try {
-      await requestSwitchEthChain(this.#provider, chainId)
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    await requestSwitchEthChain(this.#provider, chainId)
   }
 
   async addChain(chain: Chain): Promise<void> {
-    try {
-      await requestAddEthChain(
-        this.#provider,
-        Number(chain.id),
-        chain.name,
-        chain.rpcUrl,
-      )
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    await requestAddEthChain(this.#provider, chain)
   }
 
   async connect(): Promise<void> {
-    try {
-      await connectEthAccounts(this.#provider)
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    await connectEthAccounts(this.#provider)
   }
 
   getAddressUrl(chain: Chain, address: string): string {
@@ -122,30 +103,24 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   }
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {
-    try {
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
-        txBody: tx,
-      })
-      const transactionResponse = await this.#provider
-        .getSigner()
-        .sendTransaction(tx as Deferrable<TransactionRequest>)
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
+      txBody: tx,
+    })
+    const transactionResponse = await this.#provider
+      .getSigner()
+      .sendTransaction(tx as Deferrable<TransactionRequest>)
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, {
-        txHash: transactionResponse.hash,
-      })
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.TxSent, {
+      txHash: transactionResponse.hash,
+    })
 
-      const receipt = await transactionResponse.wait()
+    const receipt = await transactionResponse.wait()
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, {
-        txResponse: receipt,
-      })
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, {
+      txResponse: receipt,
+    })
 
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
-
-    return ''
+    return receipt
   }
 
   async #setListeners() {

@@ -15,6 +15,7 @@ import {
   ProviderEventPayload,
   RawProvider,
   ProviderProxyConstructor,
+  Provider,
 } from '@distributedlab/w3p'
 import {
   TokenEProvider,
@@ -23,7 +24,7 @@ import {
 } from '@tokene/vue-web3-provider'
 import { ethers } from 'ethers'
 
-import { DECIMALS } from '@/enums'
+import { DECIMALS } from '@distributedlab/tools'
 
 const STORE_NAME = 'web3-providers-store'
 
@@ -97,6 +98,10 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         instance: window.tokene as RawProvider,
       })
 
+      /**
+       * Some platform need handle a multiple chains connection, so if it is, for the fallback providers
+       * you just need to define all of them in supportedProvidersMap, every fallBack provider instance per chain
+       */
       if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
         addProvider({
           name: PROVIDERS.Fallback,
@@ -134,22 +139,21 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         await provider.connect()
       }
 
-      if (isValidChain.value) {
-        provider.setChainDetails({
+      Provider.setChainsDetails({
+        [config.SUPPORTED_CHAIN_ID]: {
           id: config.SUPPORTED_CHAIN_ID,
           name: config.SUPPORTED_CHAIN_NAME,
           rpcUrl: config.SUPPORTED_CHAIN_RPC_URL,
           explorerUrl: config.SUPPORTED_CHAIN_EXPLORER_URL,
-          // FIXME
           token: {
-            name: '',
-            symbol: '',
-            decimals: DECIMALS.TOKEN,
+            name: 'Token Name',
+            symbol: 'TKN',
+            decimals: DECIMALS.WEI,
           },
           type: CHAIN_TYPES.EVM,
           icon: '',
-        })
-      }
+        },
+      })
 
       if (provider.address?.value) {
         const authStore = useAuthStore()
