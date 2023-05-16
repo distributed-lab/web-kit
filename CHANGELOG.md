@@ -6,14 +6,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- `@distributeedlab/w3p` - EVM fallback provider, readme details about custom provider implementation, possibility to set details for many supported chains
+- `@distributedlab/w3p`
+  - EVM fallback provider
+  - readme details about custom provider implementation
+  - possibility to set details for many supported chains
+  - `wrapExternalProvider` method for EVM providers
+- `@distributedlab/tools` - `RuntimeError` class
 
 ### Changed
-- `@distributeedlab/w3p` - `multiple-providers` examples about adding details for supported chains, `SwitchChain` method of `ProviderBase` interface now optional
+- `@distributedlab/w3p`
+  - `multiple-providers` examples about adding details for supported chains
+  - `SwitchChain` method of `ProviderBase` interface now optional
+  - errors classes
+  - `handleEthError` method
+  - evm `addChain` method
+  - `BaseEVMProvider` methods now ain't need try catch anymore
+
+### Removed
+- `@distributedlab/w3p` - `RuntimeError` class
+
 
 ## [0.2.0-rc.10] - 2023-05-11
 ### Changed
-- `@distributeedlab/w3p` - types, to be more flexible with external provider proxy constructors
+- `@distributedlab/w3p` - types, to be more flexible with external provider proxy constructors
 
 ## [0.2.0-rc.9] - 2023-05-02
 ### Fixed
