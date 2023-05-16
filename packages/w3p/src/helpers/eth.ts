@@ -34,18 +34,17 @@ export const requestAddEthChain = async (
     {
       chainId: utils.hexValue(Number(chain.id)),
       chainName: chain.name,
-      ...(chain.token.name && chain.token.symbol
-        ? {
-            nativeCurrency: {
-              name: chain.token.name,
-              symbol: chain.token.symbol,
-              decimals: chain.token.decimals ?? DECIMALS.WEI,
-            },
-          }
-        : {}),
+      ...(chain.token.name &&
+        chain.token.symbol && {
+          nativeCurrency: {
+            name: chain.token.name,
+            symbol: chain.token.symbol,
+            decimals: chain.token.decimals ?? DECIMALS.WEI,
+          },
+        }),
       rpcUrls: [chain.rpcUrl],
       blockExplorerUrls: [...(chain.explorerUrl ? [chain.explorerUrl] : [])],
-      ...(chain.icon ? { iconUrls: [chain.icon] } : {}),
+      ...(chain.icon && { iconUrls: [chain.icon] }),
     },
   ])
 }
@@ -54,7 +53,7 @@ export const connectEthAccounts = async (provider: providers.Web3Provider) => {
   await provider.send('eth_requestAccounts', [])
 }
 
-export function handleEthError(error: EthProviderRpcError): void {
+export function handleEthError(error: EthProviderRpcError): never {
   switch (error.code) {
     case EIP1193.UserRejectedRequest:
       throw new errors.ProviderUserRejectedRequest(error)
