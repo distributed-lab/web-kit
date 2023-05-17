@@ -6,18 +6,23 @@ export class RuntimeError extends Error {
   public constructor(message: string, error: Error)
 
   public constructor(errorOrMessage: Error | string, error?: Error) {
-    if (error) {
-      super(errorOrMessage as string)
+    let err
+    let msg
 
-      this.originalError = error
+    if (error) {
+      msg = (errorOrMessage as string) || error.message
+      err = error
     } else {
       if (typeof errorOrMessage === 'string') {
-        super(errorOrMessage)
+        msg = errorOrMessage
       } else {
-        super(errorOrMessage?.message)
+        msg = errorOrMessage?.message
 
-        this.originalError = errorOrMessage
+        err = errorOrMessage
       }
     }
+
+    super(msg)
+    this.originalError = err
   }
 }
