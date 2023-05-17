@@ -32,7 +32,14 @@ export class ProviderUserRejectedRequest extends RuntimeError {
   public name = 'ProviderUserRejectedRequest'
 
   constructor(error = new TypeError('User rejected request')) {
-    super(error)
+    /**
+     * @description ethers.js match provider `user denied` error message
+     * and throw it's own error instance,
+     * so we override error message with our own
+     *
+     * https://github.com/ethers-io/ethers.js/blob/13593809bd61ef24c01d79de82563540d77098db/src.ts/providers/provider-jsonrpc.ts#L822
+     */
+    super('User rejected request', error)
   }
 }
 
