@@ -41,7 +41,7 @@ export class FetcherResponseBuilder<T> {
   }
 
   async #extractData() {
-    if (!this.#response || !this.#response.ok) return
+    if (!this.#response) return
     if (isEmptyBodyStatusCode(this.#response.status)) return
 
     const parsers = [
