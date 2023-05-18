@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0-rc.13] - 2023-05-18
 ### Fixed
 - `@distributedlab/fetcher` - fixed error building in response
+- `@distributedlab/w3p` - fixed invalid providerType getter for fallback evm provider wrapper
 
 ## [0.2.0-rc.12] - 2023-05-17
 ### Fixed
