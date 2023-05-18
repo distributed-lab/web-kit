@@ -43,7 +43,7 @@ export class Provider implements IProvider {
   #selectedProvider?: PROVIDERS
   #proxy?: ProviderProxy
 
-  #chainDetails?: Chain
+  public static chainsDetails?: Record<ChainId, Chain>
 
   constructor(proxyConstructor: ProviderProxyConstructor) {
     this.#selectedProvider = undefined
@@ -72,7 +72,7 @@ export class Provider implements IProvider {
   }
 
   public get chainDetails() {
-    return this.#chainDetails
+    return Provider.chainsDetails?.[this.chainId!]
   }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
@@ -95,7 +95,7 @@ export class Provider implements IProvider {
   public async connect() {
     if (!this.#proxy) throw new errors.ProviderNotInitializedError()
 
-    await this.#proxy.connect()
+    await this.#proxy?.connect?.()
   }
 
   public async switchChain(chainId: ChainId) {
@@ -106,8 +106,8 @@ export class Provider implements IProvider {
     await this.#proxy?.addChain?.(chain)
   }
 
-  public setChainDetails(chain: Chain) {
-    this.#chainDetails = chain
+  public static setChainsDetails(chains: Record<ChainId, Chain>) {
+    this.chainsDetails = chains
   }
 
   public async signAndSendTx(txRequestBody: TxRequestBody) {
@@ -141,8 +141,6 @@ export class Provider implements IProvider {
   }
 
   public onChainChanged(cb: (e?: ProviderEventPayload) => void): void {
-    this.#chainDetails = undefined
-
     this.#proxy?.onChainChanged?.(cb)
   }
 
