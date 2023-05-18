@@ -15,17 +15,22 @@
 <li><a href="../modules.html">Distributed Lab | Web-Kit</a></li>
 <li><a href="../modules/_distributedlab_w3p.html">@distributedlab/w3p</a></li>
 <li><a href="_distributedlab_w3p.CreateProviderOpts.html">CreateProviderOpts</a></li></ul>
-<h1>Type alias CreateProviderOpts</h1></div>
-<div class="tsd-signature">Create<wbr/>Provider<wbr/>Opts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span>listeners<span class="tsd-signature-symbol">?: </span><a href="_distributedlab_w3p.ProviderListeners.html" class="tsd-signature-type" data-tsd-kind="Type alias">ProviderListeners</a><span class="tsd-signature-symbol">; </span><br/><span>    </span>providerDetector<span class="tsd-signature-symbol">?: </span><a href="../classes/_distributedlab_w3p.ProviderDetector.html" class="tsd-signature-type" data-tsd-kind="Class">ProviderDetector</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<h1>Type alias CreateProviderOpts&lt;T&gt;</h1></div>
+<div class="tsd-signature">Create<wbr/>Provider<wbr/>Opts<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span>listeners<span class="tsd-signature-symbol">?: </span><a href="_distributedlab_w3p.ProviderListeners.html" class="tsd-signature-type" data-tsd-kind="Type alias">ProviderListeners</a><span class="tsd-signature-symbol">; </span><br/><span>    </span>providerDetector<span class="tsd-signature-symbol">?: </span><a href="../classes/_distributedlab_w3p.ProviderDetector.html" class="tsd-signature-type" data-tsd-kind="Class">ProviderDetector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<section class="tsd-panel tsd-type-parameters">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameters">
+<li>
+<h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> listeners<span class="tsd-signature-symbol">?: </span><a href="_distributedlab_w3p.ProviderListeners.html" class="tsd-signature-type" data-tsd-kind="Type alias">ProviderListeners</a></h5></li>
 <li class="tsd-parameter">
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> provider<wbr/>Detector<span class="tsd-signature-symbol">?: </span><a href="../classes/_distributedlab_w3p.ProviderDetector.html" class="tsd-signature-type" data-tsd-kind="Class">ProviderDetector</a></h5></li></ul></div><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> provider<wbr/>Detector<span class="tsd-signature-symbol">?: </span><a href="../classes/_distributedlab_w3p.ProviderDetector.html" class="tsd-signature-type" data-tsd-kind="Class">ProviderDetector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/bf72e03/packages/w3p/src/provider.ts#L18">packages/w3p/src/provider.ts:18</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/c10c020/packages/w3p/src/provider.ts#L18">packages/w3p/src/provider.ts:18</a></li></ul></aside></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -144,7 +149,7 @@
 <li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.requestAddEthChain.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>request<wbr/>Add<wbr/>Eth<wbr/>Chain</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.requestSwitchEthChain.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>request<wbr/>Switch<wbr/>Eth<wbr/>Chain</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.sleep.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>sleep</a></li>
-<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.wrapExternalProvider.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>wrap<wbr/>External<wbr/>Provider</a></li>
+<li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.wrapExternalEthProvider.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>wrap<wbr/>External<wbr/>Eth<wbr/>Provider</a></li>
 <li class="tsd-kind-function tsd-parent-kind-module"><a href="../functions/_distributedlab_w3p.yoctoToNear.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg>yocto<wbr/>To<wbr/>Near</a></li></ul></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
