@@ -31,7 +31,7 @@ export class FallbackEvmProvider
     this.#provider = provider as unknown as providers.Web3Provider
   }
 
-  static get providerType(): PROVIDERS {
+  static get providerType(): string {
     return PROVIDERS.Fallback
   }
 
