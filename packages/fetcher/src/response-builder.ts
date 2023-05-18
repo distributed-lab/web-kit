@@ -47,7 +47,7 @@ export class FetcherResponseBuilder<T> {
     const parsers = [
       this.#tryToParseJson.bind(this),
       this.#tryToParseFormData.bind(this), // TODO: check if it's possible to parse formData
-      this.#tryToParseBlob.bind(this),
+      ...(this.#response.ok ? [this.#tryToParseBlob.bind(this)] : []),
     ]
 
     for (const parser of parsers) {

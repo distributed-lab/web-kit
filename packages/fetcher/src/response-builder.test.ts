@@ -5,6 +5,11 @@ const RESPONSE_CFG = {
   headers: { 'Content-Type': 'application/json' },
 }
 
+const ERROR_CFG = {
+  status: 401,
+  headers: { 'Content-Type': 'application/json' },
+}
+
 const REQUEST_CFG = { url: 'http://localhost:3000' }
 
 describe('performs FetcherResponseBuilder', () => {
@@ -44,5 +49,37 @@ describe('performs FetcherResponseBuilder', () => {
     ).build()
 
     expect(result.data).toEqual(blob)
+  })
+
+  test('should build error response', async () => {
+    const response = new Response(
+      '{"errors":[{"id":"1","code":"err_some_code","status":"401","title":"Unauthorized"}]}',
+      ERROR_CFG,
+    )
+    const result = await new FetcherResponseBuilder(
+      REQUEST_CFG,
+      response,
+    ).build()
+
+    expect(result.data).toEqual({
+      errors: [
+        {
+          id: '1',
+          code: 'err_some_code',
+          status: '401',
+          title: 'Unauthorized',
+        },
+      ],
+    })
+  })
+
+  test('should build error response with empty body', async () => {
+    const response = new Response(null, ERROR_CFG)
+    const result = await new FetcherResponseBuilder(
+      REQUEST_CFG,
+      response,
+    ).build()
+
+    expect(result.data).toEqual(undefined)
   })
 })

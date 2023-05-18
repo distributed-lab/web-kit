@@ -69,7 +69,7 @@ export class JsonApiError extends Error {
   /*
    * Original error
    */
-  get originalError() {
+  get originalError(): FetcherError<JsonApiResponseErrors> {
     return this.#originalError
   }
 }
