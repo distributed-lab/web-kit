@@ -107,7 +107,7 @@ export function handleEthError(
   }
 }
 
-export const wrapExternalProvider = (
+export const wrapExternalEthProvider = (
   provider: providers.ExternalProvider,
   errorHandler?: (error: Error) => unknown,
 ): EthereumProvider => {
