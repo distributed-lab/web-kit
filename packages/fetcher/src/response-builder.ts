@@ -41,13 +41,13 @@ export class FetcherResponseBuilder<T> {
   }
 
   async #extractData() {
-    if (!this.#response || !this.#response.ok) return
+    if (!this.#response) return
     if (isEmptyBodyStatusCode(this.#response.status)) return
 
     const parsers = [
       this.#tryToParseJson.bind(this),
       this.#tryToParseFormData.bind(this), // TODO: check if it's possible to parse formData
-      this.#tryToParseBlob.bind(this),
+      ...(this.#response.ok ? [this.#tryToParseBlob.bind(this)] : []),
     ]
 
     for (const parser of parsers) {
