@@ -108,7 +108,7 @@ export const wrapExternalEthProvider = (
 ) => {
   const _baseRequest = provider.request?.bind(provider)
 
-  const request = async (request: {
+  provider.request = async (request: {
     method: string
     params?: Array<unknown>
   }) => {
@@ -122,8 +122,6 @@ export const wrapExternalEthProvider = (
 
     return result
   }
-
-  provider.request = request.bind(provider)
 
   return provider
 }
