@@ -1,4 +1,4 @@
-import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
+import { CHAIN_TYPES, PROVIDER_CHECKS, PROVIDERS } from '@/enums'
 import { sleep, wrapExternalProvider } from '@/helpers'
 
 import type {
@@ -23,9 +23,19 @@ export class ProviderDetector<T extends keyof Record<string, string> = never> {
   #rawProviders: RawProvider[]
   #isInitiated = false
 
+  public static errorHandlers?: {
+    [key in CHAIN_TYPES]: (error: Error) => unknown
+  }
+
   constructor() {
     this.#providers = []
     this.#rawProviders = []
+  }
+
+  public static defineErrorHandlers(handlersMap: {
+    [key in CHAIN_TYPES]: (error: Error) => unknown
+  }) {
+    ProviderDetector.errorHandlers = handlersMap
   }
 
   public async init(): Promise<ProviderDetector<T>> {
@@ -70,7 +80,12 @@ export class ProviderDetector<T extends keyof Record<string, string> = never> {
     const phantomProvider = window?.solana
     const solflareProvider = window?.solflare
 
-    const proxyEthProviders = ethProviders?.map(el => wrapExternalProvider(el))
+    const proxyEthProviders = ethProviders?.map(el =>
+      wrapExternalProvider(
+        el,
+        ProviderDetector.errorHandlers?.[CHAIN_TYPES.EVM],
+      ),
+    )
 
     this.#rawProviders = [
       ...(proxyEthProviders ? proxyEthProviders : []),

@@ -1,10 +1,14 @@
 import { DECIMALS } from '@distributedlab/tools'
 import { type providers, utils } from 'ethers'
-import cloneDeep from 'lodash/cloneDeep'
 
 import { EIP1193, EIP1474 } from '@/enums'
 import { errors } from '@/errors'
-import type { Chain, ChainId, EthProviderRpcError } from '@/types'
+import type {
+  Chain,
+  ChainId,
+  EthereumProvider,
+  EthProviderRpcError,
+} from '@/types'
 
 export const getEthExplorerTxUrl = (chain: Chain, txHash: string): string => {
   return `${chain.explorerUrl}/tx/${txHash}`
@@ -53,7 +57,10 @@ export const connectEthAccounts = async (provider: providers.Web3Provider) => {
   await provider.send('eth_requestAccounts', [])
 }
 
-export function handleEthError(error: EthProviderRpcError): never {
+export function handleEthError(
+  error: EthProviderRpcError,
+  defaultHandlerFn?: (error: EthProviderRpcError) => unknown,
+): never {
   switch (error.code) {
     case EIP1193.UserRejectedRequest:
       throw new errors.ProviderUserRejectedRequest(error)
@@ -92,24 +99,57 @@ export function handleEthError(error: EthProviderRpcError): never {
     case EIP1474.JsonRpcVersionNotSupported:
       throw new errors.ProviderJsonRpcVersionNotSupported(error)
     default:
+      if (defaultHandlerFn) {
+        defaultHandlerFn(error)
+      }
+
       throw error
   }
 }
 
-export const wrapExternalProvider = (provider: providers.ExternalProvider) => {
-  const p = cloneDeep(provider)
+export const wrapExternalProvider = (
+  provider: providers.ExternalProvider,
+  errorHandler?: (error: Error) => unknown,
+): EthereumProvider => {
+  const stubProvider = provider as EthereumProvider
 
-  p.request = async (request: { method: string; params?: Array<unknown> }) => {
+  const request = async (request: {
+    method: string
+    params?: Array<unknown>
+  }) => {
     let result: unknown
 
     try {
       result = await provider?.request?.(request)
     } catch (error) {
-      handleEthError(error as EthProviderRpcError)
+      handleEthError(error as EthProviderRpcError, errorHandler)
     }
 
     return result
   }
 
-  return p
+  return {
+    ...(provider as EthereumProvider),
+    ...(stubProvider?.once ? { once: stubProvider.once } : {}),
+    ...(stubProvider?.on ? { on: stubProvider.on } : {}),
+    ...(stubProvider?.off ? { off: stubProvider.off } : {}),
+    ...(stubProvider?.addListener
+      ? { addListener: stubProvider.addListener }
+      : {}),
+    ...(stubProvider?.removeListener
+      ? { removeListener: stubProvider.removeListener }
+      : {}),
+    ...(stubProvider?.removeAllListeners
+      ? { removeAllListeners: stubProvider.removeAllListeners }
+      : {}),
+    ...(stubProvider?.providers?.length
+      ? {
+          providers: stubProvider.providers,
+        }
+      : {}),
+    ...(stubProvider?.selectedAddress
+      ? { selectedAddress: stubProvider.selectedAddress }
+      : {}),
+    request,
+  }
 }
