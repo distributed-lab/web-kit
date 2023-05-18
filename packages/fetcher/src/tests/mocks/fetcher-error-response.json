@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "id": "1",
+      "code": "err_some_code",
+      "status": "401",
+      "title": "Unauthorized"
+    }
+  ]
+}

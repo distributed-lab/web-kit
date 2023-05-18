@@ -1,4 +1,5 @@
 import { FetcherResponseBuilder } from './response-builder'
+import { ERROR_RESPONSE } from './tests'
 
 const RESPONSE_CFG = {
   status: 200,
@@ -52,25 +53,13 @@ describe('performs FetcherResponseBuilder', () => {
   })
 
   test('should build valid error response', async () => {
-    const response = new Response(
-      '{"errors":[{"id":"1","code":"err_some_code","status":"401","title":"Unauthorized"}]}',
-      ERROR_CFG,
-    )
+    const response = new Response(JSON.stringify(ERROR_RESPONSE), ERROR_CFG)
     const result = await new FetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()
 
-    expect(result.data).toEqual({
-      errors: [
-        {
-          id: '1',
-          code: 'err_some_code',
-          status: '401',
-          title: 'Unauthorized',
-        },
-      ],
-    })
+    expect(result.data).toEqual(ERROR_RESPONSE)
   })
 
   test('should build valid error response with empty body', async () => {
