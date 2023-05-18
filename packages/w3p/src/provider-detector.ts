@@ -26,7 +26,7 @@ type ProviderDetectorConfig = {
   isWrapDefaultProviders: boolean
 }
 
-export class ProviderDetector<T extends keyof Record<string, string> = never> {
+export class ProviderDetector<T extends keyof Record<string, string>> {
   #providers: ProviderInstance<T>[]
   #rawProviders: RawProvider[]
   #isInitiated = false

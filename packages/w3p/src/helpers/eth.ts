@@ -3,12 +3,7 @@ import { type providers, utils } from 'ethers'
 
 import { EIP1193, EIP1474 } from '@/enums'
 import { errors } from '@/errors'
-import type {
-  Chain,
-  ChainId,
-  EthereumProvider,
-  EthProviderRpcError,
-} from '@/types'
+import type { Chain, ChainId, EthProviderRpcError } from '@/types'
 
 export const getEthExplorerTxUrl = (chain: Chain, txHash: string): string => {
   return `${chain.explorerUrl}/tx/${txHash}`
@@ -110,8 +105,8 @@ export function handleEthError(
 export const wrapExternalEthProvider = (
   provider: providers.ExternalProvider,
   errorHandler?: (error: Error) => unknown,
-): EthereumProvider => {
-  const stubProvider = provider as EthereumProvider
+) => {
+  const _baseRequest = provider.request?.bind(provider)
 
   const request = async (request: {
     method: string
@@ -120,7 +115,7 @@ export const wrapExternalEthProvider = (
     let result: unknown
 
     try {
-      result = await provider?.request?.(request)
+      result = await _baseRequest?.(request)
     } catch (error) {
       handleEthError(error as EthProviderRpcError, errorHandler)
     }
@@ -128,28 +123,7 @@ export const wrapExternalEthProvider = (
     return result
   }
 
-  return {
-    ...(provider as EthereumProvider),
-    ...(stubProvider?.once ? { once: stubProvider.once } : {}),
-    ...(stubProvider?.on ? { on: stubProvider.on } : {}),
-    ...(stubProvider?.off ? { off: stubProvider.off } : {}),
-    ...(stubProvider?.addListener
-      ? { addListener: stubProvider.addListener }
-      : {}),
-    ...(stubProvider?.removeListener
-      ? { removeListener: stubProvider.removeListener }
-      : {}),
-    ...(stubProvider?.removeAllListeners
-      ? { removeAllListeners: stubProvider.removeAllListeners }
-      : {}),
-    ...(stubProvider?.providers?.length
-      ? {
-          providers: stubProvider.providers,
-        }
-      : {}),
-    ...(stubProvider?.selectedAddress
-      ? { selectedAddress: stubProvider.selectedAddress }
-      : {}),
-    request,
-  }
+  provider.request = request.bind(provider)
+
+  return provider
 }
