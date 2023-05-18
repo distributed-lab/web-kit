@@ -1,5 +1,5 @@
-import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
-import { sleep, wrapExternalProvider } from '@/helpers'
+import { CHAIN_TYPES, PROVIDER_CHECKS, PROVIDERS } from '@/enums'
+import { sleep, wrapExternalEthProvider } from '@/helpers'
 
 import type {
   EthereumProvider,
@@ -18,14 +18,40 @@ declare global {
   }
 }
 
-export class ProviderDetector<T extends keyof Record<string, string> = never> {
+type ErrorHandlersMap = {
+  [key in CHAIN_TYPES]: (error: Error) => unknown
+}
+
+type ProviderDetectorConfig = {
+  isWrapDefaultProviders: boolean
+}
+
+export class ProviderDetector<T extends keyof Record<string, string>> {
   #providers: ProviderInstance<T>[]
   #rawProviders: RawProvider[]
   #isInitiated = false
 
+  public static errorHandlers?: ErrorHandlersMap
+  public static cfg: ProviderDetectorConfig
+
   constructor() {
     this.#providers = []
     this.#rawProviders = []
+
+    ProviderDetector.setCfg({
+      isWrapDefaultProviders: true,
+    })
+  }
+
+  public static defineErrorHandlers(handlersMap: ErrorHandlersMap) {
+    ProviderDetector.errorHandlers = handlersMap
+  }
+
+  public static setCfg(cfg: Partial<typeof ProviderDetector.cfg>) {
+    ProviderDetector.cfg = {
+      ...ProviderDetector.cfg,
+      ...cfg,
+    }
   }
 
   public async init(): Promise<ProviderDetector<T>> {
@@ -66,14 +92,21 @@ export class ProviderDetector<T extends keyof Record<string, string> = never> {
   #detectRawProviders(): void {
     const ethProviders = window?.ethereum
       ? window?.ethereum?.providers || [window?.ethereum]
-      : undefined
+      : []
     const phantomProvider = window?.solana
     const solflareProvider = window?.solflare
 
-    const proxyEthProviders = ethProviders?.map(el => wrapExternalProvider(el))
+    const proxyEthProviders = ethProviders?.map(el =>
+      wrapExternalEthProvider(
+        el,
+        ProviderDetector.errorHandlers?.[CHAIN_TYPES.EVM],
+      ),
+    )
 
     this.#rawProviders = [
-      ...(proxyEthProviders ? proxyEthProviders : []),
+      ...(ProviderDetector.cfg?.isWrapDefaultProviders && proxyEthProviders
+        ? proxyEthProviders
+        : ethProviders),
       ...(phantomProvider ? [phantomProvider] : []),
       ...(solflareProvider ? [solflareProvider] : []),
     ] as RawProvider[]

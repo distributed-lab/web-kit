@@ -15,8 +15,8 @@ import type {
   TxRequestBody,
 } from './types'
 
-export type CreateProviderOpts = {
-  providerDetector?: ProviderDetector
+export type CreateProviderOpts<T extends keyof Record<string, string>> = {
+  providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
 }
 
@@ -188,10 +188,10 @@ export class Provider implements IProvider {
  * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
  * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
  */
-export const createProvider = async (
+export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
-  opts: CreateProviderOpts = {},
-): Promise<Provider> => {
+  opts: CreateProviderOpts<T> = {},
+): Promise<Provider> {
   const { providerDetector: providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
