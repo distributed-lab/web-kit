@@ -51,7 +51,7 @@ describe('performs FetcherResponseBuilder', () => {
     expect(result.data).toEqual(blob)
   })
 
-  test('should build error response', async () => {
+  test('should build valid error response', async () => {
     const response = new Response(
       '{"errors":[{"id":"1","code":"err_some_code","status":"401","title":"Unauthorized"}]}',
       ERROR_CFG,
@@ -73,7 +73,7 @@ describe('performs FetcherResponseBuilder', () => {
     })
   })
 
-  test('should build error response with empty body', async () => {
+  test('should build valid error response with empty body', async () => {
     const response = new Response(null, ERROR_CFG)
     const result = await new FetcherResponseBuilder(
       REQUEST_CFG,
