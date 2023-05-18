@@ -66,12 +66,8 @@ export class FetcherInterceptorManager {
     let resp = response
 
     for (const interceptor of this.#interceptors) {
-      try {
-        const fn = interceptor[fnName]
-        if (fn) resp = (await fn(resp)) as FetcherResponse<T>
-      } catch (error) {
-        console.warn(error)
-      }
+      const fn = interceptor[fnName]
+      if (fn) resp = (await fn(resp)) as FetcherResponse<T>
     }
 
     return resp

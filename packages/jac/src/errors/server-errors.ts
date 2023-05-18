@@ -65,6 +65,13 @@ export class JsonApiError extends Error {
   get nestedErrors(): JsonApiResponseNestedErrors {
     return this.#nestedErrors
   }
+
+  /*
+   * Original error
+   */
+  get originalError() {
+    return this.#originalError
+  }
 }
 
 export class BadRequestError extends JsonApiError {
