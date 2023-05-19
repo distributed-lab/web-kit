@@ -326,4 +326,8 @@ export class BN {
       fractionGroupSeparator: '',
     })
   }
+
+  public abs(): BN {
+    return new BN(this.#bn.abs(), this.#cfg)
+  }
 }

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0-rc.15] - 2023-05-19
+### Added
+- `@distributedlab/tools` - abs method for BN utility
+
 ## [0.2.0-rc.14] - 2023-05-18
 ### Added
 - `@distributedlab/w3p`
@@ -216,7 +220,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.14...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.15...HEAD
+[0.2.0-rc.15]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.14...0.2.0-rc.15
 [0.2.0-rc.14]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.13...0.2.0-rc.14
 [0.2.0-rc.13]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.12...0.2.0-rc.13
 [0.2.0-rc.12]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.11...0.2.0-rc.12
