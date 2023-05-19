@@ -89,6 +89,9 @@ describe('performs BN unit test', () => {
         'SQRT requires decimals to be even number, {"number":"25000","decimals":5}',
       )
     })
+    test('abs should return correct value', () => {
+      expect(BN.fromRaw(4, 6).sub(BN.fromRaw(9, 6)).abs().value).toBe('5000000')
+    })
   })
 
   describe('performs formatting', () => {
