@@ -123,6 +123,10 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     return receipt
   }
 
+  async signMessage(message: string): Promise<string> {
+    return this.#provider.getSigner().signMessage(message)
+  }
+
   async #setListeners() {
     const stubProvider = this.#provider.provider as providers.BaseProvider
 
