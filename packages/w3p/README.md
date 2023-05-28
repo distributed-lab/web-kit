@@ -17,91 +17,15 @@ yarn add @distributedlab/w3p
 
 ## Example
 
-In the case, when you need to check which injected providers do user have in his browser
+For the reactive frameworks such as Vue or react you need to create a wrapper for the provider, which will be used in the application.
 
-```ts
-import {
-  ProviderDetector,
-  MetamaskProvider,
-  CoinbaseProvider,
-  ProviderProxyConstructor,
-  PROVIDERS,
-  ProviderConstructorMap,
-  createProvider,
-} from "@distributedlab/w3p"
+here are the the examples for both of them:
+- [Vue useProvider composable implementation](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/vue-use-provider-composable.ts)
+- [React useProvider hook implementation](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/react-use-provider-hook.ts)
 
-const providerDetector = new ProviderDetector()
+The Common usage of w3p with vue [here](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/multiple-providers.ts)
 
-await providerDetector.init()
-
-const supportedProviders: ProviderConstructorMap = {
-  [PROVIDERS.Metamask]: MetamaskProvider,
-  [PROVIDERS.Coinbase]: CoinbaseProvider,
-}
-
-const providerProxyConstructor = supportedProviders[providerType] as ProviderProxyConstructor
-
-const provider = await createProvider(providerProxyConstructor, {
-  providerDetectorInstance: providerDetector,
-  listeners: {
-    ...yourListeners,
-  },
-})
-
-await provider.connect()
-```
-
-or when you need to implement a custom provider outside of the library
-
-```ts
-import {
-  ProviderDetector,
-  MetamaskProvider,
-  CoinbaseProvider,
-  ProviderProxyConstructor,
-  PROVIDERS,
-  ProviderConstructorMap,
-  createProvider,
-} from "@distributedlab/w3p"
-
-enum EXTERNAL_PROVIDERS {
-    TokenE = 'tokene',
-}
-
-type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
-
-const providerDetector = new ProviderDetector<EXTERNAL_PROVIDERS>()
-
-const init = async (providerType: SUPPORTED_PROVIDERS) => {
-  await providerDetector.init()
-
-  const supportedProviders: {
-    [key in SUPPORTED_PROVIDERS]?: ProviderProxyConstructor
-  } = {
-    [PROVIDERS.Fallback]: FallbackProvider,
-    [PROVIDERS.Metamask]: MetamaskProvider,
-    [PROVIDERS.Coinbase]: CoinbaseProvider,
-    [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider,
-  }
-
-  const currentProviderType: SUPPORTED_PROVIDERS =
-    providerType ?? storageState.value.providerType ?? PROVIDERS.Fallback
-
-  const providerProxyConstructor: ProviderProxyConstructor =
-    supportedProviders[currentProviderType]!
-
-  const provider = await createProvider(providerProxyConstructor, {
-    providerDetectorInstance: providerDetector,
-    listeners: {
-      ...yourListeners,
-    },
-  })
-
-  await provider.connect()
-}
-
-init()
-```
+You can setup pinia js and just copy file content, or use it's callback just for create your own composable
 
 Or if you sure, that you will use only one provider, e.g. Metamask
 
@@ -115,29 +39,22 @@ await provider.connect()
 
 To create your own custom provider, you will need to develop a class that implements the `ProviderProxyConstructor` interface.
 
-#### If your provider is fully EVM-compatible, similar to Metamask or Coinbase, you can extends the `BaseEVMProvider` class as in example.
+#### If your provider is fully EVM-compatible, similar to Metamask or Coinbase, you can extend the `BaseEVMProvider` class as in example.
 ```ts
-export class TokenEProvider extends BaseEVMProvider implements ProviderProxy {
+export class MyProvider extends BaseEVMProvider implements ProviderProxy {
   constructor(provider: RawProvider) {
     super(provider)
   }
 
   static get providerType() {
-    return EXTERNAL_PROVIDERS.TokenE
+    return EXTERNAL_PROVIDERS.MyProvider
   }
 }
 ```
 
+If your provider has additional functionalities or different implementation of switching, adding a chain, signing and sending transactions methods, and more, you can create a custom class that extends the [ProviderEventBus](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/src/providers/wrapped/_event-bus.ts) and implements the [ProviderProxy](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/src/types/provider.ts#L71) interface. This allows you to override functions according to your specific requirements.
 
-If your provider has additional functionalities or different implementation of switching, adding a chain, signing and sending transactions methods, and more, you can create a custom class that extends the [`ProviderEventBus`](./src/providers/wrapped/_event-bus.ts) and implements the [`ProviderProxy`](./src/types/provider.ts?plain=71) interface. This allows you to override functions according to your specific requirements.
-
-## More examples
-Check out more examples and use-cases:
-
-- [Vue useProvider hook implementation](./examples/vue-use-provider-hook.ts)
-- [React useProvider hook implementation](./examples/react-use-provider-hook.ts)
-- [Multiple providers with the current selected one](./examples/multiple-providers.ts)
-- [Ethereum contract interaction](./examples/eth-contract-call.ts)
+To interact with contract check [this example](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/eth-contract-call.ts)
 
 ## License
 

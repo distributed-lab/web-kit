@@ -1,10 +1,9 @@
 // @ts-nocheck
 import { computed } from 'vue'
 import { Erc20__factory } from '@/types'
-import { handleEthError, sleep } from '@/helpers'
 import { BigNumberish, ethers } from 'ethers'
 import { useWeb3ProvidersStore } from '@/store'
-import { EthProviderRpcError, PROVIDERS } from '@distributedlab/w3p'
+import { PROVIDERS } from '@distributedlab/w3p'
 
 export const useErc20Contract = (address: string) => {
   const web3ProvidersStore = useWeb3ProvidersStore()
@@ -34,129 +33,75 @@ export const useErc20Contract = (address: string) => {
   const contractInterface = Erc20__factory.createInterface()
 
   const approve = async (spender: string, amount: BigNumberish) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('approve', [
+      spender,
+      amount,
+    ])
 
-    try {
-      const data = contractInterface.encodeFunctionData('approve', [
-        spender,
-        amount,
-      ])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const decreaseAllowance = async (
     spender: string,
     subtractedValue: BigNumberish,
   ) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('decreaseAllowance', [
+      spender,
+      subtractedValue,
+    ])
 
-    try {
-      const data = contractInterface.encodeFunctionData('decreaseAllowance', [
-        spender,
-        subtractedValue,
-      ])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const increaseAllowance = async (
     spender: string,
     addedValue: BigNumberish,
   ) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('increaseAllowance', [
+      spender,
+      addedValue,
+    ])
 
-    try {
-      const data = contractInterface.encodeFunctionData('increaseAllowance', [
-        spender,
-        addedValue,
-      ])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const mint = async (to: string, amount: BigNumberish) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('mint', [to, amount])
 
-    try {
-      const data = contractInterface.encodeFunctionData('mint', [to, amount])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const renounceOwnership = async () => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('renounceOwnership')
 
-    try {
-      const data = contractInterface.encodeFunctionData('renounceOwnership')
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const transfer = async (address: string, amount: BigNumberish) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('transfer', [
+      address,
+      amount,
+    ])
 
-    try {
-      const data = contractInterface.encodeFunctionData('transfer', [
-        address,
-        amount,
-      ])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const transferFrom = async (
@@ -164,95 +109,44 @@ export const useErc20Contract = (address: string) => {
     to: string,
     amount: BigNumberish,
   ) => {
-    if (!provider.value) return
+    const data = contractInterface.encodeFunctionData('transferFrom', [
+      from,
+      to,
+      amount,
+    ])
 
-    try {
-      const data = contractInterface.encodeFunctionData('transferFrom', [
-        from,
-        to,
-        amount,
-      ])
-
-      const receipt = await provider.value.signAndSendTx({
-        to: address,
-        data,
-      })
-
-      await sleep(1000)
-      return receipt
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return provider.value.signAndSendTx({
+      to: address,
+      data,
+    })
   }
 
   const getAllowance = async (owner: string, spender: string) => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.allowance(owner, spender)
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.allowance(owner, spender)
   }
 
   const getBalanceOf = async (address: string) => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.balanceOf(address)
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.balanceOf(address)
   }
 
   const getDecimals = async () => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.decimals()
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.decimals()
   }
 
   const getName = async () => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.name()
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.name()
   }
 
   const getOwner = async () => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.owner()
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.owner()
   }
 
   const getSymbol = async () => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.symbol()
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.symbol()
   }
 
   const getTotalSupply = async () => {
-    if (!contractInstance.value) return
-
-    try {
-      return contractInstance.value?.totalSupply()
-    } catch (error) {
-      handleEthError(error as EthProviderRpcError)
-    }
+    return contractInstance.value?.totalSupply()
   }
 
   return {
@@ -263,7 +157,6 @@ export const useErc20Contract = (address: string) => {
     renounceOwnership,
     transfer,
     transferFrom,
-
     getAllowance,
     getBalanceOf,
     getDecimals,
