@@ -3,7 +3,7 @@ import { MetamaskProvider } from '@/providers'
 import { mockWindow } from '@/tests'
 import type { EthereumProvider } from '@/types'
 
-import { BaseEVMProvider } from './_base-evm'
+import { BaseEVMProvider } from '@/providers'
 
 describe('performs unit test BaseEVMProvider', () => {
   let provider: BaseEVMProvider
