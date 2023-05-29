@@ -1,4 +1,6 @@
 import { setupWalletSelector, WalletSelector } from '@near-wallet-selector/core'
+import type { Options } from '@near-wallet-selector/core/lib/options.types'
+import { Observable } from 'rxjs'
 
 import { NEAR_CHAINS } from '@/enums'
 import { NearRawProvider } from '@/providers'
@@ -40,18 +42,23 @@ describe('performs NearRawProvider unit testing', () => {
 
   describe('performs init', () => {
     test('should setup wallet selector and check isSignedIn', async () => {
-      const mockSelector = {
+      const mockSelector: WalletSelector = {
         isSignedIn: jest.fn().mockReturnValue(true),
         wallet: jest.fn().mockResolvedValue(mockWallet),
         store: {
           getState: jest.fn().mockReturnValue({
             accounts: [{ accountId: 'test' }],
           }),
+          observable: new Observable(),
         },
+        options: {} as Options,
+        setActiveAccount: jest.fn,
+        on: jest.fn(),
+        off: jest.fn(),
       }
       ;(
         setupWalletSelector as jest.MockedFunction<typeof setupWalletSelector>
-      ).mockResolvedValue(mockSelector as unknown as WalletSelector)
+      ).mockResolvedValue(mockSelector)
       const result = await provider.init()
 
       expect(result).toBe(true)
