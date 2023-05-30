@@ -4,7 +4,8 @@
   "description": "Wrapper for Web3 Providers",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/w3p"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/w3p",
+    "directory": "packages/w3p"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_w3p.html",
   "license": "MIT",

@@ -4,33 +4,28 @@ import { useUniversalStorage } from '@/composables'
 import { config } from '@config'
 import {
   CoinbaseProvider,
-  // EthereumProvider,
   MetamaskProvider,
   FallbackEvmProvider,
   ProviderDetector,
   ProviderInstance,
   PROVIDERS,
-  // ProviderEventPayload,
-  // RawProvider,
   ProviderProxyConstructor,
-  // Provider,
-  // wrapExternalEthProvider,
 } from '@distributedlab/w3p'
-// import { TokenEProvider, useProvider, EXTERNAL_PROVIDERS } from '@tokene/vue-web3-provider'
 import { useProvider } from './vue-use-provider-composable'
-// import { providers } from 'ethers'
-
-import {
-  // getSupportedChainsDetails
-} from '@/helpers'
 
 const STORE_NAME = 'web3-providers-store'
 
 /**
  * EXTERNAL_PROVIDERS are the custom providers for specific project
  * you should create it in your project if you have some custom providers
+ *
+ * enum EXTERNAL_PROVIDERS = {
+ *   tokene = 'tokene',
+ *   myCustomProvider = 'myCustomProvider',
+ * }
+ *
+ * type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
  */
-// type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
 
 /**
  * By default you can use just PROVIDERS
@@ -99,34 +94,37 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
       /**
        * In the case where you have some custom provider
        * you can add it by following code
+       *
+       * if (window.tokene) {
+       *   await providerDetector.value.addProvider({
+       *     name: EXTERNAL_PROVIDERS.TokenE,
+       *     instance: wrapExternalEthProvider(
+       *       window.tokene as providers.ExternalProvider,
+       *     ) as RawProvider,
+       *   })
+       * }
        */
-      // if (window.tokene) {
-      //   await providerDetector.value.addProvider({
-      //     name: EXTERNAL_PROVIDERS.TokenE,
-      //     instance: wrapExternalEthProvider(
-      //       window.tokene as providers.ExternalProvider,
-      //     ) as RawProvider,
-      //   })
-      // }
 
       /**
        * If you need to fetch some data from contracts aka view methods for unconnected users,
        * you can add fallback provider
+       *
+       * if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
+       *   addProvider({
+       *     name: PROVIDERS.Fallback,
+       *     instance: new providers.JsonRpcProvider(
+       *       config.SUPPORTED_CHAIN_RPC_URL,
+       *       'any',
+       *     ) as unknown as EthereumProvider,
+       *   })
+       * }
        */
-      // if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
-      //   addProvider({
-      //     name: PROVIDERS.Fallback,
-      //     instance: new providers.JsonRpcProvider(
-      //       config.SUPPORTED_CHAIN_RPC_URL,
-      //       'any',
-      //     ) as unknown as EthereumProvider,
-      //   })
-      // }
 
       /**
-       * If you need to do smthng with chain details e.g. show link to explorer after tx sent
+       * If you need to do something with chain details e.g. show link to explorer after tx sent
+       *
+       * Provider.setChainsDetails(getSupportedChainsDetails())
        */
-      // Provider.setChainsDetails(getSupportedChainsDetails())
 
       /**
        * All supported providers, which should be defined, because
@@ -137,8 +135,10 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         [PROVIDERS.Fallback]: FallbackEvmProvider,
         [PROVIDERS.Metamask]: MetamaskProvider,
         [PROVIDERS.Coinbase]: CoinbaseProvider,
-        // in the case where you have some custom provider, place your ProviderProxyConstructor here
-        // [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider as ProviderProxyConstructor,
+        /**
+         * in the case where you have some custom provider, place your ProviderProxyConstructor here
+         * [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider as ProviderProxyConstructor,
+         */
       }
 
       const currentProviderType: SUPPORTED_PROVIDERS =
@@ -149,12 +149,15 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
 
       await provider.init<SUPPORTED_PROVIDERS>(providerProxyConstructor, {
         providerDetector: providerDetector.value,
-        // if you need to do smthng on some event, you can define handlers here
-        // listeners: {
-        //   onTxSent,
-        //   onTxConfirmed,
-        //   ...,
-        // },
+        /**
+         * if you need to do something on some event, you can define handlers here
+         *
+         * listeners: {
+         *   onTxSent,
+         *   onTxConfirmed,
+         *   ...,
+         * },
+         */
       })
 
       if (!provider.isConnected?.value) {

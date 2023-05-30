@@ -4,7 +4,8 @@
   "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/fetcher"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/fetcher",
+    "directory": "packages/fetcher"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_fetcher.html",
   "license": "MIT",
