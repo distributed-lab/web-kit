@@ -4,7 +4,8 @@
   "description": "A library for constructing JSON-API compliant requests and responses",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/jac"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/jac",
+    "directory": "packages/jac"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_jac.html",
   "license": "MIT",

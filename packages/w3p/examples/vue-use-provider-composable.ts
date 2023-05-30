@@ -1,17 +1,16 @@
-// @ts-nocheck
-import { onUnmounted, reactive, ref, toRefs } from 'vue'
 import {
-  Chain,
-  ChainId,
-  CreateProviderOpts,
-  TransactionResponse,
-  TxRequestBody,
-  ProviderProxyConstructor,
+  type Chain,
+  type ChainId,
   createProvider,
-  PROVIDERS,
+  type CreateProviderOpts,
   Provider,
-  RawProvider,
+  type ProviderProxyConstructor,
+  PROVIDERS,
+  type RawProvider,
+  type TransactionResponse,
+  type TxRequestBody,
 } from '@distributedlab/w3p'
+import { onUnmounted, reactive, ref, toRefs } from 'vue'
 
 type ProviderState = {
   address?: string
@@ -36,24 +35,36 @@ export const useProvider = () => {
 
   const rawProvider = ref<RawProvider>()
 
-  const init = async (
+  async function init<T extends keyof Record<string, string>>(
     providerProxyConstructor: ProviderProxyConstructor,
-    createProviderOpts: CreateProviderOpts,
-  ) => {
+    createProviderOpts: CreateProviderOpts<T>,
+  ) {
     try {
       _provider = await createProvider(providerProxyConstructor, {
         providerDetector: createProviderOpts.providerDetector,
         listeners: {
-          onAccountChanged: _updateProviderState,
-          onChainChanged: _updateProviderState,
-          onConnect: _updateProviderState,
-          onDisconnect: _updateProviderState,
           ...createProviderOpts.listeners,
+          onAccountChanged: () => {
+            createProviderOpts?.listeners?.onAccountChanged?.()
+            _updateProviderState()
+          },
+          onChainChanged: () => {
+            createProviderOpts?.listeners?.onChainChanged?.()
+            _updateProviderState()
+          },
+          onConnect: () => {
+            createProviderOpts?.listeners?.onConnect?.()
+            _updateProviderState()
+          },
+          onDisconnect: () => {
+            createProviderOpts?.listeners?.onDisconnect?.()
+            _updateProviderState()
+          },
         },
       })
 
       rawProvider.value = createProviderOpts.providerDetector?.getProvider(
-        providerProxyConstructor.providerType,
+        providerProxyConstructor.providerType as PROVIDERS,
       )?.instance
 
       _updateProviderState()
@@ -81,12 +92,6 @@ export const useProvider = () => {
 
   const addChain = async (chain: Chain) => {
     await _provider?.addChain?.(chain)
-  }
-
-  const setChainDetails = (chain: Chain) => {
-    _provider?.setChainDetails?.(chain)
-
-    _updateProviderState()
   }
 
   const getAddressUrl = (chain: Chain, address: string) => {
@@ -120,6 +125,8 @@ export const useProvider = () => {
   }
 
   onUnmounted(() => {
+    if (_providerReactiveState.providerType) return
+
     _provider?.clearHandlers()
   })
 
@@ -132,7 +139,6 @@ export const useProvider = () => {
     connect,
     switchChain,
     addChain,
-    setChainDetails,
     getAddressUrl,
     getHashFromTx,
     getTxUrl,

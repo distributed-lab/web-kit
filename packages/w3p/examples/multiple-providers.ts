@@ -1,42 +1,58 @@
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { useNotifications, useUniversalStorage } from '@/composables'
+import { useUniversalStorage } from '@/composables'
 import { config } from '@config'
-import { FallbackProvider } from '@/helpers'
-import { useAuthStore } from '@/store'
 import {
   CoinbaseProvider,
-  EthereumProvider,
   MetamaskProvider,
+  FallbackEvmProvider,
   ProviderDetector,
   ProviderInstance,
   PROVIDERS,
-  CHAIN_TYPES,
-  ProviderEventPayload,
-  RawProvider,
   ProviderProxyConstructor,
-  Provider,
 } from '@distributedlab/w3p'
-import {
-  TokenEProvider,
-  useProvider,
-  EXTERNAL_PROVIDERS,
-} from '@tokene/vue-web3-provider'
-import { ethers } from 'ethers'
-
-import { DECIMALS } from '@distributedlab/tools'
+import { useProvider } from './vue-use-provider-composable'
 
 const STORE_NAME = 'web3-providers-store'
 
-type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
+/**
+ * EXTERNAL_PROVIDERS are the custom providers for specific project
+ * you should create it in your project if you have some custom providers
+ *
+ * enum EXTERNAL_PROVIDERS = {
+ *   tokene = 'tokene',
+ *   myCustomProvider = 'myCustomProvider',
+ * }
+ *
+ * type SUPPORTED_PROVIDERS = EXTERNAL_PROVIDERS | PROVIDERS
+ */
+
+/**
+ * By default you can use just PROVIDERS
+ */
+type SUPPORTED_PROVIDERS = PROVIDERS
 
 export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
+  /**
+   * useProvider composable is the reactive wrapper for w3p,
+   * you can copy https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/vue-use-provider-composable.ts
+   * and paste in your project
+   */
   const provider = useProvider()
 
   const providerDetector = computed(
-    () => new ProviderDetector<EXTERNAL_PROVIDERS>(),
+    () => new ProviderDetector<SUPPORTED_PROVIDERS>(),
   )
 
+  /**
+   * The simple solution for keep providerType in
+   * `localStorage` | `cookie` | `sessionStorage` or all of them
+   *
+   * Under the hood it returns ref, so pinia take it as state
+   *
+   * you can replace it with your own solution
+   * for example use pinia persisted state
+   */
   const storageState = useUniversalStorage<{
     providerType?: SUPPORTED_PROVIDERS
   }>(
@@ -57,68 +73,72 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
     },
   )
 
-  const lastToastId = ref<string | number>()
-  const { showTxToast, removeToast } = useNotifications()
-
-  const authStore = useAuthStore()
-
   const isValidChain = computed(
     () =>
       String(provider.chainId?.value).toLowerCase() ===
       config.SUPPORTED_CHAIN_ID.toLowerCase(),
   )
 
-  function handleTxSent(e?: ProviderEventPayload) {
-    if (!e?.txHash || !provider?.chainDetails) return
-
-    const txLink = provider?.getTxUrl(provider.chainDetails.value!, e.txHash)
-
-    lastToastId.value = showTxToast('pending', txLink!)
-  }
-
-  function handleTxConfirmed(e?: ProviderEventPayload) {
-    if (!e?.txResponse || !provider?.getHashFromTx || !provider?.chainDetails)
-      return
-
-    const txLink = provider?.getTxUrl(
-      provider.chainDetails.value!,
-      provider.getHashFromTx(e.txResponse)!,
-    )
-
-    removeToast(lastToastId.value!)
-    showTxToast('success', txLink!)
-  }
-
+  /**
+   * init method shoud be called at the top level of your app to define connected provider e.g. after refreshing page,
+   * and if it founds providerType in storage it will try to connect to it
+   * Furthermore you can call init method with providerType param to connect to specific provider
+   *
+   * in common case you can show list of supported providers and choose on of them
+   * @param providerType
+   */
   async function init(providerType?: SUPPORTED_PROVIDERS) {
     try {
       await providerDetector.value.init()
 
-      await providerDetector.value.addProvider({
-        name: EXTERNAL_PROVIDERS.TokenE,
-        instance: window.tokene as RawProvider,
-      })
+      /**
+       * In the case where you have some custom provider
+       * you can add it by following code
+       *
+       * if (window.tokene) {
+       *   await providerDetector.value.addProvider({
+       *     name: EXTERNAL_PROVIDERS.TokenE,
+       *     instance: wrapExternalEthProvider(
+       *       window.tokene as providers.ExternalProvider,
+       *     ) as RawProvider,
+       *   })
+       * }
+       */
 
       /**
-       * Some platform need handle a multiple chains connection, so if it is, for the fallback providers
-       * you just need to define all of them in supportedProvidersMap, every fallBack provider instance per chain
+       * If you need to fetch some data from contracts aka view methods for unconnected users,
+       * you can add fallback provider
+       *
+       * if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
+       *   addProvider({
+       *     name: PROVIDERS.Fallback,
+       *     instance: new providers.JsonRpcProvider(
+       *       config.SUPPORTED_CHAIN_RPC_URL,
+       *       'any',
+       *     ) as unknown as EthereumProvider,
+       *   })
+       * }
        */
-      if (!providerDetector.value.providers[PROVIDERS.Fallback]) {
-        addProvider({
-          name: PROVIDERS.Fallback,
-          instance: new ethers.providers.JsonRpcProvider(
-            config.SUPPORTED_CHAIN_RPC_URL,
-            'any',
-          ) as unknown as EthereumProvider,
-        })
-      }
 
+      /**
+       * If you need to do something with chain details e.g. show link to explorer after tx sent
+       *
+       * Provider.setChainsDetails(getSupportedChainsDetails())
+       */
+
+      /**
+       * All supported providers, which should be defined, because
+       */
       const supportedProviders: {
         [key in SUPPORTED_PROVIDERS]?: ProviderProxyConstructor
       } = {
-        [PROVIDERS.Fallback]: FallbackProvider,
+        [PROVIDERS.Fallback]: FallbackEvmProvider,
         [PROVIDERS.Metamask]: MetamaskProvider,
         [PROVIDERS.Coinbase]: CoinbaseProvider,
-        [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider,
+        /**
+         * in the case where you have some custom provider, place your ProviderProxyConstructor here
+         * [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider as ProviderProxyConstructor,
+         */
       }
 
       const currentProviderType: SUPPORTED_PROVIDERS =
@@ -127,37 +147,21 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
       const providerProxyConstructor: ProviderProxyConstructor =
         supportedProviders[currentProviderType]!
 
-      await provider.init(providerProxyConstructor, {
+      await provider.init<SUPPORTED_PROVIDERS>(providerProxyConstructor, {
         providerDetector: providerDetector.value,
-        listeners: {
-          onTxSent: handleTxSent,
-          onTxConfirmed: handleTxConfirmed,
-        },
+        /**
+         * if you need to do something on some event, you can define handlers here
+         *
+         * listeners: {
+         *   onTxSent,
+         *   onTxConfirmed,
+         *   ...,
+         * },
+         */
       })
 
       if (!provider.isConnected?.value) {
         await provider.connect()
-      }
-
-      Provider.setChainsDetails({
-        [config.SUPPORTED_CHAIN_ID]: {
-          id: config.SUPPORTED_CHAIN_ID,
-          name: config.SUPPORTED_CHAIN_NAME,
-          rpcUrl: config.SUPPORTED_CHAIN_RPC_URL,
-          explorerUrl: config.SUPPORTED_CHAIN_EXPLORER_URL,
-          token: {
-            name: 'Token Name',
-            symbol: 'TKN',
-            decimals: DECIMALS.WEI,
-          },
-          type: CHAIN_TYPES.EVM,
-          icon: '',
-        },
-      })
-
-      if (provider.address?.value) {
-        const authStore = useAuthStore()
-        await authStore.login(provider.address!.value!)
       }
     } catch (error) {
       storageState.value.providerType = undefined
@@ -175,8 +179,6 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
       await provider.disconnect()
       // eslint-disable-next-line no-empty
     } catch (error) {}
-
-    await authStore.logout()
 
     storageState.value.providerType = undefined
 
