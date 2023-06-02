@@ -1,8 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const mockWindow = (value: any) => {
-  global.window = value
+export const mockWindow = (value: unknown) => {
+  global.window = value as Window & typeof globalThis
 }
 
 export const clearWindowMock = () => {
-  global.window = undefined as never
+  global.window = undefined as unknown as Window & typeof globalThis
 }
