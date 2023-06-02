@@ -52,13 +52,13 @@ const newPerson = () => {
   return toRaw(extend(parent, { name }))
 }
 
-const child = createChild()
+const person = newPerson()
 
-console.log(child.age) // 25
+console.log(person.age) // 25
 
-child.changeAge(30)
+person.changeAge(30)
 
-console.log(child.age) // 30
+console.log(person.age) // 30
 ```
 
 ## Changelog
