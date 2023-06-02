@@ -40,15 +40,15 @@ describe('performs provider detector unit test', () => {
       providerDetector.addProvider({ name: PROVIDERS.Metamask })
       providerDetector.addProvider({ name: PROVIDERS.Coinbase })
       expect(providerDetector.providers).toEqual({
-        metamask: { name: 'metamask' },
-        coinbase: { name: 'coinbase' },
+        metamask: { name: PROVIDERS.Metamask },
+        coinbase: { name: PROVIDERS.Coinbase },
       })
     })
     test('should add and return metamask provider', async () => {
       mockWindow({ ethereum: { providers: [MetamaskProvider] } })
       providerDetector.addProvider({ name: PROVIDERS.Metamask })
       expect(providerDetector.getProvider(PROVIDERS.Metamask)).toEqual({
-        name: 'metamask',
+        name: PROVIDERS.Metamask,
       })
     })
   })

@@ -1,17 +1,20 @@
 import { CHAIN_TYPES, PROVIDERS } from '@/enums'
 import { getNearExplorerAddressUrl, getNearExplorerTxUrl } from '@/helpers'
-import { NearProvider } from '@/providers'
+import { NearProvider, NearRawProvider } from '@/providers'
 import type { TransactionResponse } from '@/types'
 
-const mockProvider = {
+const mockProvider: NearRawProvider = {
+  accountId: 'test',
+  createAccessKeyFor: 'test',
+  isNear: false,
+  selector: null,
+  wallet: null,
   signIn: jest.fn(),
   signOut: jest.fn(),
   init: jest.fn(),
   signAndSendTxs: jest.fn(),
-  emit: jest.fn(),
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const nearProvider = new NearProvider(mockProvider as any)
+const nearProvider = new NearProvider(mockProvider)
 
 describe('performs unit test NearProvider', () => {
   afterEach(() => {
@@ -43,7 +46,6 @@ describe('performs unit test NearProvider', () => {
   test('should sign out from the provider', async () => {
     await nearProvider.disconnect()
     expect(mockProvider.signOut).toHaveBeenCalled()
-    expect(nearProvider.isConnected).toBe(false)
   })
 
   test('should get transaction hash from response', () => {

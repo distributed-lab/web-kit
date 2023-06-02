@@ -29,27 +29,6 @@ jest.mock('@/helpers', () => ({
   handleSolError: jest.fn(),
 }))
 
-jest.mock('@/enums', () => ({
-  CHAIN_TYPES: {
-    Solana: 'solana',
-  },
-  PROVIDER_EVENT_BUS_EVENTS: {
-    Initiated: 'initiated',
-    ChainChanged: 'chain-changed',
-    Connect: 'connect',
-    Disconnect: 'disconnect',
-    AccountChanged: 'account-changed',
-  },
-  PROVIDER_EVENTS: {
-    Connect: 'connect',
-    Disconnect: 'disconnect',
-    AccountChanged: 'account-changed',
-  },
-  SOLANA_CHAINS: {
-    DevNet: 'devnet',
-  },
-}))
-
 describe('performs unit test BaseSolanaProvider', () => {
   let provider: BaseSolanaProvider
 

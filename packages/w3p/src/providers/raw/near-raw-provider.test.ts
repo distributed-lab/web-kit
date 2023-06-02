@@ -59,9 +59,9 @@ describe('performs NearRawProvider unit testing', () => {
       ;(
         setupWalletSelector as jest.MockedFunction<typeof setupWalletSelector>
       ).mockResolvedValue(mockSelector)
-      const result = await provider.init()
+      const resultInitiation = await provider.init()
 
-      expect(result).toBe(true)
+      expect(resultInitiation).toBe(true)
       expect(setupWalletSelector).toHaveBeenCalledWith({
         network: NEAR_CHAINS.TestNet,
         modules: expect.any(Array<Array<Promise<WalletSelector>>>),

@@ -32,7 +32,7 @@ describe('performs provider unit test', () => {
       const provider = new Provider(MetamaskProvider)
       await expect(
         provider.init({ name: PROVIDERS.Metamask }),
-      ).rejects.toThrow()
+      ).rejects.toThrowError()
     })
 
     test('should initialize the proxy and set the selected provider', async () => {

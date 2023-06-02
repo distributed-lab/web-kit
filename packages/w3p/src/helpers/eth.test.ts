@@ -12,7 +12,7 @@ const exampleChain = {
 }
 
 describe('performs eth helper unit test', () => {
-  describe('performs get url', () => {
+  describe('performs get tx url', () => {
     test('getEthExplorerTxUrl should return correct value', () => {
       expect(
         getEthExplorerTxUrl(
@@ -23,6 +23,8 @@ describe('performs eth helper unit test', () => {
         'https://example.io/tx/0x2446f1fd773fbb9f080e674b60c6a033c7ed7427b8b9413cf28a2a4a6da9b56c',
       )
     })
+  })
+  describe('performs get address url', () => {
     test('getEthExplorerAddressUrl should return correct value', () => {
       expect(
         getEthExplorerAddressUrl(
