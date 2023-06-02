@@ -5,8 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Changed
-- `@distributedlab/w3p` - README and examples
+
+## [0.2.0-rc.17] - 2023-06-02
+### Added
+- `@distributedlab/reactivity` - Implementation of the reactivity connections to propagate changes between objects
 
 ## [0.2.0-rc.16] - 2023-05-22
 ### Added
@@ -228,7 +230,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...HEAD
+[0.2.0-rc.17]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...0.2.0-rc.17
 [0.2.0-rc.16]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.15...0.2.0-rc.16
 [0.2.0-rc.15]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.14...0.2.0-rc.15
 [0.2.0-rc.14]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.13...0.2.0-rc.14
