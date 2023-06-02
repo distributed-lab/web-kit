@@ -9,7 +9,7 @@ export class FetcherInterceptorManager {
 
   constructor(interceptors?: FetcherInterceptor[]) {
     if (interceptors) {
-      this.#interceptors = interceptors
+      this.#interceptors = [...interceptors]
     }
   }
 
@@ -45,6 +45,8 @@ export class FetcherInterceptorManager {
     return req
   }
 
+  // @distributedlab/web-kit
+  //
   public async runResponseInterceptors<T>(
     response: FetcherResponse<T>,
   ): Promise<FetcherResponse<T>> {

@@ -17,35 +17,35 @@ export class ProviderEventBus {
     this.#emitter.emit(event, payload)
   }
 
-  public onBeforeTxSent(cb: (e: ProviderEventPayload) => void): void {
+  public onBeforeTxSent(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, cb)
   }
 
-  public onTxSent(cb: (e: ProviderEventPayload) => void): void {
+  public onTxSent(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.TxSent, cb)
   }
 
-  public onTxConfirmed(cb: (e: ProviderEventPayload) => void): void {
+  public onTxConfirmed(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.TxConfirmed, cb)
   }
 
-  public onInitiated(cb: (e: ProviderEventPayload) => void): void {
+  public onInitiated(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.once(PROVIDER_EVENT_BUS_EVENTS.Initiated, cb)
   }
 
-  public onConnect(cb: (e: ProviderEventPayload) => void): void {
+  public onConnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.Connect, cb)
   }
 
-  public onDisconnect(cb: (e: ProviderEventPayload) => void): void {
+  public onDisconnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.Disconnect, cb)
   }
 
-  public onAccountChanged(cb: (e: ProviderEventPayload) => void): void {
+  public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.AccountChanged, cb)
   }
 
-  public onChainChanged(cb: (e: ProviderEventPayload) => void): void {
+  public onChainChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.ChainChanged, cb)
   }
 

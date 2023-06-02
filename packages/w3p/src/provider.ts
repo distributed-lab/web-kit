@@ -15,8 +15,8 @@ import type {
   TxRequestBody,
 } from './types'
 
-export type CreateProviderOpts = {
-  providerDetector?: ProviderDetector
+export type CreateProviderOpts<T extends keyof Record<string, string>> = {
+  providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
 }
 
@@ -43,7 +43,7 @@ export class Provider implements IProvider {
   #selectedProvider?: PROVIDERS
   #proxy?: ProviderProxy
 
-  #chainDetails?: Chain
+  public static chainsDetails?: Record<ChainId, Chain>
 
   constructor(proxyConstructor: ProviderProxyConstructor) {
     this.#selectedProvider = undefined
@@ -72,7 +72,7 @@ export class Provider implements IProvider {
   }
 
   public get chainDetails() {
-    return this.#chainDetails
+    return Provider.chainsDetails?.[this.chainId!]
   }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
@@ -83,7 +83,7 @@ export class Provider implements IProvider {
 
     Object.entries(listeners || {}).forEach(([key, value]) => {
       this.#proxy?.[key as keyof ProviderListeners]?.(
-        value as (e: ProviderEventPayload) => void,
+        value as (e?: ProviderEventPayload) => void,
       )
     })
 
@@ -95,7 +95,7 @@ export class Provider implements IProvider {
   public async connect() {
     if (!this.#proxy) throw new errors.ProviderNotInitializedError()
 
-    await this.#proxy.connect()
+    await this.#proxy?.connect?.()
   }
 
   public async switchChain(chainId: ChainId) {
@@ -106,8 +106,8 @@ export class Provider implements IProvider {
     await this.#proxy?.addChain?.(chain)
   }
 
-  public setChainDetails(chain: Chain) {
-    this.#chainDetails = chain
+  public static setChainsDetails(chains: Record<ChainId, Chain>) {
+    this.chainsDetails = chains
   }
 
   public async signAndSendTx(txRequestBody: TxRequestBody) {
@@ -136,25 +136,23 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  public onAccountChanged(cb: (e: ProviderEventPayload) => void): void {
+  public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onAccountChanged(cb)
   }
 
-  public onChainChanged(cb: (e: ProviderEventPayload) => void): void {
-    this.#chainDetails = undefined
-
+  public onChainChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onChainChanged?.(cb)
   }
 
-  public onConnect(cb: (e: ProviderEventPayload) => void): void {
+  public onConnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onConnect(cb)
   }
 
-  public onDisconnect(cb: (e: ProviderEventPayload) => void): void {
+  public onDisconnect(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onDisconnect(cb)
   }
 
-  public onInitiated(cb: (e: ProviderEventPayload) => void): void {
+  public onInitiated(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onInitiated(cb)
   }
 
@@ -162,15 +160,15 @@ export class Provider implements IProvider {
     this.#proxy?.clearHandlers()
   }
 
-  public onBeforeTxSent(cb: (e: ProviderEventPayload) => void) {
+  public onBeforeTxSent(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onBeforeTxSent(cb)
   }
 
-  public onTxSent(cb: (e: ProviderEventPayload) => void) {
+  public onTxSent(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onTxSent(cb)
   }
 
-  public onTxConfirmed(cb: (e: ProviderEventPayload) => void) {
+  public onTxConfirmed(cb: (e?: ProviderEventPayload) => void) {
     this.#proxy?.onTxConfirmed(cb)
   }
 
@@ -190,10 +188,10 @@ export class Provider implements IProvider {
  * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
  * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
  */
-export const createProvider = async (
+export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
-  opts: CreateProviderOpts = {},
-): Promise<Provider> => {
+  opts: CreateProviderOpts<T> = {},
+): Promise<Provider> {
   const { providerDetector: providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
@@ -202,7 +200,11 @@ export const createProvider = async (
   if (!providerDetector.isInitiated) {
     await providerDetector.init()
   }
-  const providerInstance = providerDetector.getProvider(proxy.providerType)
+
+  const providerInstance = providerDetector.getProvider(
+    proxy.providerType as PROVIDERS,
+  )
+
   if (!providerInstance)
     throw new errors.ProviderInjectedInstanceNotFoundError()
 

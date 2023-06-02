@@ -1,10 +1,11 @@
 {
   "name": "@distributedlab/tools",
-  "version": "0.2.0-rc.3",
+  "version": "0.2.0-rc.16",
   "description": "Collection of common utility functions and classes",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/tools"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/tools",
+    "directory": "packages/tools"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html",
   "license": "MIT",
@@ -19,12 +20,14 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "browser": "./dist/esm/index.js",
+  "node": "./dist/cjs/index.js",
   "unpkg": "./dist/index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js",
       "default": "./dist/esm/index.js"
     }
@@ -35,7 +38,7 @@
     "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
-    "test": "yarn jest",
+    "test": "yarn jest --verbose",
     "typecheck": "tsc --noEmit"
   },
   "publishConfig": {

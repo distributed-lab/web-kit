@@ -1,6 +1,5 @@
 import type { FetcherAbortManager } from '@/abort-manager'
 import { HEADER_CONTENT_TYPE } from '@/const'
-import { isObject, normalizeHeadersCase } from '@/helpers'
 import type {
   FetcherConfig,
   FetcherRequest,
@@ -8,6 +7,9 @@ import type {
   FetcherRequestConfig,
   FetcherRequestQuery,
 } from '@/types'
+
+import { isObject } from './is-object'
+import { normalizeHeadersCase } from './normalize-header-case'
 
 export const buildRequest = (
   cfg: FetcherConfig,
@@ -32,7 +34,11 @@ export const buildRequestURL = (
   endpoint: string,
   query?: FetcherRequestQuery,
 ): string => {
-  const url = new URL(endpoint, baseUrl)
+  const url = new URL(baseUrl)
+  url.pathname = [url.pathname, endpoint]
+    .join('/')
+    .replace(/\/\/+/g, '/') // replace doubled slashes
+    .replace(/\/+$/, '') // remove slash in the end
 
   if (query) {
     Object.entries(query).forEach(([key, value]) => {

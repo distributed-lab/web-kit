@@ -4,6 +4,101 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- `@distributedlab/w3p` - tests
+
+### Changed
+- `@distributedlab/w3p` - README and examples
+
+## [0.2.0-rc.16] - 2023-05-22
+### Added
+- `@distributedlab/w3p` - `signMessage` method for base-evm provider wrapper
+
+## [0.2.0-rc.15] - 2023-05-19
+### Added
+- `@distributedlab/tools` - abs method for BN utility
+
+## [0.2.0-rc.14] - 2023-05-18
+### Added
+- `@distributedlab/w3p`
+  - `ProviderDetector` - configuration and custom error handlers passing
+  - `handleEthError` - optional custom error handlers
+
+### Fixed
+- `@distributedlab/w3p` - `wrapExternalEthProvider` not supported provider listeners
+
+## [0.2.0-rc.13] - 2023-05-18
+### Fixed
+- `@distributedlab/fetcher` - error building in response
+- `@distributedlab/w3p` - invalid providerType getter for fallback evm provider wrapper
+
+## [0.2.0-rc.12] - 2023-05-17
+### Fixed
+- `@distributedlab/w3p` - `ProviderUserRejectedRequest` error class
+
+## [0.2.0-rc.11] - 2023-05-16
+### Added
+- `@distributedlab/w3p`
+  - EVM fallback provider
+  - readme details about custom provider implementation
+  - possibility to set details for many supported chains
+  - `wrapExternalProvider` method for EVM providers
+- `@distributedlab/tools` - `RuntimeError` class
+
+### Changed
+- `@distributedlab/w3p`
+  - `multiple-providers` examples about adding details for supported chains
+  - `SwitchChain` method of `ProviderBase` interface now optional
+  - errors classes
+  - `handleEthError` method
+  - evm `addChain` method
+  - `BaseEVMProvider` methods now ain't need try catch anymore
+
+### Removed
+- `@distributedlab/w3p` - `RuntimeError` class
+
+## [0.2.0-rc.10] - 2023-05-11
+### Changed
+- `@distributedlab/w3p` - types, to be more flexible with external provider proxy constructors
+
+## [0.2.0-rc.9] - 2023-05-02
+### Fixed
+- `all` - Node resolution in the `package.json` files
+
+## [0.2.0-rc.8] - 2023-05-02
+### Changed
+- `@distributedlab/fetcher` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
+- `@distributedlab/jac` - Moved `query` and `body` arguments of `request` wrapping methods into `opts`
+- `root` - Workspace dependency version to be strict equal
+- `all` - Migrate to TypeScript 5.0.4
+
+### Fixed
+- `@distributedlab/fetcher` - Circular dependencies in the helpers
+
+## [0.2.0-rc.7] - 2023-04-27
+### Fixed
+- `@distributedlab/fetcher` - Base URL cropping in the case when it has a path
+
+## [0.2.0-rc.6] - 2023-04-25
+### Changed
+- `@distributedlab/tools` - `EventEmitter` Make emit second parameter optional
+
+## [0.2.0-rc.5] - 2023-04-24
+### Fixed
+- `@distributedlab/fetcher` - `clone` method
+
+### Removed
+- `@distributedlab/jac` - Dependency `@distributedlab/jsona`
+
+## [0.2.0-rc.4] - 2023-04-24
+### Added
+- `@distributedlab/jac` - `deserialize` helper to deserialize JSON API structures
+- `@distributedlab/w3p` - Examples and use-cases
+
+### Removed
+- `@distributedlab/jac` - Dependency `@distributedlab/jsona`
+
 ## [0.2.0-rc.3] - 2023-04-24
 ## Added
 - `root`: Package `@distributedlab/w3p` - wrapper for web3 providers
@@ -136,7 +231,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.3...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...HEAD
+[0.2.0-rc.16]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.15...0.2.0-rc.16
+[0.2.0-rc.15]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.14...0.2.0-rc.15
+[0.2.0-rc.14]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.13...0.2.0-rc.14
+[0.2.0-rc.13]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.12...0.2.0-rc.13
+[0.2.0-rc.12]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.11...0.2.0-rc.12
+[0.2.0-rc.11]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.10...0.2.0-rc.11
+[0.2.0-rc.10]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.9...0.2.0-rc.10
+[0.2.0-rc.9]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.8...0.2.0-rc.9
+[0.2.0-rc.8]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.7...0.2.0-rc.8
+[0.2.0-rc.7]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.6...0.2.0-rc.7
+[0.2.0-rc.6]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.5...0.2.0-rc.6
+[0.2.0-rc.5]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.4...0.2.0-rc.5
+[0.2.0-rc.4]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.3...0.2.0-rc.4
 [0.2.0-rc.3]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.2...0.2.0-rc.3
 [0.2.0-rc.2]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.1...0.2.0-rc.2
 [0.2.0-rc.1]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.0...0.2.0-rc.1

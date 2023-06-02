@@ -16,10 +16,8 @@ import {
 import type {
   Endpoint,
   JsonApiClientConfig,
-  JsonApiClientRequestBody,
   JsonApiClientRequestConfig,
   JsonApiClientRequestOpts,
-  JsonApiClientRequestQuery,
   JsonApiDefaultMeta,
   JsonApiResponseErrors,
   JsonApiResponseRaw,
@@ -158,13 +156,11 @@ export class JsonApiClient {
    */
   get<T, U = JsonApiDefaultMeta>(
     endpoint: Endpoint,
-    query?: JsonApiClientRequestQuery,
-    opts?: JsonApiClientRequestOpts,
+    opts?: Partial<JsonApiClientRequestOpts>,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.GET,
       endpoint,
-      query: query as FetcherRequestQuery,
       ...(opts || {}),
     })
   }
@@ -175,13 +171,11 @@ export class JsonApiClient {
    */
   post<T, U = JsonApiDefaultMeta>(
     endpoint: Endpoint,
-    body?: JsonApiClientRequestBody,
-    opts?: JsonApiClientRequestOpts,
+    opts?: Partial<JsonApiClientRequestOpts>,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.POST,
       endpoint,
-      body,
       ...(opts || {}),
     })
   }
@@ -193,13 +187,11 @@ export class JsonApiClient {
    */
   patch<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    body?: JsonApiClientRequestBody,
-    opts?: JsonApiClientRequestOpts,
+    opts?: Partial<JsonApiClientRequestOpts>,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.PATCH,
       endpoint,
-      body,
       ...(opts || {}),
     })
   }
@@ -210,13 +202,11 @@ export class JsonApiClient {
    */
   put<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    body?: JsonApiClientRequestBody,
-    opts?: JsonApiClientRequestOpts,
+    opts?: Partial<JsonApiClientRequestOpts>,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.PUT,
       endpoint,
-      body,
       ...(opts || {}),
     })
   }
@@ -227,13 +217,11 @@ export class JsonApiClient {
    */
   delete<T, U = JsonApiDefaultMeta>(
     endpoint: string,
-    body?: JsonApiClientRequestBody,
-    opts?: JsonApiClientRequestOpts,
+    opts?: Partial<JsonApiClientRequestOpts>,
   ): Promise<JsonApiResponse<T, U>> {
     return this.request<T, U>({
       method: HTTP_METHODS.DELETE,
       endpoint,
-      body,
       ...(opts || {}),
     })
   }

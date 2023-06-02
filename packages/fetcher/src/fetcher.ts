@@ -11,10 +11,8 @@ import type {
   FetcherConfig,
   FetcherInterceptor,
   FetcherRequest,
-  FetcherRequestBody,
   FetcherRequestConfig,
   FetcherRequestOpts,
-  FetcherRequestQuery,
   FetcherResponse,
 } from '@/types'
 
@@ -68,7 +66,7 @@ export class Fetcher {
    * Clones current Fetcher instance.
    */
   public clone(): Fetcher {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+    return new Fetcher(this.#config, this.#interceptorManager.interceptors)
   }
 
   /**
@@ -163,12 +161,10 @@ export class Fetcher {
    */
   public get<T>(
     endpoint: string,
-    query?: FetcherRequestQuery,
     opts?: FetcherRequestOpts,
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      query,
       method: HTTP_METHODS.GET,
       ...(opts || {}),
     })
@@ -179,12 +175,10 @@ export class Fetcher {
    */
   public post<T>(
     endpoint: string,
-    body?: FetcherRequestBody,
     opts?: FetcherRequestOpts,
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      body,
       method: HTTP_METHODS.POST,
       ...(opts || {}),
     })
@@ -195,12 +189,10 @@ export class Fetcher {
    */
   public patch<T>(
     endpoint: string,
-    body?: FetcherRequestBody,
     opts?: FetcherRequestOpts,
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      body,
       method: HTTP_METHODS.PATCH,
       ...(opts || {}),
     })
@@ -211,12 +203,10 @@ export class Fetcher {
    */
   public put<T>(
     endpoint: string,
-    body?: FetcherRequestBody,
     opts?: FetcherRequestOpts,
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      body,
       method: HTTP_METHODS.PUT,
       ...(opts || {}),
     })
@@ -227,12 +217,10 @@ export class Fetcher {
    */
   public delete<T>(
     endpoint: string,
-    body?: FetcherRequestBody,
     opts?: FetcherRequestOpts,
   ): Promise<FetcherResponse<T>> {
     return this.request<T>({
       endpoint,
-      body,
       method: HTTP_METHODS.DELETE,
       ...(opts || {}),
     })

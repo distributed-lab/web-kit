@@ -1,4 +1,5 @@
-import { setupWalletSelector, WalletSelector } from '@near-wallet-selector/core'
+import type { WalletSelector } from '@near-wallet-selector/core'
+import { setupWalletSelector } from '@near-wallet-selector/core'
 import type { Options } from '@near-wallet-selector/core/lib/options.types'
 import { Observable } from 'rxjs'
 

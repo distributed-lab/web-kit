@@ -3,7 +3,7 @@ import { MetamaskProvider } from '@/providers'
 import { mockWindow } from '@/tests'
 import type { ProviderInstance } from '@/types'
 
-import { Provider } from './Provider'
+import { Provider } from './provider'
 
 describe('performs provider unit test', () => {
   mockWindow({

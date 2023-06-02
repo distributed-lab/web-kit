@@ -1,10 +1,11 @@
 {
   "name": "@distributedlab/fetcher",
-  "version": "0.2.0-rc.3",
+  "version": "0.2.0-rc.16",
   "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/fetcher"
+    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/fetcher",
+    "directory": "packages/fetcher"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_fetcher.html",
   "license": "MIT",
@@ -19,12 +20,14 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "browser": "./dist/esm/index.js",
+  "node": "./dist/cjs/index.js",
   "unpkg": "./dist/index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js",
       "import": "./dist/esm/index.js",
       "default": "./dist/esm/index.js"
     }
@@ -36,7 +39,7 @@
     "build:esm": "npx swc src -d ./dist/esm --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-    "test": "yarn jest"
+    "test": "yarn jest --verbose"
   },
   "publishConfig": {
     "access": "public"

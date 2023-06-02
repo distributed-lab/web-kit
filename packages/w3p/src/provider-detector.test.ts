@@ -5,7 +5,7 @@ import { clearWindowMock, mockWindow } from '@/tests'
 
 describe('performs provider detector unit test', () => {
   describe('performs init', () => {
-    let providerDetector: ProviderDetector
+    let providerDetector: ProviderDetector<keyof Record<string, string>>
 
     beforeEach(() => {
       providerDetector = new ProviderDetector()
@@ -23,7 +23,7 @@ describe('performs provider detector unit test', () => {
     })
   })
   describe('performs get and add providers', () => {
-    let providerDetector: ProviderDetector
+    let providerDetector: ProviderDetector<keyof Record<string, string>>
 
     beforeEach(() => {
       providerDetector = new ProviderDetector()

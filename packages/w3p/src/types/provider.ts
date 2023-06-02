@@ -23,8 +23,8 @@ import type { SolanaProvider } from './solana'
 
 export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
 
-export type ProviderInstance = {
-  name: PROVIDERS
+export type ProviderInstance<T extends keyof Record<string, string> = never> = {
+  name: T | PROVIDERS
   instance?: RawProvider
 }
 
@@ -53,10 +53,10 @@ export interface ProviderBase {
   address?: string
   isConnected: boolean
 
-  connect: () => Promise<void>
+  connect?: () => Promise<void>
 
   addChain?: (chain: Chain) => Promise<void>
-  switchChain: (chainId: ChainId) => Promise<void>
+  switchChain?: (chainId: ChainId) => Promise<void>
 
   signAndSendTx?: (txRequestBody: TxRequestBody) => Promise<TransactionResponse>
   signMessage?: (message: string) => Promise<string>
@@ -73,17 +73,17 @@ export interface ProviderProxy extends ProviderBase, ProviderSubscriber {
 }
 
 export interface IProvider extends ProviderBase, ProviderSubscriber {
-  providerType?: PROVIDERS
+  providerType?: string
   init: (
     provider: ProviderInstance,
     listeners?: ProviderListeners,
   ) => Promise<this>
 
+  connect: () => Promise<void>
   chainDetails?: Chain
-  setChainDetails?: (chain: Chain) => void
 }
 
 export interface ProviderProxyConstructor {
   new (provider: RawProvider): ProviderProxy
-  providerType: PROVIDERS
+  providerType: string
 }

@@ -16,10 +16,10 @@ export interface EthereumProvider extends providers.ExternalProvider {
   removeAllListeners(event?: string | symbol): this
   providers?: this[]
   selectedAddress: string | null
-  request: (...args: any[]) => Promise<void>
+  request?: (request: { method: string; params?: Array<any> }) => Promise<any>
 }
 
-export type EthProviderRpcError = {
+export interface EthProviderRpcError extends Error {
   message: string
   code: number | string
   data?: unknown

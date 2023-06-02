@@ -1,7 +1,6 @@
-import { PROVIDER_CHECKS, PROVIDERS } from '@/enums'
-import { sleep } from '@/helpers'
+import { CHAIN_TYPES, PROVIDER_CHECKS, PROVIDERS } from '@/enums'
+import { sleep, wrapExternalEthProvider } from '@/helpers'
 
-import { NearRawProvider } from './providers'
 import type {
   EthereumProvider,
   ProviderInstance,
@@ -19,17 +18,43 @@ declare global {
   }
 }
 
-export class ProviderDetector {
-  #providers: ProviderInstance[]
+type ErrorHandlersMap = {
+  [key in CHAIN_TYPES]: (error: Error) => unknown
+}
+
+type ProviderDetectorConfig = {
+  isWrapDefaultProviders: boolean
+}
+
+export class ProviderDetector<T extends keyof Record<string, string>> {
+  #providers: ProviderInstance<T>[]
   #rawProviders: RawProvider[]
   #isInitiated = false
+
+  public static errorHandlers?: ErrorHandlersMap
+  public static cfg: ProviderDetectorConfig
 
   constructor() {
     this.#providers = []
     this.#rawProviders = []
+
+    ProviderDetector.setCfg({
+      isWrapDefaultProviders: true,
+    })
   }
 
-  public async init(): Promise<ProviderDetector> {
+  public static defineErrorHandlers(handlersMap: ErrorHandlersMap) {
+    ProviderDetector.errorHandlers = handlersMap
+  }
+
+  public static setCfg(cfg: Partial<typeof ProviderDetector.cfg>) {
+    ProviderDetector.cfg = {
+      ...ProviderDetector.cfg,
+      ...cfg,
+    }
+  }
+
+  public async init(): Promise<ProviderDetector<T>> {
     this.#detectRawProviders()
     await this.#defineProviders()
     this.#isInitiated = true
@@ -40,7 +65,7 @@ export class ProviderDetector {
     return this.#isInitiated
   }
 
-  public get providers(): Record<PROVIDERS, ProviderInstance> {
+  public get providers(): Record<PROVIDERS | T, ProviderInstance> {
     return this.#providers.reduce((acc, el) => {
       const name = el.name.toLowerCase() as PROVIDERS
 
@@ -49,32 +74,39 @@ export class ProviderDetector {
         name,
       }
       return acc
-    }, {} as Record<PROVIDERS, ProviderInstance>)
+    }, {} as Record<PROVIDERS | T, ProviderInstance>)
   }
 
   public get isEnabled(): boolean {
     return Boolean(this.#providers.length)
   }
 
-  public getProvider(provider: PROVIDERS): ProviderInstance | undefined {
+  public getProvider(provider: PROVIDERS | T): ProviderInstance | undefined {
     return this.providers[provider]
   }
 
-  public addProvider(provider: ProviderInstance): void {
+  public addProvider(provider: ProviderInstance<T>): void {
     this.#providers.push(provider)
   }
 
   #detectRawProviders(): void {
     const ethProviders = window?.ethereum
       ? window?.ethereum?.providers || [window?.ethereum]
-      : undefined
+      : []
     const phantomProvider = window?.solana
     const solflareProvider = window?.solflare
-    const nearProvider = new NearRawProvider({})
+
+    const proxyEthProviders = ethProviders?.map(el =>
+      wrapExternalEthProvider(
+        el,
+        ProviderDetector.errorHandlers?.[CHAIN_TYPES.EVM],
+      ),
+    )
 
     this.#rawProviders = [
-      ...(ethProviders ? ethProviders : []),
-      ...(nearProvider ? [nearProvider] : []),
+      ...(ProviderDetector.cfg?.isWrapDefaultProviders && proxyEthProviders
+        ? proxyEthProviders
+        : ethProviders),
       ...(phantomProvider ? [phantomProvider] : []),
       ...(solflareProvider ? [solflareProvider] : []),
     ] as RawProvider[]

@@ -5,7 +5,7 @@ import { EIP1193, EIP1474, SOLANA_CHAINS } from '@/enums'
 import { errors } from '@/errors'
 import type { Chain, SolanaProviderRpcError } from '@/types'
 
-export function handleSolError(error: SolanaProviderRpcError) {
+export function handleSolError(error: SolanaProviderRpcError): never {
   const ErrorCode = error?.error?.code || error?.code
 
   switch (ErrorCode) {

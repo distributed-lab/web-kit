@@ -17,39 +17,15 @@ yarn add @distributedlab/w3p
 
 ## Example
 
-In the case, when you need to check which injected providers do user have in his browser
+For the reactive frameworks such as Vue or react you need to create a wrapper for the provider, which will be used in the application.
 
-```ts
-import {
-  ProviderDetector,
-  MetamaskProvider,
-  CoinbaseProvider,
-  ProviderProxyConstructor,
-  PROVIDERS,
-  ProviderConstructorMap,
-  createProvider,
-} from "@distributedlab/w3p"
+here are the the examples for both of them:
+- [Vue useProvider composable implementation](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/vue-use-provider-composable.ts)
+- [React useProvider hook implementation](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/react-use-provider-hook.ts)
 
-const providerDetector = new ProviderDetector()
+The Common usage of w3p with vue [here](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/multiple-providers.ts)
 
-await providerDetector.init()
-
-const supportedProviders: ProviderConstructorMap = {
-  [PROVIDERS.Metamask]: MetamaskProvider,
-  [PROVIDERS.Coinbase]: CoinbaseProvider,
-}
-
-const providerProxyConstructor = supportedProviders[providerType] as ProviderProxyConstructor
-
-const provider = await createProvider(providerProxyConstructor, {
-  providerDetectorInstance: providerDetector,
-  listeners: {
-    ...yourListeners,
-  },
-})
-
-await provider.connect()
-```
+You can setup pinia js and just copy file content, or use it's callback just for create your own composable
 
 Or if you sure, that you will use only one provider, e.g. Metamask
 
@@ -60,6 +36,25 @@ const provider = await createProvider(MetamaskProvider)
 
 await provider.connect()
 ```
+
+To create your own custom provider, you will need to develop a class that implements the `ProviderProxyConstructor` interface.
+
+#### If your provider is fully EVM-compatible, similar to Metamask or Coinbase, you can extend the `BaseEVMProvider` class as in example.
+```ts
+export class MyProvider extends BaseEVMProvider implements ProviderProxy {
+  constructor(provider: RawProvider) {
+    super(provider)
+  }
+
+  static get providerType() {
+    return EXTERNAL_PROVIDERS.MyProvider
+  }
+}
+```
+
+If your provider has additional functionalities or different implementation of switching, adding a chain, signing and sending transactions methods, and more, you can create a custom class that extends the [ProviderEventBus](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/src/providers/wrapped/_event-bus.ts) and implements the [ProviderProxy](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/src/types/provider.ts#L71) interface. This allows you to override functions according to your specific requirements.
+
+To interact with contract check [this example](https://github.com/distributed-lab/web-kit/blob/main/packages/w3p/examples/eth-contract-call.ts)
 
 ## License
 
