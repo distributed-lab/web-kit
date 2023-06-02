@@ -6,7 +6,7 @@ import {
   getEthExplorerTxUrl,
   hexToDecimal,
 } from '@/helpers'
-import { ProviderEventBus } from '@/providers'
+import { ProviderEventBus } from './_event-bus'
 import type {
   Chain,
   ChainId,
