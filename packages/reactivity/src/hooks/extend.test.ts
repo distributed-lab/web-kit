@@ -96,4 +96,29 @@ describe('performs extend hook unit test', () => {
     child.changeAge(changedAge)
     expect(child.age).toBe(changedAge)
   })
+
+  test('should correctly override value of the extended parent', () => {
+    const createParent = () => {
+      const age = ref(mockedAge)
+
+      return toRaw({
+        age,
+      })
+    }
+
+    const createChild = () => {
+      const parent = createParent()
+      const age = ref(changedAge)
+
+      return toRaw(
+        extend(parent, {
+          age,
+        }),
+      )
+    }
+
+    const child = createChild()
+
+    expect(child.age).toBe(changedAge)
+  })
 })
