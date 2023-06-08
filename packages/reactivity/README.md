@@ -14,7 +14,7 @@ import { ref, computed, toRaw } from '@distributedlab/reactivity'
 
 const newPerson = () => {
   const age = ref(30)
-  const name = computed('John')
+  const name = computed(() => 'John')
 
   const changeAge = (newAge: number) => {
     age.value = newAge
