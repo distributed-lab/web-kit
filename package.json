@@ -26,6 +26,11 @@
   "scripts": {
     "build": "yarn workspaces foreach -pv --topological-dev run build && yarn build:browser",
     "build:browser": "rollup -c --bundleConfigAsCjs",
+    "build:jac": "yarn workspace @distributedlab/jac build",
+    "build:fetcher": "yarn workspace @distributedlab/fetcher build",
+    "build:tools": "yarn workspace @distributedlab/tools build",
+    "build:reactivity": "yarn workspace @rarimo/reactivity build",
+    "build:w3p": "yarn workspace @rarimo/w3p build",
     "docs": "typedoc --options typedoc.json",
     "lint": "eslint . --ext .ts --fix --cache --max-warnings=0 && yarn workspaces foreach -pv --no-private run typecheck",
     "test": "yarn workspaces foreach -pv --no-private run test",

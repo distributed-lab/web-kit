@@ -1,10 +1,10 @@
 {
   "name": "@distributedlab/tools",
-  "version": "0.2.0-rc.16",
+  "version": "0.2.0-rc.17",
   "description": "Collection of common utility functions and classes",
   "repository": {
     "type": "git",
-    "url": "https://github.com/distributed-lab/web-kit/tree/main/packages/tools",
+    "url": "https://github.com/distributed-lab/web-kit.git",
     "directory": "packages/tools"
   },
   "homepage": "https://distributed-lab.github.io/web-kit/modules/_distributedlab_tools.html",
