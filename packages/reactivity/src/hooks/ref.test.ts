@@ -12,4 +12,17 @@ describe('performs ref hook', () => {
     age.value = 30
     expect(age.value).toBe(30)
   })
+
+  test('should be able to create empty ref', () => {
+    const age = ref<number>()
+    expect(age.value).toBeUndefined()
+    age.value = 30
+    expect(age.value).toBe(30)
+  })
+
+  test('should be able to paste another ref as value', () => {
+    const age = ref<number>(12)
+    expect(age.value).toBe(12)
+    expect(ref(age).value).toBe(12)
+  })
 })

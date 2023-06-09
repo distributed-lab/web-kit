@@ -1,4 +1,4 @@
-import type { MaybeComputed, MaybeRef, Ref } from '@/types'
+import type { MaybeComputed, MaybeRef, Ref, RefFunction } from '@/types'
 
 import { isComputed } from './computed'
 
@@ -26,4 +26,4 @@ export const unref = <T>(target: MaybeRef<T> | MaybeComputed<T>): T => {
   return isRef(target) || isComputed(target) ? target.value : target
 }
 
-export const ref = <T>(value: T): Ref<T> => new RefIml(value)
+export const ref: RefFunction = (value?: unknown) => new RefIml(value)

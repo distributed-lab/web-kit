@@ -1,4 +1,4 @@
-import type { Raw } from '@/types'
+import type { Extended, Raw } from '@/types'
 
 import { computed } from './computed'
 import { unref } from './ref'
@@ -6,8 +6,8 @@ import { unref } from './ref'
 export const extend = <P extends object, C extends object>(
   parent: Raw<P>,
   child: C,
-): Raw<P> & C => {
-  const obj = {} as Raw<P> & C
+): Extended<P, C> => {
+  const obj = {} as Extended<P, C>
 
   Object.defineProperties(obj, createDescriptors(parent))
   Object.defineProperties(obj, createDescriptors(child))

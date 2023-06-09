@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-rc.19] - 2023-06-09
+- `@distributedlab/reactivity` - `extend` hook return type
+- `@distributedlab/reactivity` - `ref` hook value argument type
+
 ## [0.2.0-rc.18] - 2023-06-08
 ### Fixed
-- `@distributedlab/reactivity` - Redefining issue in the `extend` method
+- `@distributedlab/reactivity` - Redefining issue in the `extend` hook
 
 ## [0.2.0-rc.17] - 2023-06-08
 ### Added
@@ -234,7 +238,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...HEAD
+[0.2.0-rc.19]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...0.2.0-rc.19
 [0.2.0-rc.18]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...0.2.0-rc.18
 [0.2.0-rc.17]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...0.2.0-rc.17
 [0.2.0-rc.16]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.15...0.2.0-rc.16
