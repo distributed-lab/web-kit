@@ -1,3 +1,5 @@
+import { DECIMALS } from '@distributedlab/tools'
+
 import { CHAIN_TYPES } from '@/enums'
 import { getEthExplorerAddressUrl, getEthExplorerTxUrl } from '@/helpers'
 
@@ -6,7 +8,7 @@ const exampleChain = {
   name: 'Example',
   rpcUrl: 'https://mainnet.example.io/v3/',
   explorerUrl: 'https://example.io',
-  token: { name: 'Example', symbol: 'ex', decimals: 18 },
+  token: { name: 'Example', symbol: 'ex', decimals: DECIMALS.WEI },
   type: CHAIN_TYPES.EVM,
   icon: 'https://example.com/image.svg',
 }

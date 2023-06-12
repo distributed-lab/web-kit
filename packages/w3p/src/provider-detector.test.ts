@@ -15,7 +15,6 @@ describe('performs provider detector unit test', () => {
     afterEach(clearWindowMock)
 
     test('should initialize the provider detector', async () => {
-
       await providerDetector.init()
 
       expect(providerDetector.isInitiated).toBeTruthy()
