@@ -9,12 +9,12 @@ describe('performs provider detector unit test', () => {
 
     beforeEach(() => {
       providerDetector = new ProviderDetector()
+      mockWindow({ ethereum: {} })
     })
 
     afterEach(clearWindowMock)
 
     test('should initialize the provider detector', async () => {
-      mockWindow({ ethereum: {} })
 
       await providerDetector.init()
 
@@ -32,7 +32,6 @@ describe('performs provider detector unit test', () => {
     afterEach(clearWindowMock)
 
     test('should list empty providers', async () => {
-      mockWindow({ ethereum: {} })
       expect(providerDetector.providers).toEqual({})
     })
     test('should add and return list providers', async () => {
