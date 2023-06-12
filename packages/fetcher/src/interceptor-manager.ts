@@ -1,42 +1,35 @@
+import { ref, toRaw } from '@distributedlab/reactivity'
+
 import type {
   FetcherInterceptor,
+  FetcherInterceptorManager,
   FetcherRequest,
   FetcherResponse,
 } from '@/types'
 
-export class FetcherInterceptorManager {
-  #interceptors: FetcherInterceptor[] = []
+export const newFetcherInterceptorManager = (
+  args: FetcherInterceptor[] = [],
+): FetcherInterceptorManager => {
+  const interceptors = ref<FetcherInterceptor[]>(args)
 
-  constructor(interceptors?: FetcherInterceptor[]) {
-    if (interceptors) {
-      this.#interceptors = [...interceptors]
-    }
+  const add = (i: FetcherInterceptor) => {
+    interceptors.value.push(i)
   }
 
-  public get interceptors(): FetcherInterceptor[] {
-    return this.#interceptors
-  }
-
-  public add(interceptor: FetcherInterceptor): void {
-    this.#interceptors.push(interceptor)
-  }
-
-  public remove(interceptor: FetcherInterceptor): void {
-    const index = this.#interceptors.indexOf(interceptor)
+  const remove = (interceptor: FetcherInterceptor) => {
+    const index = interceptors.value.indexOf(interceptor)
     if (!~index) return
-    this.#interceptors.splice(index, 1)
+    interceptors.value.splice(index, 1)
   }
 
-  public clear(): void {
-    this.#interceptors = []
+  const clear = () => {
+    interceptors.value = []
   }
 
-  public async runRequestInterceptors(
-    request: FetcherRequest,
-  ): Promise<FetcherRequest> {
+  const runRequestInterceptors = async (request: FetcherRequest) => {
     let req = request
 
-    for (const interceptor of this.#interceptors) {
+    for (const interceptor of interceptors.value) {
       if (interceptor.request) {
         req = await interceptor.request(req)
       }
@@ -45,31 +38,35 @@ export class FetcherInterceptorManager {
     return req
   }
 
-  // @distributedlab/web-kit
-  //
-  public async runResponseInterceptors<T>(
-    response: FetcherResponse<T>,
-  ): Promise<FetcherResponse<T>> {
-    return this.#runResponseInterceptors(response, 'response')
+  const runResponseInterceptors = async <T>(response: FetcherResponse<T>) => {
+    return _runResponseInterceptors(response, 'response')
   }
 
-  public async runErrorInterceptors<T>(
-    response: FetcherResponse<T>,
-  ): Promise<FetcherResponse<T>> {
-    return this.#runResponseInterceptors(response, 'error')
+  const runErrorInterceptors = async <T>(response: FetcherResponse<T>) => {
+    return _runResponseInterceptors(response, 'error')
   }
 
-  async #runResponseInterceptors<T>(
+  const _runResponseInterceptors = async <T>(
     response: FetcherResponse<T>,
     fnName: 'response' | 'error',
-  ): Promise<FetcherResponse<T>> {
+  ) => {
     let resp = response
 
-    for (const interceptor of this.#interceptors) {
+    for (const interceptor of interceptors.value) {
       const fn = interceptor[fnName]
       if (fn) resp = (await fn(resp)) as FetcherResponse<T>
     }
 
     return resp
   }
+
+  return toRaw({
+    interceptors,
+    add,
+    remove,
+    clear,
+    runRequestInterceptors,
+    runResponseInterceptors,
+    runErrorInterceptors,
+  })
 }

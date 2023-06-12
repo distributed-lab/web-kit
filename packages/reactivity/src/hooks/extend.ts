@@ -22,6 +22,7 @@ const createDescriptors = <T extends object>(obj: T) => {
         value: computed(() => unref(obj[k as keyof T])),
         enumerable: true,
         configurable: true,
+        writable: true,
       }
 
       if (typeof v === 'function') result.value = v.bind(obj)

@@ -1,9 +1,7 @@
-import { FetcherAbortManager } from './abort-manager'
 import { DEFAULT_CONFIG } from './const'
-import { Fetcher } from './fetcher'
-import { FetcherInterceptorManager } from './interceptor-manager'
+import { newFetcher } from './fetcher'
 import { mockFetchResponse } from './tests'
-import type { FetcherRequest } from './types'
+import type { Fetcher, FetcherRequest } from './types'
 
 beforeEach(() => {
   jest.resetModules()
@@ -17,23 +15,11 @@ const cfg = {
 describe('performs Fetcher unit test', () => {
   describe('performs constructor', () => {
     test('should set config', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       expect(fetcher.config).toEqual({
         ...DEFAULT_CONFIG,
         ...cfg,
       })
-    })
-
-    test('should create abort manager', () => {
-      const fetcher = new Fetcher(cfg)
-      expect(fetcher.abortManager).toBeInstanceOf(FetcherAbortManager)
-    })
-
-    test('should create interceptor manager', () => {
-      const fetcher = new Fetcher(cfg)
-      expect(fetcher.interceptorManager).toBeInstanceOf(
-        FetcherInterceptorManager,
-      )
     })
 
     test('should create interceptor manager with interceptors', () => {
@@ -41,7 +27,7 @@ describe('performs Fetcher unit test', () => {
         request: (cfg: FetcherRequest) => Promise.resolve(cfg),
       }
 
-      const fetcher = new Fetcher(cfg, [interceptor])
+      const fetcher = newFetcher(cfg, [interceptor])
 
       expect(fetcher.interceptorManager.interceptors.length).toBe(1)
       expect(fetcher.interceptorManager.interceptors[0]).toBe(interceptor)
@@ -50,12 +36,12 @@ describe('performs Fetcher unit test', () => {
 
   describe('performs helper methods', () => {
     test('should return base url', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       expect(fetcher.baseUrl).toBe(cfg.baseUrl)
     })
 
     test('should use interceptor', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       const interceptor = {
         request: (cfg: FetcherRequest) => Promise.resolve(cfg),
       }
@@ -65,7 +51,7 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('should eject interceptor', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       const interceptor = {
         request: (cfg: FetcherRequest) => Promise.resolve(cfg),
       }
@@ -75,14 +61,14 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('should use base url', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       const newBaseUrl = 'http://localhost:8080/'
       fetcher.useBaseUrl(newBaseUrl)
       expect(fetcher.baseUrl).toBe(newBaseUrl)
     })
 
     test('should update config', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       const newConfig = { timeout: 1000 }
       fetcher.updateConfig(newConfig)
       expect(fetcher.config).toEqual({
@@ -93,7 +79,7 @@ describe('performs Fetcher unit test', () => {
     })
 
     test('should abort request', () => {
-      const fetcher = new Fetcher(cfg)
+      const fetcher = newFetcher(cfg)
       const abortSpy = jest.spyOn(fetcher.abortManager, 'abort')
       fetcher.abort()
       expect(abortSpy).toBeCalled()
@@ -119,7 +105,7 @@ describe('performs Fetcher unit test', () => {
     }
 
     beforeEach(() => {
-      fetcher = new Fetcher(cfg)
+      fetcher = newFetcher(cfg)
 
       mockFetchResponse(mockedEmptyResponse)
 
@@ -131,49 +117,86 @@ describe('performs Fetcher unit test', () => {
 
       await fetcher.get('/get', { query })
 
-      expect(fetcher.request).toHaveBeenLastCalledWith({
-        method: 'GET',
-        endpoint: '/get',
-        query,
-      })
+      expect(fetch).toHaveBeenLastCalledWith(
+        'https://example.com/get?foo=bar',
+        {
+          body: null,
+          cache: 'no-store',
+          credentials: 'include',
+          headers: {},
+          method: 'GET',
+          signal: expect.any(AbortSignal),
+          referrerPolicy: 'strict-origin-when-cross-origin',
+          url: 'https://example.com/get?foo=bar',
+        },
+      )
     })
 
     test('"post()" should call "request()" with correct params', async () => {
       await fetcher.post('/post', { body: mockedBody })
 
-      expect(fetcher.request).toHaveBeenLastCalledWith({
+      const url = 'https://example.com/post'
+
+      expect(fetch).toHaveBeenLastCalledWith(url, {
+        body: JSON.stringify(mockedBody),
+        cache: 'no-store',
+        credentials: 'include',
+        headers: {},
         method: 'POST',
-        endpoint: '/post',
-        body: mockedBody,
+        signal: expect.any(AbortSignal),
+        referrerPolicy: 'strict-origin-when-cross-origin',
+        url,
       })
     })
 
     test('"put()" should call "request()" with correct params', async () => {
       await fetcher.put('/put', { body: mockedBody })
 
-      expect(fetcher.request).toHaveBeenLastCalledWith({
+      const url = 'https://example.com/put'
+
+      expect(fetch).toHaveBeenLastCalledWith(url, {
+        body: JSON.stringify(mockedBody),
+        cache: 'no-store',
+        credentials: 'include',
+        headers: {},
         method: 'PUT',
-        endpoint: '/put',
-        body: mockedBody,
+        signal: expect.any(AbortSignal),
+        referrerPolicy: 'strict-origin-when-cross-origin',
+        url,
       })
     })
 
     test('"patch()" should call "request()" with correct params', async () => {
       await fetcher.patch('/patch', { body: mockedBody })
 
-      expect(fetcher.request).toHaveBeenLastCalledWith({
+      const url = 'https://example.com/patch'
+
+      expect(fetch).toHaveBeenLastCalledWith(url, {
+        body: JSON.stringify(mockedBody),
+        cache: 'no-store',
+        credentials: 'include',
+        headers: {},
         method: 'PATCH',
-        endpoint: '/patch',
-        body: mockedBody,
+        signal: expect.any(AbortSignal),
+        referrerPolicy: 'strict-origin-when-cross-origin',
+        url,
       })
     })
 
     test('"delete()" should call "request()" with correct params', async () => {
       await fetcher.delete('/delete')
 
-      expect(fetcher.request).toHaveBeenLastCalledWith({
+      const url = 'https://example.com/delete'
+
+      expect(fetch).toHaveBeenLastCalledWith(url, {
+        body: null,
+        cache: 'no-store',
+        credentials: 'include',
+        headers: {},
         method: 'DELETE',
-        endpoint: '/delete',
+        signal: expect.any(AbortSignal),
+        referrerPolicy: 'strict-origin-when-cross-origin',
+        url,
       })
     })
 

@@ -1,53 +1,57 @@
+import { ref, toRaw } from '@distributedlab/reactivity'
+
 import { isEmptyBodyStatusCode } from '@/helpers'
-import type { FetcherRequest, FetcherResponse } from '@/types'
+import type {
+  FetcherRequest,
+  FetcherResponse,
+  FetcherResponseBuilder,
+} from '@/types'
 
-export class FetcherResponseBuilder<T> {
-  #response?: Response
-  readonly #result: FetcherResponse<T>
+export const newFetcherResponseBuilder = <T>(
+  req?: FetcherRequest,
+  resp?: Response,
+): FetcherResponseBuilder<T> => {
+  let builder: FetcherResponseBuilder<T>
+  const response = ref<Response>()
 
-  constructor(request?: FetcherRequest, response?: Response) {
-    this.#result = {
-      ok: false,
-      status: 0,
-      statusText: '',
-      headers: {} as Headers,
-      url: '',
-      request: request || { url: '' },
+  const result = ref<FetcherResponse<T>>({
+    ok: false,
+    status: 0,
+    statusText: '',
+    headers: {} as Headers,
+    url: '',
+    request: req || { url: '' },
+  })
+
+  const build = async () => {
+    if (!response.value || isEmptyBodyStatusCode(response.value.status)) {
+      return result.value
     }
 
-    if (response) {
-      this.populateResponse(response)
+    await extractData()
+
+    return result.value
+  }
+
+  const populateResponse = (r: Response) => {
+    response.value = r.clone()
+    result.value.ok = response.value.ok
+    result.value.status = response.value.status
+    result.value.statusText = response.value.statusText
+    result.value.headers = response.value.headers
+    result.value.url = response.value.url
+    return builder
+  }
+
+  const extractData = async () => {
+    if (!response.value || isEmptyBodyStatusCode(response.value.status)) {
+      return
     }
-  }
-
-  public async build(): Promise<FetcherResponse<T>> {
-    if (!this.#response || isEmptyBodyStatusCode(this.#response.status)) {
-      return this.#result
-    }
-
-    await this.#extractData()
-
-    return this.#result
-  }
-
-  public populateResponse(response: Response): this {
-    this.#response = response.clone()
-    this.#result.ok = response.ok
-    this.#result.status = response.status
-    this.#result.statusText = response.statusText
-    this.#result.headers = response.headers
-    this.#result.url = response.url
-    return this
-  }
-
-  async #extractData() {
-    if (!this.#response) return
-    if (isEmptyBodyStatusCode(this.#response.status)) return
 
     const parsers = [
-      this.#tryToParseJson.bind(this),
-      this.#tryToParseFormData.bind(this), // TODO: check if it's possible to parse formData
-      ...(this.#response.ok ? [this.#tryToParseBlob.bind(this)] : []),
+      parseJson,
+      parseFormData,
+      ...(response.value.ok ? [parseBlob] : []),
     ]
 
     for (const parser of parsers) {
@@ -56,26 +60,34 @@ export class FetcherResponseBuilder<T> {
     }
   }
 
-  async #tryToParseJson(): Promise<boolean> {
-    // Clone response to be able to read response body multiple times
-    // https://developer.mozilla.org/en-US/docs/Web/API/Response/bodyUsed
-    return this.#tryToWrapper(this.#response?.clone()?.json() as Promise<T>)
-  }
+  /**
+   * Clone response to be able to read response body multiple times
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/Response/bodyUsed}
+   */
+  const parseJson = () =>
+    tryToParse(response.value?.clone()?.json() as Promise<T>)
 
-  async #tryToParseBlob(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.clone()?.blob() as Promise<T>)
-  }
+  const parseBlob = () =>
+    tryToParse(response.value?.clone()?.blob() as Promise<T>)
 
-  async #tryToParseFormData(): Promise<boolean> {
-    return this.#tryToWrapper(this.#response?.clone()?.formData() as Promise<T>)
-  }
+  const parseFormData = () =>
+    tryToParse(response.value?.clone()?.formData() as Promise<T>)
 
-  async #tryToWrapper(promise: Promise<T>): Promise<boolean> {
+  const tryToParse = async (promise: Promise<T>) => {
     try {
-      this.#result.data = (await promise) as T
+      result.value.data = (await promise) as T
       return true
     } catch (e) {
       return false
     }
   }
+
+  if (resp) populateResponse(resp)
+
+  builder = toRaw({
+    build,
+    populateResponse,
+  })
+
+  return builder
 }

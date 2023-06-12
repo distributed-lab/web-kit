@@ -14,7 +14,12 @@ export const toRaw = <T extends object>(target: T): Raw<T> => {
     }
 
     if (typeof v === 'function') {
-      result = { value: v, enumerable: true }
+      result = {
+        value: v,
+        enumerable: true,
+        configurable: true,
+        writable: true,
+      }
     }
 
     acc[k] = result

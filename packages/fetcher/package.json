@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/fetcher",
-  "version": "0.2.0-rc.19",
+  "version": "0.2.0-rc.20",
   "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",
@@ -60,6 +60,8 @@
     "displayName": "@distributedlab/fetcher"
   },
   "dependencies": {
+    "@distributedlab/reactivity": "workspace:*",
+    "@distributedlab/tools": "workspace:^",
     "uuid": "^9.0.0"
   }
 }

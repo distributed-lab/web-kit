@@ -1,4 +1,4 @@
-import { FetcherResponseBuilder } from './response-builder'
+import { newFetcherResponseBuilder } from './response-builder'
 import { ERROR_RESPONSE } from './tests'
 
 const RESPONSE_CFG = {
@@ -16,7 +16,7 @@ const REQUEST_CFG = { url: 'http://localhost:3000' }
 describe('performs FetcherResponseBuilder', () => {
   test('should build response with JSON body', async () => {
     const response = new Response('{"foo": "bar"}', RESPONSE_CFG)
-    const result = await new FetcherResponseBuilder(
+    const result = await newFetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()
@@ -27,7 +27,7 @@ describe('performs FetcherResponseBuilder', () => {
 
   test('should build response with empty body', async () => {
     const response = new Response(null, { ...RESPONSE_CFG, status: 204 })
-    const result = await new FetcherResponseBuilder(
+    const result = await newFetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()
@@ -44,7 +44,7 @@ describe('performs FetcherResponseBuilder', () => {
     ])
     const blob = new Blob([byteArray], { type: 'application/json' })
     const response = new Response(blob, RESPONSE_CFG)
-    const result = await new FetcherResponseBuilder(
+    const result = await newFetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()
@@ -54,7 +54,7 @@ describe('performs FetcherResponseBuilder', () => {
 
   test('should build valid error response', async () => {
     const response = new Response(JSON.stringify(ERROR_RESPONSE), ERROR_CFG)
-    const result = await new FetcherResponseBuilder(
+    const result = await newFetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()
@@ -64,7 +64,7 @@ describe('performs FetcherResponseBuilder', () => {
 
   test('should build valid error response with empty body', async () => {
     const response = new Response(null, ERROR_CFG)
-    const result = await new FetcherResponseBuilder(
+    const result = await newFetcherResponseBuilder(
       REQUEST_CFG,
       response,
     ).build()

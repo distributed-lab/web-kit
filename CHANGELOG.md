@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-rc.20] - 2023-06-12
+### Added
+- `@distributedlab/fetcher` - `@distributedlab/reactivity` dependency
+- `@distributedlab/fetcher` - Standalone `fetcher` instance, methods of which accepts full URLs instead of endpoint paths
+
+### Changed
+- `@distributedlab/fetcher` - Refactored with `@distributedlab/reactivity` package
+
+### Fixed
+- `@distributedlab/reactivity` - `toRaw`, `extend` sets writable value descriptors
+
+
 ## [0.2.0-rc.19] - 2023-06-09
 - `@distributedlab/reactivity` - `extend` hook return type
 - `@distributedlab/reactivity` - `ref` hook value argument type
@@ -238,7 +250,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...HEAD
+[0.2.0-rc.20]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...0.2.0-rc.20
 [0.2.0-rc.19]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...0.2.0-rc.19
 [0.2.0-rc.18]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...0.2.0-rc.18
 [0.2.0-rc.17]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...0.2.0-rc.17

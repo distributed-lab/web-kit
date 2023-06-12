@@ -1,40 +1,50 @@
-export class FetcherAbortManager {
-  readonly #controllers: Map<string, AbortController>
+import { ref, toRaw } from '@distributedlab/reactivity'
 
-  constructor() {
-    this.#controllers = new Map()
+import type { FetcherAbortManager } from '@/types'
+
+export const newFetcherAbortManager = (): FetcherAbortManager => {
+  const controllers = ref<Map<string, AbortController>>(new Map())
+
+  const get = (requestId: string) => {
+    return controllers.value.get(requestId)
   }
 
-  public get(requestId: string): AbortController | undefined {
-    return this.#controllers.get(requestId)
-  }
-
-  public set(requestId: string): AbortController {
+  const set = (requestId: string) => {
     const controller = new AbortController()
-    this.#controllers.set(requestId, controller)
+    controllers.value.set(requestId, controller)
     return controller
   }
 
-  public setSafe(requestId?: string): AbortSignal | null {
+  const setSafe = (requestId?: string) => {
     if (!requestId) return null
-    return this.set(requestId).signal
+    return set(requestId).signal
   }
 
-  public has(requestId: string): boolean {
-    return this.#controllers.has(requestId)
+  const has = (requestId: string) => {
+    return controllers.value.has(requestId)
   }
 
-  public clear(requestId?: string): boolean {
-    return this.#controllers.delete(requestId ?? '')
+  const clear = (requestId?: string) => {
+    return controllers.value.delete(requestId ?? '')
   }
 
-  public abort(requestId?: string): boolean {
+  const abort = (requestId?: string) => {
     const id = requestId ?? ''
 
-    if (!id || !this.has(id)) return false
+    if (!id || !has(id)) return false
 
-    const controller = this.get(id)!
+    const controller = get(id)!
     controller.abort()
-    return this.clear(id)
+    return clear(id)
   }
+
+  return toRaw({
+    controllers,
+    get,
+    set,
+    setSafe,
+    has,
+    clear,
+    abort,
+  })
 }

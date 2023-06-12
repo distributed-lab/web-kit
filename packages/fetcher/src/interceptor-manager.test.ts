@@ -1,4 +1,4 @@
-import { FetcherInterceptorManager } from './interceptor-manager'
+import { newFetcherInterceptorManager } from './interceptor-manager'
 import type {
   FetcherInterceptor,
   FetcherRequest,
@@ -7,7 +7,7 @@ import type {
 
 describe('performs FetcherInterceptorManager unit test', () => {
   test('should add a new interceptor', () => {
-    const manager = new FetcherInterceptorManager()
+    const manager = newFetcherInterceptorManager()
     const interceptor: FetcherInterceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
@@ -17,7 +17,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
   })
 
   test('should eject an interceptor', () => {
-    const manager = new FetcherInterceptorManager()
+    const manager = newFetcherInterceptorManager()
     const interceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
@@ -27,7 +27,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
   })
 
   test('should not eject an interceptor if the interceptor is not found', () => {
-    const manager = new FetcherInterceptorManager()
+    const manager = newFetcherInterceptorManager()
     const interceptor = {
       request: (config: FetcherRequest) => Promise.resolve(config),
     }
@@ -40,7 +40,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
 
   describe('performs request interceptors', () => {
     test('should run request interceptors', async () => {
-      const manager = new FetcherInterceptorManager()
+      const manager = newFetcherInterceptorManager()
       const interceptor1 = {
         request: (config: FetcherRequest) => Promise.resolve(config),
       }
@@ -55,7 +55,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
     })
 
     test('should change request', async () => {
-      const manager = new FetcherInterceptorManager()
+      const manager = newFetcherInterceptorManager()
       const interceptor1 = {
         request: (config: FetcherRequest) =>
           Promise.resolve({ ...config, url: 'http://localhost/1' }),
@@ -83,7 +83,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
       statusText: 'OK',
     }
 
-    const manager = new FetcherInterceptorManager()
+    const manager = newFetcherInterceptorManager()
     const interceptor = {
       response: (response: FetcherResponse<T>) =>
         Promise.resolve({ ...response, data: 'data1' }),
@@ -109,7 +109,7 @@ describe('performs FetcherInterceptorManager unit test', () => {
       statusText: 'Bad Request',
     }
 
-    const manager = new FetcherInterceptorManager()
+    const manager = newFetcherInterceptorManager()
     const interceptor1 = {
       error: (response: FetcherResponse<object>) =>
         Promise.resolve({ ...response, data: 'data1' }),

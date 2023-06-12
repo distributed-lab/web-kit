@@ -1,6 +1,6 @@
-import type { FetcherAbortManager } from '@/abort-manager'
 import { HEADER_CONTENT_TYPE } from '@/const'
 import type {
+  FetcherAbortManager,
   FetcherConfig,
   FetcherRequest,
   FetcherRequestBody,
