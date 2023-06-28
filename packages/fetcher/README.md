@@ -218,7 +218,7 @@ in scenarios where you require a one-time request and prefers to avoid the overh
 import { fetcher } from '@distributedlab/fetcher'
 
 const getData = async () => {
-  const { data } = fetcher.get<{ name: string }>('https://api.example.com/data')
+  const { data } = await fetcher.get<{ name: string }>('https://api.example.com/data')
   console.log(data) // { name: 'John' }
 }
 ```
