@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.0-rc.20] - 2023-06-28
 ### Added
 - `@distributedlab/fetcher` - `fetcher` standalone instance
+
 ### Fixed
 - `@distributedlab/w3p` - Circular dependency
 
@@ -235,14 +238,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: `yarn rsc` Release Sanity Check script
 - `root`: Rollup and configuration file to build packages for CDN
 - `@distributedlab/tools`: Handling big numbers
-- `@distributedlab/tools`: Add tests  for time.ts and duration.ts
+- `@distributedlab/tools`: Add tests for time.ts and duration.ts
 
 ### Changed****
 - `root`: Updated `README.md`
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...HEAD
+[0.2.0-rc.20]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...0.2.0-rc.20
 [0.2.0-rc.19]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...0.2.0-rc.19
 [0.2.0-rc.18]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...0.2.0-rc.18
 [0.2.0-rc.17]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...0.2.0-rc.17
