@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `@distributedlab/fetcher` - `fetcher` standalone instance
+### Fixed
+- `@distributedlab/w3p` - Circular dependency
 
 ## [0.2.0-rc.19] - 2023-06-09
 - `@distributedlab/reactivity` - `extend` hook return type

@@ -1,9 +1,9 @@
 import type { FetcherConfig } from '@/types'
 
 export const DEFAULT_CONFIG: Omit<FetcherConfig, 'baseUrl'> = {
-  credentials: 'include',
+  credentials: 'omit',
   cache: 'no-store',
-  referrerPolicy: 'strict-origin-when-cross-origin',
+  referrerPolicy: 'no-referrer',
   mode: 'cors',
   timeout: 60000,
 }

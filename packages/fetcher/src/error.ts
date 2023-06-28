@@ -11,3 +11,11 @@ export class FetcherError<T = undefined> extends Error {
     this.request = resp.request
   }
 }
+
+export class FetcherURLParseError extends Error {
+  public name = 'FetcherURLParseError'
+
+  constructor(e = new TypeError('Failed to parse URL')) {
+    super(e.toString())
+  }
+}

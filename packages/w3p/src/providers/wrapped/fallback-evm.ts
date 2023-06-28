@@ -6,7 +6,6 @@ import {
   getEthExplorerTxUrl,
   hexToDecimal,
 } from '@/helpers'
-import { ProviderEventBus } from '@/providers'
 import type {
   Chain,
   ChainId,
@@ -16,6 +15,8 @@ import type {
   SolanaTransactionResponse,
   TransactionResponse,
 } from '@/types'
+
+import { ProviderEventBus } from '../wrapped/_event-bus'
 
 export class FallbackEvmProvider
   extends ProviderEventBus
