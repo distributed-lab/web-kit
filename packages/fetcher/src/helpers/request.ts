@@ -34,25 +34,31 @@ export const buildRequestURL = (
   endpoint: string,
   query?: FetcherRequestQuery,
 ): string => {
-  const url = new URL(baseUrl)
-  url.pathname = [url.pathname, endpoint]
-    .join('/')
-    .replace(/\/\/+/g, '/') // replace doubled slashes
-    .replace(/\/+$/, '') // remove slash in the end
+  const parsedUrl = new URL(baseUrl)
 
-  if (query) {
-    Object.entries(query).forEach(([key, value]) => {
-      if (isObject(value)) {
-        throw new TypeError(
-          "Fetcher: query parameters can't have nested objects.",
-        )
-      }
+  // To parse query params from endpoint correctly, we need to reparse it
+  // otherwise query params could be serialized incorrectly
+  // (ex. "?" symbol will be encoded to "%3F")
+  const url = new URL(
+    [parsedUrl.origin, parsedUrl.pathname, endpoint]
+      .join('/')
+      .replace(/\/\/+/g, '/') // replace doubled slashes
+      .replace(/\/+$/, ''), // remove slash in the end
+  )
 
-      url.searchParams.append(key, value.toString())
-    })
-  }
+  if (!query) return url.toString()
+
+  Object.entries(query).forEach(([key, value]) => {
+    validateQueryValue(value)
+    url.searchParams.append(key, value.toString())
+  })
 
   return url.toString()
+}
+
+const validateQueryValue = (value: unknown): void => {
+  if (!isObject(value)) return
+  throw new TypeError("Fetcher: query parameters can't have nested objects.")
 }
 
 export const buildRequestConfig = (

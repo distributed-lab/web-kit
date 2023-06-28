@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-rc.21] - 2023-06-28
+### Fixed
+- `@distributedlab/fetcher` - Building URL from base URL and endpoint with query params
+
 ## [0.2.0-rc.20] - 2023-06-28
 ### Added
 - `@distributedlab/fetcher` - `fetcher` standalone instance
@@ -245,7 +249,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.21...HEAD
+[0.2.0-rc.21]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...0.2.0-rc.21
 [0.2.0-rc.20]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...0.2.0-rc.20
 [0.2.0-rc.19]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...0.2.0-rc.19
 [0.2.0-rc.18]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...0.2.0-rc.18
