@@ -61,11 +61,11 @@ export class Time {
   }
 
   private _dayjs(date?: TimeDate, format?: TimeFormat): Dayjs {
-    return dayjs(date, format)
+    return dayjs(unwrap(date), format)
   }
 
   private _tz(date: TimeDate, timezone?: string) {
-    return dayjs.tz(date, timezone)
+    return dayjs.tz(unwrap(date), timezone)
   }
 
   public get dayjs(): Dayjs {
@@ -139,7 +139,7 @@ export class Time {
   }
 
   public toCalendar(referenceTime?: TimeDate, calendar?: TimeCalendar): string {
-    return this.#date.calendar(referenceTime, calendar)
+    return this.#date.calendar(unwrap(referenceTime), calendar)
   }
 
   public subtract(value: number, unit?: TimeManipulate): Time {
@@ -153,23 +153,23 @@ export class Time {
   }
 
   public isSame(comparisonDate?: TimeDate, unit?: TimeOpUnit): boolean {
-    return this.#date.isSame(comparisonDate, unit)
+    return this.#date.isSame(unwrap(comparisonDate), unit)
   }
 
   public isBefore(comparisonDate?: TimeDate): boolean {
-    return this.#date.isBefore(comparisonDate)
+    return this.#date.isBefore(unwrap(comparisonDate))
   }
 
   public isAfter(comparisonDate?: TimeDate): boolean {
-    return this.#date.isAfter(comparisonDate)
+    return this.#date.isAfter(unwrap(comparisonDate))
   }
 
   public isSameOrAfter(comparisonDate?: TimeDate): boolean {
-    return this.#date.isSameOrAfter(comparisonDate)
+    return this.#date.isSameOrAfter(unwrap(comparisonDate))
   }
 
   public isSameOrBefore(comparisonDate?: TimeDate): boolean {
-    return this.#date.isSameOrBefore(comparisonDate)
+    return this.#date.isSameOrBefore(unwrap(comparisonDate))
   }
 
   public isBetween(
@@ -178,7 +178,12 @@ export class Time {
     unit?: TimeManipulate,
     inclusivity?: Inclusivity,
   ): boolean {
-    return this.#date.isBetween(startDate, endDate, unit, inclusivity)
+    return this.#date.isBetween(
+      unwrap(startDate),
+      unwrap(endDate),
+      unit,
+      inclusivity,
+    )
   }
 
   public diff(
@@ -190,7 +195,7 @@ export class Time {
   }
 
   public getFrom(date: TimeDate): string {
-    return this.#date.from(date)
+    return this.#date.from(unwrap(date))
   }
 
   public get fromNow(): string {
@@ -198,12 +203,16 @@ export class Time {
   }
 
   public getTo(date: TimeDate): string {
-    return this.#date.to(date)
+    return this.#date.to(unwrap(date))
   }
 
   public get toNow(): string {
     return this.#date.toNow()
   }
+}
+
+const unwrap = (date: TimeDate): Exclude<TimeDate, Time> => {
+  return date instanceof Time ? date.timestamp : date
 }
 
 export const time = (date?: TimeDate, format?: TimeFormat): Time =>
