@@ -212,7 +212,7 @@ export class Time {
 }
 
 const unwrap = (date: TimeDate): Exclude<TimeDate, Time> => {
-  return date instanceof Time ? date.timestamp : date
+  return date instanceof Time ? date.dayjs : date
 }
 
 export const time = (date?: TimeDate, format?: TimeFormat): Time =>
