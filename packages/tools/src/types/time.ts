@@ -1,12 +1,14 @@
 import type { Dayjs } from 'dayjs'
 
+import type { Time } from '@/time'
+
 export type IsoDate = string // RFC3339Nano ISO Date String
 
 export type UnixDate = number // Unix time
 
 export type Inclusivity = '()' | '[)' | '(]' | '[]' // Inclusivity
 
-export type TimeDate = string | number | Date | Dayjs | null | undefined
+export type TimeDate = Time | Date | Dayjs | string | number | null | undefined
 
 export type TimeFormat =
   | {
