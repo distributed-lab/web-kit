@@ -94,6 +94,47 @@ describe('performs BN unit test', () => {
     })
   })
 
+  describe('performs decimals conversion', () => {
+    describe('toGreaterDecimals', () => {
+      test('should throw error if the decimals is less then current', () => {
+        expect(
+          () => BN.fromBigInt('2595', 6).toGreaterDecimals(5).value,
+        ).toThrowError()
+      })
+      test('should return correct value if the decimals is greater then current', () => {
+        expect(BN.fromBigInt('2595', 6).toGreaterDecimals(18).value).toBe(
+          '2595000000000000',
+        )
+      })
+    })
+
+    describe('toLessDecimals', () => {
+      test('should throw error if the decimals is greater then current', () => {
+        expect(
+          () => BN.fromBigInt('2595', 6).toLessDecimals(7).value,
+        ).toThrowError()
+      })
+      test('should return correct value if the decimals is less then current', () => {
+        expect(
+          BN.fromBigInt('2595000000000000', 18).toLessDecimals(6).value,
+        ).toBe('2595')
+      })
+    })
+
+    describe('toDecimals', () => {
+      test('should return correct value if the decimals is less then current', () => {
+        expect(BN.fromBigInt('2595130808637828', 18).toDecimals(6).value).toBe(
+          '2595',
+        )
+      })
+      test('should return correct value if the decimals is greater then current', () => {
+        expect(BN.fromBigInt('2595', 6).toDecimals(18).value).toBe(
+          '2595000000000000',
+        )
+      })
+    })
+  })
+
   describe('performs formatting', () => {
     test('formatting should return correct string', () => {
       expect(
