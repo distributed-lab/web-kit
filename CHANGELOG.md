@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0-rc.23] - 2023-07-05
+### Added
+- `@distributedlab/tools` - `BN` `toGreaterDecimals`, `toLessDecimals`, `toDecimals` methods
+
+### Fixed
+- `root` - Inlining sourcemaps to be able to use debugger
+
 ## [0.2.0-rc.22] - 2023-07-05
 ### Changed
 - `@distributedlab/tools` - Extend `TimeDate` type with `Time` instance to be able to use as argument
@@ -253,7 +260,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.22...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.23...HEAD
+[0.2.0-rc.23]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.22...0.2.0-rc.23
 [0.2.0-rc.22]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.21...0.2.0-rc.22
 [0.2.0-rc.21]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...0.2.0-rc.21
 [0.2.0-rc.20]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...0.2.0-rc.20
