@@ -102,9 +102,9 @@ describe('performs BN unit test', () => {
         ).toThrowError()
       })
       test('should return correct value if the decimals is greater then current', () => {
-        expect(BN.fromBigInt('2595', 6).toGreaterDecimals(18).value).toBe(
-          '2595000000000000',
-        )
+        const amount = BN.fromBigInt('2595', 6).toGreaterDecimals(18)
+        expect(amount.value).toBe('2595000000000000')
+        expect(amount.decimals).toBe(18)
       })
     })
 
@@ -115,22 +115,22 @@ describe('performs BN unit test', () => {
         ).toThrowError()
       })
       test('should return correct value if the decimals is less then current', () => {
-        expect(
-          BN.fromBigInt('2595000000000000', 18).toLessDecimals(6).value,
-        ).toBe('2595')
+        const amount = BN.fromBigInt('2595000000000000', 18).toLessDecimals(6)
+        expect(amount.value).toBe('2595')
+        expect(amount.decimals).toBe(6)
       })
     })
 
     describe('toDecimals', () => {
       test('should return correct value if the decimals is less then current', () => {
-        expect(BN.fromBigInt('2595130808637828', 18).toDecimals(6).value).toBe(
-          '2595',
-        )
+        const amount = BN.fromBigInt('2595000000000000', 18).toDecimals(6)
+        expect(amount.value).toBe('2595')
+        expect(amount.decimals).toBe(6)
       })
       test('should return correct value if the decimals is greater then current', () => {
-        expect(BN.fromBigInt('2595', 6).toDecimals(18).value).toBe(
-          '2595000000000000',
-        )
+        const amount = BN.fromBigInt('2595', 6).toDecimals(18)
+        expect(amount.value).toBe('2595000000000000')
+        expect(amount.decimals).toBe(18)
       })
     })
   })

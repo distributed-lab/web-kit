@@ -319,7 +319,7 @@ export class BN {
 
     return BN.fromBigInt(
       this.#bn.multipliedBy(BN.#makeTenPower(decimals - this.#cfg.decimals)),
-      this.#cfg.decimals,
+      decimals,
     )
   }
 
