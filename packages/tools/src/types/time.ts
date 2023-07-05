@@ -8,7 +8,7 @@ export type UnixDate = number // Unix time
 
 export type Inclusivity = '()' | '[)' | '(]' | '[]' // Inclusivity
 
-export type TimeDate = string | number | Date | Dayjs | null | undefined | Time
+export type TimeDate = Time | Date | Dayjs | string | number | null | undefined
 
 export type TimeFormat =
   | {

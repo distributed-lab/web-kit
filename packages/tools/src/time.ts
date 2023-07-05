@@ -215,5 +215,6 @@ const unwrap = (date: TimeDate): Exclude<TimeDate, Time> => {
   return date instanceof Time ? date.dayjs : date
 }
 
-export const time = (date?: TimeDate, format?: TimeFormat): Time =>
-  new Time(date, format)
+export const time = (date?: TimeDate, format?: TimeFormat): Time => {
+  return new Time(date, format)
+}
