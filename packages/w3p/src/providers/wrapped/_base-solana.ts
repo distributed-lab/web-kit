@@ -34,12 +34,16 @@ export class BaseSolanaProvider
   implements ProviderProxy
 {
   readonly #provider: SolanaProvider
+  #rawProvider: RawProvider
+
   #chainId?: ChainId
   #address?: string
 
   constructor(provider: RawProvider) {
     super()
     this.#provider = provider as SolanaProvider
+
+    this.#rawProvider = provider
   }
 
   get chainType(): CHAIN_TYPES {
@@ -60,6 +64,10 @@ export class BaseSolanaProvider
 
   get provider(): SolanaProvider {
     return this.#provider
+  }
+
+  get rawProvider(): RawProvider {
+    return this.#rawProvider
   }
 
   get #defaultEventPayload() {
