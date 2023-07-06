@@ -23,17 +23,24 @@ export class FallbackEvmProvider
   implements ProviderProxy
 {
   #provider: providers.Web3Provider
+  #rawProvider: RawProvider
 
   #chainId?: ChainId
   #address?: string
 
   constructor(provider: RawProvider) {
     super()
+
     this.#provider = provider as unknown as providers.Web3Provider
+    this.#rawProvider = provider
   }
 
   static get providerType(): string {
     return PROVIDERS.Fallback
+  }
+
+  get rawProvider(): RawProvider {
+    return this.#rawProvider
   }
 
   get chainType(): CHAIN_TYPES {

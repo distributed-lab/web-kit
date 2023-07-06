@@ -51,6 +51,10 @@ export class Provider implements IProvider {
     this.#proxyConstructor = proxyConstructor
   }
 
+  public get rawProvider() {
+    return this.#proxy?.rawProvider
+  }
+
   public get chainType() {
     return this.#proxy?.chainType
   }

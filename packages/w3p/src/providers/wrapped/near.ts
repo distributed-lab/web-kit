@@ -21,17 +21,25 @@ import { ProviderEventBus } from './_event-bus'
 
 export class NearProvider extends ProviderEventBus implements ProviderProxy {
   readonly #provider: NearRawProvider
+  #rawProvider: RawProvider
 
   #chainId?: ChainId
   #address?: string
 
   constructor(provider: RawProvider) {
     super()
+
     this.#provider = provider as NearRawProvider
+    this.#rawProvider = provider
   }
   static get providerType(): PROVIDERS {
     return PROVIDERS.Near
   }
+
+  get rawProvider(): RawProvider {
+    return this.#rawProvider
+  }
+
   get isConnected(): boolean {
     return Boolean(this.#chainId && this.#address)
   }

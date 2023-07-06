@@ -51,6 +51,7 @@ export interface ProviderBase {
   chainId?: ChainId
   chainType?: CHAIN_TYPES
   address?: string
+  rawProvider?: RawProvider
   isConnected: boolean
 
   connect?: () => Promise<void>
