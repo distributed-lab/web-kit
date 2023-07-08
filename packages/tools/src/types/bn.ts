@@ -8,6 +8,6 @@ export type BnConfig = {
 
 export type BnLike = string | number | bigint | BN
 
-export type BnStaticConfig = {
+export type BnGlobalConfig = {
   precision: number
 }

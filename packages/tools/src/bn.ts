@@ -1,6 +1,6 @@
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
-import type { BnConfig, BnConfigLike, BnLike, BnStaticConfig } from '@/types'
+import type { BnConfig, BnConfigLike, BnGlobalConfig, BnLike } from '@/types'
 
 export const DEFAULT_BN_PRECISION = 18
 
@@ -8,28 +8,48 @@ const ZERO = '0'
 const BN_0 = BigInt(ZERO)
 const NUMBER_REGEX = /^(-?)(\d*)\.?(\d*)$/
 
-let staticConfig: BnStaticConfig = {
+let globalConfig: BnGlobalConfig = {
   precision: DEFAULT_BN_PRECISION,
 }
 
 export class BN {
+  /**
+   * Solidity maximum uint256 value.
+   */
   public static MAX_UINT256 = BN.fromBigInt(2n ** 256n - 1n, 1)
 
-  public static get config(): BnStaticConfig {
-    return staticConfig
+  /**
+   * {@link BN} class global config.
+   */
+  public static get config(): BnGlobalConfig {
+    return globalConfig
   }
 
+  /**
+   * {@link BN} class global precision.
+   */
   public static get precision(): number {
-    return staticConfig.precision
+    return globalConfig.precision
   }
 
+  /**
+   * Raw value multiplied by ten power of {@link BN.precision}.
+   */
   readonly #value: bigint
+
+  /**
+   * {@link BN} instance config.
+   */
   readonly #cfg: BnConfig
+
+  /**
+   * Ten power of {@link BN.precision}.
+   */
   readonly #tens: bigint = getTens(BN.precision)
 
   /**
    *
-   * @param value - Always BigInt * ten power of ${@link BN.precision}
+   * @param value - Always BigInt * ten power of {@link BN.precision}
    * @param config - The config of the value.
    * @protected
    * @returns A new {@link BN} instance.
@@ -40,11 +60,12 @@ export class BN {
   }
 
   /**
-   * Sets new {@link BnStaticConfig} config to the {@link BN}.
+   * Sets new {@link BnGlobalConfig} config to the {@link BN}.
    */
-  public static setConfig(config: Partial<BnStaticConfig>): void {
-    staticConfig = { ...staticConfig, ...config }
+  public static setConfig(config: Partial<BnGlobalConfig>): void {
+    globalConfig = { ...globalConfig, ...config }
   }
+
   /**
    *
    * @returns `true` if `arg` is {@link BN} instance.
@@ -79,16 +100,25 @@ export class BN {
     return new BN(BigInt(parseNumberString(val)), parseConfig(config))
   }
 
+  /**
+   *  @returns A minimum {@link BN} value from the `args`.
+   */
   public static min(...args: BN[]): BN {
     const min = args.reduce((min, el) => (el.raw < min.raw ? el : min))
     return new BN(min.raw, min.config)
   }
 
+  /**
+   *  @returns A maximum {@link BN} value from the `args`.
+   */
   public static max(...args: BN[]): BN {
     const max = args.reduce((min, el) => (el.raw > min.raw ? el : min))
     return new BN(max.raw, max.config)
   }
 
+  /**
+   *  @returns A `this` config.
+   */
   public get config(): BnConfig {
     return this.#cfg
   }
@@ -107,6 +137,9 @@ export class BN {
     return this.#value === BN_0
   }
 
+  /**
+   *  @returns `true` if the `this` value is negative.
+   */
   public get isNegative(): boolean {
     return this.#value < BN_0
   }
@@ -118,6 +151,9 @@ export class BN {
     return this.#value
   }
 
+  /**
+   *  @returns A big int string value with the `this.decimals` applied.
+   */
   public get value(): string {
     return toDecimals(this.#value, this.#cfg.decimals, BN.precision).toString()
   }
@@ -206,11 +242,19 @@ export class BN {
       : this.toLessDecimals(decimals)
   }
 
+  /**
+   * @returns A new {@link BN} with the provided decimals, less than current one,
+   * otherwise throws {@link RuntimeError}.
+   */
   public toLessDecimals(decimals: number): BN {
     assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.LESS)
     return this.#toDecimals(decimals)
   }
 
+  /**
+   * @returns A new {@link BN} with the provided decimals, greater than current one,
+   * otherwise throws {@link RuntimeError}.
+   */
   public toGreaterDecimals(decimals: number): BN {
     assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.GREATER)
     return this.#toDecimals(decimals)
