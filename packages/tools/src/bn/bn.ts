@@ -1,12 +1,12 @@
+import { BN_0, DEFAULT_BN_PRECISION, ZERO } from '@/const'
+import { BN_ASSERT_DECIMALS_OP } from '@/enums'
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
 import type { BnConfig, BnConfigLike, BnGlobalConfig, BnLike } from '@/types'
 
-export const DEFAULT_BN_PRECISION = 18
-
-const ZERO = '0'
-const BN_0 = BigInt(ZERO)
-const NUMBER_REGEX = /^(-?)(\d*)\.?(\d*)$/
+import { assertDecimals } from './assertions'
+import { toDecimals } from './decimals'
+import { parseConfig, parseNumberString } from './parsers'
 
 let globalConfig: BnGlobalConfig = {
   precision: DEFAULT_BN_PRECISION,
@@ -138,6 +138,13 @@ export class BN {
   }
 
   /**
+   *  @returns `true` if the `this` value is positive.
+   */
+  public get isPositive(): boolean {
+    return this.#value > BN_0
+  }
+
+  /**
    *  @returns `true` if the `this` value is negative.
    */
   public get isNegative(): boolean {
@@ -234,6 +241,14 @@ export class BN {
   }
 
   /**
+   * @returns A new {@link BN} whose value is the value of `this` negated, i.e.
+   * multiplied by -1.
+   */
+  public negated(): BN {
+    return new BN(this.#value * -1n, this.#cfg)
+  }
+
+  /**
    * @returns A new {@link BN} with the provided decimals.
    */
   public toDecimals(decimals: number): BN {
@@ -286,91 +301,6 @@ export class BN {
 
     return negative + val
   }
-}
-
-enum BN_ASSERT_DECIMALS_OP {
-  LESS = 'LESS',
-  GREATER = 'GREATER',
-}
-
-function assertDecimals(
-  decimals: number,
-  currentDecimals: number,
-  op: BN_ASSERT_DECIMALS_OP,
-): void {
-  assert(
-    decimals > BN.precision,
-    'Provided decimals cannot be greater than the precision',
-  )
-
-  const isGreater = op === BN_ASSERT_DECIMALS_OP.GREATER
-
-  const expression = isGreater
-    ? decimals < currentDecimals
-    : decimals > currentDecimals
-
-  const message = isGreater
-    ? 'Provided decimals cannot be less than the current decimals'
-    : 'Provided decimals cannot be greater than the current decimals'
-
-  assert(expression, message)
-}
-
-function parseNumberString(_value: string): string {
-  let val = _value.trimStart().trimEnd()
-
-  assert(!val.match(new RegExp(NUMBER_REGEX)), 'Invalid string value')
-
-  while (val[0] === ZERO && val[1] !== '.') {
-    val = val.substring(1)
-  }
-
-  const match = val.match(new RegExp(NUMBER_REGEX))!
-  const negative = match[1]
-  const whole = negative + match[2]
-  const fractional = match[3].slice(0, BN.precision)
-  const isFractionalZero = !fractional || fractional.match(/^(0+)$/)
-  const isWholeZero = whole === ZERO || whole.replaceAll(ZERO, '') === ''
-
-  if (isWholeZero && isFractionalZero) return ZERO
-  if (!fractional) return whole.padEnd(whole.length + BN.precision, ZERO)
-
-  return (isWholeZero ? '' : whole) + fractional.padEnd(BN.precision, ZERO)
-}
-
-function parseConfig(config: BnConfigLike): BnConfig {
-  const cfg = typeof config === 'number' ? { decimals: config } : config
-  assert(!cfg.decimals, 'Decimals cannot be zero or undefined')
-  assert(cfg.decimals < 0, 'Decimals cannot be negative')
-  return cfg
-}
-
-function toDecimals(
-  val: bigint,
-  decimals: number,
-  actualDecimals: number,
-): bigint {
-  return decimals > actualDecimals
-    ? toGreaterDecimals(val, decimals, actualDecimals)
-    : toLessDecimals(val, decimals, actualDecimals)
-}
-
-function toGreaterDecimals(
-  val: bigint,
-  decimals: number,
-  currentDecimals: number,
-): bigint {
-  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.GREATER)
-  return val * 10n ** BigInt(decimals - currentDecimals)
-}
-
-function toLessDecimals(
-  val: bigint,
-  decimals: number,
-  currentDecimals: number,
-): bigint {
-  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.LESS)
-  return val / 10n ** BigInt(currentDecimals - decimals)
 }
 
 function getTens(precision: number): bigint {

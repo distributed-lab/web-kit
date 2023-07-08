@@ -1,4 +1,4 @@
-import { BN } from '@/bn'
+import { BN } from '@/bn/bn'
 
 export type BnConfigLike = number | BnConfig
 

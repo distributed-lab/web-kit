@@ -10,3 +10,8 @@ export enum BN_ROUNDING {
   HALF_CEIL = 7,
   HALF_FLOOR = 8,
 }
+
+export enum BN_ASSERT_DECIMALS_OP {
+  LESS = 'LESS',
+  GREATER = 'GREATER',
+}
