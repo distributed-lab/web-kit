@@ -21,3 +21,10 @@ export class RuntimeError extends Error {
     }
   }
 }
+
+export function assert(
+  expression: boolean,
+  message: string,
+): asserts expression is true {
+  if (expression) throw new RuntimeError(message)
+}

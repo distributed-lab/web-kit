@@ -1,13 +1,13 @@
-import type BigNumber from 'bignumber.js'
+import { BN } from '@/bn'
 
-import type { BN } from '@/bn'
-import type { BN_ROUNDING } from '@/enums'
+export type BnConfigLike = number | BnConfig
 
-export type BnCfg = {
+export type BnConfig = {
   decimals: number
-  rounding?: BN_ROUNDING
-  noGroupSeparator?: boolean
 }
 
-export type BnFormatCfg = BigNumber.Format & BnCfg
-export type BnLike = string | number | BigNumber | BN
+export type BnLike = string | number | bigint | BN
+
+export type BnStaticConfig = {
+  precision: number
+}
