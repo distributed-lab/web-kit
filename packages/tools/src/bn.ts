@@ -2,17 +2,25 @@ import { assert } from '@/errors'
 import { isHex } from '@/helpers'
 import type { BnConfig, BnConfigLike, BnLike, BnStaticConfig } from '@/types'
 
-export const DEFAULT_BN_PRECISION = 24
+export const DEFAULT_BN_PRECISION = 18
 
 const ZERO = '0'
 const BN_0 = BigInt(ZERO)
 const NUMBER_REGEX = /^(-?)(\d*)\.?(\d*)$/
 
-export class BN {
-  public static MAX_UINT256 = 2n ** 256n - 1n
+let staticConfig: BnStaticConfig = {
+  precision: DEFAULT_BN_PRECISION,
+}
 
-  public static config: BnStaticConfig = {
-    precision: DEFAULT_BN_PRECISION,
+export class BN {
+  public static MAX_UINT256 = BN.fromBigInt(2n ** 256n - 1n, 1)
+
+  public static get config(): BnStaticConfig {
+    return staticConfig
+  }
+
+  public static get precision(): number {
+    return staticConfig.precision
   }
 
   readonly #value: bigint
@@ -35,7 +43,7 @@ export class BN {
    * Sets new {@link BnStaticConfig} config to the {@link BN}.
    */
   public static setConfig(config: Partial<BnStaticConfig>): void {
-    BN.config = { ...BN.config, ...config }
+    staticConfig = { ...staticConfig, ...config }
   }
   /**
    *
@@ -71,11 +79,18 @@ export class BN {
     return new BN(BigInt(parseNumberString(val)), parseConfig(config))
   }
 
-  /**
-   *  @returns The current {@link BN} precision.
-   */
-  public static get precision(): number {
-    return BN.config.precision
+  public static min(...args: BN[]): BN {
+    const min = args.reduce((min, el) => (el.raw < min.raw ? el : min))
+    return new BN(min.raw, min.config)
+  }
+
+  public static max(...args: BN[]): BN {
+    const max = args.reduce((min, el) => (el.raw > min.raw ? el : min))
+    return new BN(max.raw, max.config)
+  }
+
+  public get config(): BnConfig {
+    return this.#cfg
   }
 
   /**
@@ -83,13 +98,6 @@ export class BN {
    */
   public get decimals(): number {
     return this.#cfg.decimals
-  }
-
-  /**
-   *  @returns The current {@link BN} precision.
-   */
-  public get precision(): number {
-    return BN.config.precision
   }
 
   /**
@@ -111,12 +119,7 @@ export class BN {
   }
 
   public get value(): string {
-    return toDecimals(
-      this.#value,
-      this.#cfg.decimals,
-      BN.config.precision,
-      BN.config.precision,
-    ).toString()
+    return toDecimals(this.#value, this.#cfg.decimals, BN.precision).toString()
   }
 
   /**
@@ -198,32 +201,78 @@ export class BN {
    * @returns A new {@link BN} with the provided decimals.
    */
   public toDecimals(decimals: number): BN {
-    return new BN(
-      toDecimals(this.#value, decimals, this.#cfg.decimals, BN.precision),
-      { ...this.#cfg, decimals },
-    )
+    return decimals > this.#cfg.decimals
+      ? this.toGreaterDecimals(decimals)
+      : this.toLessDecimals(decimals)
+  }
+
+  public toLessDecimals(decimals: number): BN {
+    assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.LESS)
+    return this.#toDecimals(decimals)
+  }
+
+  public toGreaterDecimals(decimals: number): BN {
+    assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.GREATER)
+    return this.#toDecimals(decimals)
+  }
+
+  #toDecimals(decimals: number): BN {
+    return new BN(this.#value, { ...this.#cfg, decimals })
   }
 
   /**
    * @returns A human-readable float string.
    */
   public toString(): string {
+    let val = this.value
+
+    const decimals = this.#cfg.decimals
     const negative = this.isNegative ? '-' : ''
-    const formatted = this.#value / getTens(this.precision - this.#cfg.decimals)
-    const str = formatted.toString()
-    const index = str.length - this.#cfg.decimals
-    return `${negative}${str.substring(0, index)}.${str.substring(index)}`
+    const isLessOne = val.length < decimals
+
+    if (this.isNegative) val = val.slice(1)
+
+    if (isLessOne) val = val.padStart(decimals, ZERO)
+
+    const pointIdx = val.length - decimals
+
+    val = val.slice(0, pointIdx) + '.' + val.slice(pointIdx)
+
+    if (val.startsWith('.')) val = ZERO + val
+
+    return negative + val
   }
 }
 
-const assertPrecision = (decimals: number, precision: number): void => {
-  assert(
-    decimals > precision,
-    'Provided decimals cannot be greater than the precision',
-  )
+enum BN_ASSERT_DECIMALS_OP {
+  LESS = 'LESS',
+  GREATER = 'GREATER',
 }
 
-const parseNumberString = (_value: string): string => {
+function assertDecimals(
+  decimals: number,
+  currentDecimals: number,
+  op: BN_ASSERT_DECIMALS_OP,
+): void {
+  assert(
+    decimals > BN.precision,
+    'Provided decimals cannot be greater than the precision',
+  )
+
+  const isGreater = op === BN_ASSERT_DECIMALS_OP.GREATER
+
+  const expression = isGreater
+    ? decimals < currentDecimals
+    : decimals > currentDecimals
+
+  const message = isGreater
+    ? 'Provided decimals cannot be less than the current decimals'
+    : 'Provided decimals cannot be greater than the current decimals'
+
+  assert(expression, message)
+}
+
+function parseNumberString(_value: string): string {
   let val = _value.trimStart().trimEnd()
 
   assert(!val.match(new RegExp(NUMBER_REGEX)), 'Invalid string value')
@@ -233,7 +282,8 @@ const parseNumberString = (_value: string): string => {
   }
 
   const match = val.match(new RegExp(NUMBER_REGEX))!
-  const whole = match[2]
+  const negative = match[1]
+  const whole = negative + match[2]
   const fractional = match[3].slice(0, BN.precision)
   const isFractionalZero = !fractional || fractional.match(/^(0+)$/)
   const isWholeZero = whole === ZERO || whole.replaceAll(ZERO, '') === ''
@@ -244,52 +294,41 @@ const parseNumberString = (_value: string): string => {
   return (isWholeZero ? '' : whole) + fractional.padEnd(BN.precision, ZERO)
 }
 
-const parseConfig = (config: BnConfigLike): BnConfig => {
+function parseConfig(config: BnConfigLike): BnConfig {
   const cfg = typeof config === 'number' ? { decimals: config } : config
   assert(!cfg.decimals, 'Decimals cannot be zero or undefined')
   assert(cfg.decimals < 0, 'Decimals cannot be negative')
   return cfg
 }
 
-const toDecimals = (
+function toDecimals(
   val: bigint,
   decimals: number,
   actualDecimals: number,
-  precision: number,
-): bigint => {
+): bigint {
   return decimals > actualDecimals
-    ? toGreaterDecimals(val, decimals, actualDecimals, precision)
-    : toLessDecimals(val, decimals, actualDecimals, precision)
+    ? toGreaterDecimals(val, decimals, actualDecimals)
+    : toLessDecimals(val, decimals, actualDecimals)
 }
 
-const toLessDecimals = (
+function toGreaterDecimals(
   val: bigint,
   decimals: number,
-  actualDecimals: number,
-  precision: number,
-): bigint => {
-  assertPrecision(decimals, precision)
-  assert(
-    decimals > actualDecimals,
-    'Provided decimals cannot be greater than the current decimals',
-  )
-  return val / 10n ** BigInt(actualDecimals - decimals)
+  currentDecimals: number,
+): bigint {
+  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.GREATER)
+  return val * 10n ** BigInt(decimals - currentDecimals)
 }
 
-const toGreaterDecimals = (
+function toLessDecimals(
   val: bigint,
   decimals: number,
-  actualDecimals: number,
-  precision: number,
-): bigint => {
-  assertPrecision(decimals, precision)
-  assert(
-    decimals < actualDecimals,
-    'Provided decimals cannot be less than the current decimals',
-  )
-  return val * 10n ** BigInt(decimals - actualDecimals)
+  currentDecimals: number,
+): bigint {
+  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.LESS)
+  return val / 10n ** BigInt(currentDecimals - decimals)
 }
 
-const getTens = (precision: number): bigint => {
+function getTens(precision: number): bigint {
   return 10n ** BigInt(precision)
 }
