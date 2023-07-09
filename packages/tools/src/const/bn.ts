@@ -1,4 +1,6 @@
-export const DEFAULT_BN_PRECISION = 24
+import { DECIMALS } from '@/enums'
+
+export const DEFAULT_BN_PRECISION = DECIMALS.YOCTO
 export const ONE = '1'
 export const ZERO = '0'
 export const HUNDRED = '100'

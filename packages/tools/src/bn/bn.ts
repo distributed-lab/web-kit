@@ -2,14 +2,30 @@ import { BN_ZERO, DEFAULT_BN_PRECISION, HUNDRED, ONE, ZERO } from '@/const'
 import { BN_ASSERT_DECIMALS_OP } from '@/enums'
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
-import type { BnConfig, BnConfigLike, BnGlobalConfig, BnLike } from '@/types'
+import type {
+  BnConfig,
+  BnConfigLike,
+  BnFormatConfig,
+  BnGlobalConfig,
+  BnLike,
+} from '@/types'
 
 import { assertDecimals } from './assertions'
 import { getTens, toDecimals } from './decimals'
+import { format as _format } from './format'
 import { parseConfig, parseNumberString } from './parsers'
 
 let globalConfig: BnGlobalConfig = {
   precision: DEFAULT_BN_PRECISION,
+  format: {
+    prefix: '',
+    decimalSeparator: '.',
+    groupSeparator: ',',
+    groupSize: 3,
+    fractionGroupSeparator: ' ',
+    fractionGroupSize: 0,
+    suffix: '',
+  },
 }
 
 export class BN {
@@ -243,6 +259,10 @@ export class BN {
     return this.cmp(other) >= 0
   }
 
+  /**
+   * @returns A new {@link BN} whose value is the square root of `this`.
+   * @throws {@link RuntimeError} if `BN.precision` is not even number.
+   */
   public sqrt(): BN {
     const expression = BN.precision > 1 && BN.precision % 2 !== 0
     assert(expression, 'sqrt requires precision to be even number')
@@ -332,6 +352,15 @@ export class BN {
   }
 
   /**
+   * @returns A string representing the value of `this` fixed-point notation and
+   * formatted according to the properties of the {@link BN.config.format} and
+   * `format` (if exist) objects.
+   */
+  public format(format: BnFormatConfig = {}): string {
+    return _format(this.toString(), { ...BN.config.format, ...format })
+  }
+
+  /**
    * @returns A human-readable float string.
    */
   public toString(): string {
@@ -362,11 +391,11 @@ export class BN {
   }
 
   get #one(): BN {
-    return BN.fromRaw(ONE, this.config)
+    return BN.fromRaw(ONE, this.#cfg)
   }
 
   get #hundred(): BN {
-    return BN.fromRaw(HUNDRED, this.config)
+    return BN.fromRaw(HUNDRED, this.#cfg)
   }
 
   #toDecimals(decimals: number): BN {
@@ -374,6 +403,6 @@ export class BN {
   }
 
   #percentToFraction(percent: number): BN {
-    return BN.fromRaw(percent, this.config).div(this.#hundred)
+    return BN.fromRaw(percent, this.#cfg).div(this.#hundred)
   }
 }

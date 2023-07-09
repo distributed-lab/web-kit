@@ -435,4 +435,93 @@ describe('performs BN unit test', () => {
       '231221312.312323',
     )
   })
+
+  describe('performs formatting', () => {
+    test('should throw error if group or fraction sizes non integer', () => {
+      expect(() =>
+        BN.fromRaw(0, 1).format({
+          groupSize: 2.2,
+        }),
+      ).toThrowError()
+      expect(() =>
+        BN.fromRaw(0, 1).format({
+          fractionGroupSize: 2.2,
+        }),
+      ).toThrowError()
+    })
+
+    test('formatting should return correct string', () => {
+      expect(
+        BN.fromRaw(0, 1).format({
+          decimals: 2,
+        }),
+      ).toBe('0.00')
+
+      expect(
+        BN.fromRaw(1, 1).mul(BN.fromRaw(0, 1)).format({
+          prefix: 'USD ',
+          decimals: 2,
+        }),
+      ).toBe('USD 0.00')
+
+      expect(
+        BN.fromRaw(1, 1).mul(BN.fromRaw(0, 1)).format({
+          decimals: 2,
+          suffix: ' USD',
+        }),
+      ).toBe('0.00 USD')
+
+      expect(
+        BN.fromRaw(2, 18).mul(BN.fromRaw(3, 18)).format({
+          decimals: 0,
+          groupSeparator: ',',
+        }),
+      ).toBe('6')
+
+      expect(
+        BN.fromRaw('12233444423.123123123123123', 18).format({
+          decimals: 6,
+          groupSeparator: ',',
+        }),
+      ).toBe('122,334,444,23.1231231')
+
+      expect(
+        BN.fromRaw('12233444423.123123123123123', 18).format({
+          decimals: 6,
+          groupSeparator: '.',
+          decimalSeparator: ',',
+        }),
+      ).toBe('122.334.444.23,1231231')
+
+      expect(
+        BN.fromRaw('12233444423.123123123123123', 18).format({
+          decimals: 6,
+          groupSeparator: ' ',
+          decimalSeparator: '.',
+          groupSize: 3,
+        }),
+      ).toBe('122 334 444 23.1231231')
+
+      expect(
+        BN.fromRaw('12233444423.123123123123123', 18).format({
+          decimals: 6,
+          groupSeparator: ' ',
+          fractionGroupSize: 2,
+          decimalSeparator: '.',
+          groupSize: 3,
+        }),
+      ).toBe('122 334 444 23.12 31 23 1')
+
+      expect(
+        BN.fromRaw('12233444423.123123123123123', 18).format({
+          decimals: 6,
+          groupSeparator: ' ',
+          fractionGroupSize: 2,
+          fractionGroupSeparator: '_',
+          decimalSeparator: '.',
+          groupSize: 3,
+        }),
+      ).toBe('122 334 444 23.12_31_23_1')
+    })
+  })
 })
