@@ -265,6 +265,13 @@ export class BN {
   }
 
   /**
+   * @returns A new {@link BN} whose value is absolute `this`.
+   */
+  public abs(): BN {
+    return this.isPositive ? this : this.negated()
+  }
+
+  /**
    * @returns A new {@link BN} whose value is percentage of `this` value.
    */
   public percent(percent: number): BN {

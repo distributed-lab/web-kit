@@ -331,6 +331,10 @@ describe('performs BN unit test', () => {
       expect(BN.fromRaw(-1, decimals).negated().value).toBe('1000000')
     })
 
+    test('abs should return correct value', () => {
+      expect(BN.fromRaw(4, 6).sub(BN.fromRaw(9, 6)).abs().value).toBe('5000000')
+    })
+
     describe('performs percent calculations', () => {
       const value = '0.002433'
       const decimals = 18
