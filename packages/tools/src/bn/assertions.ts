@@ -3,11 +3,11 @@ import { assert } from '@/errors'
 
 import { BN } from './bn'
 
-export function assertDecimals(
+export const assertDecimals = (
   decimals: number,
   currentDecimals: number,
   op: BN_ASSERT_DECIMALS_OP,
-): void {
+) => {
   assert(
     decimals > BN.precision,
     'Provided decimals cannot be greater than the precision',

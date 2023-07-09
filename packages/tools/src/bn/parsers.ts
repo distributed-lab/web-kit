@@ -4,7 +4,7 @@ import type { BnConfig, BnConfigLike } from '@/types'
 
 import { BN } from './bn'
 
-export function parseNumberString(_value: string): string {
+export const parseNumberString = (_value: string): string => {
   let val = _value.trimStart().trimEnd()
 
   assert(!val.match(new RegExp(NUMBER_REGEX)), 'Invalid string value')
@@ -26,7 +26,7 @@ export function parseNumberString(_value: string): string {
   return (isWholeZero ? '' : whole) + fractional.padEnd(BN.precision, ZERO)
 }
 
-export function parseConfig(config: BnConfigLike): BnConfig {
+export const parseConfig = (config: BnConfigLike): BnConfig => {
   const cfg = typeof config === 'number' ? { decimals: config } : config
   assert(!cfg.decimals, 'Decimals cannot be zero or undefined')
   assert(cfg.decimals < 0, 'Decimals cannot be negative')

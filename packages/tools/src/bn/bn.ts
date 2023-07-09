@@ -1,11 +1,11 @@
-import { BN_0, DEFAULT_BN_PRECISION, ZERO } from '@/const'
+import { BN_ZERO, DEFAULT_BN_PRECISION, HUNDRED, ONE, ZERO } from '@/const'
 import { BN_ASSERT_DECIMALS_OP } from '@/enums'
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
 import type { BnConfig, BnConfigLike, BnGlobalConfig, BnLike } from '@/types'
 
 import { assertDecimals } from './assertions'
-import { toDecimals } from './decimals'
+import { getTens, toDecimals } from './decimals'
 import { parseConfig, parseNumberString } from './parsers'
 
 let globalConfig: BnGlobalConfig = {
@@ -95,7 +95,7 @@ export class BN {
    * @returns A new {@link BN} if `value` argument is valid integer or float value,
    * otherwise throws {@link RuntimeError}.
    */
-  public static fromRaw(value: string | number, config: BnConfigLike): BN {
+  public static fromRaw(value: Exclude<BnLike, BN>, config: BnConfigLike): BN {
     const val = String(value)
     return new BN(BigInt(parseNumberString(val)), parseConfig(config))
   }
@@ -134,21 +134,21 @@ export class BN {
    *  @returns `true` if the `this` value is zero.
    */
   public get isZero(): boolean {
-    return this.#value === BN_0
+    return this.#value === BN_ZERO
   }
 
   /**
    *  @returns `true` if the `this` value is positive.
    */
   public get isPositive(): boolean {
-    return this.#value > BN_0
+    return this.#value > BN_ZERO
   }
 
   /**
    *  @returns `true` if the `this` value is negative.
    */
   public get isNegative(): boolean {
-    return this.#value < BN_0
+    return this.#value < BN_ZERO
   }
 
   /**
@@ -183,7 +183,7 @@ export class BN {
    *  @returns A new {@link BN} with the result of this divided by `other`.
    */
   public div(other: BN): BN {
-    assert(other.raw === BN_0, 'Cannot divide by zero')
+    assert(other.raw === BN_ZERO, 'Cannot divide by zero')
     return new BN((this.raw * this.#tens) / other.raw, this.#cfg)
   }
 
@@ -240,12 +240,49 @@ export class BN {
     return this.cmp(other) >= 0
   }
 
+  public sqrt(): BN {
+    const expression = BN.precision > 1 && BN.precision % 2 !== 0
+    assert(expression, 'sqrt requires precision to be even number')
+
+    if (this.isZero) return this
+
+    let x0 = this.raw / 2n
+    let x1 = (x0 + this.raw / x0) / 2n
+
+    while (x0 - x1 > 1n) {
+      x0 = x1
+      x1 = (x0 + this.raw / x0) / 2n
+    }
+
+    return new BN(x1 * getTens(BN.precision / 2), this.#cfg)
+  }
+
   /**
-   * @returns A new {@link BN} whose value is the value of `this` negated, i.e.
-   * multiplied by -1.
+   * @returns A new {@link BN} whose value is negated `this` (multiplied by -1).
    */
   public negated(): BN {
     return new BN(this.#value * -1n, this.#cfg)
+  }
+
+  /**
+   * @returns A new {@link BN} whose value is percentage of `this` value.
+   */
+  public percent(percent: number): BN {
+    return this.mul(this.#percentToFraction(percent))
+  }
+
+  /**
+   * @returns A new {@link BN} whose value is `this` with added percentage.
+   */
+  public addPercent(percent: number): BN {
+    return this.mul(this.#one.add(this.#percentToFraction(percent)))
+  }
+
+  /**
+   * @returns A new {@link BN} whose value is `this` with subtracted percentage.
+   */
+  public subPercent(percent: number): BN {
+    return this.div(this.#one.add(this.#percentToFraction(percent)))
   }
 
   /**
@@ -275,10 +312,6 @@ export class BN {
     return this.#toDecimals(decimals)
   }
 
-  #toDecimals(decimals: number): BN {
-    return new BN(this.#value, { ...this.#cfg, decimals })
-  }
-
   /**
    * @returns A human-readable float string.
    */
@@ -301,8 +334,20 @@ export class BN {
 
     return negative + val
   }
-}
 
-function getTens(precision: number): bigint {
-  return 10n ** BigInt(precision)
+  get #one(): BN {
+    return BN.fromRaw(ONE, this.config)
+  }
+
+  get #hundred(): BN {
+    return BN.fromRaw(HUNDRED, this.config)
+  }
+
+  #toDecimals(decimals: number): BN {
+    return new BN(this.#value, { ...this.#cfg, decimals })
+  }
+
+  #percentToFraction(percent: number): BN {
+    return BN.fromRaw(percent, this.config).div(this.#hundred)
+  }
 }

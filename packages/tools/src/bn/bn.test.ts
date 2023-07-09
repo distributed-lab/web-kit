@@ -325,53 +325,98 @@ describe('performs BN unit test', () => {
         ),
       ).toBeTruthy()
     })
+
+    test('performs negated, should return correct value', () => {
+      expect(BN.fromRaw(1, decimals).negated().value).toBe('-1000000')
+      expect(BN.fromRaw(-1, decimals).negated().value).toBe('1000000')
+    })
+
+    describe('performs percent calculations', () => {
+      const value = '0.002433'
+      const decimals = 18
+
+      test('percent from this should return correct value', () => {
+        expect(BN.fromRaw(value, decimals).percent(5).value).toBe(
+          '121650000000000',
+        )
+      })
+
+      test('addPercent to this should return correct value', () => {
+        expect(BN.fromRaw(value, decimals).addPercent(5).value).toBe(
+          '2554650000000000',
+        )
+      })
+
+      test('subPercent from this should return correct value', () => {
+        expect(BN.fromRaw(value, decimals).subPercent(2.5).value).toBe(
+          '2373658536585365',
+        )
+      })
+    })
+
+    describe('performs decimals conversion', () => {
+      describe('toGreaterDecimals', () => {
+        test('should throw error if the decimals is less then current', () => {
+          expect(
+            () => BN.fromBigInt('2595', 6).toGreaterDecimals(5).value,
+          ).toThrowError()
+        })
+
+        test('should return correct value if the decimals is greater then current', () => {
+          const amount = BN.fromBigInt('2595', 6).toGreaterDecimals(18)
+          expect(amount.value).toBe('2595000000000000')
+          expect(amount.decimals).toBe(18)
+        })
+      })
+
+      describe('toLessDecimals', () => {
+        test('should throw error if the decimals is greater then current', () => {
+          expect(
+            () => BN.fromBigInt('2595', 6).toLessDecimals(7).value,
+          ).toThrowError()
+        })
+
+        test('should return correct value if the decimals is less then current', () => {
+          const amount = BN.fromBigInt('2595000000000000', 18).toLessDecimals(6)
+          expect(amount.value).toBe('2595')
+          expect(amount.decimals).toBe(6)
+        })
+      })
+
+      describe('toDecimals', () => {
+        test('should return correct value if the decimals is less then current', () => {
+          const amount = BN.fromBigInt('2595000000000000', 18).toDecimals(6)
+          expect(amount.value).toBe('2595')
+          expect(amount.decimals).toBe(6)
+        })
+
+        test('should return correct value if the decimals is greater then current', () => {
+          const amount = BN.fromBigInt('2595', 6).toDecimals(18)
+          expect(amount.value).toBe('2595000000000000')
+          expect(amount.decimals).toBe(18)
+        })
+      })
+    })
+
+    describe('performs sqrt', () => {
+      test('sqrt should return correct value', () => {
+        expect(BN.fromRaw(4, 6).sqrt().value).toBe('2000000')
+        expect(BN.fromRaw(9, 18).sqrt().value).toBe('3000000000000000000')
+        expect(BN.fromRaw(0.25, 6).sqrt().value).toBe('500000')
+        expect(BN.fromRaw(1, 6).sqrt().value).toBe('1000000')
+      })
+
+      test('should throw error if precision is odd number', () => {
+        BN.setConfig({ precision: 5 })
+        expect(() => BN.fromRaw(0.25, 6).sqrt()).toThrowError()
+      })
+    })
   })
 
   test('MAX_UINT256 should return correct value', () => {
     expect(BN.MAX_UINT256.value).toBe(
       '115792089237316195423570985008687907853269984665640564039457584007913129639935',
     )
-  })
-
-  describe('performs decimals conversion', () => {
-    describe('toGreaterDecimals', () => {
-      test('should throw error if the decimals is less then current', () => {
-        expect(
-          () => BN.fromBigInt('2595', 6).toGreaterDecimals(5).value,
-        ).toThrowError()
-      })
-      test('should return correct value if the decimals is greater then current', () => {
-        const amount = BN.fromBigInt('2595', 6).toGreaterDecimals(18)
-        expect(amount.value).toBe('2595000000000000')
-        expect(amount.decimals).toBe(18)
-      })
-    })
-
-    describe('toLessDecimals', () => {
-      test('should throw error if the decimals is greater then current', () => {
-        expect(
-          () => BN.fromBigInt('2595', 6).toLessDecimals(7).value,
-        ).toThrowError()
-      })
-      test('should return correct value if the decimals is less then current', () => {
-        const amount = BN.fromBigInt('2595000000000000', 18).toLessDecimals(6)
-        expect(amount.value).toBe('2595')
-        expect(amount.decimals).toBe(6)
-      })
-    })
-
-    describe('toDecimals', () => {
-      test('should return correct value if the decimals is less then current', () => {
-        const amount = BN.fromBigInt('2595000000000000', 18).toDecimals(6)
-        expect(amount.value).toBe('2595')
-        expect(amount.decimals).toBe(6)
-      })
-      test('should return correct value if the decimals is greater then current', () => {
-        const amount = BN.fromBigInt('2595', 6).toDecimals(18)
-        expect(amount.value).toBe('2595000000000000')
-        expect(amount.decimals).toBe(18)
-      })
-    })
   })
 
   describe('performs toString, should return correct value', () => {
@@ -384,23 +429,4 @@ describe('performs BN unit test', () => {
       '231221312.312323',
     )
   })
-
-  test('performs negated, should return correct value', () => {
-    expect(BN.fromRaw(1, decimals).negated().value).toBe('-1000000')
-    expect(BN.fromRaw(-1, decimals).negated().value).toBe('1000000')
-  })
-
-  // test('percent', () => {
-  //   const amount = BN.fromBigInt('2433', 6)
-  //   const div = amount.mul(BN.fromRaw(1, 18))
-  //   const percent = div.div(BN.fromBigInt(1025000000000000000, 18))
-  //   expect(String(percent.raw)).toBe('2373658536585365')
-  //
-  //   BN.setConfig({ precision: 24 })
-  //
-  //   const amount1 = BN.fromBigInt('2433', 6).toDecimals(18)
-  //   const div1 = amount1.mul(BN.fromRaw(1, 18))
-  //   const percent1 = div1.div(BN.fromBigInt(1025000000000000000, 18))
-  //   expect(percent1.value).toBe('2373658536585365')
-  // })
 })
