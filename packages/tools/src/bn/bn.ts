@@ -35,7 +35,7 @@ export class BN {
   /**
    * Raw value multiplied by ten power of {@link BN.precision}.
    */
-  readonly #value: bigint
+  readonly #raw: bigint
 
   /**
    * {@link BN} instance config.
@@ -55,7 +55,7 @@ export class BN {
    * @returns A new {@link BN} instance.
    */
   protected constructor(value: bigint, config: BnConfig) {
-    this.#value = value
+    this.#raw = value
     this.#cfg = config
   }
 
@@ -78,14 +78,14 @@ export class BN {
    * @returns A new {@link BN} if `value` argument is valid big int like value,
    * otherwise throws {@link RuntimeError}.
    */
-  public static fromBigInt(value: BnLike, config: BnConfigLike): BN {
+  public static fromBigInt(value: BnLike, decimalsOrConfig: BnConfigLike): BN {
     let val = value
 
     if (typeof val === 'string') {
       val = isHex(val) ? BigInt(val).toString() : val
       assert(!val.match(/^(-?)(\d*)$/), 'Invalid big int string')
     }
-    const cfg = parseConfig(config)
+    const cfg = parseConfig(decimalsOrConfig)
     const parsed = BigInt(BN.isBn(val) ? val.value : val)
     const withPrecision = parsed * getTens(BN.precision - cfg.decimals)
     return new BN(withPrecision, cfg)
@@ -95,9 +95,12 @@ export class BN {
    * @returns A new {@link BN} if `value` argument is valid integer or float value,
    * otherwise throws {@link RuntimeError}.
    */
-  public static fromRaw(value: Exclude<BnLike, BN>, config: BnConfigLike): BN {
+  public static fromRaw(
+    value: Exclude<BnLike, BN>,
+    decimalsOrConfig: BnConfigLike,
+  ): BN {
     const val = String(value)
-    return new BN(BigInt(parseNumberString(val)), parseConfig(config))
+    return new BN(BigInt(parseNumberString(val)), parseConfig(decimalsOrConfig))
   }
 
   /**
@@ -134,49 +137,49 @@ export class BN {
    *  @returns `true` if the `this` value is zero.
    */
   public get isZero(): boolean {
-    return this.#value === BN_ZERO
+    return this.#raw === BN_ZERO
   }
 
   /**
    *  @returns `true` if the `this` value is positive.
    */
   public get isPositive(): boolean {
-    return this.#value > BN_ZERO
+    return this.#raw > BN_ZERO
   }
 
   /**
    *  @returns `true` if the `this` value is negative.
    */
   public get isNegative(): boolean {
-    return this.#value < BN_ZERO
+    return this.#raw < BN_ZERO
   }
 
   /**
    *  @returns A raw {@link BigInt} value with the {@link BN.precision} applied.
    */
   public get raw(): bigint {
-    return this.#value
+    return this.#raw
   }
 
   /**
    *  @returns A big int string value with the `this.decimals` applied.
    */
   public get value(): string {
-    return toDecimals(this.#value, this.#cfg.decimals, BN.precision).toString()
+    return toDecimals(this.#raw, this.#cfg.decimals, BN.precision).toString()
   }
 
   /**
    *  @returns A new {@link BN} with the result of this added to `other`.
    */
   public add(other: BN): BN {
-    return new BN(this.#value + other.raw, this.#cfg)
+    return new BN(this.#raw + other.raw, this.#cfg)
   }
 
   /**
    *  @returns A new {@link BN} with the result of other subtracted from this.
    */
   public sub(other: BN): BN {
-    return new BN(this.#value - other.raw, this.#cfg)
+    return new BN(this.#raw - other.raw, this.#cfg)
   }
 
   /**
@@ -184,21 +187,21 @@ export class BN {
    */
   public div(other: BN): BN {
     assert(other.raw === BN_ZERO, 'Cannot divide by zero')
-    return new BN((this.raw * this.#tens) / other.raw, this.#cfg)
+    return new BN((this.#raw * this.#tens) / other.raw, this.#cfg)
   }
 
   /**
    *  @returns A new {@link BN} with the result of this multiplied by `other`.
    */
   public mul(other: BN): BN {
-    return new BN((this.raw * other.raw) / this.#tens, this.#cfg)
+    return new BN((this.#raw * other.raw) / this.#tens, this.#cfg)
   }
 
   /**
    *  @returns A comparison result between this and other.
    */
   public cmp(other: BN): number {
-    const a = this.raw
+    const a = this.#raw
     const b = other.raw
     if (a < b) return -1
     if (a > b) return 1
@@ -261,7 +264,7 @@ export class BN {
    * @returns A new {@link BN} whose value is negated `this` (multiplied by -1).
    */
   public negated(): BN {
-    return new BN(this.#value * -1n, this.#cfg)
+    return new BN(this.#raw * -1n, this.#cfg)
   }
 
   /**
@@ -269,6 +272,15 @@ export class BN {
    */
   public abs(): BN {
     return this.isPositive ? this : this.negated()
+  }
+
+  /**
+   * @returns A new {@link BN} whose value is `this` raised to the power of `exponent`.
+   */
+  public pow(exponent: number): BN {
+    const exp = BigInt(exponent)
+    const fr = getTens(Number(BigInt(BN.precision) * (exp - 1n)))
+    return new BN(this.#raw ** exp / fr, this.#cfg)
   }
 
   /**
@@ -342,6 +354,13 @@ export class BN {
     return negative + val
   }
 
+  /**
+   * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description}
+   */
+  public toJSON(): string {
+    return this.value
+  }
+
   get #one(): BN {
     return BN.fromRaw(ONE, this.config)
   }
@@ -351,7 +370,7 @@ export class BN {
   }
 
   #toDecimals(decimals: number): BN {
-    return new BN(this.#value, { ...this.#cfg, decimals })
+    return new BN(this.#raw, { ...this.#cfg, decimals })
   }
 
   #percentToFraction(percent: number): BN {
