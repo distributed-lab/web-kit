@@ -1,7 +1,6 @@
-import { BN_ZERO, DEFAULT_BN_PRECISION, HUNDRED, ONE, ZERO } from '@/const'
+import { DEFAULT_BN_PRECISION } from '@/const'
 import { BN_ASSERT_DECIMALS_OP, BN_ROUNDING, DECIMALS } from '@/enums'
-import { assert } from '@/errors'
-import { isHex } from '@/helpers'
+import { assert, isHex, isIntegerString } from '@/helpers'
 import type {
   BnConfig,
   BnConfigLike,
@@ -108,7 +107,7 @@ export class BN {
 
     if (typeof val === 'string') {
       val = isHex(val) ? BigInt(val).toString() : val
-      assert(!val.match(/^(-?)(\d*)$/), 'Invalid big int string')
+      assert(!isIntegerString(val), 'Invalid big int string')
     }
     const cfg = parseConfig(decimalsOrConfig)
     const parsed = BigInt(BN.isBn(val) ? val.value : val)
@@ -166,21 +165,21 @@ export class BN {
    *  @returns `true` if the `this` value is zero.
    */
   public get isZero(): boolean {
-    return this.#raw === BN_ZERO
+    return this.#raw === 0n
   }
 
   /**
    *  @returns `true` if the `this` value is positive.
    */
   public get isPositive(): boolean {
-    return this.#raw > BN_ZERO
+    return this.#raw > 0n
   }
 
   /**
    *  @returns `true` if the `this` value is negative.
    */
   public get isNegative(): boolean {
-    return this.#raw < BN_ZERO
+    return this.#raw < 0n
   }
 
   /**
@@ -215,7 +214,7 @@ export class BN {
    *  @returns A new {@link BN} with the result of this divided by `other`.
    */
   public div(other: BN): BN {
-    assert(other.raw === BN_ZERO, 'Cannot divide by zero')
+    assert(other.raw === 0n, 'Cannot divide by zero')
     return new BN((this.#raw * this.#tens) / other.raw, this.#cfg)
   }
 
@@ -396,13 +395,13 @@ export class BN {
 
     if (this.isNegative) val = val.slice(1)
 
-    if (isLessOne) val = val.padStart(decimals, ZERO)
+    if (isLessOne) val = val.padStart(decimals, '0')
 
     const pointIdx = val.length - decimals
 
     val = val.slice(0, pointIdx) + '.' + val.slice(pointIdx)
 
-    if (val.startsWith('.')) val = ZERO + val
+    if (val.startsWith('.')) val = '0' + val
 
     return negative + val
   }
@@ -415,11 +414,11 @@ export class BN {
   }
 
   get #one(): BN {
-    return BN.fromRaw(ONE, this.#cfg)
+    return BN.fromRaw(1, this.#cfg)
   }
 
   get #hundred(): BN {
-    return BN.fromRaw(HUNDRED, this.#cfg)
+    return BN.fromRaw(100, this.#cfg)
   }
 
   #toDecimals(decimals: number): BN {

@@ -1,5 +1,5 @@
 import { BN_ASSERT_DECIMALS_OP } from '@/enums'
-import { assert } from '@/errors'
+import { assert } from '@/helpers'
 
 import { BN } from './bn'
 
@@ -10,7 +10,7 @@ export const assertDecimals = (
 ) => {
   assert(
     decimals > BN.precision,
-    'Provided decimals cannot be greater than the precision',
+    'Provided decimals cannot be greater than the BN config precision',
   )
 
   const isGreater = op === BN_ASSERT_DECIMALS_OP.GREATER
