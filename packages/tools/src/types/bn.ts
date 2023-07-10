@@ -1,4 +1,5 @@
-import { BN } from '@/bn/bn'
+import { BN } from '@/bn'
+import { BN_ROUNDING } from '@/enums'
 
 export type BnConfigLike = number | BnConfig
 
@@ -10,6 +11,7 @@ export type BnLike = string | number | bigint | BN
 
 export type BnGlobalConfig = {
   precision: number
+  rounding: BN_ROUNDING
   format: BnFormatConfig
 }
 

@@ -1,5 +1,5 @@
 import { BN_ZERO, DEFAULT_BN_PRECISION, HUNDRED, ONE, ZERO } from '@/const'
-import { BN_ASSERT_DECIMALS_OP } from '@/enums'
+import { BN_ASSERT_DECIMALS_OP, BN_ROUNDING } from '@/enums'
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
 import type {
@@ -14,9 +14,11 @@ import { assertDecimals } from './assertions'
 import { getTens, toDecimals } from './decimals'
 import { format as _format } from './format'
 import { parseConfig, parseNumberString } from './parsers'
+import { round } from './round'
 
 let globalConfig: BnGlobalConfig = {
   precision: DEFAULT_BN_PRECISION,
+  rounding: BN_ROUNDING.DEFAULT,
   format: {
     prefix: '',
     decimalSeparator: '.',
@@ -33,6 +35,8 @@ export class BN {
    * Solidity maximum uint256 value.
    */
   public static MAX_UINT256 = BN.fromBigInt(2n ** 256n - 1n, 1)
+
+  public static ROUNDING = BN_ROUNDING
 
   /**
    * {@link BN} class global config.
@@ -358,6 +362,17 @@ export class BN {
    */
   public format(format: BnFormatConfig = {}): string {
     return _format(this.toString(), { ...BN.config.format, ...format })
+  }
+
+  /**
+   * @returns A new {@link BN} whose value is the value of `this` rounded to
+   * decimals using {@link BN_ROUNDING} rounding mode.
+   */
+  public round(decimals: number, rounding?: BN_ROUNDING): BN {
+    return BN.fromBigInt(
+      round(this, decimals, rounding ?? BN.config.rounding),
+      { ...this.#cfg, decimals },
+    )
   }
 
   /**

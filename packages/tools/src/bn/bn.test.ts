@@ -1,4 +1,5 @@
 import { DEFAULT_BN_PRECISION } from '@/const'
+import { BN_ROUNDING } from '@/enums'
 
 import { BN } from './bn'
 
@@ -408,6 +409,183 @@ describe('performs BN unit test', () => {
       test('should throw error if precision is odd number', () => {
         BN.setConfig({ precision: 5 })
         expect(() => BN.fromRaw(0.25, 6).sqrt()).toThrowError()
+      })
+    })
+
+    describe('performs round', () => {
+      test('should return correctly rounded value with default rounding mode if no mode is provided', () => {
+        expect(BN.fromRaw('1.56666666', 8).round(6).value).toBe('1566667')
+        expect(BN.fromRaw('1.43333333', 8).round(6).value).toBe('1433333')
+      })
+
+      describe('should return correctly rounded value with', () => {
+        test('rounding mode up', () => {
+          expect(
+            BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.UP).value,
+          ).toBe('1555556')
+          expect(
+            BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.UP).value,
+          ).toBe('1555556')
+          expect(
+            BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.UP).value,
+          ).toBe('1555556')
+          expect(
+            BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.UP).value,
+          ).toBe('1555555')
+        })
+      })
+
+      test('rounding mode down', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.DOWN).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.DOWN).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.DOWN).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.DOWN).value,
+        ).toBe('1555555')
+      })
+
+      test('rounding mode ceil', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('-1.5555557', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555555', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555554', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555550', 8).round(6, BN_ROUNDING.CEIL).value,
+        ).toBe('-1555555')
+      })
+
+      test('rounding mode flour', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('-1.5555557', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555555', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555554', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555550', 8).round(6, BN_ROUNDING.FLOOR).value,
+        ).toBe('-1555555')
+      })
+
+      test('rounding mode half up', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.HALF_UP).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.HALF_UP).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.HALF_UP).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.HALF_UP).value,
+        ).toBe('1555555')
+      })
+
+      test('rounding mode half down', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.HALF_DOWN).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.HALF_DOWN).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.HALF_DOWN).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.HALF_DOWN).value,
+        ).toBe('1555555')
+      })
+
+      test('rounding mode half ceil', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('-1.5555557', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555555', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555554', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555550', 8).round(6, BN_ROUNDING.HALF_CEIL).value,
+        ).toBe('-1555555')
+      })
+
+      test('rounding mode half flour', () => {
+        expect(
+          BN.fromRaw('1.5555557', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('1555556')
+        expect(
+          BN.fromRaw('1.5555555', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555554', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('1.5555550', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('1555555')
+        expect(
+          BN.fromRaw('-1.5555557', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555555', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('-1555556')
+        expect(
+          BN.fromRaw('-1.5555554', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('-1555555')
+        expect(
+          BN.fromRaw('-1.5555550', 8).round(6, BN_ROUNDING.HALF_FLOOR).value,
+        ).toBe('-1555555')
       })
     })
 
