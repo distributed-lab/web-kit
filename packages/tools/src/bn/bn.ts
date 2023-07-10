@@ -1,5 +1,5 @@
 import { BN_ZERO, DEFAULT_BN_PRECISION, HUNDRED, ONE, ZERO } from '@/const'
-import { BN_ASSERT_DECIMALS_OP, BN_ROUNDING } from '@/enums'
+import { BN_ASSERT_DECIMALS_OP, BN_ROUNDING, DECIMALS } from '@/enums'
 import { assert } from '@/errors'
 import { isHex } from '@/helpers'
 import type {
@@ -35,7 +35,7 @@ export class BN {
    * Solidity maximum uint256 value.
    */
   public static MAX_UINT256 = BN.fromBigInt(2n ** 256n - 1n, 1)
-
+  public static WEI_DECIMALS = DECIMALS.WEI
   public static ROUNDING = BN_ROUNDING
 
   /**
@@ -97,6 +97,11 @@ export class BN {
   /**
    * @returns A new {@link BN} if `value` argument is valid big int like value,
    * otherwise throws {@link RuntimeError}.
+   *
+   * @example
+   * ```ts
+   * const oneEth = BN.fromBigInt('1000000000000000000', 18)
+   * ```
    */
   public static fromBigInt(value: BnLike, decimalsOrConfig: BnConfigLike): BN {
     let val = value
@@ -114,6 +119,10 @@ export class BN {
   /**
    * @returns A new {@link BN} if `value` argument is valid integer or float value,
    * otherwise throws {@link RuntimeError}.
+   * @example
+   * ```ts
+   * const oneEth = BN.fromBigInt(1, 18)
+   * ```
    */
   public static fromRaw(
     value: Exclude<BnLike, BN>,

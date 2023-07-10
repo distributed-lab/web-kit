@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- `@distributedlab/tools` - `BN` `percent, addPercent, subPercent, negated` methods
+- `@distributedlab/tools` - `BN` `isNegative, isPositive, raw` getters
+
+### Changed
+- `@distributedlab/tools` - `BN` migrated to the native `BigInt`
+- `@distributedlab/tools` - `BN` uses maximum precision for calculations
+- `@distributedlab/tools` - `BN` `isGreaterThan` renamed to `gt`
+- `@distributedlab/tools` - `BN` `isGreaterThanOrEqualTo` renamed to `gte`
+- `@distributedlab/tools` - `BN` `isLessThan` renamed to `lt`
+- `@distributedlab/tools` - `BN` `isLessThanOrEqualTo` renamed to `lte`
+- `@distributedlab/tools` - `BN` `isEqualTo` renamed to `eq`
+- `@distributedlab/tools` - `BN` default rounding mode is `BN_ROUNDING.HALF_UP`
+
+### Removed
+- `@distributedlab/tools` - `bignumber.js` dependency
+- `@distributedlab/tools` - `BN` `fromFraction, toFraction, clone` methods
+- `@distributedlab/tools` - `BN_ROUNDING.HALF_EVEN` rounding mode
+- `@distributedlab/tools` - `BnFormatConfig.secondGroupSize` field
+
 ## [0.2.0-rc.25] - 2023-07-06
 ### Added
 - `@distributedlab/w3p` - `RawProvider` property
