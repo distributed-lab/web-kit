@@ -16,7 +16,7 @@ describe('performs BN unit test', () => {
           const bn = BN.fromBigInt(value, 6)
           expect(bn.value).toBe(value)
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(1000000000000000000000000n)
+          expect(bn.raw).toBe(100000000000000000000000000n)
         })
 
         describe('and hex string', () => {
@@ -30,7 +30,7 @@ describe('performs BN unit test', () => {
             const bn = BN.fromBigInt(`0x${value}`, 6)
             expect(bn.value).toBe('2354113825')
             expect(bn.decimals).toBe(6)
-            expect(bn.raw).toBe(2354113825000000000000000000n)
+            expect(bn.raw).toBe(235411382500000000000000000000n)
           })
         })
       })
@@ -41,14 +41,14 @@ describe('performs BN unit test', () => {
           const bn = BN.fromBigInt(value, 6)
           expect(bn.value).toBe(value.toString())
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(2451222523000000000000000000n)
+          expect(bn.raw).toBe(245122252300000000000000000000n)
         })
 
         test('with scientific notation', () => {
           const bn = BN.fromBigInt(3e5, 6)
           expect(bn.value).toBe('300000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(300000000000000000000000n)
+          expect(bn.raw).toBe(30000000000000000000000000n)
         })
       })
     })
@@ -59,21 +59,21 @@ describe('performs BN unit test', () => {
           const bn = BN.fromRaw(22, 6)
           expect(bn.value).toBe('22000000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(22000000000000000000000000n)
+          expect(bn.raw).toBe(2200000000000000000000000000n)
         })
 
         test('and has decimals', () => {
           const bn = BN.fromRaw(3.14, 6)
           expect(bn.value).toBe('3140000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(3140000000000000000000000n)
+          expect(bn.raw).toBe(314000000000000000000000000n)
         })
 
         test('and negative', () => {
           const bn = BN.fromRaw(-3.14, 6)
           expect(bn.value).toBe('-3140000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(-3140000000000000000000000n)
+          expect(bn.raw).toBe(-314000000000000000000000000n)
         })
       })
 
@@ -82,77 +82,77 @@ describe('performs BN unit test', () => {
           const bn = BN.fromRaw('22', 6)
           expect(bn.value).toBe('22000000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(22000000000000000000000000n)
+          expect(bn.raw).toBe(2200000000000000000000000000n)
         })
 
         test('if has 0 as decimal', () => {
           const bn = BN.fromRaw('5.0', 6)
           expect(bn.value).toBe('5000000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(5000000000000000000000000n)
+          expect(bn.raw).toBe(500000000000000000000000000n)
         })
 
         test('if has trailing 0 decimals', () => {
           const bn = BN.fromRaw('4.000', 6)
           expect(bn.value).toBe('4000000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(4000000000000000000000000n)
+          expect(bn.raw).toBe(400000000000000000000000000n)
         })
 
         test('if has 1 decimal', () => {
           const bn = BN.fromRaw('2.3', 6)
           expect(bn.value).toBe('2300000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(2300000000000000000000000n)
+          expect(bn.raw).toBe(230000000000000000000000000n)
         })
 
         test('if has 3 decimals', () => {
           const bn = BN.fromRaw('1.123', 6)
           expect(bn.value).toBe('1123000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(1123000000000000000000000n)
+          expect(bn.raw).toBe(112300000000000000000000000n)
         })
 
         test('if negative', () => {
           const bn = BN.fromRaw('-1.123', 6)
           expect(bn.value).toBe('-1123000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(-1123000000000000000000000n)
+          expect(bn.raw).toBe(-112300000000000000000000000n)
         })
 
         test('if has decimals overflow', () => {
           const bn = BN.fromRaw('2.12333344', 6)
           expect(bn.value).toBe('2123333')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(2123333440000000000000000n)
+          expect(bn.raw).toBe(212333344000000000000000000n)
         })
 
         test('if has precision overflow', () => {
           const bn = BN.fromRaw('3.14159265358979323846264338327950', 6)
           expect(bn.value).toBe('3141592')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(3141592653589793238462643n)
+          expect(bn.raw).toBe(314159265358979323846264338n)
         })
 
         test('if has 0 whole part', () => {
           const bn = BN.fromRaw('0.123', 6)
           expect(bn.value).toBe('123000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(123000000000000000000000n)
+          expect(bn.raw).toBe(12300000000000000000000000n)
         })
 
         test('if has only trailing 0 whole part', () => {
           const bn = BN.fromRaw('000.123', 6)
           expect(bn.value).toBe('123000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(123000000000000000000000n)
+          expect(bn.raw).toBe(12300000000000000000000000n)
         })
 
         test('if has trailing 0 and whole part', () => {
           const bn = BN.fromRaw('0004.78', 6)
           expect(bn.value).toBe('4780000')
           expect(bn.decimals).toBe(6)
-          expect(bn.raw).toBe(4780000000000000000000000n)
+          expect(bn.raw).toBe(478000000000000000000000000n)
         })
 
         describe('if value is zero', () => {
@@ -181,7 +181,7 @@ describe('performs BN unit test', () => {
 
         describe('if value has empty space', () => {
           const intValue = '2840000'
-          const precisionValue = 2840000000000000000000000n
+          const precisionValue = 284000000000000000000000000n
 
           test('in the beginning', () => {
             const bn = BN.fromRaw('  2.84', 6)
@@ -248,7 +248,7 @@ describe('performs BN unit test', () => {
     })
 
     test('get raw', () => {
-      expect(bn.raw).toBe(1000000000000000000000000n)
+      expect(bn.raw).toBe(100000000000000000000000000n)
     })
 
     test('get decimals', () => {
