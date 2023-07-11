@@ -3,7 +3,7 @@ import { toDecimals } from '@/bn/decimals'
 import { BN_ROUNDING } from '@/enums'
 
 export const round = (bn: BN, decimals: number, mode: BN_ROUNDING) => {
-  const precisioned = toDecimals(bn.raw, decimals + 1, BN.precision).toString()
+  const precisioned = toDecimals(bn.raw, BN.precision, decimals + 1).toString()
 
   const isNegative = bn.isNegative
   const num = BigInt(precisioned.slice(0, -1))

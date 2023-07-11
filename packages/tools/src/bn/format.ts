@@ -16,27 +16,25 @@ export const format = (value: string, format: BnFormatConfig) => {
   /* eslint-enable prefer-const */
 
   const expression =
-    !Number.isInteger(groupSize) || !Number.isInteger(fractionGroupSize)
+    Number.isInteger(groupSize) && Number.isInteger(fractionGroupSize)
 
   assert(expression, 'groupSize and fractionGroupSize must be an integer')
 
   let [whole, fraction] = value.split('.')
 
-  const negative = whole.startsWith('-') ? '-' : ''
+  const sign = whole.startsWith('-') ? '-' : ''
 
-  if (negative) whole = whole.slice(1)
+  if (sign) whole = whole.slice(1)
 
   if (groupSize && groupSeparator) {
     whole = insertCharEveryN(whole, groupSeparator, groupSize)
   }
 
-  if (decimals === 0) {
-    fraction = ''
-    decimalSeparator = ''
-  }
-
   if (decimals) {
     fraction = fraction.padEnd(decimals, '0').slice(0, decimals + 1)
+  } else {
+    fraction = ''
+    decimalSeparator = ''
   }
 
   if (fractionGroupSeparator && fractionGroupSize) {
@@ -47,14 +45,11 @@ export const format = (value: string, format: BnFormatConfig) => {
     )
   }
 
-  return [prefix, negative, whole, decimalSeparator, fraction, suffix].join('')
+  return [prefix, sign, whole, decimalSeparator, fraction, suffix].join('')
 }
 
 const insertCharEveryN = (value: string, char: string, n: number) => {
-  const result = value.split('').reduce((acc, i, idx) => {
-    if (idx && !(idx % n)) return acc + char + i
-    return acc + i
-  }, '')
-
+  const val = value.endsWith(char) ? value.slice(0, -1) : value
+  const result = val.replace(new RegExp(`(.{${n}})`, 'g'), `$1${char}`)
   return result.endsWith(char) ? result.slice(0, -1) : result
 }

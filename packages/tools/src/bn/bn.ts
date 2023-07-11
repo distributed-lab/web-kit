@@ -107,7 +107,7 @@ export class BN {
 
     if (typeof val === 'string') {
       val = isHex(val) ? BigInt(val).toString() : val
-      assert(!isIntegerString(val), 'Invalid big int string')
+      assert(isIntegerString(val), 'Invalid big int string')
     }
     const cfg = parseConfig(decimalsOrConfig)
     const parsed = BigInt(BN.isBn(val) ? val.value : val)
@@ -193,7 +193,7 @@ export class BN {
    *  @returns A big int string value with the `this.decimals` applied.
    */
   public get value(): string {
-    return toDecimals(this.#raw, this.#cfg.decimals, BN.precision).toString()
+    return toDecimals(this.#raw, BN.precision, this.#cfg.decimals).toString()
   }
 
   /**
@@ -214,7 +214,7 @@ export class BN {
    *  @returns A new {@link BN} with the result of this divided by `other`.
    */
   public div(other: BN): BN {
-    assert(other.raw === 0n, 'Cannot divide by zero')
+    assert(other.raw !== 0n, 'Cannot divide by zero')
     return new BN((this.#raw * this.#tens) / other.raw, this.#cfg)
   }
 
@@ -276,7 +276,7 @@ export class BN {
    * @throws {@link RuntimeError} if `BN.precision` is not even number.
    */
   public sqrt(): BN {
-    const expression = BN.precision > 1 && BN.precision % 2 !== 0
+    const expression = BN.precision > 1 && BN.precision % 2 === 0
     assert(expression, 'sqrt requires precision to be even number')
 
     if (this.isZero) return this
@@ -350,7 +350,7 @@ export class BN {
    * otherwise throws {@link RuntimeError}.
    */
   public toLessDecimals(decimals: number): BN {
-    assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.LESS)
+    assertDecimals(this.#cfg.decimals, decimals, BN_ASSERT_DECIMALS_OP.LESS)
     return this.#toDecimals(decimals)
   }
 
@@ -359,7 +359,7 @@ export class BN {
    * otherwise throws {@link RuntimeError}.
    */
   public toGreaterDecimals(decimals: number): BN {
-    assertDecimals(decimals, this.#cfg.decimals, BN_ASSERT_DECIMALS_OP.GREATER)
+    assertDecimals(this.#cfg.decimals, decimals, BN_ASSERT_DECIMALS_OP.GREATER)
     return this.#toDecimals(decimals)
   }
 

@@ -4,30 +4,30 @@ import { assertDecimals } from './assertions'
 
 export const toDecimals = (
   val: bigint,
-  decimals: number,
-  actualDecimals: number,
+  currentDecimals: number,
+  targetDecimals: number,
 ): bigint => {
-  return decimals > actualDecimals
-    ? toGreaterDecimals(val, decimals, actualDecimals)
-    : toLessDecimals(val, decimals, actualDecimals)
+  return targetDecimals > currentDecimals
+    ? toGreaterDecimals(val, currentDecimals, targetDecimals)
+    : toLessDecimals(val, currentDecimals, targetDecimals)
 }
 
 export const toGreaterDecimals = (
   val: bigint,
-  decimals: number,
   currentDecimals: number,
+  targetDecimals: number,
 ): bigint => {
-  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.GREATER)
-  return val * 10n ** BigInt(decimals - currentDecimals)
+  assertDecimals(currentDecimals, targetDecimals, BN_ASSERT_DECIMALS_OP.GREATER)
+  return val * 10n ** BigInt(targetDecimals - currentDecimals)
 }
 
 export const toLessDecimals = (
   val: bigint,
-  decimals: number,
   currentDecimals: number,
+  targetDecimals: number,
 ): bigint => {
-  assertDecimals(decimals, currentDecimals, BN_ASSERT_DECIMALS_OP.LESS)
-  return val / 10n ** BigInt(currentDecimals - decimals)
+  assertDecimals(currentDecimals, targetDecimals, BN_ASSERT_DECIMALS_OP.LESS)
+  return val / 10n ** BigInt(currentDecimals - targetDecimals)
 }
 
 export const getTens = (precision: number): bigint => {

@@ -18,7 +18,6 @@ export type BnGlobalConfig = {
 export type BnFormatConfig = {
   // string to prepend
   prefix?: string
-  // decimal separator
   decimalSeparator?: string
   // grouping separator of the integer part
   groupSeparator?: string

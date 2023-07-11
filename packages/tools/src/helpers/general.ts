@@ -4,7 +4,7 @@ import { RuntimeError } from '@/errors'
 export const isHex = (value: string): boolean => HEX_REGEX.test(value)
 
 export const isIntegerString = (value: string): boolean => {
-  return Boolean(value.match(/^(-?)(\d*)$/))
+  return Boolean(value.match(/^-?\d+$/))
 }
 
 export const isFixedPointString = (value: string): boolean => {
@@ -14,6 +14,6 @@ export const isFixedPointString = (value: string): boolean => {
 export function assert(
   expression: boolean,
   message: string,
-): asserts expression is true {
-  if (expression) throw new RuntimeError(message)
+): asserts expression is false {
+  if (!expression) throw new RuntimeError(message)
 }
