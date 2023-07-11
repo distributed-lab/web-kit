@@ -406,6 +406,8 @@ describe('performs BN unit test', () => {
         expect(BN.fromRaw(1, 6).sqrt().value).toBe('1000000')
         expect(BN.fromRaw(9, 3).sqrt().value).toBe('3000')
         expect(BN.fromRaw(10, 3).sqrt().value).toBe('3162')
+        expect(BN.fromRaw(10, 18).sqrt().value).toBe('3162277660168379331')
+        expect(BN.fromRaw(1024, 18).sqrt().value).toBe('32000000000000000000')
         expect(BN.fromRaw(0, 3).sqrt().value).toBe('0')
       })
 
