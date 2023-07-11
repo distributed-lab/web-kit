@@ -11,6 +11,8 @@ package-lock.json
 *.log
 
 deprecated
+coverage
+packages/*/coverage
 
 .eslintcache
 

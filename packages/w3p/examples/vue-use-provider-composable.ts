@@ -2,7 +2,7 @@ import {
   type Chain,
   type ChainId,
   createProvider,
-  type CreateProviderOpts,
+  type CreateProviderOpts, IProvider,
   Provider,
   type ProviderProxyConstructor,
   PROVIDERS,
