@@ -404,11 +404,13 @@ describe('performs BN unit test', () => {
         expect(BN.fromRaw(9, 18).sqrt().value).toBe('3000000000000000000')
         expect(BN.fromRaw(0.25, 6).sqrt().value).toBe('500000')
         expect(BN.fromRaw(1, 6).sqrt().value).toBe('1000000')
+        expect(BN.fromRaw(9, 3).sqrt().value).toBe('3000')
+        expect(BN.fromRaw(10, 3).sqrt().value).toBe('3162')
+        expect(BN.fromRaw(0, 3).sqrt().value).toBe('0')
       })
 
-      test('should throw error if precision is odd number', () => {
-        BN.setConfig({ precision: 5 })
-        expect(() => BN.fromRaw(0.25, 6).sqrt()).toThrowError()
+      test('should throw error if number is negative', () => {
+        expect(() => BN.fromRaw(-1, 6).sqrt()).toThrowError()
       })
     })
 

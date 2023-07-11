@@ -276,20 +276,20 @@ export class BN {
    * @throws {@link RuntimeError} if `BN.precision` is not even number.
    */
   public sqrt(): BN {
-    const expression = BN.precision > 1 && BN.precision % 2 === 0
-    assert(expression, 'sqrt requires precision to be even number')
+    assert(!this.isNegative, 'sqrt of negative numbers is not supported')
 
     if (this.isZero) return this
 
-    let x0 = this.raw / 2n
-    let x1 = (x0 + this.raw / x0) / 2n
+    const base = this.raw * this.#tens
+    let x0 = base / 2n
+    let x1 = (x0 + base / x0) / 2n
 
     while (x0 - x1 > 1n) {
       x0 = x1
-      x1 = (x0 + this.raw / x0) / 2n
+      x1 = (x0 + base / x0) / 2n
     }
 
-    return new BN(x1 * getTens(BN.precision / 2), this.#cfg)
+    return new BN(x1, this.#cfg)
   }
 
   /**
