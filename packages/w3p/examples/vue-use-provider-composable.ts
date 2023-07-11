@@ -9,7 +9,7 @@ import {
   type RawProvider,
   type TransactionResponse,
   type TxRequestBody,
-} from "@distributedlab/w3p";
+} from '@distributedlab/w3p'
 import { onUnmounted, reactive, ref, toRefs } from 'vue'
 
 type ProviderState = {
