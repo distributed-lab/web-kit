@@ -4,12 +4,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
 ### Added
-- `@distributedlab/w3p` - tests
+- `@distributedlab/w3p` Test coverage
+## [0.2.0] - 2023-07-11
 
+## [0.2.0-rc.25] - 2023-07-06
+### Added
+- `@distributedlab/w3p` - `RawProvider` property
+
+## [0.2.0-rc.24] - 2023-07-05
+### Fixed
+- `@distributedlab/tools` - `BN.toGreaterDecimals` method returnable instance decimals value
+
+## [0.2.0-rc.23] - 2023-07-05
+### Added
+- `@distributedlab/tools` - `BN` `toGreaterDecimals`, `toLessDecimals`, `toDecimals` methods
+
+### Fixed
+- `root` - Inlining sourcemaps to be able to use debugger
+
+## [0.2.0-rc.22] - 2023-07-05
 ### Changed
-- `@distributedlab/w3p` - README and examples
+- `@distributedlab/tools` - Extend `TimeDate` type with `Time` instance to be able to use as argument
+
+## [0.2.0-rc.21] - 2023-06-28
+### Fixed
+- `@distributedlab/fetcher` - Building URL from base URL and endpoint with query params
+
+## [0.2.0-rc.20] - 2023-06-28
+### Added
+- `@distributedlab/fetcher` - `fetcher` standalone instance
+
+### Fixed
+- `@distributedlab/w3p` - Circular dependency
+
+## [0.2.0-rc.19] - 2023-06-09
+- `@distributedlab/reactivity` - `extend` hook return type
+- `@distributedlab/reactivity` - `ref` hook value argument type
+
+## [0.2.0-rc.18] - 2023-06-08
+### Fixed
+- `@distributedlab/reactivity` - Redefining issue in the `extend` hook
+
+## [0.2.0-rc.17] - 2023-06-08
+### Added
+- `@distributedlab/reactivity` - Implementation of the reactivity connections to propagate changes between objects
 
 ## [0.2.0-rc.16] - 2023-05-22
 ### Added
@@ -224,14 +264,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `root`: `yarn rsc` Release Sanity Check script
 - `root`: Rollup and configuration file to build packages for CDN
 - `@distributedlab/tools`: Handling big numbers
-- `@distributedlab/tools`: Add tests  for time.ts and duration.ts
+- `@distributedlab/tools`: Add tests for time.ts and duration.ts
 
 ### Changed****
 - `root`: Updated `README.md`
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.25...0.2.0
+[0.2.0-rc.25]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.24...0.2.0-rc.25
+[0.2.0-rc.24]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.23...0.2.0-rc.24
+[0.2.0-rc.23]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.22...0.2.0-rc.23
+[0.2.0-rc.22]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.21...0.2.0-rc.22
+[0.2.0-rc.21]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.20...0.2.0-rc.21
+[0.2.0-rc.20]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.19...0.2.0-rc.20
+[0.2.0-rc.19]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.18...0.2.0-rc.19
+[0.2.0-rc.18]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.17...0.2.0-rc.18
+[0.2.0-rc.17]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.16...0.2.0-rc.17
 [0.2.0-rc.16]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.15...0.2.0-rc.16
 [0.2.0-rc.15]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.14...0.2.0-rc.15
 [0.2.0-rc.14]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.13...0.2.0-rc.14

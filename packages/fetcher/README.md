@@ -1,4 +1,5 @@
 # @distributedlab/fetcher
+
 Fetch API wrapper with the extended functionality and simple interface.
 
 ![version (scoped package)](https://badgen.net/npm/v/@distributedlab/fetcher)
@@ -21,6 +22,7 @@ import { Fetcher } from '@distributedlab/fetcher'
 ```
 
 CommonJS:
+
 ```ts
 const { Fetcher } = require('@distributedlab/fetcher')
 ```
@@ -28,8 +30,10 @@ const { Fetcher } = require('@distributedlab/fetcher')
 Via CDN:
 
 In HTML:
+
 ```html
-<script src="https://unpkg.com/@distributedlab/fetcher"></script>
+
+<script src='https://unpkg.com/@distributedlab/fetcher'></script>
 ```
 
 In code:
@@ -94,18 +98,19 @@ const api = new Fetcher({
 
 const getDataWithQuery = async () => {
   const { data } = await api.get<{ name: string }>('/data', {
-  query: {
-    filter: "John",
+    query: {
+      filter: "John",
       exists: true,
       "page[number]": 1,
       include: ["comments", "posts"],
-  }
-})
+    }
+  })
   return data
 }
 ```
 
-`POST` request (`PUT`, `PATCH` request has pretty much the same interface, just use `put` or `patch` method instead of `post`):
+`POST` request (`PUT`, `PATCH` request has pretty much the same interface, just use `put` or `patch`
+method instead of `post`):
 
 ```ts
 import { Fetcher } from '@distributedlab/fetcher'
@@ -116,10 +121,10 @@ const api = new Fetcher({
 
 const postData = async () => {
   const { data } = await api.post<{ name: string }>('/data', {
-  body: {
-    name: "John",
-  }
-})
+    body: {
+      name: "John",
+    }
+  })
   return data
 }
 ```
@@ -180,7 +185,7 @@ const api = new Fetcher({
 api.addInterceptor({
   request: async request => {
     // Do something before request is sent
-    return {...request, url: `${request.url}?foo=bar`}
+    return { ...request, url: `${request.url}?foo=bar` }
   },
   response: async response => {
     // Do something with response
@@ -202,6 +207,24 @@ api.addInterceptor({
 
 ```
 
+### Standalone
+
+The `Fetcher` standalone feature offers the convenience of making requests to an external API without
+the need to create an instance or configure options such as `baseUrl`. It proves particularly useful
+in scenarios where you require a one-time request and prefers to avoid the overhead of setting up a
+`Fetcher` instance:
+
+```ts
+import { fetcher } from '@distributedlab/fetcher'
+
+const getData = async () => {
+  const { data } = await fetcher.get<{ name: string }>('https://api.example.com/data')
+  console.log(data) // { name: 'John' }
+}
+```
+
 ## Changelog
 
-For the change log, see [CHANGELOG.md](https://github.com/distributed-lab/web-kit/blob/main/CHANGELOG.md).
+For the change log, see [CHANGELOG.md].
+
+[CHANGELOG.md]: https://github.com/distributed-lab/web-kit/blob/main/CHANGELOG.md

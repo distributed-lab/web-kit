@@ -95,13 +95,7 @@ export class BN {
 
   static #toGreatestDecimals(...args: BN[]): BN[] {
     const greatestDecimals = BN.#getGreatestDecimal(...args).decimals
-
-    return args.map(el =>
-      BN.fromBigInt(
-        el.bn.multipliedBy(BN.#makeTenPower(greatestDecimals - el.decimals)),
-        greatestDecimals,
-      ),
-    )
+    return args.map(el => el.toGreaterDecimals(greatestDecimals))
   }
 
   static #makeTenPower(decimals: BnLike): BigNumber {
@@ -314,6 +308,40 @@ export class BN {
   public fromFraction(decimals?: number): BN {
     const fr = BN.#makeOneTenthPower(decimals || DECIMALS.WEI)
     return new BN(this.#bn.multipliedBy(fr), this.#cfg)
+  }
+
+  public toGreaterDecimals(decimals: number): BN {
+    if (decimals < this.#cfg.decimals) {
+      throw new TypeError(
+        'Provided decimals cannot be less than the current decimals',
+      )
+    }
+
+    return BN.fromBigInt(
+      this.#bn.multipliedBy(BN.#makeTenPower(decimals - this.#cfg.decimals)),
+      decimals,
+    )
+  }
+
+  public toLessDecimals(decimals: number): BN {
+    if (decimals > this.#cfg.decimals) {
+      throw new TypeError(
+        'Provided decimals cannot be greater than the current decimals',
+      )
+    }
+
+    return BN.fromBigInt(
+      this.#bn
+        .dividedBy(BN.#makeTenPower(this.#cfg.decimals - decimals))
+        .toFixed(0),
+      decimals,
+    )
+  }
+
+  public toDecimals(decimals: number): BN {
+    return decimals > this.#cfg.decimals
+      ? this.toGreaterDecimals(decimals)
+      : this.toLessDecimals(decimals)
   }
 
   /**

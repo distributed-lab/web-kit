@@ -49,3 +49,5 @@ export type FetcherResponse<T> = {
   request: FetcherRequest
   data?: T
 }
+
+export type FetcherStandaloneConfig = Omit<FetcherConfig, 'baseUrl'>

@@ -27,5 +27,5 @@
   },
   "exclude": ["examples","src/tests", ".test.ts"],
   "minify": false,
-  "sourceMaps": true
+  "sourceMaps": "inline"
 }

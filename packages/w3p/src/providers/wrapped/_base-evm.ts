@@ -30,16 +30,24 @@ import { ProviderEventBus } from './_event-bus'
 
 export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   readonly #provider: providers.Web3Provider
+  #rawProvider: RawProvider
 
   #chainId?: ChainId
   #address?: string
 
   constructor(provider: RawProvider) {
     super()
+
     this.#provider = new providers.Web3Provider(
       provider as providers.ExternalProvider,
       'any',
     )
+
+    this.#rawProvider = provider
+  }
+
+  get rawProvider(): RawProvider {
+    return this.#rawProvider
   }
 
   get chainType(): CHAIN_TYPES {

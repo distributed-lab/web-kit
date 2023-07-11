@@ -29,9 +29,9 @@ const ABORT_MANAGER = {
 const RESULT = {
   body: null,
   cache: 'no-store',
-  credentials: 'include',
+  credentials: 'omit',
   method: 'GET',
-  referrerPolicy: 'strict-origin-when-cross-origin',
+  referrerPolicy: 'no-referrer',
   signal: ABORT_MANAGER.setSafe(REQUEST_CFG.id),
   headers: {
     'Content-Type': 'application/json',
