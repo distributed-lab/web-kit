@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - `@distributedlab/w3p` Test coverage
+
 ## [0.2.0] - 2023-07-11
 
 ## [0.2.0-rc.25] - 2023-07-06
