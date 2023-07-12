@@ -21,7 +21,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">BN</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L18">packages/tools/src/bn.ts:18</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L32">packages/tools/src/bn/bn.ts:32</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -33,155 +33,288 @@
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Properties</h3>
-<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#_bn" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>#bn</span></a>
-<a href="_distributedlab_tools.BN.html#_cfg" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#cfg</span></a>
+<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#_cfg" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>#cfg</span></a>
+<a href="_distributedlab_tools.BN.html#_raw" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#raw</span></a>
+<a href="_distributedlab_tools.BN.html#_tens" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>#tens</span></a>
 <a href="_distributedlab_tools.BN.html#MAX_UINT256" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>MAX_<wbr/>UINT256</span></a>
 <a href="_distributedlab_tools.BN.html#ROUNDING" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>ROUNDING</span></a>
 <a href="_distributedlab_tools.BN.html#WEI_DECIMALS" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>WEI_<wbr/>DECIMALS</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Accessors</h3>
-<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#bn" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF4D4D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-262144-path"></rect><path d="M8.85 16L11.13 7.24H12.582L14.85 16H13.758L13.182 13.672H10.53L9.954 16H8.85ZM10.746 12.76H12.954L12.282 10.06C12.154 9.548 12.054 9.12 11.982 8.776C11.91 8.432 11.866 8.208 11.85 8.104C11.834 8.208 11.79 8.432 11.718 8.776C11.646 9.12 11.546 9.544 11.418 10.048L10.746 12.76Z" fill="var(--color-text)" id="icon-262144-text"></path></svg><span>bn</span></a>
-<a href="_distributedlab_tools.BN.html#cfg" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>cfg</span></a>
+<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#_hundred" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF4D4D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-262144-path"></rect><path d="M8.85 16L11.13 7.24H12.582L14.85 16H13.758L13.182 13.672H10.53L9.954 16H8.85ZM10.746 12.76H12.954L12.282 10.06C12.154 9.548 12.054 9.12 11.982 8.776C11.91 8.432 11.866 8.208 11.85 8.104C11.834 8.208 11.79 8.432 11.718 8.776C11.646 9.12 11.546 9.544 11.418 10.048L10.746 12.76Z" fill="var(--color-text)" id="icon-262144-text"></path></svg><span>#hundred</span></a>
+<a href="_distributedlab_tools.BN.html#_one" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>#one</span></a>
+<a href="_distributedlab_tools.BN.html#config" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>config</span></a>
 <a href="_distributedlab_tools.BN.html#decimals" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>decimals</span></a>
+<a href="_distributedlab_tools.BN.html#isNegative" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>is<wbr/>Negative</span></a>
+<a href="_distributedlab_tools.BN.html#isPositive" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>is<wbr/>Positive</span></a>
 <a href="_distributedlab_tools.BN.html#isZero" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>is<wbr/>Zero</span></a>
+<a href="_distributedlab_tools.BN.html#raw" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>raw</span></a>
 <a href="_distributedlab_tools.BN.html#value" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>value</span></a>
+<a href="_distributedlab_tools.BN.html#config-2" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>config</span></a>
+<a href="_distributedlab_tools.BN.html#precision" class="tsd-index-link tsd-kind-accessor tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg><span>precision</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
-<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#abs" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF4DB8" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-2048-path"></rect><path d="M9.162 16V7.24H10.578L11.514 10.072C11.602 10.328 11.674 10.584 11.73 10.84C11.794 11.088 11.842 11.28 11.874 11.416C11.906 11.28 11.954 11.088 12.018 10.84C12.082 10.584 12.154 10.324 12.234 10.06L13.122 7.24H14.538V16H13.482V12.82C13.482 12.468 13.49 12.068 13.506 11.62C13.53 11.172 13.558 10.716 13.59 10.252C13.622 9.78 13.654 9.332 13.686 8.908C13.726 8.476 13.762 8.1 13.794 7.78L12.366 12.16H11.334L9.894 7.78C9.934 8.092 9.97 8.456 10.002 8.872C10.042 9.28 10.078 9.716 10.11 10.18C10.142 10.636 10.166 11.092 10.182 11.548C10.206 12.004 10.218 12.428 10.218 12.82V16H9.162Z" fill="var(--color-text)" id="icon-2048-text"></path></svg><span>abs</span></a>
+<div class="tsd-index-list"><a href="_distributedlab_tools.BN.html#_percentToFraction" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF4DB8" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-2048-path"></rect><path d="M9.162 16V7.24H10.578L11.514 10.072C11.602 10.328 11.674 10.584 11.73 10.84C11.794 11.088 11.842 11.28 11.874 11.416C11.906 11.28 11.954 11.088 12.018 10.84C12.082 10.584 12.154 10.324 12.234 10.06L13.122 7.24H14.538V16H13.482V12.82C13.482 12.468 13.49 12.068 13.506 11.62C13.53 11.172 13.558 10.716 13.59 10.252C13.622 9.78 13.654 9.332 13.686 8.908C13.726 8.476 13.762 8.1 13.794 7.78L12.366 12.16H11.334L9.894 7.78C9.934 8.092 9.97 8.456 10.002 8.872C10.042 9.28 10.078 9.716 10.11 10.18C10.142 10.636 10.166 11.092 10.182 11.548C10.206 12.004 10.218 12.428 10.218 12.82V16H9.162Z" fill="var(--color-text)" id="icon-2048-text"></path></svg><span>#percent<wbr/>To<wbr/>Fraction</span></a>
+<a href="_distributedlab_tools.BN.html#_toDecimals" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#to<wbr/>Decimals</span></a>
+<a href="_distributedlab_tools.BN.html#abs" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>abs</span></a>
 <a href="_distributedlab_tools.BN.html#add" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>add</span></a>
-<a href="_distributedlab_tools.BN.html#clone" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>clone</span></a>
+<a href="_distributedlab_tools.BN.html#addPercent" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>add<wbr/>Percent</span></a>
+<a href="_distributedlab_tools.BN.html#cmp" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>cmp</span></a>
 <a href="_distributedlab_tools.BN.html#div" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>div</span></a>
+<a href="_distributedlab_tools.BN.html#eq" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>eq</span></a>
 <a href="_distributedlab_tools.BN.html#format" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>format</span></a>
-<a href="_distributedlab_tools.BN.html#fromFraction" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>from<wbr/>Fraction</span></a>
-<a href="_distributedlab_tools.BN.html#isEqualTo" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Equal<wbr/>To</span></a>
-<a href="_distributedlab_tools.BN.html#isGreaterThan" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Greater<wbr/>Than</span></a>
-<a href="_distributedlab_tools.BN.html#isGreaterThanOrEqualTo" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Greater<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</span></a>
-<a href="_distributedlab_tools.BN.html#isLessThan" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Less<wbr/>Than</span></a>
-<a href="_distributedlab_tools.BN.html#isLessThanOrEqualTo" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Less<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</span></a>
+<a href="_distributedlab_tools.BN.html#gt" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>gt</span></a>
+<a href="_distributedlab_tools.BN.html#gte" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>gte</span></a>
+<a href="_distributedlab_tools.BN.html#lt" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>lt</span></a>
+<a href="_distributedlab_tools.BN.html#lte" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>lte</span></a>
 <a href="_distributedlab_tools.BN.html#mul" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>mul</span></a>
+<a href="_distributedlab_tools.BN.html#negated" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>negated</span></a>
+<a href="_distributedlab_tools.BN.html#percent" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>percent</span></a>
 <a href="_distributedlab_tools.BN.html#pow" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>pow</span></a>
 <a href="_distributedlab_tools.BN.html#round" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>round</span></a>
 <a href="_distributedlab_tools.BN.html#sqrt" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>sqrt</span></a>
 <a href="_distributedlab_tools.BN.html#sub" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>sub</span></a>
+<a href="_distributedlab_tools.BN.html#subPercent" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>sub<wbr/>Percent</span></a>
 <a href="_distributedlab_tools.BN.html#toDecimals" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Decimals</span></a>
-<a href="_distributedlab_tools.BN.html#toFraction" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Fraction</span></a>
 <a href="_distributedlab_tools.BN.html#toGreaterDecimals" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Greater<wbr/>Decimals</span></a>
+<a href="_distributedlab_tools.BN.html#toJSON" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>toJSON</span></a>
 <a href="_distributedlab_tools.BN.html#toLessDecimals" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Less<wbr/>Decimals</span></a>
 <a href="_distributedlab_tools.BN.html#toString" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>String</span></a>
-<a href="_distributedlab_tools.BN.html#_getGreatestDecimal" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#get<wbr/>Greatest<wbr/>Decimal</span></a>
-<a href="_distributedlab_tools.BN.html#_instance" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#instance</span></a>
-<a href="_distributedlab_tools.BN.html#_makeOneTenthPower" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#make<wbr/>One<wbr/>Tenth<wbr/>Power</span></a>
-<a href="_distributedlab_tools.BN.html#_makeTenPower" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#make<wbr/>Ten<wbr/>Power</span></a>
-<a href="_distributedlab_tools.BN.html#_toGreatestDecimals" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-private"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>#to<wbr/>Greatest<wbr/>Decimals</span></a>
 <a href="_distributedlab_tools.BN.html#fromBigInt" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>from<wbr/>Big<wbr/>Int</span></a>
 <a href="_distributedlab_tools.BN.html#fromRaw" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>from<wbr/>Raw</span></a>
 <a href="_distributedlab_tools.BN.html#isBn" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>is<wbr/>Bn</span></a>
 <a href="_distributedlab_tools.BN.html#max" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>max</span></a>
 <a href="_distributedlab_tools.BN.html#min" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>min</span></a>
+<a href="_distributedlab_tools.BN.html#setConfig" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Config</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-protected"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_BN">new BN<span class="tsd-signature-symbol">(</span>bigLike<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a>, cfg<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#constructor.new_BN" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_BN">new BN<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">bigint</span>, config<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#constructor.new_BN" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description"><code class="tsd-tag ts-flagProtected">Protected</code> 
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> instance.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>bigLike: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li>
+<h5>value: <span class="tsd-signature-type">bigint</span></h5>
+<div class="tsd-comment tsd-typography"><p>Always BigInt * ten power of <a href="_distributedlab_tools.BN.html#precision">precision</a></p>
+</div></li>
 <li>
-<h5>cfg: <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></h5></li></ul></div>
+<h5>config: <a href="../types/_distributedlab_tools.BnConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfig</a></h5>
+<div class="tsd-comment tsd-typography"><p>The config of the value.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L30">packages/tools/src/bn.ts:30</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L76">packages/tools/src/bn/bn.ts:76</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_bn" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>#bn</span><a href="#_bn" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">#bn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BigNumber</span></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L19">packages/tools/src/bn.ts:19</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_cfg" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>#cfg</span><a href="#_cfg" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">#cfg<span class="tsd-signature-symbol">:</span> <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></div><aside class="tsd-sources">
+<div class="tsd-signature">#cfg<span class="tsd-signature-symbol">:</span> <a href="../types/_distributedlab_tools.BnConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfig</a></div>
+<div class="tsd-comment tsd-typography"><p><a href="_distributedlab_tools.BN.html">BN</a> instance config.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L20">packages/tools/src/bn.ts:20</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L62">packages/tools/src/bn/bn.ts:62</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_raw" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>#raw</span><a href="#_raw" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">#raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span></div>
+<div class="tsd-comment tsd-typography"><p>Raw value multiplied by ten power of <a href="_distributedlab_tools.BN.html#precision">precision</a>.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L57">packages/tools/src/bn/bn.ts:57</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_tens" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>#tens</span><a href="#_tens" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">#tens<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">bigint</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>Ten power of <a href="_distributedlab_tools.BN.html#precision">precision</a>.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L67">packages/tools/src/bn/bn.ts:67</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="MAX_UINT256" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>MAX_<wbr/>UINT256</span><a href="#MAX_UINT256" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">MAX_<wbr/>UINT256<span class="tsd-signature-symbol">:</span> <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
+<div class="tsd-signature">MAX_<wbr/>UINT256<span class="tsd-signature-symbol">:</span> <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>Solidity maximum uint256 value.</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L24">packages/tools/src/bn.ts:24</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L36">packages/tools/src/bn/bn.ts:36</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ROUNDING" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>ROUNDING</span><a href="#ROUNDING" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">ROUNDING<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="../enums/_distributedlab_tools.BN_ROUNDING.html" class="tsd-signature-type" data-tsd-kind="Enumeration">BN_ROUNDING</a><span class="tsd-signature-symbol"> = BN_ROUNDING</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L22">packages/tools/src/bn.ts:22</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L38">packages/tools/src/bn/bn.ts:38</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="WEI_DECIMALS" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>WEI_<wbr/>DECIMALS</span><a href="#WEI_DECIMALS" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">WEI_<wbr/>DECIMALS<span class="tsd-signature-symbol">:</span> <a href="../enums/_distributedlab_tools.DECIMALS.html" class="tsd-signature-type" data-tsd-kind="Enumeration">DECIMALS</a><span class="tsd-signature-symbol"> = DECIMALS.WEI</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L23">packages/tools/src/bn.ts:23</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L37">packages/tools/src/bn/bn.ts:37</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
-<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="bn" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>bn</span><a href="#bn" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-<li class="tsd-signature" id="bn.bn-1"><span class="tsd-signature-symbol">get</span> bn<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumber</span></li>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><a id="_hundred" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#hundred</span><a href="#_hundred" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature" id="_hundred._hundred-1"><span class="tsd-signature-symbol">get</span> #hundred<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BigNumber</span></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L155">packages/tools/src/bn.ts:155</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="cfg" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>cfg</span><a href="#cfg" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-<li class="tsd-signature" id="cfg.cfg-1"><span class="tsd-signature-symbol">get</span> cfg<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></li>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L419">packages/tools/src/bn/bn.ts:419</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><a id="_one" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#one</span><a href="#_one" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature" id="_one._one-1"><span class="tsd-signature-symbol">get</span> #one<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></li>
 <li class="tsd-description">
-<h4 class="tsd-returns-title">Returns <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></h4><aside class="tsd-sources">
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L147">packages/tools/src/bn.ts:147</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L415">packages/tools/src/bn/bn.ts:415</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="config" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>config</span><a href="#config" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="config.config-1"><span class="tsd-signature-symbol">get</span> config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfig</a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A <code>this</code> config.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="../types/_distributedlab_tools.BnConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfig</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L151">packages/tools/src/bn/bn.ts:151</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="decimals" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>decimals</span><a href="#decimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
 <li class="tsd-signature" id="decimals.decimals-1"><span class="tsd-signature-symbol">get</span> decimals<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>The number of decimal places</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L151">packages/tools/src/bn.ts:151</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L158">packages/tools/src/bn/bn.ts:158</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="isNegative" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>is<wbr/>Negative</span><a href="#isNegative" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="isNegative.isNegative-1"><span class="tsd-signature-symbol">get</span> isNegative<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if the <code>this</code> value is negative.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L179">packages/tools/src/bn/bn.ts:179</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="isPositive" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>is<wbr/>Positive</span><a href="#isPositive" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="isPositive.isPositive-1"><span class="tsd-signature-symbol">get</span> isPositive<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if the <code>this</code> value is positive.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L172">packages/tools/src/bn/bn.ts:172</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="isZero" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Zero</span><a href="#isZero" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
 <li class="tsd-signature" id="isZero.isZero-1"><span class="tsd-signature-symbol">get</span> isZero<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if the <code>this</code> value is zero.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L159">packages/tools/src/bn.ts:159</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L165">packages/tools/src/bn/bn.ts:165</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="raw" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>raw</span><a href="#raw" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="raw.raw-1"><span class="tsd-signature-symbol">get</span> raw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">bigint</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A raw BigInt value with the <a href="_distributedlab_tools.BN.html#precision">precision</a> applied.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">bigint</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L186">packages/tools/src/bn/bn.ts:186</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="value" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>value</span><a href="#value" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
 <li class="tsd-signature" id="value.value-1"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A big int string value with the <code>this.decimals</code> applied.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L163">packages/tools/src/bn.ts:163</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L193">packages/tools/src/bn/bn.ts:193</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="config-2" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>config</span><a href="#config-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="config-2.config-3"><span class="tsd-signature-symbol">get</span> config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnGlobalConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnGlobalConfig</a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p><a href="_distributedlab_tools.BN.html">BN</a> class global config.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="../types/_distributedlab_tools.BnGlobalConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnGlobalConfig</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L43">packages/tools/src/bn/bn.ts:43</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class"><a id="precision" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>precision</span><a href="#precision" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature" id="precision.precision-1"><span class="tsd-signature-symbol">get</span> precision<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p><a href="_distributedlab_tools.BN.html">BN</a> class global precision.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L50">packages/tools/src/bn/bn.ts:50</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_percentToFraction" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#percent<wbr/>To<wbr/>Fraction</span><a href="#_percentToFraction" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_percentToFraction._percentToFraction-1">#percent<wbr/>To<wbr/>Fraction<span class="tsd-signature-symbol">(</span>percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#_percentToFraction._percentToFraction-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>percent: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L427">packages/tools/src/bn/bn.ts:427</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_toDecimals" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>#to<wbr/>Decimals</span><a href="#_toDecimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+<li class="tsd-signature tsd-anchor-link" id="_toDecimals._toDecimals-1">#to<wbr/>Decimals<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#_toDecimals._toDecimals-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L423">packages/tools/src/bn/bn.ts:423</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="abs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>abs</span><a href="#abs" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="abs.abs-1">abs<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#abs.abs-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is absolute <code>this</code>.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L358">packages/tools/src/bn.ts:358</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L303">packages/tools/src/bn/bn.ts:303</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="add" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>add</span><a href="#add" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="add.add-1">add<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#add.add-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the result of this added to <code>other</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -189,25 +322,47 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L211">packages/tools/src/bn.ts:211</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="clone" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>clone</span><a href="#clone" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L200">packages/tools/src/bn/bn.ts:200</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="addPercent" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>add<wbr/>Percent</span><a href="#addPercent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="clone.clone-1">clone<span class="tsd-signature-symbol">(</span>cfg<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#clone.clone-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="addPercent.addPercent-1">add<wbr/>Percent<span class="tsd-signature-symbol">(</span>percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#addPercent.addPercent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is <code>this</code> with added percentage.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> cfg: <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></h5></li></ul></div>
+<h5>percent: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L171">packages/tools/src/bn.ts:171</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L327">packages/tools/src/bn/bn.ts:327</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="cmp" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>cmp</span><a href="#cmp" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="cmp.cmp-1">cmp<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><a href="#cmp.cmp-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A comparison result between this and other.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L229">packages/tools/src/bn/bn.ts:229</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="div" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>div</span><a href="#div" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="div.div-1">div<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#div.div-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the result of this divided by <code>other</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -215,38 +370,49 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L191">packages/tools/src/bn.ts:191</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L214">packages/tools/src/bn/bn.ts:214</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="eq" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>eq</span><a href="#eq" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="eq.eq-1">eq<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#eq.eq-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>other</code> is equal to <code>this</code>.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L240">packages/tools/src/bn/bn.ts:240</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="format" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>format</span><a href="#format" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="format.format-1">format<span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnFormatCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnFormatCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#format.format-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="format.format-1">format<span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnFormatConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnFormatConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#format.format-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A string representing the value of <code>this</code> fixed-point notation and
+formatted according to the properties of the BN.config.format and
+<code>format</code> (if exist) objects.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> format: <a href="../types/_distributedlab_tools.BnFormatCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnFormatCfg</a></h5></li></ul></div>
+<h5>format: <a href="../types/_distributedlab_tools.BnFormatConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnFormatConfig</a><span class="tsd-signature-symbol"> = {}</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L278">packages/tools/src/bn.ts:278</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fromFraction" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>from<wbr/>Fraction</span><a href="#fromFraction" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L370">packages/tools/src/bn/bn.ts:370</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="gt" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>gt</span><a href="#gt" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="fromFraction.fromFraction-1">from<wbr/>Fraction<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#fromFraction.fromFraction-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="gt.gt-1">gt<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#gt.gt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L308">packages/tools/src/bn.ts:308</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isEqualTo" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>is<wbr/>Equal<wbr/>To</span><a href="#isEqualTo" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="isEqualTo.isEqualTo-1">is<wbr/>Equal<wbr/>To<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isEqualTo.isEqualTo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>other</code> is greater than to <code>this</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -254,12 +420,15 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L270">packages/tools/src/bn.ts:270</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isGreaterThan" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>is<wbr/>Greater<wbr/>Than</span><a href="#isGreaterThan" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L261">packages/tools/src/bn/bn.ts:261</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="gte" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>gte</span><a href="#gte" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="isGreaterThan.isGreaterThan-1">is<wbr/>Greater<wbr/>Than<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isGreaterThan.isGreaterThan-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="gte.gte-1">gte<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#gte.gte-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>other</code> is greater than or equal to <code>this</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -267,12 +436,15 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L254">packages/tools/src/bn.ts:254</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isGreaterThanOrEqualTo" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>is<wbr/>Greater<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</span><a href="#isGreaterThanOrEqualTo" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L268">packages/tools/src/bn/bn.ts:268</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="lt" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>lt</span><a href="#lt" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="isGreaterThanOrEqualTo.isGreaterThanOrEqualTo-1">is<wbr/>Greater<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isGreaterThanOrEqualTo.isGreaterThanOrEqualTo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="lt.lt-1">lt<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#lt.lt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>other</code> is less than to <code>this</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -280,12 +452,15 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L258">packages/tools/src/bn.ts:258</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isLessThan" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>is<wbr/>Less<wbr/>Than</span><a href="#isLessThan" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L247">packages/tools/src/bn/bn.ts:247</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="lte" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>lte</span><a href="#lte" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="isLessThan.isLessThan-1">is<wbr/>Less<wbr/>Than<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isLessThan.isLessThan-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="lte.lte-1">lte<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#lte.lte-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>other</code> is less than or equal to <code>this</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -293,25 +468,15 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L262">packages/tools/src/bn.ts:262</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isLessThanOrEqualTo" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>is<wbr/>Less<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</span><a href="#isLessThanOrEqualTo" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="isLessThanOrEqualTo.isLessThanOrEqualTo-1">is<wbr/>Less<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><a href="#isLessThanOrEqualTo.isLessThanOrEqualTo-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L266">packages/tools/src/bn.ts:266</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L254">packages/tools/src/bn/bn.ts:254</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="mul" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>mul</span><a href="#mul" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="mul.mul-1">mul<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#mul.mul-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the result of this multiplied by <code>other</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -319,48 +484,90 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L175">packages/tools/src/bn.ts:175</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L222">packages/tools/src/bn/bn.ts:222</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="negated" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>negated</span><a href="#negated" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="negated.negated-1">negated<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#negated.negated-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is negated <code>this</code> (multiplied by -1).</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L296">packages/tools/src/bn/bn.ts:296</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="percent" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>percent</span><a href="#percent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="percent.percent-1">percent<span class="tsd-signature-symbol">(</span>percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#percent.percent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is percentage of <code>this</code> value.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>percent: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L320">packages/tools/src/bn/bn.ts:320</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="pow" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>pow</span><a href="#pow" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="pow.pow-1">pow<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#pow.pow-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="pow.pow-1">pow<span class="tsd-signature-symbol">(</span>exponent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#pow.pow-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is <code>this</code> raised to the power of <code>exponent</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>other: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h5>exponent: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L229">packages/tools/src/bn.ts:229</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L310">packages/tools/src/bn/bn.ts:310</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="round" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>round</span><a href="#round" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="round.round-1">round<span class="tsd-signature-symbol">(</span>precision<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, mode<span class="tsd-signature-symbol">?: </span><a href="../enums/_distributedlab_tools.BN_ROUNDING.html" class="tsd-signature-type" data-tsd-kind="Enumeration">BN_ROUNDING</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#round.round-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="round.round-1">round<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rounding<span class="tsd-signature-symbol">?: </span><a href="../enums/_distributedlab_tools.BN_ROUNDING.html" class="tsd-signature-type" data-tsd-kind="Enumeration">BN_ROUNDING</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#round.round-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is the value of <code>this</code> rounded to
+decimals using <a href="../enums/_distributedlab_tools.BN_ROUNDING.html">BN_ROUNDING</a> rounding mode.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>precision: <span class="tsd-signature-type">number</span></h5></li>
+<h5>decimals: <span class="tsd-signature-type">number</span></h5></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> mode: <a href="../enums/_distributedlab_tools.BN_ROUNDING.html" class="tsd-signature-type" data-tsd-kind="Enumeration">BN_ROUNDING</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> rounding: <a href="../enums/_distributedlab_tools.BN_ROUNDING.html" class="tsd-signature-type" data-tsd-kind="Enumeration">BN_ROUNDING</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L274">packages/tools/src/bn.ts:274</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L378">packages/tools/src/bn/bn.ts:378</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="sqrt" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>sqrt</span><a href="#sqrt" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="sqrt.sqrt-1">sqrt<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#sqrt.sqrt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is the square root of <code>this</code>.</p>
+
+<h3>Throws</h3><p><a href="_distributedlab_tools.RuntimeError.html">RuntimeError</a> if <code>BN.precision</code> is not even number.</p>
+</div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L238">packages/tools/src/bn.ts:238</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L276">packages/tools/src/bn/bn.ts:276</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="sub" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>sub</span><a href="#sub" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="sub.sub-1">sub<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#sub.sub-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the result of other subtracted from this.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -368,12 +575,31 @@
 <h5>other: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L220">packages/tools/src/bn.ts:220</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L207">packages/tools/src/bn/bn.ts:207</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="subPercent" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>sub<wbr/>Percent</span><a href="#subPercent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="subPercent.subPercent-1">sub<wbr/>Percent<span class="tsd-signature-symbol">(</span>percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#subPercent.subPercent-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> whose value is <code>this</code> with subtracted percentage.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>percent: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L334">packages/tools/src/bn/bn.ts:334</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toDecimals" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>Decimals</span><a href="#toDecimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="toDecimals.toDecimals-1">to<wbr/>Decimals<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#toDecimals.toDecimals-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the provided decimals.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -381,25 +607,16 @@
 <h5>decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L341">packages/tools/src/bn.ts:341</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toFraction" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>to<wbr/>Fraction</span><a href="#toFraction" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="toFraction.toFraction-1">to<wbr/>Fraction<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#toFraction.toFraction-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L303">packages/tools/src/bn.ts:303</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L341">packages/tools/src/bn/bn.ts:341</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toGreaterDecimals" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>Greater<wbr/>Decimals</span><a href="#toGreaterDecimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="toGreaterDecimals.toGreaterDecimals-1">to<wbr/>Greater<wbr/>Decimals<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#toGreaterDecimals.toGreaterDecimals-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the provided decimals, greater than current one,
+otherwise throws <a href="_distributedlab_tools.RuntimeError.html">RuntimeError</a>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -407,12 +624,26 @@
 <h5>decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L313">packages/tools/src/bn.ts:313</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L360">packages/tools/src/bn/bn.ts:360</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toJSON" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>toJSON</span><a href="#toJSON" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="toJSON.toJSON-1">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#toJSON.toJSON-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description</a></p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L411">packages/tools/src/bn/bn.ts:411</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toLessDecimals" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>Less<wbr/>Decimals</span><a href="#toLessDecimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="toLessDecimals.toLessDecimals-1">to<wbr/>Less<wbr/>Decimals<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#toLessDecimals.toLessDecimals-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> with the provided decimals, less than current one,
+otherwise throws <a href="_distributedlab_tools.RuntimeError.html">RuntimeError</a>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -420,92 +651,26 @@
 <h5>decimals: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L326">packages/tools/src/bn.ts:326</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L351">packages/tools/src/bn/bn.ts:351</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toString" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>String</span><a href="#toString" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="toString.toString-1">to<wbr/>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#toString.toString-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography">
-<h3>Description</h3><p>Converts uint value to float and returns human-readable string</p>
+<h3>Returns</h3><p>A human-readable float string.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L350">packages/tools/src/bn.ts:350</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_getGreatestDecimal" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>#get<wbr/>Greatest<wbr/>Decimal</span><a href="#_getGreatestDecimal" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_getGreatestDecimal._getGreatestDecimal-1">#get<wbr/>Greatest<wbr/>Decimal<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#_getGreatestDecimal._getGreatestDecimal-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span>args: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L90">packages/tools/src/bn.ts:90</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_instance" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>#instance</span><a href="#_instance" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_instance._instance-1">#instance<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a>, config<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumber</span><a href="#_instance._instance-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>value: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> config: <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BigNumber</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L109">packages/tools/src/bn.ts:109</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_makeOneTenthPower" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>#make<wbr/>One<wbr/>Tenth<wbr/>Power</span><a href="#_makeOneTenthPower" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_makeOneTenthPower._makeOneTenthPower-1">#make<wbr/>One<wbr/>Tenth<wbr/>Power<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumber</span><a href="#_makeOneTenthPower._makeOneTenthPower-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>decimals: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BigNumber</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L105">packages/tools/src/bn.ts:105</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_makeTenPower" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>#make<wbr/>Ten<wbr/>Power</span><a href="#_makeTenPower" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_makeTenPower._makeTenPower-1">#make<wbr/>Ten<wbr/>Power<span class="tsd-signature-symbol">(</span>decimals<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BigNumber</span><a href="#_makeTenPower._makeTenPower-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>decimals: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BigNumber</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L101">packages/tools/src/bn.ts:101</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="_toGreatestDecimals" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <code class="tsd-tag ts-flagPrivate">Private</code> <span>#to<wbr/>Greatest<wbr/>Decimals</span><a href="#_toGreatestDecimals" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-<li class="tsd-signature tsd-anchor-link" id="_toGreatestDecimals._toGreatestDecimals-1">#to<wbr/>Greatest<wbr/>Decimals<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span><a href="#_toGreatestDecimals._toGreatestDecimals-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span>args: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L96">packages/tools/src/bn.ts:96</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L388">packages/tools/src/bn/bn.ts:388</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fromBigInt" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Big<wbr/>Int</span><a href="#fromBigInt" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="fromBigInt.fromBigInt-1">from<wbr/>Big<wbr/>Int<span class="tsd-signature-symbol">(</span>bigLike<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a>, decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cfg<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#fromBigInt.fromBigInt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="fromBigInt.fromBigInt-1">from<wbr/>Big<wbr/>Int<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a>, decimalsOrConfig<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnConfigLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfigLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#fromBigInt.fromBigInt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography">
-<h3>Description</h3><p>@link{BN.fromBigInt} accepts uint number value</p>
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> if <code>value</code> argument is valid big int like value,
+otherwise throws <a href="_distributedlab_tools.RuntimeError.html">RuntimeError</a>.</p>
 
 <h3>Example</h3><pre><code class="language-ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-15">oneEth</span><span class="hl-1"> = </span><span class="hl-15">BN</span><span class="hl-1">.</span><span class="hl-0">fromBigInt</span><span class="hl-1">(</span><span class="hl-2">&#39;1000000000000000000&#39;</span><span class="hl-1">, </span><span class="hl-13">18</span><span class="hl-1">)</span>
 </code></pre>
@@ -514,42 +679,42 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>bigLike: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li>
+<h5>value: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li>
 <li>
-<h5>decimals: <span class="tsd-signature-type">number</span></h5></li>
-<li>
-<h5>cfg: <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol"> = ...</span></h5></li></ul></div>
+<h5>decimalsOrConfig: <a href="../types/_distributedlab_tools.BnConfigLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfigLike</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L57">packages/tools/src/bn.ts:57</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L105">packages/tools/src/bn/bn.ts:105</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fromRaw" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>from<wbr/>Raw</span><a href="#fromRaw" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="fromRaw.fromRaw-1">from<wbr/>Raw<span class="tsd-signature-symbol">(</span>bigLike<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a>, decimals<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cfg<span class="tsd-signature-symbol">?: </span><a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#fromRaw.fromRaw-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="fromRaw.fromRaw-1">from<wbr/>Raw<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span>, decimalsOrConfig<span class="tsd-signature-symbol">: </span><a href="../types/_distributedlab_tools.BnConfigLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfigLike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#fromRaw.fromRaw-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography">
-<h3>Description</h3><p>@link{BN.fromRaw} accepts number value and multiply it to 10**decimals</p>
+<h3>Returns</h3><p>A new <a href="_distributedlab_tools.BN.html">BN</a> if <code>value</code> argument is valid integer or float value,
+otherwise throws <a href="_distributedlab_tools.RuntimeError.html">RuntimeError</a>.</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-15">oneEth</span><span class="hl-1"> = </span><span class="hl-15">BN</span><span class="hl-1">.</span><span class="hl-0">fromBigInt</span><span class="hl-1">(</span><span class="hl-13">1</span><span class="hl-1">, </span><span class="hl-13">18</span><span class="hl-1">)</span>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-15">oneEth</span><span class="hl-1"> = </span><span class="hl-15">BN</span><span class="hl-1">.</span><span class="hl-0">fromRaw</span><span class="hl-1">(</span><span class="hl-13">1</span><span class="hl-1">, </span><span class="hl-13">18</span><span class="hl-1">)</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>bigLike: <a href="../types/_distributedlab_tools.BnLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnLike</a></h5></li>
+<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">bigint</span></h5></li>
 <li>
-<h5>decimals: <span class="tsd-signature-type">number</span></h5></li>
-<li>
-<h5>cfg: <a href="../types/_distributedlab_tools.BnCfg.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnCfg</a><span class="tsd-signature-symbol"> = ...</span></h5></li></ul></div>
+<h5>decimalsOrConfig: <a href="../types/_distributedlab_tools.BnConfigLike.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnConfigLike</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L75">packages/tools/src/bn.ts:75</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L126">packages/tools/src/bn/bn.ts:126</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isBn" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>is<wbr/>Bn</span><a href="#isBn" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="isBn.isBn-1">is<wbr/>Bn<span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">arg</span><span class="tsd-signature-symbol"> is </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#isBn.isBn-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p><code>true</code> if <code>arg</code> is <a href="_distributedlab_tools.BN.html">BN</a> instance.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -557,12 +722,15 @@
 <h5>arg: <span class="tsd-signature-type">unknown</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">arg</span><span class="tsd-signature-symbol"> is </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L86">packages/tools/src/bn.ts:86</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L92">packages/tools/src/bn/bn.ts:92</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="max" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>max</span><a href="#max" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="max.max-1">max<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#max.max-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A maximum <a href="_distributedlab_tools.BN.html">BN</a> value from the <code>args</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -570,12 +738,15 @@
 <h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span>args: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L138">packages/tools/src/bn.ts:138</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L144">packages/tools/src/bn/bn.ts:144</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="min" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>min</span><a href="#min" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="min.min-1">min<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><a href="#min.min-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<h3>Returns</h3><p>A minimum <a href="_distributedlab_tools.BN.html">BN</a> value from the <code>args</code>.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -583,7 +754,22 @@
 <h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span>args: <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="_distributedlab_tools.BN.html" class="tsd-signature-type" data-tsd-kind="Class">BN</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/464abf3/packages/tools/src/bn.ts#L129">packages/tools/src/bn.ts:129</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L137">packages/tools/src/bn/bn.ts:137</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setConfig" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>set<wbr/>Config</span><a href="#setConfig" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="setConfig.setConfig-1">set<wbr/>Config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/_distributedlab_tools.BnGlobalConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnGlobalConfig</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#setConfig.setConfig-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sets new <a href="../types/_distributedlab_tools.BnGlobalConfig.html">BnGlobalConfig</a> config to the <a href="_distributedlab_tools.BN.html">BN</a>.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>config: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/_distributedlab_tools.BnGlobalConfig.html" class="tsd-signature-type" data-tsd-kind="Type alias">BnGlobalConfig</a><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/distributed-lab/web-kit/blob/5faf865/packages/tools/src/bn/bn.ts#L84">packages/tools/src/bn/bn.ts:84</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -615,47 +801,55 @@
 <li class="current tsd-kind-class tsd-parent-kind-module"><a href="_distributedlab_tools.BN.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-class)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-128-path"></rect><path d="M11.898 16.1201C11.098 16.1201 10.466 15.8961 10.002 15.4481C9.53803 15.0001 9.30603 14.3841 9.30603 13.6001V9.64012C9.30603 8.85612 9.53803 8.24012 10.002 7.79212C10.466 7.34412 11.098 7.12012 11.898 7.12012C12.682 7.12012 13.306 7.34812 13.77 7.80412C14.234 8.25212 14.466 8.86412 14.466 9.64012H13.386C13.386 9.14412 13.254 8.76412 12.99 8.50012C12.734 8.22812 12.37 8.09212 11.898 8.09212C11.426 8.09212 11.054 8.22412 10.782 8.48812C10.518 8.75212 10.386 9.13212 10.386 9.62812V13.6001C10.386 14.0961 10.518 14.4801 10.782 14.7521C11.054 15.0161 11.426 15.1481 11.898 15.1481C12.37 15.1481 12.734 15.0161 12.99 14.7521C13.254 14.4801 13.386 14.0961 13.386 13.6001H14.466C14.466 14.3761 14.234 14.9921 13.77 15.4481C13.306 15.8961 12.682 16.1201 11.898 16.1201Z" fill="var(--color-text)" id="icon-128-text"></path></svg><span>BN</span></a>
 <ul>
 <li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-protected"><a href="_distributedlab_tools.BN.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-512-path"></use><use href="#icon-512-text"></use></svg>constructor</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_bn" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#bn</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_cfg" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#cfg</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_raw" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#raw</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_tens" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>#tens</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#MAX_UINT256" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>MAX_<wbr/>UINT256</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#ROUNDING" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>ROUNDING</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#WEI_DECIMALS" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>WEI_<wbr/>DECIMALS</a></li>
-<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#bn" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>bn</a></li>
-<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#cfg" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>cfg</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_hundred" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>#hundred</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_one" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>#one</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#config" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>config</a></li>
 <li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#decimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>decimals</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isNegative" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>is<wbr/>Negative</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isPositive" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>is<wbr/>Positive</a></li>
 <li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isZero" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>is<wbr/>Zero</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#raw" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>raw</a></li>
 <li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#value" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>value</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#config-2" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>config</a></li>
+<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#precision" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>precision</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_percentToFraction" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#percent<wbr/>To<wbr/>Fraction</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_toDecimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#to<wbr/>Decimals</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#abs" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>abs</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#add" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>add</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#clone" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>clone</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#addPercent" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>add<wbr/>Percent</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#cmp" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>cmp</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#div" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>div</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#eq" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>eq</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#format" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>format</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#fromFraction" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>from<wbr/>Fraction</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isEqualTo" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Equal<wbr/>To</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isGreaterThan" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Greater<wbr/>Than</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isGreaterThanOrEqualTo" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Greater<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isLessThan" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Less<wbr/>Than</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isLessThanOrEqualTo" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Less<wbr/>Than<wbr/>Or<wbr/>Equal<wbr/>To</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#gt" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>gt</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#gte" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>gte</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#lt" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>lt</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#lte" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>lte</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#mul" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>mul</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#negated" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>negated</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#percent" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>percent</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#pow" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>pow</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#round" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>round</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#sqrt" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>sqrt</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#sub" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>sub</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#subPercent" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>sub<wbr/>Percent</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toDecimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Decimals</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toFraction" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Fraction</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toGreaterDecimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Greater<wbr/>Decimals</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toJSON" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>toJSON</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toLessDecimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Less<wbr/>Decimals</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#toString" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>String</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_getGreatestDecimal" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#get<wbr/>Greatest<wbr/>Decimal</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_instance" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#instance</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_makeOneTenthPower" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#make<wbr/>One<wbr/>Tenth<wbr/>Power</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_makeTenPower" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#make<wbr/>Ten<wbr/>Power</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_distributedlab_tools.BN.html#_toGreatestDecimals" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>#to<wbr/>Greatest<wbr/>Decimals</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#fromBigInt" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>from<wbr/>Big<wbr/>Int</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#fromRaw" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>from<wbr/>Raw</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#isBn" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>is<wbr/>Bn</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#max" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>max</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#min" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>min</a></li></ul></li></ul></nav></div></div>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#min" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>min</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="_distributedlab_tools.BN.html#setConfig" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Config</a></li></ul></li></ul></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div><script src="../assets/main.js"></script></body></html>
