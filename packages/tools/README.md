@@ -15,6 +15,9 @@ yarn add @distributedlab/tools
 ```
 
 #### Work with big numbers
+BN uses 26 (yoctoNEAR + 2 (percent precision)) maximum precision by default.
+You can change it by `BN.setConfig` method.
+
 ```ts
 import { BN } from '@distributedlab/tools';
 

@@ -5,8 +5,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [1.0.0-rc.0] - 2023-07-12
 ### Added
 - `@distributedlab/w3p` Test coverage
+- `@distributedlab/tools`
+  - `BN`
+    - `percent, addPercent, subPercent, negated` methods
+    - `isNegative, isPositive, raw` getters
+
+### Changed
+- `@distributedlab/tools`
+  - `BN`
+    - migrated to the native `BigInt`
+    - uses maximum precision for calculations
+    - `isGreaterThan` renamed to `gt`
+    - `isGreaterThanOrEqualTo` renamed to `gte`
+    - `isLessThan` renamed to `lt`
+    - `isLessThanOrEqualTo` renamed to `lte`
+    - `isEqualTo` renamed to `eq`
+    - default rounding mode is `BN_ROUNDING.HALF_UP`
+
+### Removed
+- `@distributedlab/tools` - `bignumber.js` dependency
+- `@distributedlab/tools` - `BN` `fromFraction, toFraction, clone` methods
+- `@distributedlab/tools` - `BN_ROUNDING.HALF_EVEN` rounding mode
+- `@distributedlab/tools` - `BnFormatConfig.secondGroupSize` field
 
 ## [0.2.0] - 2023-07-11
 
@@ -272,7 +296,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.0...HEAD
+[1.0.0-rc.0]: https://github.com/distributed-lab/web-kit/compare/0.2.0...1.0.0-rc.0
 [0.2.0]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.25...0.2.0
 [0.2.0-rc.25]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.24...0.2.0-rc.25
 [0.2.0-rc.24]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.23...0.2.0-rc.24
