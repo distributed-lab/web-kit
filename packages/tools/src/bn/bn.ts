@@ -9,7 +9,7 @@ import type {
   BnLike,
 } from '@/types'
 
-import { assertDecimals } from './assertions'
+import { assertDecimals, assertDecimalsInteger } from './assertions'
 import { getTens, toDecimals } from './decimals'
 import { format as _format } from './format'
 import { parseConfig, parseNumberString } from './parsers'
@@ -120,7 +120,7 @@ export class BN {
    * otherwise throws {@link RuntimeError}.
    * @example
    * ```ts
-   * const oneEth = BN.fromBigInt(1, 18)
+   * const oneEth = BN.fromRaw(1, 18)
    * ```
    */
   public static fromRaw(
@@ -135,16 +135,14 @@ export class BN {
    *  @returns A minimum {@link BN} value from the `args`.
    */
   public static min(...args: BN[]): BN {
-    const min = args.reduce((min, el) => (el.raw < min.raw ? el : min))
-    return new BN(min.raw, min.config)
+    return args.reduce((min, el) => (el.raw < min.raw ? el : min))
   }
 
   /**
    *  @returns A maximum {@link BN} value from the `args`.
    */
   public static max(...args: BN[]): BN {
-    const max = args.reduce((min, el) => (el.raw > min.raw ? el : min))
-    return new BN(max.raw, max.config)
+    return args.reduce((min, el) => (el.raw > min.raw ? el : min))
   }
 
   /**
@@ -310,6 +308,7 @@ export class BN {
    * @returns A new {@link BN} whose value is `this` raised to the power of `exponent`.
    */
   public pow(exponent: number): BN {
+    assertDecimalsInteger(exponent)
     const exp = BigInt(exponent)
     const fr = getTens(Number(BigInt(BN.precision) * (exp - 1n)))
     return new BN(this.#raw ** exp / fr, this.#cfg)

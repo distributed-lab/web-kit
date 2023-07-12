@@ -8,6 +8,8 @@ export const assertDecimals = (
   targetDecimals: number,
   op: BN_ASSERT_DECIMALS_OP,
 ) => {
+  assertDecimalsInteger(currentDecimals)
+
   assert(
     targetDecimals < BN.precision,
     'Target decimals cannot be greater than the BN config precision',
@@ -25,4 +27,8 @@ export const assertDecimals = (
     targetDecimals < currentDecimals,
     'Target decimals cannot be greater than the current decimals',
   )
+}
+
+export const assertDecimalsInteger = (decimals: number) => {
+  assert(Number.isInteger(decimals), 'Decimals must be an integer')
 }

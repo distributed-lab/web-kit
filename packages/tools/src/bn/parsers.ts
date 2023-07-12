@@ -2,6 +2,7 @@ import { NUMBER_REGEX } from '@/const'
 import { assert, isFixedPointString } from '@/helpers'
 import type { BnConfig, BnConfigLike } from '@/types'
 
+import { assertDecimalsInteger } from './assertions'
 import { BN } from './bn'
 
 export const parseNumberString = (_value: string): string => {
@@ -28,6 +29,7 @@ export const parseNumberString = (_value: string): string => {
 
 export const parseConfig = (config: BnConfigLike): BnConfig => {
   const cfg = typeof config === 'number' ? { decimals: config } : config
+  assertDecimalsInteger(cfg.decimals)
   assert(Boolean(cfg.decimals), 'Decimals cannot be zero or undefined')
   assert(cfg.decimals > 0, 'Decimals cannot be negative')
   return cfg
