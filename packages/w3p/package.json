@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/w3p",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0-rc.1",
   "description": "Wrapper for Web3 Providers",
   "repository": {
     "type": "git",

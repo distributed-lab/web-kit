@@ -339,6 +339,8 @@ export class BN {
    * @returns A new {@link BN} with the provided decimals.
    */
   public toDecimals(decimals: number): BN {
+    if (decimals === this.#cfg.decimals) return this
+
     return decimals > this.#cfg.decimals
       ? this.toGreaterDecimals(decimals)
       : this.toLessDecimals(decimals)
