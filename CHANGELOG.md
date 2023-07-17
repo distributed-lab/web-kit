@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.0.0-rc.2] - 2023-07-17
+### Fixed
+- `@distributedlab/tools` - `Time` `TimeDate` data when the value is in timestamp format
+
 ## [1.0.0-rc.1] - 2023-07-17
 ### Fixed
 - `@distributedlab/tools` - `BN` `toDecimals` method when decimals value equals to this decimals value
@@ -300,7 +304,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.1...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.2...HEAD
+[1.0.0-rc.2]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.1...1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.0...1.0.0-rc.1
 [1.0.0-rc.0]: https://github.com/distributed-lab/web-kit/compare/0.2.0...1.0.0-rc.0
 [0.2.0]: https://github.com/distributed-lab/web-kit/compare/0.2.0-rc.25...0.2.0
