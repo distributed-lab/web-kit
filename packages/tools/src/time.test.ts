@@ -158,4 +158,10 @@ describe('Performs time class unit test', () => {
     time.utc(true)
     expect(time.ms).toStrictEqual(1677801600000)
   })
+
+  test('test timestamp, should return correct value', () => {
+    const time1 = new Time('2023-03-03')
+    const time2 = new Time(time1.timestamp)
+    expect(time1.ISO).toEqual(time2.ISO)
+  })
 })
