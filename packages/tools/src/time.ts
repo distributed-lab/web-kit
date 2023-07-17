@@ -212,12 +212,9 @@ export class Time {
 }
 
 const parseDate = (date: TimeDate): Exclude<TimeDate, Time> => {
-  return date instanceof Time
-    ? date.dayjs
-    : (typeof date === 'string' || typeof date === 'number') &&
-      Number(date) >= 0
-    ? Number(date) * 1000
-    : date
+  if (typeof date === 'number') return date * 1000
+
+  return date instanceof Time ? date.dayjs : date
 }
 
 export const time = (date?: TimeDate, format?: TimeFormat): Time => {
