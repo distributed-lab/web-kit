@@ -61,11 +61,11 @@ export class Time {
   }
 
   private _dayjs(date?: TimeDate, format?: TimeFormat): Dayjs {
-    return dayjs(unwrap(parseDate(date)), format)
+    return dayjs(parseDate(date), format)
   }
 
   private _tz(date: TimeDate, timezone?: string) {
-    return dayjs.tz(unwrap(parseDate(date)), timezone)
+    return dayjs.tz(parseDate(date), timezone)
   }
 
   public get dayjs(): Dayjs {
@@ -139,7 +139,7 @@ export class Time {
   }
 
   public toCalendar(referenceTime?: TimeDate, calendar?: TimeCalendar): string {
-    return this.#date.calendar(unwrap(parseDate(referenceTime)), calendar)
+    return this.#date.calendar(parseDate(referenceTime), calendar)
   }
 
   public subtract(value: number, unit?: TimeManipulate): Time {
@@ -153,23 +153,23 @@ export class Time {
   }
 
   public isSame(comparisonDate?: TimeDate, unit?: TimeOpUnit): boolean {
-    return this.#date.isSame(unwrap(parseDate(comparisonDate)), unit)
+    return this.#date.isSame(parseDate(comparisonDate), unit)
   }
 
   public isBefore(comparisonDate?: TimeDate): boolean {
-    return this.#date.isBefore(unwrap(parseDate(comparisonDate)))
+    return this.#date.isBefore(parseDate(comparisonDate))
   }
 
   public isAfter(comparisonDate?: TimeDate): boolean {
-    return this.#date.isAfter(unwrap(parseDate(comparisonDate)))
+    return this.#date.isAfter(parseDate(comparisonDate))
   }
 
   public isSameOrAfter(comparisonDate?: TimeDate): boolean {
-    return this.#date.isSameOrAfter(unwrap(parseDate(comparisonDate)))
+    return this.#date.isSameOrAfter(parseDate(comparisonDate))
   }
 
   public isSameOrBefore(comparisonDate?: TimeDate): boolean {
-    return this.#date.isSameOrBefore(unwrap(parseDate(comparisonDate)))
+    return this.#date.isSameOrBefore(parseDate(comparisonDate))
   }
 
   public isBetween(
@@ -179,8 +179,8 @@ export class Time {
     inclusivity?: Inclusivity,
   ): boolean {
     return this.#date.isBetween(
-      unwrap(parseDate(startDate)),
-      unwrap(parseDate(endDate)),
+      parseDate(startDate),
+      parseDate(endDate),
       unit,
       inclusivity,
     )
@@ -195,7 +195,7 @@ export class Time {
   }
 
   public getFrom(date: TimeDate): string {
-    return this.#date.from(unwrap(date))
+    return this.#date.from(parseDate(date))
   }
 
   public get fromNow(): string {
@@ -203,7 +203,7 @@ export class Time {
   }
 
   public getTo(date: TimeDate): string {
-    return this.#date.to(unwrap(date))
+    return this.#date.to(parseDate(date))
   }
 
   public get toNow(): string {
@@ -211,15 +211,13 @@ export class Time {
   }
 }
 
-const parseDate = (date?: TimeDate): TimeDate => {
-  return (typeof date === 'string' || typeof date === 'number') &&
-    Number(date) >= 0
+const parseDate = (date: TimeDate): Exclude<TimeDate, Time> => {
+  return date instanceof Time
+    ? date.dayjs
+    : (typeof date === 'string' || typeof date === 'number') &&
+      Number(date) >= 0
     ? Number(date) * 1000
     : date
-}
-
-const unwrap = (date: TimeDate): Exclude<TimeDate, Time> => {
-  return date instanceof Time ? date.dayjs : date
 }
 
 export const time = (date?: TimeDate, format?: TimeFormat): Time => {
