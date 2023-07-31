@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/reactivity",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "Implementation of the reactivity connections to propagate changes between objects",
   "repository": {
     "type": "git",

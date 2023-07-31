@@ -1,15 +1,18 @@
-import type { Extended, Raw } from '@/types'
+import type { Extended, Parent } from '@/types'
 
 import { computed } from './computed'
 import { unref } from './ref'
 
-export const extend = <P extends object, C extends object>(
-  parent: Raw<P>,
+export const extend = <C extends object, P extends Parent[]>(
   child: C,
-): Extended<P, C> => {
-  const obj = {} as Extended<P, C>
+  ...parents: [...P]
+): Extended<C, P> => {
+  const obj = {} as Extended<C, P>
 
-  Object.defineProperties(obj, createDescriptors(parent))
+  parents.forEach(p => {
+    Object.defineProperties(obj, createDescriptors(p))
+  })
+
   Object.defineProperties(obj, createDescriptors(child))
 
   return obj
