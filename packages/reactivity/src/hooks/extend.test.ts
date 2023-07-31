@@ -6,6 +6,7 @@ import { ref } from './ref'
 const mockedAge = 10
 const changedAge = 20
 const mockedName = 'John'
+const mockedSex = 'male'
 
 describe('performs extend hook unit test', () => {
   test('should basically extend child with parent', () => {
@@ -20,9 +21,12 @@ describe('performs extend hook unit test', () => {
       const name = computed(() => mockedName)
 
       return toRaw(
-        extend(parent, {
-          name,
-        }),
+        extend(
+          {
+            name,
+          },
+          parent,
+        ),
       )
     }
 
@@ -53,9 +57,12 @@ describe('performs extend hook unit test', () => {
       const name = computed(() => mockedName)
 
       return toRaw(
-        extend(parent, {
-          name,
-        }),
+        extend(
+          {
+            name,
+          },
+          parent,
+        ),
       )
     }
 
@@ -84,9 +91,12 @@ describe('performs extend hook unit test', () => {
       const name = computed(() => mockedName)
 
       return toRaw(
-        extend(parent, {
-          name,
-        }),
+        extend(
+          {
+            name,
+          },
+          parent,
+        ),
       )
     }
 
@@ -111,14 +121,52 @@ describe('performs extend hook unit test', () => {
       const age = ref(changedAge)
 
       return toRaw(
-        extend(parent, {
-          age,
-        }),
+        extend(
+          {
+            age,
+          },
+          parent,
+        ),
       )
     }
 
     const child = createChild()
 
     expect(child.age).toBe(changedAge)
+  })
+
+  test('should extend multiple parents', () => {
+    const createParent1 = () => {
+      const age = ref(mockedAge)
+
+      return toRaw({
+        age,
+      })
+    }
+
+    const createParent2 = () => {
+      const name = ref(mockedName)
+
+      return toRaw({
+        name,
+      })
+    }
+
+    const createChild = () => {
+      const parent1 = createParent1()
+      const parent2 = createParent2()
+      const sex = ref(mockedSex)
+
+      return toRaw(extend({ sex }, parent1, parent2))
+    }
+
+    const child = createChild()
+
+    expect(child).toHaveProperty('age')
+    expect(child).toHaveProperty('name')
+    expect(child).toHaveProperty('sex')
+    expect(child.age).toBe(mockedAge)
+    expect(child.name).toBe(mockedName)
+    expect(child.sex).toBe(mockedSex)
   })
 })
