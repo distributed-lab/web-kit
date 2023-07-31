@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/fetcher",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "description": "Fetch API wrapper with the extended functionality and simple interface",
   "repository": {
     "type": "git",

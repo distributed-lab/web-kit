@@ -633,6 +633,11 @@ describe('performs BN unit test', () => {
     })
 
     test('formatting should return correct string', () => {
+      expect(BN.fromRaw(10.223, 6).format({ decimals: 2 })).toBe('10.22')
+      expect(BN.fromRaw(10.223, 6).format({ decimals: 10 })).toBe(
+        '10.2230000000',
+      )
+
       expect(
         BN.fromRaw(0, 1).format({
           decimals: 2,
@@ -665,7 +670,7 @@ describe('performs BN unit test', () => {
           decimals: 6,
           groupSeparator: ',',
         }),
-      ).toBe('122,334,444,23.1231231')
+      ).toBe('122,334,444,23.123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -673,7 +678,7 @@ describe('performs BN unit test', () => {
           groupSeparator: '.',
           decimalSeparator: ',',
         }),
-      ).toBe('122.334.444.23,1231231')
+      ).toBe('122.334.444.23,123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -682,7 +687,7 @@ describe('performs BN unit test', () => {
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.1231231')
+      ).toBe('122 334 444 23.123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -692,7 +697,7 @@ describe('performs BN unit test', () => {
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.12 31 23 1')
+      ).toBe('122 334 444 23.12 31 23')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -703,7 +708,7 @@ describe('performs BN unit test', () => {
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.12_31_23_1')
+      ).toBe('122 334 444 23.12_31_23')
     })
   })
 })

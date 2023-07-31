@@ -31,7 +31,7 @@ export const format = (value: string, format: BnFormatConfig) => {
   }
 
   if (decimals) {
-    fraction = fraction.padEnd(decimals, '0').slice(0, decimals + 1)
+    fraction = fraction.padEnd(decimals, '0').slice(0, decimals)
   } else {
     fraction = ''
     decimalSeparator = ''
