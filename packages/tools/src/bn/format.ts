@@ -1,4 +1,4 @@
-import { assert } from '@/helpers'
+import { assert, reverseString } from '@/helpers'
 import type { BnFormatConfig } from '@/types'
 
 export const format = (value: string, format: BnFormatConfig) => {
@@ -27,7 +27,9 @@ export const format = (value: string, format: BnFormatConfig) => {
   if (sign) whole = whole.slice(1)
 
   if (groupSize && groupSeparator) {
-    whole = insertCharEveryN(whole, groupSeparator, groupSize)
+    whole = reverseString(
+      insertCharEveryN(reverseString(whole), groupSeparator, groupSize),
+    )
   }
 
   if (decimals) {
@@ -38,10 +40,12 @@ export const format = (value: string, format: BnFormatConfig) => {
   }
 
   if (fractionGroupSeparator && fractionGroupSize) {
-    fraction = insertCharEveryN(
-      fraction,
-      fractionGroupSeparator,
-      fractionGroupSize,
+    fraction = reverseString(
+      insertCharEveryN(
+        reverseString(fraction),
+        fractionGroupSeparator,
+        fractionGroupSize,
+      ),
     )
   }
 

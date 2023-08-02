@@ -17,3 +17,7 @@ export function assert(
 ): asserts expression is false {
   if (!expression) throw new RuntimeError(message)
 }
+
+export const reverseString = (str: string): string => {
+  return str.split('').reverse().join('')
+}

@@ -670,7 +670,7 @@ describe('performs BN unit test', () => {
           decimals: 6,
           groupSeparator: ',',
         }),
-      ).toBe('122,334,444,23.123123')
+      ).toBe('12,233,444,423.123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -678,7 +678,7 @@ describe('performs BN unit test', () => {
           groupSeparator: '.',
           decimalSeparator: ',',
         }),
-      ).toBe('122.334.444.23,123123')
+      ).toBe('12.233.444.423,123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -687,7 +687,7 @@ describe('performs BN unit test', () => {
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.123123')
+      ).toBe('12 233 444 423.123123')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
@@ -697,18 +697,18 @@ describe('performs BN unit test', () => {
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.12 31 23')
+      ).toBe('12 233 444 423.12 31 23')
 
       expect(
         BN.fromRaw('12233444423.123123123123123', 18).format({
-          decimals: 6,
+          decimals: 9,
           groupSeparator: ' ',
           fractionGroupSize: 2,
           fractionGroupSeparator: '_',
           decimalSeparator: '.',
           groupSize: 3,
         }),
-      ).toBe('122 334 444 23.12_31_23')
+      ).toBe('12 233 444 423.1_23_12_31_23')
     })
   })
 })
