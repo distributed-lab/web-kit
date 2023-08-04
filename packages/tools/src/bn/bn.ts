@@ -18,6 +18,7 @@ import { round } from './round'
 let globalConfig: BnGlobalConfig = {
   precision: DEFAULT_BN_PRECISION,
   rounding: BN_ROUNDING.DEFAULT,
+  decimals: DECIMALS.WEI,
   format: {
     prefix: '',
     decimalSeparator: '.',
@@ -33,9 +34,17 @@ export class BN {
   /**
    * Solidity maximum uint256 value.
    */
-  public static MAX_UINT256 = BN.fromBigInt(2n ** 256n - 1n, 1)
-  public static WEI_DECIMALS = DECIMALS.WEI
-  public static ROUNDING = BN_ROUNDING
+  public static get MAX_UINT256() {
+    return BN.fromBigInt(2n ** 256n - 1n, 1)
+  }
+
+  public static get WEI_DECIMALS() {
+    return DECIMALS.WEI
+  }
+
+  public static get ROUNDING() {
+    return BN_ROUNDING
+  }
 
   /**
    * {@link BN} class global config.
@@ -102,14 +111,14 @@ export class BN {
    * const oneEth = BN.fromBigInt('1000000000000000000', 18)
    * ```
    */
-  public static fromBigInt(value: BnLike, decimalsOrConfig: BnConfigLike): BN {
+  public static fromBigInt(value: BnLike, decimalsOrConfig?: BnConfigLike): BN {
     let val = value
 
     if (typeof val === 'string') {
       val = isHex(val) ? BigInt(val).toString() : val
       assert(isIntegerString(val), 'Invalid big int string')
     }
-    const cfg = parseConfig(decimalsOrConfig)
+    const cfg = parseConfig(decimalsOrConfig ?? BN.config.decimals)
     const parsed = BigInt(BN.isBn(val) ? val.value : val)
     const withPrecision = parsed * getTens(BN.precision - cfg.decimals)
     return new BN(withPrecision, cfg)
@@ -125,10 +134,11 @@ export class BN {
    */
   public static fromRaw(
     value: Exclude<BnLike, BN>,
-    decimalsOrConfig: BnConfigLike,
+    decimalsOrConfig?: BnConfigLike,
   ): BN {
     const val = String(value)
-    return new BN(BigInt(parseNumberString(val)), parseConfig(decimalsOrConfig))
+    const cfg = parseConfig(decimalsOrConfig ?? BN.config.decimals)
+    return new BN(BigInt(parseNumberString(val)), cfg)
   }
 
   /**

@@ -11,6 +11,7 @@ export type BnLike = string | number | bigint | BN
 
 export type BnGlobalConfig = {
   precision: number
+  decimals: number
   rounding: BN_ROUNDING
   format: BnFormatConfig
 }

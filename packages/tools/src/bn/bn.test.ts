@@ -1,11 +1,11 @@
 import { DEFAULT_BN_PRECISION } from '@/const'
-import { BN_ROUNDING } from '@/enums'
+import { BN_ROUNDING, DECIMALS } from '@/enums'
 
 import { BN } from './bn'
 
 describe('performs BN unit test', () => {
   beforeEach(() => {
-    BN.setConfig({ precision: DEFAULT_BN_PRECISION })
+    BN.setConfig({ precision: DEFAULT_BN_PRECISION, decimals: DECIMALS.WEI })
   })
 
   describe('performs static methods', () => {
@@ -49,6 +49,21 @@ describe('performs BN unit test', () => {
           expect(bn.value).toBe('300000')
           expect(bn.decimals).toBe(6)
           expect(bn.raw).toBe(30000000000000000000000000n)
+        })
+
+        test('with empty config', () => {
+          const bn = BN.fromBigInt('1000000000000000000')
+          expect(bn.value).toBe('1000000000000000000')
+          expect(bn.decimals).toBe(18)
+          expect(bn.raw).toBe(100000000000000000000000000n)
+        })
+
+        test('with empty config and changed global config', () => {
+          BN.setConfig({ decimals: 6 })
+          const bn = BN.fromBigInt('1000000')
+          expect(bn.value).toBe('1000000')
+          expect(bn.decimals).toBe(6)
+          expect(bn.raw).toBe(100000000000000000000000000n)
         })
       })
     })
@@ -202,6 +217,21 @@ describe('performs BN unit test', () => {
             expect(bn.value).toBe(intValue)
             expect(bn.decimals).toBe(6)
             expect(bn.raw).toBe(precisionValue)
+          })
+
+          test('with empty config', () => {
+            const bn = BN.fromRaw('1')
+            expect(bn.value).toBe('1000000000000000000')
+            expect(bn.decimals).toBe(18)
+            expect(bn.raw).toBe(100000000000000000000000000n)
+          })
+
+          test('with empty config and changed global config', () => {
+            BN.setConfig({ decimals: 6 })
+            const bn = BN.fromRaw('1')
+            expect(bn.value).toBe('1000000')
+            expect(bn.decimals).toBe(6)
+            expect(bn.raw).toBe(100000000000000000000000000n)
           })
         })
       })
