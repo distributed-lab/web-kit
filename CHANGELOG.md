@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.0.0-rc.6] - 2023-08-04
+### Added
+- `@distributedlab/tools` - `BN` decimals global configuration
+
+### Changed
+- `@distributedlab/tools`
+  - `BN`
+    - `fromRaw` `configOrDecimals` argument is optional
+    - `fromBigInt` `configOrDecimals` argument is optional
+
+### Fixed
+- `@distributedlab/tools` - `BN` static fields `undefined` value after production build at the client side
+
 ## [1.0.0-rc.5] - 2023-08-02
 ### Fixed
 - `@distributedlab/tools` - `BN` format group sizes
@@ -319,7 +332,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.5...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.6...HEAD
+[1.0.0-rc.6]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.5...1.0.0-rc.6
 [1.0.0-rc.5]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.4...1.0.0-rc.5
 [1.0.0-rc.4]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.3...1.0.0-rc.4
 [1.0.0-rc.3]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.2...1.0.0-rc.3
