@@ -50,9 +50,9 @@ export class ProviderEventBus {
   }
 
   // TODO: RETURN
-  // public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
-  //   this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, cb)
-  // }
+  public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
+    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, cb)
+  }
 
   public clearHandlers(): void {
     this.#emitter.clear()

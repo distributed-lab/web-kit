@@ -9,7 +9,6 @@ import {
   PROVIDERS,
 } from '@/enums'
 import { getEthExplorerAddressUrl, getEthExplorerTxUrl } from '@/helpers'
-import { ProviderEventBus } from '@/providers'
 import type {
   Chain,
   ChainId,
@@ -22,6 +21,8 @@ import type {
   TxRequestBody,
   WalletConnectInitArgs,
 } from '@/types'
+
+import { ProviderEventBus } from './_event-bus'
 
 export class WalletConnectEvmProvider
   extends ProviderEventBus
