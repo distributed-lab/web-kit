@@ -10,6 +10,7 @@ import {
   ProviderInstance,
   PROVIDERS,
   ProviderProxyConstructor,
+  WalletConnectEvmProvider,
 } from '@distributedlab/w3p'
 import { useProvider } from './vue-use-provider-composable'
 
@@ -135,6 +136,7 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         [PROVIDERS.Fallback]: FallbackEvmProvider,
         [PROVIDERS.Metamask]: MetamaskProvider,
         [PROVIDERS.Coinbase]: CoinbaseProvider,
+        [PROVIDERS.WalletConnect]: WalletConnectEvmProvider,
         /**
          * in the case where you have some custom provider, place your ProviderProxyConstructor here
          * [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider as ProviderProxyConstructor,

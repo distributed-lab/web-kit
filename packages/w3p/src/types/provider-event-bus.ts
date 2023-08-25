@@ -4,11 +4,13 @@ import type { TransactionResponse, TxRequestBody } from '@/types'
 import type { ChainId } from './chain'
 
 export type ProviderEventPayload = {
+  uri?: string
   address?: string
   isConnected?: boolean
   chainId?: ChainId
   txBody?: TxRequestBody
   txHash?: string
+  connectUri?: string
   txResponse?: TransactionResponse
 }
 
@@ -22,6 +24,7 @@ export type ProviderEventMap = {
   [PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent]: ProviderEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.TxSent]: ProviderEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.TxConfirmed]: ProviderEventPayload
+  [PROVIDER_EVENT_BUS_EVENTS.UriUpdate]: ProviderEventPayload
 }
 
 export type ProviderEventCallback = (e?: ProviderEventPayload) => void
@@ -37,6 +40,7 @@ export interface ProviderSubscriber {
   onBeforeTxSent(cb: ProviderEventCallback): void
   onTxSent(cb: ProviderEventCallback): void
   onTxConfirmed(cb: ProviderEventCallback): void
+  onUriUpdate?(cd: ProviderEventCallback): void
 }
 
 export type ProviderListeners = {

@@ -2,7 +2,7 @@ import {
   type Chain,
   type ChainId,
   createProvider,
-  type CreateProviderOpts, IProvider,
+  type CreateProviderOpts,
   Provider,
   type ProviderProxyConstructor,
   PROVIDERS,
@@ -17,6 +17,7 @@ type ProviderState = {
   chainId?: ChainId
   chainType?: string
   isConnected?: boolean
+  connectUri?: string
   providerType?: PROVIDERS
   chainDetails?: Chain
 }

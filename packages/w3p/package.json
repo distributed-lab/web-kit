@@ -51,8 +51,9 @@
     "@near-wallet-selector/core": "^7.8.2",
     "@near-wallet-selector/my-near-wallet": "^7.8.2",
     "@solana/web3.js": "^1.73.2",
+    "@walletconnect/ethereum-provider": "^2.10.0",
     "bs58": "^5.0.0",
-    "ethers": "^5.7.2",
+    "ethers": "5.7.2",
     "near-api-js": "^1.1.0"
   },
   "devDependencies": {

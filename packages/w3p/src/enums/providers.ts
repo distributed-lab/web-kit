@@ -5,6 +5,7 @@ export enum PROVIDERS {
   Coinbase = 'coinbase',
   Solflare = 'solflare',
   Near = 'near',
+  WalletConnect = 'wallet-connect',
 }
 
 export enum PROVIDER_CHECKS {
@@ -34,4 +35,5 @@ export enum PROVIDER_EVENT_BUS_EVENTS {
   BeforeTxSent = 'before-tx-sent',
   TxSent = 'tx-sent',
   TxConfirmed = 'tx-confirmed',
+  UriUpdate = 'uri-update',
 }

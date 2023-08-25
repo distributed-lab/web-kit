@@ -7,6 +7,7 @@ import type {
 import type { providers } from 'ethers'
 
 import type { CHAIN_TYPES, PROVIDERS } from '@/enums'
+import type { WalletConnectInitArgs } from '@/types'
 
 import type { Chain, ChainId } from './chain'
 import type { EthereumProvider } from './ethereum'
@@ -20,8 +21,14 @@ import type {
   ProviderSubscriber,
 } from './provider-event-bus'
 import type { SolanaProvider } from './solana'
+import type { WalletConnectRawProvider } from './wallet-connect'
 
-export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
+export type RawProvider =
+  | EthereumProvider
+  | SolanaProvider
+  | NearRawProvider
+  | WalletConnectRawProvider
+  | WalletConnectInitArgs
 
 export type ProviderInstance<T extends keyof Record<string, string> = never> = {
   name: T | PROVIDERS
@@ -52,6 +59,7 @@ export interface ProviderBase {
   chainType?: CHAIN_TYPES
   address?: string
   rawProvider?: RawProvider
+  connectUri?: string // TODO: REMOVE
   isConnected: boolean
 
   connect?: () => Promise<void>

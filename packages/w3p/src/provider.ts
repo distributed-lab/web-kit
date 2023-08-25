@@ -1,4 +1,4 @@
-import type { PROVIDERS } from '@/enums'
+import { PROVIDERS } from '@/enums'
 import { errors } from '@/errors'
 import { ProviderDetector } from '@/provider-detector'
 
@@ -13,11 +13,13 @@ import type {
   ProviderProxyConstructor,
   TransactionResponse,
   TxRequestBody,
+  WalletConnectInitArgs,
 } from './types'
 
 export type CreateProviderOpts<T extends keyof Record<string, string>> = {
   providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
+  initArguments?: WalletConnectInitArgs
 }
 
 /**
@@ -77,6 +79,11 @@ export class Provider implements IProvider {
 
   public get chainDetails() {
     return Provider.chainsDetails?.[this.chainId!]
+  }
+
+  // TODO: UPDATE
+  get connectUri(): string | undefined {
+    return this.#proxy?.connectUri
   }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
@@ -140,6 +147,13 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
+  // TODO: REMOVE
+  public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
+    if (this.#proxy?.onUriUpdate) {
+      this.#proxy?.onUriUpdate(cb)
+    }
+  }
+
   public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
     this.#proxy?.onAccountChanged(cb)
   }
@@ -196,21 +210,34 @@ export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts<T> = {},
 ): Promise<Provider> {
-  const { providerDetector: providerDetectorInstance, listeners } = opts
+  const {
+    providerDetector: providerDetectorInstance,
+    listeners,
+    initArguments,
+  } = opts
 
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
 
-  if (!providerDetector.isInitiated) {
+  if (
+    !providerDetector.isInitiated &&
+    proxy.providerType !== PROVIDERS.WalletConnect
+  ) {
     await providerDetector.init()
+    const providerInstance = providerDetector.getProvider(
+      proxy.providerType as PROVIDERS,
+    )
+
+    if (!providerInstance)
+      throw new errors.ProviderInjectedInstanceNotFoundError()
+    return provider.init(providerInstance, listeners)
   }
 
-  const providerInstance = providerDetector.getProvider(
-    proxy.providerType as PROVIDERS,
+  return provider.init(
+    {
+      name: proxy.providerType,
+      instance: initArguments,
+    } as ProviderInstance,
+    listeners,
   )
-
-  if (!providerInstance)
-    throw new errors.ProviderInjectedInstanceNotFoundError()
-
-  return provider.init(providerInstance, listeners)
 }
