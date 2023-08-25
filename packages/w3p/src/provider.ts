@@ -81,10 +81,10 @@ export class Provider implements IProvider {
     return Provider.chainsDetails?.[this.chainId!]
   }
 
-  // TODO: UPDATE
-  get connectUri(): string | undefined {
-    return this.#proxy?.connectUri
-  }
+  // // TODO: UPDATE
+  // get connectUri(): string | undefined {
+  //   return this.#proxy?.connectUri
+  // }
 
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
     if (!provider.instance)
