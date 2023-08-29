@@ -81,11 +81,6 @@ export class Provider implements IProvider {
     return Provider.chainsDetails?.[this.chainId!]
   }
 
-  // // TODO: UPDATE
-  // get connectUri(): string | undefined {
-  //   return this.#proxy?.connectUri
-  // }
-
   public async init(provider: ProviderInstance, listeners?: ProviderListeners) {
     if (!provider.instance)
       throw new errors.ProviderInjectedInstanceNotFoundError()
@@ -147,7 +142,6 @@ export class Provider implements IProvider {
     return this.#proxy?.signMessage?.(message) ?? ''
   }
 
-  // TODO: REMOVE
   public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
     if (this.#proxy?.onUriUpdate) {
       this.#proxy?.onUriUpdate(cb)

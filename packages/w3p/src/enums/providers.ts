@@ -35,5 +35,5 @@ export enum PROVIDER_EVENT_BUS_EVENTS {
   BeforeTxSent = 'before-tx-sent',
   TxSent = 'tx-sent',
   TxConfirmed = 'tx-confirmed',
-  UriUpdate = 'uri-update', // TODO: RETURN
+  UriUpdate = 'uri-update',
 }

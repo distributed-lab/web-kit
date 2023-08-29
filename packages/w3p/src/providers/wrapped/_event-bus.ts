@@ -49,7 +49,6 @@ export class ProviderEventBus {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.ChainChanged, cb)
   }
 
-  // TODO: RETURN
   public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, cb)
   }

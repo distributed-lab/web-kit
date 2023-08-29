@@ -36,20 +36,19 @@ export class WalletConnectEvmProvider
   #connectUri?: string
 
   readonly #projectId: string
-  readonly #currentChain: number
-  readonly #optionalChains: number[]
-
+  readonly #currentChains: WalletConnectInitArgs['currentChains']
+  readonly #optionalChains: WalletConnectInitArgs['optionalChains']
   constructor(provider: RawProvider) {
     super()
 
     if (!(provider as WalletConnectInitArgs).projectId) {
-      throw new Error('projectId is required')
+      throw new Error('projectId is required for WalletConnect provider')
     }
 
-    const { projectId, currentChain, optionalChains } =
+    const { projectId, currentChains, optionalChains } =
       provider as WalletConnectInitArgs
     this.#projectId = projectId
-    this.#currentChain = currentChain
+    this.#currentChains = currentChains
     this.#optionalChains = optionalChains
     this.#provider = new Provider()
     this.#ethProvider = new providers.Web3Provider(this.#provider)
@@ -95,13 +94,8 @@ export class WalletConnectEvmProvider
   async init(): Promise<void> {
     this.#provider = await EthereumProvider.init({
       projectId: this.#projectId,
-      chains: [this.#currentChain],
-      optionalChains: this.#optionalChains,
-      // TODO: DELETE
-      rpcMap: {
-        5: 'https://mainnet.infura.io/v3/26bf92648f88404b9fbac6b98868bb29',
-        80001: 'https://api.zan.top/node/v1/polygon/mumbai/public',
-      },
+      chains: this.#currentChains,
+      optionalChains: this.#optionalChains as number[],
       showQrModal: false,
       methods: [
         'wallet_switchEthereumChain',
@@ -279,25 +273,13 @@ export class WalletConnectEvmProvider
       )
     })
 
-    // this.#provider.on('session_update', ({ id, topic }) => {
-    //   /* empty */
-    // })
-
     this.#provider.on('session_delete', () => {
       this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
     })
 
-    // TODO: DO SOMETHING
     this.#provider.on('display_uri', uri => {
       this.#connectUri = uri
       this.emit(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, this.#defaultEventPayload)
     })
-
-    // this.#provider.on('connect', e => {})
-    // this.#provider.on('disconnect', e => {})
-    // this.#provider.on('message', e => {})
-    // this.#provider.on('chainChanged', e => {})
-    // this.#provider.on('accountsChanged', e => {})
-    // this.#provider.on('display_uri', e => {})
   }
 }

@@ -59,7 +59,7 @@ export interface ProviderBase {
   chainType?: CHAIN_TYPES
   address?: string
   rawProvider?: RawProvider
-  connectUri?: string // TODO: REMOVE
+  connectUri?: string
   isConnected: boolean
 
   connect?: () => Promise<void>

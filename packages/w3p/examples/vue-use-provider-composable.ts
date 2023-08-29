@@ -17,7 +17,6 @@ type ProviderState = {
   chainId?: ChainId
   chainType?: string
   isConnected?: boolean
-  connectUri?: string
   providerType?: PROVIDERS
   chainDetails?: Chain
 }
