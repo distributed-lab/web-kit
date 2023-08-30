@@ -77,6 +77,10 @@ export class Provider implements IProvider {
     return this.#proxy?.chainId
   }
 
+  public get connectUri() {
+    return this.#proxy?.connectUri
+  }
+
   public get chainDetails() {
     return Provider.chainsDetails?.[this.chainId!]
   }

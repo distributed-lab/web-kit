@@ -21,13 +21,11 @@ import type {
   ProviderSubscriber,
 } from './provider-event-bus'
 import type { SolanaProvider } from './solana'
-import type { WalletConnectRawProvider } from './wallet-connect'
 
 export type RawProvider =
   | EthereumProvider
   | SolanaProvider
   | NearRawProvider
-  | WalletConnectRawProvider
   | WalletConnectInitArgs
 
 export type ProviderInstance<T extends keyof Record<string, string> = never> = {
