@@ -4,7 +4,6 @@ import type { TransactionResponse, TxRequestBody } from '@/types'
 import type { ChainId } from './chain'
 
 export type ProviderEventPayload = {
-  uri?: string
   address?: string
   isConnected?: boolean
   chainId?: ChainId

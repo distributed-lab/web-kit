@@ -38,6 +38,7 @@ export class WalletConnectEvmProvider
   readonly #projectId: string
   readonly #currentChains: WalletConnectInitArgs['currentChains']
   readonly #optionalChains: WalletConnectInitArgs['optionalChains']
+
   constructor(provider: RawProvider) {
     super()
 
@@ -182,7 +183,6 @@ export class WalletConnectEvmProvider
       .transactionHash as SolanaTransactionResponse
   }
 
-  // FIXME: can't call it more than once
   async switchChain(chainId: ChainId): Promise<void> {
     await this.#ethProvider?.send?.('wallet_switchEthereumChain', [
       { chainId: utils.hexlify(chainId) },
