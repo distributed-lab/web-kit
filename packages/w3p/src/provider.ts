@@ -7,19 +7,19 @@ import type {
   ChainId,
   IProvider,
   ProviderEventPayload,
+  ProviderInitArgs,
   ProviderInstance,
   ProviderListeners,
   ProviderProxy,
   ProviderProxyConstructor,
   TransactionResponse,
   TxRequestBody,
-  WalletConnectInitArgs,
 } from './types'
 
 export type CreateProviderOpts<T extends keyof Record<string, string>> = {
   providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
-  initArguments?: WalletConnectInitArgs
+  initArguments?: ProviderInitArgs
 }
 
 /**
@@ -207,25 +207,13 @@ export async function createProvider<T extends keyof Record<string, string>>(
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
 
-  if (
-    !providerDetector.isInitiated &&
-    proxy.providerType !== PROVIDERS.WalletConnect
-  ) {
-    await providerDetector.init()
-    const providerInstance = providerDetector.getProvider(
-      proxy.providerType as PROVIDERS,
-    )
-
-    if (!providerInstance)
-      throw new errors.ProviderInjectedInstanceNotFoundError()
-    return provider.init(providerInstance, listeners)
-  }
-
-  return provider.init(
-    {
-      name: proxy.providerType,
-      instance: initArguments,
-    } as ProviderInstance,
-    listeners,
+  await providerDetector.init()
+  const providerInstance = providerDetector.getProvider(
+    proxy.providerType as PROVIDERS,
+    initArguments,
   )
+
+  if (!providerInstance)
+    throw new errors.ProviderInjectedInstanceNotFoundError()
+  return provider.init(providerInstance, listeners)
 }

@@ -22,11 +22,13 @@ import type {
 } from './provider-event-bus'
 import type { SolanaProvider } from './solana'
 
+export type ProviderInitArgs = WalletConnectInitArgs
+
 export type RawProvider =
   | EthereumProvider
   | SolanaProvider
   | NearRawProvider
-  | WalletConnectInitArgs
+  | ProviderInitArgs
 
 export type ProviderInstance<T extends keyof Record<string, string> = never> = {
   name: T | PROVIDERS
