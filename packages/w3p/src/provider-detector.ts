@@ -1,6 +1,5 @@
 import { CHAIN_TYPES, PROVIDER_CHECKS, PROVIDERS } from '@/enums'
 import { sleep, wrapExternalEthProvider } from '@/helpers'
-import { WalletConnectEvmProvider } from '@/providers'
 
 import type {
   EthereumProvider,
@@ -68,20 +67,15 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
   }
 
   public get providers(): Record<PROVIDERS | T, ProviderInstance> {
-    return this.#providers.reduce(
-      (acc, el) => {
-        const name = el.name.toLowerCase() as PROVIDERS
+    return this.#providers.reduce((acc, el) => {
+      const name = el.name.toLowerCase() as PROVIDERS
 
-        acc[name] = {
-          ...el,
-          name,
-        }
-        return acc
-      },
-      {
-        [PROVIDERS.WalletConnect]: WalletConnectEvmProvider,
-      } as Record<PROVIDERS | T, ProviderInstance>,
-    )
+      acc[name] = {
+        ...el,
+        name,
+      }
+      return acc
+    }, {} as Record<PROVIDERS | T, ProviderInstance>)
   }
 
   public get isEnabled(): boolean {
