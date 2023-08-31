@@ -3,7 +3,6 @@ import { sleep, wrapExternalEthProvider } from '@/helpers'
 
 import type {
   EthereumProvider,
-  ProviderInitArgs,
   ProviderInstance,
   RawProvider,
   SolanaProvider,
@@ -82,16 +81,8 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
     return Boolean(this.#providers.length)
   }
 
-  public getProvider(
-    provider: PROVIDERS | T,
-    initArgs?: ProviderInitArgs,
-  ): ProviderInstance | undefined {
-    return initArgs
-      ? ({
-          name: provider,
-          instance: initArgs,
-        } as ProviderInstance)
-      : this.providers[provider]
+  public getProvider(provider: PROVIDERS | T): ProviderInstance | undefined {
+    return this.providers[provider]
   }
 
   public addProvider(provider: ProviderInstance<T>): void {

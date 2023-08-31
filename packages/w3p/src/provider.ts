@@ -198,22 +198,21 @@ export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts<T> = {},
 ): Promise<Provider> {
-  const {
-    providerDetector: providerDetectorInstance,
-    listeners,
-    initArguments,
-  } = opts
+  const { providerDetector: providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
 
-  await providerDetector.init()
+  if (!providerDetector.isInitiated) {
+    await providerDetector.init()
+  }
+
   const providerInstance = providerDetector.getProvider(
     proxy.providerType as PROVIDERS,
-    initArguments,
   )
 
   if (!providerInstance)
     throw new errors.ProviderInjectedInstanceNotFoundError()
+
   return provider.init(providerInstance, listeners)
 }

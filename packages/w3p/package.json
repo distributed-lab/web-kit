@@ -65,6 +65,9 @@
     "jest": "^29.5.0",
     "tsc-alias": "^1.8.2"
   },
+  "peerDependencies": {
+    "@walletconnect/modal": "^2.6.1"
+  },
   "typedoc": {
     "entryPoint": "./src/index.ts",
     "readmeFile": "./README.md",
