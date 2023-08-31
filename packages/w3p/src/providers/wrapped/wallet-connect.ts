@@ -13,7 +13,6 @@ import type {
   Chain,
   ChainId,
   EthTransactionResponse,
-  ProviderEventPayload,
   ProviderProxy,
   RawProvider,
   SolanaTransactionResponse,
@@ -33,7 +32,6 @@ export class WalletConnectEvmProvider
 
   #chainId?: ChainId
   #address?: string
-  #connectUri?: string
 
   readonly #projectId: string
   readonly #currentChains: WalletConnectInitArgs['currentChains']
@@ -75,10 +73,6 @@ export class WalletConnectEvmProvider
     return this.#chainId
   }
 
-  get connectUri(): string | undefined {
-    return this.#connectUri
-  }
-
   get address(): string | undefined {
     return this.#address
   }
@@ -88,7 +82,6 @@ export class WalletConnectEvmProvider
       address: this.#address,
       chainId: this.#chainId,
       isConnected: this.isConnected,
-      connectUri: this.#connectUri,
     }
   }
 
@@ -97,7 +90,7 @@ export class WalletConnectEvmProvider
       projectId: this.#projectId,
       chains: this.#currentChains,
       optionalChains: this.#optionalChains as number[],
-      showQrModal: false,
+      showQrModal: true,
       methods: [
         'wallet_switchEthereumChain',
         'wallet_addEthereumChain',
@@ -244,10 +237,6 @@ export class WalletConnectEvmProvider
     ])
   }
 
-  public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
-    this.emitter.on(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, cb)
-  }
-
   async #setListeners() {
     this.#provider.on('session_event', e => {
       this.#chainId = e?.params?.chainId.split(':')[1] ?? this.#chainId
@@ -275,11 +264,6 @@ export class WalletConnectEvmProvider
 
     this.#provider.on('session_delete', () => {
       this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
-    })
-
-    this.#provider.on('display_uri', uri => {
-      this.#connectUri = uri
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, this.#defaultEventPayload)
     })
   }
 }

@@ -49,10 +49,6 @@ export class ProviderEventBus {
     this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.ChainChanged, cb)
   }
 
-  public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
-    this.#emitter.on(PROVIDER_EVENT_BUS_EVENTS.UriUpdate, cb)
-  }
-
   public clearHandlers(): void {
     this.#emitter.clear()
   }

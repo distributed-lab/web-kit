@@ -77,10 +77,6 @@ export class Provider implements IProvider {
     return this.#proxy?.chainId
   }
 
-  public get connectUri() {
-    return this.#proxy?.connectUri
-  }
-
   public get chainDetails() {
     return Provider.chainsDetails?.[this.chainId!]
   }
@@ -144,12 +140,6 @@ export class Provider implements IProvider {
 
   public async signMessage(message: string) {
     return this.#proxy?.signMessage?.(message) ?? ''
-  }
-
-  public onUriUpdate(cb: (e?: ProviderEventPayload) => void): void {
-    if (this.#proxy?.onUriUpdate) {
-      this.#proxy?.onUriUpdate(cb)
-    }
   }
 
   public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
