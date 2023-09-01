@@ -44,4 +44,5 @@ export default packages.map((pkg) => ({
     json(),
     terser(),
   ],
+  external: ['@walletconnect/modal']
 }))
