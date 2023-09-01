@@ -21,7 +21,7 @@ import type {
   WalletConnectInitArgs,
 } from '@/types'
 
-import { ProviderEventBus } from './_event-bus'
+import { ProviderEventBus } from '../wrapped/_event-bus'
 
 export class WalletConnectEvmProvider
   extends ProviderEventBus

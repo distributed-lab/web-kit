@@ -23,7 +23,7 @@ import type {
   TxRequestBody,
 } from '@/types'
 
-import { ProviderEventBus } from './_event-bus'
+import { ProviderEventBus } from '../wrapped/_event-bus'
 
 const getAddress = (publicKey: PublicKey | null): string => {
   return publicKey ? new PublicKey(publicKey).toBase58() : ''

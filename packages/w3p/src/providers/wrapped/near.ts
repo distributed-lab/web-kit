@@ -17,7 +17,7 @@ import type {
   TxRequestBody,
 } from '@/types'
 
-import { ProviderEventBus } from './_event-bus'
+import { ProviderEventBus } from '../wrapped/_event-bus'
 
 export class NearProvider extends ProviderEventBus implements ProviderProxy {
   readonly #provider: NearRawProvider

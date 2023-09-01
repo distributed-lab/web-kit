@@ -504,6 +504,8 @@ __metadata:
     jest: ^29.5.0
     near-api-js: ^1.1.0
     tsc-alias: ^1.8.2
+  peerDependencies:
+    "@walletconnect/modal": ^2.6.1
   languageName: unknown
   linkType: soft
 
@@ -8202,8 +8204,6 @@ __metadata:
     typedoc: ^0.23.26
     typescript: ^5.0.4
     yorkie: ^2.0.0
-  peerDependencies:
-    "@walletconnect/modal": ^2.6.1
   languageName: unknown
   linkType: soft
 

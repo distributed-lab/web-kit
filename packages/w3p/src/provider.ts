@@ -7,7 +7,6 @@ import type {
   ChainId,
   IProvider,
   ProviderEventPayload,
-  ProviderInitArgs,
   ProviderInstance,
   ProviderListeners,
   ProviderProxy,
@@ -19,7 +18,6 @@ import type {
 export type CreateProviderOpts<T extends keyof Record<string, string>> = {
   providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
-  initArguments?: ProviderInitArgs
 }
 
 /**
