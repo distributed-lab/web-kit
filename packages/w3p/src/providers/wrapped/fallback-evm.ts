@@ -16,7 +16,7 @@ import type {
   TransactionResponse,
 } from '@/types'
 
-import { ProviderEventBus } from '../wrapped/_event-bus'
+import { ProviderEventBus } from './_event-bus'
 
 export class FallbackEvmProvider
   extends ProviderEventBus

@@ -26,7 +26,7 @@ import type {
   TxRequestBody,
 } from '@/types'
 
-import { ProviderEventBus } from '../wrapped/_event-bus'
+import { ProviderEventBus } from './_event-bus'
 
 export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   readonly #provider: providers.Web3Provider

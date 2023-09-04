@@ -1,4 +1,4 @@
-import { PROVIDERS } from '@/enums'
+import type { PROVIDERS } from '@/enums'
 import { errors } from '@/errors'
 import { ProviderDetector } from '@/provider-detector'
 

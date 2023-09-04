@@ -15,7 +15,6 @@ import type {
   EthTransactionResponse,
   ProviderProxy,
   RawProvider,
-  SolanaTransactionResponse,
   TransactionResponse,
   TxRequestBody,
   WalletConnectInitArgs,
@@ -27,7 +26,7 @@ export class WalletConnectEvmProvider
   extends ProviderEventBus
   implements ProviderProxy
 {
-  #provider: Provider
+  #rawProvider: Provider
   #ethProvider: providers.Web3Provider
 
   #chainId?: ChainId
@@ -49,8 +48,8 @@ export class WalletConnectEvmProvider
     this.#projectId = projectId
     this.#currentChains = currentChains
     this.#optionalChains = optionalChains
-    this.#provider = new Provider()
-    this.#ethProvider = new providers.Web3Provider(this.#provider)
+    this.#rawProvider = new Provider()
+    this.#ethProvider = new providers.Web3Provider(this.#rawProvider)
   }
 
   static get providerType(): PROVIDERS {
@@ -58,7 +57,7 @@ export class WalletConnectEvmProvider
   }
 
   get rawProvider() {
-    return this.#provider as unknown as RawProvider
+    return this.#rawProvider as unknown as RawProvider
   }
 
   get chainType(): CHAIN_TYPES {
@@ -86,7 +85,7 @@ export class WalletConnectEvmProvider
   }
 
   async init(): Promise<void> {
-    this.#provider = await EthereumProvider.init({
+    this.#rawProvider = await EthereumProvider.init({
       projectId: this.#projectId,
       chains: this.#currentChains,
       optionalChains: this.#optionalChains as number[],
@@ -111,7 +110,7 @@ export class WalletConnectEvmProvider
       optionalEvents: [],
     })
 
-    this.#ethProvider = new providers.Web3Provider(this.#provider)
+    this.#ethProvider = new providers.Web3Provider(this.#rawProvider)
 
     await this.#checkForPersistedSession()
 
@@ -121,16 +120,16 @@ export class WalletConnectEvmProvider
   }
 
   async connect(): Promise<void> {
-    await this.#provider.connect()
+    await this.#rawProvider.connect()
 
-    await this.#provider.enable()
+    await this.#rawProvider.enable()
 
-    const accounts = await this.#provider.request<string[]>({
+    const accounts = await this.#rawProvider.request<string[]>({
       method: 'eth_requestAccounts',
     })
 
     this.#chainId =
-      this.#provider?.session?.namespaces?.eip155?.chains?.[0]?.split(':')[1]
+      this.#rawProvider?.session?.namespaces?.eip155?.chains?.[0]?.split(':')[1]
 
     this.#address = accounts?.[0]
 
@@ -148,17 +147,17 @@ export class WalletConnectEvmProvider
   }
 
   async #checkForPersistedSession() {
-    if (!this.#provider) {
+    if (!this.#rawProvider) {
       throw new ReferenceError('EthereumProvider is not initialized.')
     }
 
-    if (!this.#provider?.session) return
+    if (!this.#rawProvider?.session) return
 
     this.#chainId =
-      this.#provider?.session?.namespaces?.eip155?.chains?.[0]?.split(':')[1]
+      this.#rawProvider?.session?.namespaces?.eip155?.chains?.[0]?.split(':')[1]
 
     this.#address =
-      this.#provider?.session?.namespaces?.eip155?.accounts?.[0]?.split(
+      this.#rawProvider?.session?.namespaces?.eip155?.accounts?.[0]?.split(
         ':',
       )?.[2]
   }
@@ -172,8 +171,7 @@ export class WalletConnectEvmProvider
   }
 
   getHashFromTx(txResponse: TransactionResponse): string {
-    return (txResponse as EthTransactionResponse)
-      .transactionHash as SolanaTransactionResponse
+    return (txResponse as EthTransactionResponse).transactionHash
   }
 
   async switchChain(chainId: ChainId): Promise<void> {
@@ -203,7 +201,7 @@ export class WalletConnectEvmProvider
   }
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {
-    if (!this.#provider) throw new TypeError(`Provider is not initialized`)
+    if (!this.#rawProvider) throw new TypeError(`Provider is not initialized`)
 
     this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
       txBody: tx,
@@ -228,7 +226,7 @@ export class WalletConnectEvmProvider
   }
 
   async signMessage(message: string): Promise<string> {
-    if (!this.#provider || !this.#address)
+    if (!this.#rawProvider || !this.#address)
       throw new TypeError(`Provider is not initialized`)
 
     return this.#ethProvider?.send('personal_sign', [
@@ -238,7 +236,7 @@ export class WalletConnectEvmProvider
   }
 
   async #setListeners() {
-    this.#provider.on('session_event', e => {
+    this.#rawProvider.on('session_event', e => {
       this.#chainId = e?.params?.chainId.split(':')[1] ?? this.#chainId
 
       this.#address =
@@ -262,7 +260,7 @@ export class WalletConnectEvmProvider
       )
     })
 
-    this.#provider.on('session_delete', () => {
+    this.#rawProvider.on('session_delete', () => {
       this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
     })
   }
