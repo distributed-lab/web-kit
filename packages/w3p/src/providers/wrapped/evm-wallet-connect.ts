@@ -1,5 +1,6 @@
 import { DECIMALS } from '@distributedlab/tools'
-import Provider, { EthereumProvider } from '@walletconnect/ethereum-provider'
+import { WalletConnectModal } from '@walletconnect/modal'
+import UniversalProvider from '@walletconnect/universal-provider'
 import { providers, utils } from 'ethers'
 
 import {
@@ -19,6 +20,7 @@ import type {
   TxRequestBody,
   WalletConnectInitArgs,
 } from '@/types'
+import { type EthereumProvider } from '@/types'
 
 import { ProviderEventBus } from '../wrapped/_event-bus'
 
@@ -26,15 +28,16 @@ export class WalletConnectEvmProvider
   extends ProviderEventBus
   implements ProviderProxy
 {
-  #rawProvider: Provider
+  #rawProvider: UniversalProvider
   #ethProvider: providers.Web3Provider
+
+  #w3Modal: WalletConnectModal
 
   #chainId?: ChainId
   #address?: string
 
   readonly #projectId: string
-  readonly #currentChains: WalletConnectInitArgs['currentChains']
-  readonly #optionalChains: WalletConnectInitArgs['optionalChains']
+  readonly #currentChain: ChainId
 
   constructor(provider: RawProvider) {
     super()
@@ -43,13 +46,14 @@ export class WalletConnectEvmProvider
       throw new Error('projectId is required for WalletConnect provider')
     }
 
-    const { projectId, currentChains, optionalChains } =
-      provider as WalletConnectInitArgs
+    const { projectId, currentChain } = provider as WalletConnectInitArgs
     this.#projectId = projectId
-    this.#currentChains = currentChains
-    this.#optionalChains = optionalChains
-    this.#rawProvider = new Provider()
-    this.#ethProvider = new providers.Web3Provider(this.#rawProvider)
+    this.#currentChain = currentChain
+    this.#rawProvider = {} as UniversalProvider
+    this.#ethProvider = {} as providers.Web3Provider
+    this.#w3Modal = new WalletConnectModal({
+      projectId: this.#projectId,
+    })
   }
 
   static get providerType(): PROVIDERS {
@@ -65,7 +69,7 @@ export class WalletConnectEvmProvider
   }
 
   get isConnected(): boolean {
-    return Boolean(this.#chainId)
+    return Boolean(this.#chainId) || Boolean(this.#address)
   }
 
   get chainId(): ChainId | undefined {
@@ -85,32 +89,11 @@ export class WalletConnectEvmProvider
   }
 
   async init(): Promise<void> {
-    this.#rawProvider = await EthereumProvider.init({
+    this.#rawProvider = await UniversalProvider.init({
+      logger: 'info',
+      relayUrl: 'wss://relay.walletconnect.com',
       projectId: this.#projectId,
-      chains: this.#currentChains,
-      optionalChains: this.#optionalChains as number[],
-      showQrModal: true,
-      methods: [
-        'wallet_switchEthereumChain',
-        'wallet_addEthereumChain',
-        'eth_requestAccounts',
-
-        'eth_sendTransaction',
-
-        'eth_sign',
-        'personal_sign',
-        'eth_signTypedData',
-      ],
-      events: [
-        PROVIDER_EVENTS.Connect,
-        PROVIDER_EVENTS.Disconnect,
-        PROVIDER_EVENTS.ChainChanged,
-        PROVIDER_EVENTS.AccountsChanged,
-      ],
-      optionalEvents: [],
     })
-
-    this.#ethProvider = new providers.Web3Provider(this.#rawProvider)
 
     await this.#checkForPersistedSession()
 
@@ -120,9 +103,34 @@ export class WalletConnectEvmProvider
   }
 
   async connect(): Promise<void> {
-    await this.#rawProvider.connect()
+    await this.#rawProvider.connect({
+      namespaces: {
+        eip155: {
+          methods: [
+            'wallet_switchEthereumChain',
+            'wallet_addEthereumChain',
+            'eth_requestAccounts',
+
+            'eth_sendTransaction',
+
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData',
+          ],
+          chains: [`eip155:${this.#currentChain}`],
+          events: [
+            PROVIDER_EVENTS.Connect,
+            PROVIDER_EVENTS.Disconnect,
+            PROVIDER_EVENTS.ChainChanged,
+            PROVIDER_EVENTS.AccountsChanged,
+          ],
+        },
+      },
+    })
 
     await this.#rawProvider.enable()
+
+    this.#ethProvider = new providers.Web3Provider(this.#rawProvider)
 
     const accounts = await this.#rawProvider.request<string[]>({
       method: 'eth_requestAccounts',
@@ -144,6 +152,13 @@ export class WalletConnectEvmProvider
         : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
       this.#defaultEventPayload,
     )
+
+    this.#w3Modal.closeModal()
+  }
+
+  async disconnect() {
+    await this.#rawProvider.disconnect()
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
   }
 
   async #checkForPersistedSession() {
@@ -236,32 +251,39 @@ export class WalletConnectEvmProvider
   }
 
   async #setListeners() {
-    this.#rawProvider.on('session_event', e => {
-      this.#chainId = e?.params?.chainId.split(':')[1] ?? this.#chainId
+    ;(this.#rawProvider as unknown as EthereumProvider).on(
+      'session_event',
+      e => {
+        this.#chainId = e?.params?.chainId.split(':')[1] ?? this.#chainId
 
-      this.#address =
-        e?.params?.event?.data?.[0]?.split(':')?.[2] ?? this.#address
+        this.#address =
+          e?.params?.event?.data?.[0]?.split(':')?.[2] ?? this.#address
 
-      this.emit(
-        PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
-        this.#defaultEventPayload,
-      )
+        this.emit(
+          PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
+          this.#defaultEventPayload,
+        )
 
-      this.emit(
-        PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
-        this.#defaultEventPayload,
-      )
+        this.emit(
+          PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
+          this.#defaultEventPayload,
+        )
 
-      this.emit(
-        this.isConnected
-          ? PROVIDER_EVENT_BUS_EVENTS.Connect
-          : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
-        this.#defaultEventPayload,
-      )
-    })
+        this.emit(
+          this.isConnected
+            ? PROVIDER_EVENT_BUS_EVENTS.Connect
+            : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
+          this.#defaultEventPayload,
+        )
+      },
+    )
 
     this.#rawProvider.on('session_delete', () => {
       this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
+    })
+
+    this.#rawProvider.on('display_uri', (uri: string) => {
+      this.#w3Modal.openModal({ uri })
     })
   }
 }

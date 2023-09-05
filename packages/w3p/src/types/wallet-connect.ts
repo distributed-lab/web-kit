@@ -1,5 +1,6 @@
+import type { ChainId } from '@/types'
+
 export type WalletConnectInitArgs = {
   projectId: string
-  currentChains: [number, ...number[]]
-  optionalChains?: [number, ...number[]]
+  currentChain: ChainId
 }
