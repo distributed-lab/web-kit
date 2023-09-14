@@ -10,9 +10,11 @@ import {
   PROVIDERS,
 } from '@/enums'
 import { getEthExplorerAddressUrl, getEthExplorerTxUrl } from '@/helpers'
+import { Provider } from '@/provider'
 import type {
   Chain,
   ChainId,
+  EthereumProvider,
   EthTransactionResponse,
   ProviderProxy,
   RawProvider,
@@ -20,7 +22,6 @@ import type {
   TxRequestBody,
   WalletConnectInitArgs,
 } from '@/types'
-import { type EthereumProvider } from '@/types'
 
 import { ProviderEventBus } from '../wrapped/_event-bus'
 
@@ -37,7 +38,6 @@ export class WalletConnectEvmProvider
   #address?: string
 
   readonly #projectId: string
-  readonly #currentChain: ChainId
 
   constructor(provider: RawProvider) {
     super()
@@ -46,9 +46,8 @@ export class WalletConnectEvmProvider
       throw new Error('projectId is required for WalletConnect provider')
     }
 
-    const { projectId, currentChain } = provider as WalletConnectInitArgs
+    const { projectId } = provider as WalletConnectInitArgs
     this.#projectId = projectId
-    this.#currentChain = currentChain
     this.#rawProvider = {} as UniversalProvider
     this.#ethProvider = {} as providers.Web3Provider
     this.#w3Modal = new WalletConnectModal({
@@ -117,7 +116,7 @@ export class WalletConnectEvmProvider
             'personal_sign',
             'eth_signTypedData',
           ],
-          chains: [`eip155:${this.#currentChain}`],
+          chains: ['eip155:1'],
           events: [
             PROVIDER_EVENTS.Connect,
             PROVIDER_EVENTS.Disconnect,
@@ -126,6 +125,29 @@ export class WalletConnectEvmProvider
           ],
         },
       },
+      optionalNamespaces: {
+        eip155: {
+          methods: [
+            'wallet_switchEthereumChain',
+            'wallet_addEthereumChain',
+            'eth_requestAccounts',
+
+            'eth_sendTransaction',
+
+            'eth_sign',
+            'personal_sign',
+            'eth_signTypedData',
+          ],
+          chains: ['eip155:1'],
+          events: [
+            PROVIDER_EVENTS.Connect,
+            PROVIDER_EVENTS.Disconnect,
+            PROVIDER_EVENTS.ChainChanged,
+            PROVIDER_EVENTS.AccountsChanged,
+          ],
+        },
+      },
+      skipPairing: true,
     })
 
     await this.#rawProvider.enable()
@@ -158,6 +180,8 @@ export class WalletConnectEvmProvider
 
   async disconnect() {
     await this.#rawProvider.disconnect()
+    this.#chainId = undefined
+    this.#address = undefined
     this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
   }
 
@@ -189,9 +213,22 @@ export class WalletConnectEvmProvider
     return (txResponse as EthTransactionResponse).transactionHash
   }
 
+  /**
+   * @description Switch the chain with WalletConnect Provider.
+   * You should always add a network first and then change it.
+   */
+
   async switchChain(chainId: ChainId): Promise<void> {
+    if (!Provider.chainsDetails) {
+      throw new ReferenceError('Chains details are empty.')
+    }
+    const foundChain = Provider.chainsDetails[chainId]
+    if (!foundChain) {
+      throw new ReferenceError('The network you want to change was not found')
+    }
+    await this.addChain(foundChain)
     await this.#ethProvider?.send?.('wallet_switchEthereumChain', [
-      { chainId: utils.hexlify(chainId) },
+      { chainId: foundChain.id },
     ])
   }
 

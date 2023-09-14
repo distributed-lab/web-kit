@@ -18,6 +18,7 @@ import type {
 export type CreateProviderOpts<T extends keyof Record<string, string>> = {
   providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
+  chainsDetails?: Record<ChainId, Chain>
 }
 
 /**
@@ -191,12 +192,22 @@ export class Provider implements IProvider {
  * const providerDetectorInstance = await new ProviderDetector().init()
  * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
  * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
+ * // When using WalletConnectEvmProvider, don't forget to add chainsDetails.
+ * const walletConnectProvider = await createProvider(WalletConnectEvmProvider, { providerDetectorInstance, chainsDetails })
  */
 export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts<T> = {},
 ): Promise<Provider> {
-  const { providerDetector: providerDetectorInstance, listeners } = opts
+  const {
+    providerDetector: providerDetectorInstance,
+    listeners,
+    chainsDetails,
+  } = opts
+
+  if (chainsDetails) {
+    Provider.setChainsDetails(chainsDetails)
+  }
 
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
