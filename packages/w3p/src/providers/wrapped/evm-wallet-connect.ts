@@ -222,11 +222,15 @@ export class WalletConnectEvmProvider
     if (!Provider.chainsDetails) {
       throw new ReferenceError('Chains details are empty.')
     }
+
     const foundChain = Provider.chainsDetails[chainId]
+
     if (!foundChain) {
       throw new ReferenceError('The network you want to change was not found')
     }
+
     await this.addChain(foundChain)
+
     await this.#ethProvider?.send?.('wallet_switchEthereumChain', [
       { chainId: foundChain.id },
     ])
