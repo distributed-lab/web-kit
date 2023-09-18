@@ -42,7 +42,6 @@ export default packages.map((pkg) => ({
     typescript({
       tsconfig: `./packages/${pkg}/tsconfig.json`,
     }),
-    json(),
     terser(),
   ],
   external: ['@walletconnect/modal']

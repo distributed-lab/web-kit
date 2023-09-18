@@ -18,7 +18,6 @@ import type {
 export type CreateProviderOpts<T extends keyof Record<string, string>> = {
   providerDetector?: ProviderDetector<T>
   listeners?: ProviderListeners
-  chainsDetails?: Record<ChainId, Chain>
 }
 
 /**
@@ -199,15 +198,7 @@ export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
   opts: CreateProviderOpts<T> = {},
 ): Promise<Provider> {
-  const {
-    providerDetector: providerDetectorInstance,
-    listeners,
-    chainsDetails,
-  } = opts
-
-  if (chainsDetails) {
-    Provider.setChainsDetails(chainsDetails)
-  }
+  const { providerDetector: providerDetectorInstance, listeners } = opts
 
   const provider = new Provider(proxy)
   const providerDetector = providerDetectorInstance || new ProviderDetector()
