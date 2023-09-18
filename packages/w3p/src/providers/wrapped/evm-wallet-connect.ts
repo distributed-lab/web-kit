@@ -1,4 +1,3 @@
-import { DECIMALS } from '@distributedlab/tools'
 import { WalletConnectModal } from '@walletconnect/modal'
 import UniversalProvider from '@walletconnect/universal-provider'
 import { providers, utils } from 'ethers'
@@ -9,7 +8,12 @@ import {
   PROVIDER_EVENTS,
   PROVIDERS,
 } from '@/enums'
-import { getEthExplorerAddressUrl, getEthExplorerTxUrl } from '@/helpers'
+import {
+  getEthExplorerAddressUrl,
+  getEthExplorerTxUrl,
+  requestAddEthChain,
+  requestSwitchEthChain,
+} from '@/helpers'
 import { Provider } from '@/provider'
 import type {
   Chain,
@@ -226,34 +230,16 @@ export class WalletConnectEvmProvider
     const foundChain = Provider.chainsDetails[chainId]
 
     if (!foundChain) {
-      throw new ReferenceError('The network you want to change was not found')
+      throw new ReferenceError('Network is not supported')
     }
 
     await this.addChain(foundChain)
 
-    await this.#ethProvider?.send?.('wallet_switchEthereumChain', [
-      { chainId: foundChain.id },
-    ])
+    await requestSwitchEthChain(this.#ethProvider, foundChain.id)
   }
 
   async addChain(chain: Chain): Promise<void> {
-    await this.#ethProvider?.send?.('wallet_addEthereumChain', [
-      {
-        chainId: utils.hexValue(Number(chain.id)),
-        chainName: chain.name,
-        ...(chain.token.name &&
-          chain.token.symbol && {
-            nativeCurrency: {
-              name: chain.token.name,
-              symbol: chain.token.symbol,
-              decimals: chain.token.decimals ?? DECIMALS.WEI,
-            },
-          }),
-        rpcUrls: [chain.rpcUrl],
-        blockExplorerUrls: [...(chain.explorerUrl ? [chain.explorerUrl] : [])],
-        ...(chain.icon && { iconUrls: [chain.icon] }),
-      },
-    ])
+    await requestAddEthChain(this.#ethProvider, chain)
   }
 
   async signAndSendTx(tx: TxRequestBody): Promise<TransactionResponse> {
