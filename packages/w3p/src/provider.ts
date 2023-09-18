@@ -192,7 +192,7 @@ export class Provider implements IProvider {
  * const metamaskProvider = await createProvider(MetamaskProvider, { providerDetectorInstance })
  * const phantomProvider = await createProvider(PhantomProvider, { providerDetectorInstance })
  * // When using WalletConnectEvmProvider, don't forget to add chainsDetails.
- * const walletConnectProvider = await createProvider(WalletConnectEvmProvider, { providerDetectorInstance, chainsDetails })
+ * Provider.setChainsDetails(chainsDetails)
  */
 export async function createProvider<T extends keyof Record<string, string>>(
   proxy: ProviderProxyConstructor,
