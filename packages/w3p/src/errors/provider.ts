@@ -28,6 +28,14 @@ export class ProviderChainNotFoundError extends RuntimeError {
   }
 }
 
+export class ProviderChainDetailsNotFoundError extends RuntimeError {
+  public name = 'ProviderChainDetailsAreEmptyError'
+
+  constructor(error = new TypeError('Cant find chains details in provider')) {
+    super(error)
+  }
+}
+
 export class ProviderUserRejectedRequest extends RuntimeError {
   public name = 'ProviderUserRejectedRequest'
 

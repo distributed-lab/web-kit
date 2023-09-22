@@ -104,6 +104,21 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
        *     ) as RawProvider,
        *   })
        * }
+
+       * Because WalletConnect does not provide an interface for
+       * interacting with Ethereum through `window.ethereum`,
+       * we need to add information about this provider using following
+       * method
+       *
+       * await providerDetector.value.addProvider({
+       *     name: PROVIDERS.WalletConnect,
+       *     instance: {
+       *       projectId: 'abcdefghijklmnopqrstuvwxyz',
+       *       relayUrl: 'wss://relay.walletconnect.com',
+       *       logger: 'info'
+       *     } as RawProvider,
+       *   })
+       *
        */
 
       /**
@@ -125,6 +140,30 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
        * If you need to do something with chain details e.g. show link to explorer after tx sent
        *
        * Provider.setChainsDetails(getSupportedChainsDetails())
+       */
+
+      /**
+       * If you need to do something with chain details e.g. show link to explorer after tx sent
+       *
+       * Provider.setChainsDetails(getSupportedChainsDetails())
+       */
+
+      /**
+       * To define a custom RPC network that the WalletConnect provider
+       * will use, you need to specify the chain you want to define in
+       * the Provider.setChainDetails method.
+       *
+       * Provider.setChainsDetails({
+       *  5: {
+       *    id: '0x5',
+       *    name: 'Goerli',
+       *    rpcUrl: 'https://goerli.blockpi.network/v1/rpc/public',
+       *    explorerUrl: 'https://goerli.etherscan.io/',
+       *    token: { name: 'Goerli', symbol: 'GTH', decimals: 18 },
+       *    type: CHAIN_TYPES.EVM,
+       *    icon: '',
+       *  },
+       * })
        */
 
       /**
