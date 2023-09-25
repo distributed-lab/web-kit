@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [1.0.0-rc.7] - 2023-09-21
+## [1.0.0-rc.7] - 2023-09-25
 ### Added
 - `@distributedlab/w3p` - WalletConnect EVM provider
 
