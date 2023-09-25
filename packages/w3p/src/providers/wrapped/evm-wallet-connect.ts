@@ -97,14 +97,6 @@ export class WalletConnectEvmProvider
     return this.#address
   }
 
-  get #defaultEventPayload() {
-    return {
-      address: this.#address,
-      chainId: this.#chainId,
-      isConnected: this.isConnected,
-    }
-  }
-
   async init(): Promise<void> {
     this.#rawProvider = await UniversalProvider.init({
       logger: this.#logger,
@@ -211,10 +203,8 @@ export class WalletConnectEvmProvider
 
   /**
    * @description Switch the chain with WalletConnect Provider.
-   * You should always add a network first and then change it.
-   *
-   * @example
-   * Provider.setChainDetails
+   * You should always add a network first with the proper method
+   * {@link Provider.setChainDetails} and then change it.
    */
 
   async switchChain(chainId: ChainId): Promise<void> {
@@ -303,6 +293,14 @@ export class WalletConnectEvmProvider
       utils.hexlify(utils.toUtf8Bytes(message)),
       this.#address.toLowerCase(),
     ])
+  }
+
+  get #defaultEventPayload() {
+    return {
+      address: this.#address,
+      chainId: this.#chainId,
+      isConnected: this.isConnected,
+    }
   }
 
   async #setListeners() {

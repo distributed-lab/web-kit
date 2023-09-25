@@ -105,10 +105,10 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
        *   })
        * }
 
-       * Because WalletConnect does not provide an interface for
-       * interacting with Ethereum through `window.ethereum`,
-       * we need to add information about this provider using following
-       * method
+       * Since WalletConnect lacks an injected provider for
+       * interacting with the chain, it's required to add
+       * WalletConnect provider configuration with
+       * the following method:
        *
        * await providerDetector.value.addProvider({
        *     name: PROVIDERS.WalletConnect,

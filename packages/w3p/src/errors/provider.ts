@@ -29,7 +29,7 @@ export class ProviderChainNotFoundError extends RuntimeError {
 }
 
 export class ProviderChainDetailsNotFoundError extends RuntimeError {
-  public name = 'ProviderChainDetailsAreEmptyError'
+  public name = 'ProviderChainDetailsNotFoundError'
 
   constructor(error = new TypeError('Cant find chains details in provider')) {
     super(error)
