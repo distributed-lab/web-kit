@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.0.0-rc.8] - 2023-10-10
+### Added
+- `@distributedlab/w3p` - MetamaskFallback provider
+
 ## [1.0.0-rc.7] - 2023-09-25
 ### Added
 - `@distributedlab/w3p` - WalletConnect EVM provider
@@ -336,7 +340,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.7...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.8...HEAD
+[1.0.0-rc.8]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.7...1.0.0-rc.8
 [1.0.0-rc.7]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.6...1.0.0-rc.7
 [1.0.0-rc.6]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.5...1.0.0-rc.6
 [1.0.0-rc.5]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.4...1.0.0-rc.5

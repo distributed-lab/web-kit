@@ -27,7 +27,7 @@ export type CreateProviderOpts<T extends keyof Record<string, string>> = {
  *
  * @example
  * ```js
- * import { createProvider, MetamaskProvider } from '@rarimo/provider'
+ * import { createProvider, MetamaskProvider } from '@distributedlab/w3p'
  *
  * const getMetamaskWalletAddress = async () => {
  *   // Connect to the Metamask wallet in the browser using ethers.js, using the MetamaskProvider interface to limit bundle size.

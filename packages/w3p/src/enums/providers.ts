@@ -6,6 +6,7 @@ export enum PROVIDERS {
   Solflare = 'solflare',
   Near = 'near',
   WalletConnect = 'wallet-connect',
+  MetamaskFallback = 'metamask-fallback',
 }
 
 export enum PROVIDER_CHECKS {

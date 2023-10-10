@@ -11,6 +11,7 @@ import {
   PROVIDERS,
   ProviderProxyConstructor,
   WalletConnectEvmProvider,
+  MetamaskFallbackProvider,
 } from '@distributedlab/w3p'
 import { useProvider } from './vue-use-provider-composable'
 
@@ -119,6 +120,13 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
        *     } as RawProvider,
        *   })
        *
+       * To avoid the inability to connect to MetaMask from browsers
+       * on mobile devices, you need to add the MetamaskFallbackProvider
+       * during the initialization of the providerDetector.
+       *
+       * await providerDetector.value.addProvider({
+       *     name: PROVIDERS.MetamaskFallback,
+       *   })
        */
 
       /**
@@ -176,6 +184,7 @@ export const useWeb3ProvidersStore = defineStore(STORE_NAME, () => {
         [PROVIDERS.Metamask]: MetamaskProvider,
         [PROVIDERS.Coinbase]: CoinbaseProvider,
         [PROVIDERS.WalletConnect]: WalletConnectEvmProvider,
+        [PROVIDERS.MetamaskFallback]: MetamaskFallbackProvider,
         /**
          * in the case where you have some custom provider, place your ProviderProxyConstructor here
          * [EXTERNAL_PROVIDERS.TokenE]: TokenEProvider as ProviderProxyConstructor,

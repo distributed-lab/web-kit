@@ -22,7 +22,7 @@ import { BaseSolanaProvider } from './_base-solana'
  *
  * @example
  * ```js
- * import { createProvider, SolflareProvider } from '@rarimo/provider'
+ * import { createProvider, SolflareProvider } from '@distributedlab/w3p'
  *
  * const getSolflareWalletAddress = async () => {
  *   // Connect to the Solflare wallet in the browser using Web3.js, using the SolflareProvider interface to limit bundle size.

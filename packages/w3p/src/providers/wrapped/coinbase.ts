@@ -8,7 +8,7 @@ import { BaseEVMProvider } from './_base-evm'
  *
  * @example
  * ```js
- * import { createProvider, CoinbaseProvider } from '@rarimo/provider'
+ * import { createProvider, CoinbaseProvider } from '@distributedlab/w3p'
  *
  * const getCoinbaseWalletAddress = async () => {
  *   // Connect to the Coinbase wallet in the browser using Web3.js, using the CoinbaseProvider interface to limit bundle size.
