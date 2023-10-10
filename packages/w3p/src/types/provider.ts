@@ -7,6 +7,7 @@ import type {
 import type { providers } from 'ethers'
 
 import type { CHAIN_TYPES, PROVIDERS } from '@/enums'
+import type { WalletConnectInitArgs } from '@/types'
 
 import type { Chain, ChainId } from './chain'
 import type { EthereumProvider } from './ethereum'
@@ -21,7 +22,11 @@ import type {
 } from './provider-event-bus'
 import type { SolanaProvider } from './solana'
 
-export type RawProvider = EthereumProvider | SolanaProvider | NearRawProvider
+export type RawProvider =
+  | EthereumProvider
+  | SolanaProvider
+  | NearRawProvider
+  | WalletConnectInitArgs
 
 export type ProviderInstance<T extends keyof Record<string, string> = never> = {
   name: T | PROVIDERS

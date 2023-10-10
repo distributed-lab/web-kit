@@ -5,6 +5,7 @@ export enum PROVIDERS {
   Coinbase = 'coinbase',
   Solflare = 'solflare',
   Near = 'near',
+  WalletConnect = 'wallet-connect',
 }
 
 export enum PROVIDER_CHECKS {

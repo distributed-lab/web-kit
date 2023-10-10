@@ -6,8 +6,8 @@ import babel from '@rollup/plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import json from '@rollup/plugin-json'
-import alias from "@rollup/plugin-alias";
-import nodePolyfills from 'rollup-plugin-polyfill-node';
+import alias from '@rollup/plugin-alias'
+import nodePolyfills from 'rollup-plugin-polyfill-node'
 
 const packages = fs.readdirSync(path.resolve(__dirname, './packages'))
 
@@ -20,11 +20,12 @@ export default packages.map((pkg) => ({
     format: 'iife'
   },
   plugins: [
-    commonjs(),
     resolve({
       browser: true,
       preferBuiltins: false,
     }),
+    commonjs(),
+    json(),
     nodePolyfills(),
     ...(pkg === "w3p" ? [
       alias({
@@ -41,7 +42,7 @@ export default packages.map((pkg) => ({
     typescript({
       tsconfig: `./packages/${pkg}/tsconfig.json`,
     }),
-    json(),
     terser(),
   ],
+  external: ['@walletconnect/modal']
 }))
