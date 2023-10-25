@@ -44,6 +44,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'prefer-const': ['error', { destructuring: 'all'}],
   },
 };
 

@@ -1,5 +1,5 @@
-import { BN } from '@/bn'
 import { BN_ROUNDING } from '@/enums'
+import { BN } from '@/math'
 
 export type BnConfigLike = number | BnConfig
 
