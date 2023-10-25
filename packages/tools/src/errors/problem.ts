@@ -1,8 +1,9 @@
 import log from 'loglevel'
 
-import { RuntimeError } from './errors'
-import { EventBus } from './event-bus'
-import type { ProblemConfig } from './types'
+import { EventBus } from '@/events'
+import type { ProblemConfig } from '@/types'
+
+import { RuntimeError } from './runtime-error'
 
 let config: ProblemConfig = {
   eventBus: new EventBus(),
