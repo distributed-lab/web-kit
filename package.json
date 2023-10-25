@@ -69,8 +69,5 @@
     "typescript": "^5.0.4",
     "yorkie": "^2.0.0"
   },
-  "packageManager": "yarn@3.4.1",
-  "dependencies": {
-    "loglevel": "^1.8.1"
-  }
+  "packageManager": "yarn@3.4.1"
 }
