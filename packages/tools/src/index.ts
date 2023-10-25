@@ -1,6 +1,7 @@
 export * from '@/enums'
 export * from '@/errors'
 export * from '@/events'
+export * from '@/go'
 export * from '@/helpers'
 export * from '@/math'
 export * from '@/time'
