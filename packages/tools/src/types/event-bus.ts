@@ -1,4 +1,4 @@
-import { EVENT_BUS_EVENTS } from '@/const/event-bus'
+import { EVENT_BUS_EVENTS } from '@/const'
 
 export type EventBusEventMap<AdditionalEventBusMap extends object> =
   typeof EVENT_BUS_EVENTS & AdditionalEventBusMap

@@ -1,6 +1,7 @@
 import { BN_ROUNDING } from '@/enums'
-import { BN } from '@/math/bn'
-import { toDecimals } from '@/math/decimals'
+
+import { BN } from './bn'
+import { toDecimals } from './decimals'
 
 export const round = (bn: BN, decimals: number, mode: BN_ROUNDING) => {
   const precisioned = toDecimals(bn.raw, BN.precision, decimals + 1).toString()
