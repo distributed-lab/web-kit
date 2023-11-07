@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/tools",
-  "version": "1.0.0-rc.7",
+  "version": "1.0.0-rc.8",
   "description": "Collection of common utility functions and classes",
   "repository": {
     "type": "git",

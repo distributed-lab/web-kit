@@ -21,10 +21,27 @@ export const parseNumberString = (_value: string): string => {
   const isFractionalZero = !fractional || fractional.match(/^(0+)$/)
   const isWholeZero = whole === '0' || whole.replaceAll('0', '') === ''
 
-  if (isWholeZero && isFractionalZero) return '0'
-  if (!fractional) return whole.padEnd(whole.length + BN.precision, '0')
+  const exponential = match[4]
+  const exponentialSign = exponential?.slice(1, 2)
+  const exponentialDecimals = Number(exponential?.slice(2))
 
-  return (isWholeZero ? '' : whole) + fractional.padEnd(BN.precision, '0')
+  if (isWholeZero && isFractionalZero) return '0'
+
+  let result = whole.padEnd(whole.length + BN.precision, '0')
+
+  if (!fractional) return fromExp(result, exponentialSign, exponentialDecimals)
+
+  result = (isWholeZero ? '' : whole) + fractional.padEnd(BN.precision, '0')
+
+  return fromExp(result, exponentialSign, exponentialDecimals)
+}
+
+const fromExp = (value: string, sign?: string, decimals?: number) => {
+  if (!sign || !decimals) return value
+  if (sign === '+') return value.padEnd(value.length + decimals, '0')
+  if (decimals > value.length) return '0'
+
+  return value.slice(0, value.length - decimals)
 }
 
 export const parseConfig = (config: BnConfigLike): BnConfig => {
