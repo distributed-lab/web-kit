@@ -234,6 +234,89 @@ describe('performs BN unit test', () => {
             expect(bn.raw).toBe(100000000000000000000000000n)
           })
         })
+
+        describe('if value with exponential notation', () => {
+          describe('without fraction part', () => {
+            test('with positive exponent', () => {
+              const bn = BN.fromRaw('1e+2', 6)
+              expect(bn.value).toBe('100000000')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(10000000000000000000000000000n)
+            })
+
+            test('with negative exponent which equals value length', () => {
+              const bn = BN.fromRaw('33e-2', 6)
+              expect(bn.value).toBe('330000')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(33000000000000000000000000n)
+            })
+
+            test('with negative exponent which more than value length', () => {
+              const bn = BN.fromRaw('22e-10', 18)
+              expect(bn.value).toBe('2200000000')
+              expect(bn.decimals).toBe(18)
+              expect(bn.raw).toBe(220000000000000000n)
+            })
+
+            test('with negative exponent which more than value length [2]', () => {
+              const bn = BN.fromRaw('22e-10', 6)
+              expect(bn.value).toBe('0')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(220000000000000000n)
+            })
+
+            test('with negative exponent which more than BN precision', () => {
+              const bn = BN.fromRaw(`22e-${BN.precision + 4}`, 6)
+              expect(bn.value).toBe('0')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(0n)
+            })
+          })
+
+          describe('with fraction part', () => {
+            test('with positive exponent', () => {
+              const bn = BN.fromRaw('3.5e+4', 6)
+              expect(bn.value).toBe('35000000000')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(3500000000000000000000000000000n)
+            })
+
+            test('with positive exponent and whole is zero', () => {
+              const bn = BN.fromRaw('0.1e+5', 6)
+              expect(bn.value).toBe('10000000000')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(1000000000000000000000000000000n)
+            })
+
+            test('with negative exponent which equals value length', () => {
+              const bn = BN.fromRaw('0.33e-3', 6)
+              expect(bn.value).toBe('330')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(33000000000000000000000n)
+            })
+
+            test('with negative exponent which more than value length', () => {
+              const bn = BN.fromRaw('1.34e-10', 18)
+              expect(bn.value).toBe('134000000')
+              expect(bn.decimals).toBe(18)
+              expect(bn.raw).toBe(13400000000000000n)
+            })
+
+            test('with negative exponent which equals BN precision', () => {
+              const bn = BN.fromRaw(`1.3e-${BN.precision}`, 6)
+              expect(bn.value).toBe('0')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(1n)
+            })
+
+            test('with negative exponent which more than BN precision', () => {
+              const bn = BN.fromRaw(`2.2e-${BN.precision + 4}`, 6)
+              expect(bn.value).toBe('0')
+              expect(bn.decimals).toBe(6)
+              expect(bn.raw).toBe(0n)
+            })
+          })
+        })
       })
     })
 
