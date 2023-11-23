@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.0.0-rc.9] - 2023-11-23
+### Fixed
+- `@distributedlab/w3p` - `@walletconnect/modal` dependency
+
 ## [1.0.0-rc.8] - 2023-11-07
 ### Fixed
 - `@distributedlab/tools` - `BN.fromRaw` parsing string value with the exponential notation
