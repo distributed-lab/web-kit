@@ -30,7 +30,7 @@
     "build:fetcher": "yarn workspace @distributedlab/fetcher build",
     "build:tools": "yarn workspace @distributedlab/tools build",
     "build:reactivity": "yarn workspace @distributedlab/reactivity build",
-    "build:w3p": "yarn workspace @rarimo/w3p build",
+    "build:w3p": "yarn workspace @distributedlab/w3p build",
     "docs": "typedoc --options typedoc.json",
     "lint": "eslint . --ext .ts --fix --cache --max-warnings=0 && yarn workspaces foreach -pv --no-private run typecheck",
     "test": "yarn workspaces foreach -pv --no-private run test",
