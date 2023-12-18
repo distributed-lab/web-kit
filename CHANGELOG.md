@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0-rc.9] - 2023-12-18
 ### Fixed
-- `@distributedlab/fetcher` - not passing query params from url
+- `@distributedlab/fetcher` - parsing query params from URL in the fetcher standalone
 
 ## [1.0.0-rc.8] - 2023-11-07
 ### Fixed

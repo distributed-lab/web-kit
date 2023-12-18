@@ -1,22 +1,13 @@
 import type { FetcherRequestQuery } from '@/types'
 
-export const extractQueryParams = (url: string): FetcherRequestQuery => {
-  const parsedUrl = new URL(url)
+export const extractQueryParams = (url: URL): FetcherRequestQuery => {
+  const query = {} as FetcherRequestQuery
 
-  if (!parsedUrl.search.startsWith('?')) return {}
+  if (!url.searchParams.size) return query
 
-  return parsedUrl.search
-    .split(/[?&]/g)
-    .map(item => {
-      if (!item) return {}
+  for (const [key, value] of url.searchParams.entries()) {
+    query[key] = value
+  }
 
-      const d = item.split('=')
-
-      const res = {} as FetcherRequestQuery
-
-      res[d.shift() || ''] = decodeURIComponent(d.join('='))
-
-      return res
-    })
-    .reduce((a, b) => ({ ...a, ...b }), {})
+  return query
 }

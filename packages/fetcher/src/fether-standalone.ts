@@ -34,7 +34,7 @@ const performRequest = async <T>(
       ...(opts || {}),
       query: {
         ...opts?.query,
-        ...(u.toString()?.includes('?') && extractQueryParams(u.toString())),
+        ...extractQueryParams(u),
       },
     },
   })
