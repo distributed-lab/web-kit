@@ -6,9 +6,10 @@ export const extractQueryParams = (url: string): FetcherRequestQuery => {
   if (!parsedUrl.search.startsWith('?')) return {}
 
   return parsedUrl.search
-    .substring(1)
-    .split('&')
+    .split(/[?&]/g)
     .map(item => {
+      if (!item) return {}
+
       const d = item.split('=')
 
       const res = {} as FetcherRequestQuery
