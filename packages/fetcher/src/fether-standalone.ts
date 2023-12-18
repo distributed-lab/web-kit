@@ -1,6 +1,7 @@
 import { HTTP_METHODS } from '@/enums'
 import { FetcherURLParseError } from '@/error'
 import { Fetcher } from '@/fetcher'
+import { extractQueryParams } from '@/helpers'
 import type {
   FetcherRequestOpts,
   FetcherResponse,
@@ -29,7 +30,13 @@ const performRequest = async <T>(
   }).request<T>({
     endpoint: u.pathname,
     method,
-    ...(opts || {}),
+    ...{
+      ...(opts || {}),
+      query: {
+        ...opts?.query,
+        ...extractQueryParams(u.toString()),
+      },
+    },
   })
 }
 

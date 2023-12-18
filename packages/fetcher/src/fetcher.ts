@@ -4,7 +4,7 @@ import { FetcherAbortManager } from '@/abort-manager'
 import { DEFAULT_CONFIG } from '@/const'
 import { HTTP_METHODS } from '@/enums'
 import { FetcherError } from '@/error'
-import { buildRequest, validateBaseUrl } from '@/helpers'
+import { buildRequest, extractQueryParams, validateBaseUrl } from '@/helpers'
 import { FetcherInterceptorManager } from '@/interceptor-manager'
 import { FetcherResponseBuilder } from '@/response-builder'
 import type {
@@ -166,7 +166,13 @@ export class Fetcher {
     return this.request<T>({
       endpoint,
       method: HTTP_METHODS.GET,
-      ...(opts || {}),
+      ...{
+        ...(opts || {}),
+        query: {
+          ...opts?.query,
+          ...extractQueryParams(endpoint),
+        },
+      },
     })
   }
 
