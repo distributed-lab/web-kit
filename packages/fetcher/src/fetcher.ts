@@ -170,7 +170,7 @@ export class Fetcher {
         ...(opts || {}),
         query: {
           ...opts?.query,
-          ...extractQueryParams(endpoint),
+          ...(endpoint.includes('?') && extractQueryParams(endpoint)),
         },
       },
     })
