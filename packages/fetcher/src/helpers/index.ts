@@ -1,4 +1,5 @@
 export * from './empty-body'
+export * from './extract-query-params'
 export * from './is-object'
 export * from './normalize-header-case'
 export * from './request'

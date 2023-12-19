@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.0.0-rc.9] - 2023-12-18
+### Fixed
+- `@distributedlab/fetcher` - parsing query params from URL in the fetcher standalone
+
 ## [1.0.0-rc.8] - 2023-11-07
 ### Fixed
 - `@distributedlab/tools` - `BN.fromRaw` parsing string value with the exponential notation
@@ -340,7 +344,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.8...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.9...HEAD
+[1.0.0-rc.9]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.8...1.0.0-rc.9
 [1.0.0-rc.8]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.7...1.0.0-rc.8
 [1.0.0-rc.7]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.6...1.0.0-rc.7
 [1.0.0-rc.6]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.5...1.0.0-rc.6
