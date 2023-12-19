@@ -39,28 +39,28 @@ export type CreateProviderOpts<T extends keyof Record<string, string>> = {
  * ```
  */
 export class Provider implements IProvider {
-  readonly #proxyConstructor: ProviderProxyConstructor
-  #selectedProvider?: PROVIDERS
-  #proxy?: ProviderProxy
+  readonly proxyConstructor: ProviderProxyConstructor
+  selectedProvider?: PROVIDERS
+  proxy?: ProviderProxy
 
   public static chainsDetails?: Record<ChainId, Chain>
 
   constructor(proxyConstructor: ProviderProxyConstructor) {
-    this.#selectedProvider = undefined
-    this.#proxy = undefined
-    this.#proxyConstructor = proxyConstructor
+    this.selectedProvider = undefined
+    this.proxy = undefined
+    this.proxyConstructor = proxyConstructor
   }
 
   public get rawProvider() {
-    return this.#proxy?.rawProvider
+    return this.proxy?.rawProvider
   }
 
   public get chainType() {
-    return this.#proxy?.chainType
+    return this.proxy?.chainType
   }
 
   public get providerType() {
-    return this.#selectedProvider
+    return this.selectedProvider
   }
 
   public get isConnected() {
@@ -68,11 +68,11 @@ export class Provider implements IProvider {
   }
 
   public get address() {
-    return this.#proxy?.address
+    return this.proxy?.address
   }
 
   public get chainId() {
-    return this.#proxy?.chainId
+    return this.proxy?.chainId
   }
 
   public get chainDetails() {
@@ -83,31 +83,31 @@ export class Provider implements IProvider {
     if (!provider.instance)
       throw new errors.ProviderInjectedInstanceNotFoundError()
 
-    this.#proxy = new this.#proxyConstructor(provider.instance)
+    this.proxy = new this.proxyConstructor(provider.instance)
 
     Object.entries(listeners || {}).forEach(([key, value]) => {
-      this.#proxy?.[key as keyof ProviderListeners]?.(
+      this.proxy?.[key as keyof ProviderListeners]?.(
         value as (e?: ProviderEventPayload) => void,
       )
     })
 
-    this.#selectedProvider = provider.name
-    await this.#proxy?.init()
+    this.selectedProvider = provider.name
+    await this.proxy?.init()
     return this
   }
 
   public async connect() {
-    if (!this.#proxy) throw new errors.ProviderNotInitializedError()
+    if (!this.proxy) throw new errors.ProviderNotInitializedError()
 
-    await this.#proxy?.connect?.()
+    await this.proxy?.connect?.()
   }
 
   public async switchChain(chainId: ChainId) {
-    await this.#proxy?.switchChain?.(chainId)
+    await this.proxy?.switchChain?.(chainId)
   }
 
   public async addChain(chain: Chain) {
-    await this.#proxy?.addChain?.(chain)
+    await this.proxy?.addChain?.(chain)
   }
 
   public static setChainsDetails(chains: Record<ChainId, Chain>) {
@@ -115,8 +115,8 @@ export class Provider implements IProvider {
   }
 
   public async signAndSendTx(txRequestBody: TxRequestBody) {
-    if (this.#proxy?.signAndSendTx) {
-      return this.#proxy?.signAndSendTx?.(
+    if (this.proxy?.signAndSendTx) {
+      return this.proxy?.signAndSendTx?.(
         txRequestBody,
       ) as Promise<TransactionResponse>
     }
@@ -125,59 +125,59 @@ export class Provider implements IProvider {
   }
 
   public getHashFromTx(txResponse: TransactionResponse) {
-    return this.#proxy?.getHashFromTx?.(txResponse) ?? ''
+    return this.proxy?.getHashFromTx?.(txResponse) ?? ''
   }
 
   public getTxUrl(chain: Chain, txHash: string) {
-    return this.#proxy?.getTxUrl?.(chain, txHash) ?? ''
+    return this.proxy?.getTxUrl?.(chain, txHash) ?? ''
   }
 
   public getAddressUrl(chain: Chain, address: string) {
-    return this.#proxy?.getAddressUrl?.(chain, address) ?? ''
+    return this.proxy?.getAddressUrl?.(chain, address) ?? ''
   }
 
   public async signMessage(message: string) {
-    return this.#proxy?.signMessage?.(message) ?? ''
+    return this.proxy?.signMessage?.(message) ?? ''
   }
 
   public onAccountChanged(cb: (e?: ProviderEventPayload) => void): void {
-    this.#proxy?.onAccountChanged(cb)
+    this.proxy?.onAccountChanged(cb)
   }
 
   public onChainChanged(cb: (e?: ProviderEventPayload) => void): void {
-    this.#proxy?.onChainChanged?.(cb)
+    this.proxy?.onChainChanged?.(cb)
   }
 
   public onConnect(cb: (e?: ProviderEventPayload) => void): void {
-    this.#proxy?.onConnect(cb)
+    this.proxy?.onConnect(cb)
   }
 
   public onDisconnect(cb: (e?: ProviderEventPayload) => void): void {
-    this.#proxy?.onDisconnect(cb)
+    this.proxy?.onDisconnect(cb)
   }
 
   public onInitiated(cb: (e?: ProviderEventPayload) => void): void {
-    this.#proxy?.onInitiated(cb)
+    this.proxy?.onInitiated(cb)
   }
 
   public clearHandlers(): void {
-    this.#proxy?.clearHandlers()
+    this.proxy?.clearHandlers()
   }
 
   public onBeforeTxSent(cb: (e?: ProviderEventPayload) => void) {
-    this.#proxy?.onBeforeTxSent(cb)
+    this.proxy?.onBeforeTxSent(cb)
   }
 
   public onTxSent(cb: (e?: ProviderEventPayload) => void) {
-    this.#proxy?.onTxSent(cb)
+    this.proxy?.onTxSent(cb)
   }
 
   public onTxConfirmed(cb: (e?: ProviderEventPayload) => void) {
-    this.#proxy?.onTxConfirmed(cb)
+    this.proxy?.onTxConfirmed(cb)
   }
 
   public async disconnect() {
-    await this.#proxy?.disconnect?.()
+    await this.proxy?.disconnect?.()
   }
 }
 
