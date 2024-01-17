@@ -34,7 +34,7 @@ describe('performs JsonApiClient request unit test', () => {
     test('should throw exception "baseUrl" argument not provided', () => {
       const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
       expect(() => api.useBaseUrl('')).toThrow(
-        'Fetcher: invalid base URL. TypeError [ERR_INVALID_URL]: Invalid URL',
+        'Fetcher: invalid base URL. TypeError: Invalid URL',
       )
     })
 
@@ -51,7 +51,7 @@ describe('performs JsonApiClient request unit test', () => {
     test('should throw exception if "baseUrl" argument not provided', () => {
       const api = new JsonApiClient({ baseUrl: VALID_BASE_URL_1 })
       expect(() => api.withBaseUrl('')).toThrow(
-        'Fetcher: invalid base URL. TypeError [ERR_INVALID_URL]: Invalid URL',
+        'Fetcher: invalid base URL. TypeError: Invalid URL',
       )
     })
 
