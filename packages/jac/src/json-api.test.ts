@@ -1,12 +1,7 @@
-import {
-  Fetcher,
-  FetcherError,
-} from '@distributedlab/fetcher'
+import { Fetcher, FetcherError } from '@distributedlab/fetcher'
 import { RuntimeError } from '@distributedlab/tools'
 
-import {
-  errors,
-} from '@/errors'
+import { errors } from '@/errors'
 import type { JsonApiResponseErrors } from '@/types'
 
 import { JsonApiClient } from './json-api'
