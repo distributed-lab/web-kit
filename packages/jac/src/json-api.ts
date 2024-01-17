@@ -127,7 +127,6 @@ export class JsonApiClient {
     opts: JsonApiClientRequestOpts,
   ): Promise<JsonApiResponse<T, U>> {
     let raw: JsonApiResponseRaw
-
     const config: JsonApiClientRequestConfig = {
       body: opts.body,
       method: opts.method,
