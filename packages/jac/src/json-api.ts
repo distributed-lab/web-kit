@@ -2,7 +2,7 @@ import type {
   FetcherInterceptor,
   FetcherRequestQuery,
 } from '@distributedlab/fetcher'
-import { Fetcher, HTTP_METHODS, FetcherError } from '@distributedlab/fetcher'
+import { Fetcher, FetcherError, HTTP_METHODS } from '@distributedlab/fetcher'
 
 import type { JsonApiResponse } from '@/response'
 
