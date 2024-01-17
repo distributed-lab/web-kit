@@ -1,9 +1,8 @@
 import type {
-  FetcherError,
   FetcherInterceptor,
   FetcherRequestQuery,
 } from '@distributedlab/fetcher'
-import { Fetcher, HTTP_METHODS } from '@distributedlab/fetcher'
+import { Fetcher, HTTP_METHODS, FetcherError } from '@distributedlab/fetcher'
 
 import type { JsonApiResponse } from '@/response'
 
@@ -140,7 +139,11 @@ export class JsonApiClient {
     try {
       raw = await this.#fetcher.request(config)
     } catch (e) {
-      throw parseJsonApiError(e as FetcherError<JsonApiResponseErrors>)
+      if (e instanceof FetcherError<JsonApiResponseErrors>) {
+        throw parseJsonApiError(e as FetcherError<JsonApiResponseErrors>)
+      }
+
+      throw e
     }
 
     return parseJsonApiResponse<T, U>({

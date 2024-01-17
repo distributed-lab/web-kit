@@ -1,8 +1,12 @@
-import { Fetcher } from '@distributedlab/fetcher'
-
+import {
+  Fetcher,
+  FetcherError,
+  type FetcherResponse,
+} from '@distributedlab/fetcher'
 import { JsonApiClient } from './json-api'
-import { PARSED_RESPONSE, RAW_RESPONSE } from './tests'
-import { MockWrapper } from './tests'
+import { PARSED_RESPONSE, RAW_RESPONSE, MockWrapper } from './tests'
+import type { JsonApiResponseErrors } from '@/types'
+import { RuntimeError } from '@distributedlab/tools'
 
 const VALID_BASE_URL_1 = 'http://localhost'
 const VALID_BASE_URL_2 = 'http://foo.bar'
@@ -15,6 +19,8 @@ const mockedBody = {
     bar: 'string',
   },
 }
+
+export class CustomError extends RuntimeError {}
 
 describe('performs JsonApiClient request unit test', () => {
   test('performs constructor, should set base url if provided', () => {
@@ -125,6 +131,28 @@ describe('performs JsonApiClient request unit test', () => {
         body: undefined,
       })
     })
+  })
+
+  test('should throw custom error', async () => {
+    const api = new JsonApiClient(VALID_CFG)
+
+    const error = new CustomError('')
+    jest.spyOn(api, 'request').mockRejectedValue(error)
+
+    await expect(api.get('')).rejects.toThrowError(CustomError)
+  })
+
+  test('should return false if error is not instance of FetcherError', async () => {
+    const error = new CustomError('')
+
+    expect(error instanceof FetcherError<JsonApiResponseErrors>).toEqual(true)
+  })
+
+  test('should return true if error is instance of FetcherError', async () => {
+    const error = new FetcherError<JsonApiResponseErrors>(
+      {} as FetcherResponse<JsonApiResponseErrors>,
+    )
+    expect(error instanceof FetcherError<JsonApiResponseErrors>).toEqual(true)
   })
 
   test('should return correct data', () => {
