@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.10] - 2024-01-17
+### Fixed
+- `@distributedlab/jac` - possibility to throw custom error on request
+
 ## [1.0.0-rc.9] - 2023-12-19
 ### Fixed
 - `@distributedlab/fetcher` - parsing query params from URL in the fetcher standalone

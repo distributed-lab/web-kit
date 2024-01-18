@@ -1,8 +1,11 @@
-import { Fetcher } from '@distributedlab/fetcher'
+import { Fetcher, FetcherError } from '@distributedlab/fetcher'
+import { RuntimeError } from '@distributedlab/tools'
+
+import { errors } from '@/errors'
+import type { JsonApiResponseErrors } from '@/types'
 
 import { JsonApiClient } from './json-api'
-import { PARSED_RESPONSE, RAW_RESPONSE } from './tests'
-import { MockWrapper } from './tests'
+import { MockWrapper, PARSED_RESPONSE, RAW_RESPONSE } from './tests'
 
 const VALID_BASE_URL_1 = 'http://localhost'
 const VALID_BASE_URL_2 = 'http://foo.bar'
@@ -15,6 +18,8 @@ const mockedBody = {
     bar: 'string',
   },
 }
+
+class CustomError extends RuntimeError {}
 
 describe('performs JsonApiClient request unit test', () => {
   test('performs constructor, should set base url if provided', () => {
@@ -125,6 +130,70 @@ describe('performs JsonApiClient request unit test', () => {
         body: undefined,
       })
     })
+  })
+
+  test('should throw network error', () => {
+    const rawErrorResponse = MockWrapper.makeFetcherResponse(
+      {
+        errors: [
+          {
+            id: '1',
+            code: 'err_some_code',
+            status: '405',
+            title: 'Unhandled error',
+          },
+        ],
+      },
+      405,
+    )
+
+    const api = new JsonApiClient(VALID_CFG)
+
+    jest
+      .spyOn(Fetcher.prototype, 'request')
+      .mockRejectedValue(new FetcherError(rawErrorResponse))
+
+    expect(api.get('')).rejects.toThrowError(errors.NetworkError)
+  })
+
+  test('should throw unauthorized error', () => {
+    const rawErrorResponse = MockWrapper.makeFetcherResponse(
+      {
+        errors: [
+          {
+            id: '1',
+            code: 'err_some_code',
+            status: '401',
+            title: 'Unauthorized',
+          },
+        ],
+      },
+      401,
+    )
+
+    const api = new JsonApiClient(VALID_CFG)
+
+    jest
+      .spyOn(Fetcher.prototype, 'request')
+      .mockRejectedValue(new FetcherError(rawErrorResponse))
+
+    expect(api.get('')).rejects.toThrowError(errors.UnauthorizedError)
+  })
+
+  test('should throw custom error', async () => {
+    jest
+      .spyOn(Fetcher.prototype, 'request')
+      .mockRejectedValue(new CustomError(''))
+
+    const api = new JsonApiClient(VALID_CFG)
+
+    expect(api.get('/')).rejects.toThrowError(CustomError)
+  })
+
+  test('should return false if error is not instance of FetcherError', async () => {
+    const error = new CustomError('')
+
+    expect(error instanceof FetcherError<JsonApiResponseErrors>).toEqual(false)
   })
 
   test('should return correct data', () => {
