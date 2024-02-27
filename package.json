@@ -24,8 +24,7 @@
     "pre-push": "yarn test && yarn rsc"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -pv --topological-dev run build && yarn build:browser",
-    "build:browser": "rollup -c --bundleConfigAsCjs",
+    "build": "yarn workspaces foreach -pv --topological-dev run build",
     "build:jac": "yarn workspace @distributedlab/jac build",
     "build:fetcher": "yarn workspace @distributedlab/fetcher build",
     "build:tools": "yarn workspace @distributedlab/tools build",
@@ -41,13 +40,6 @@
     "apply-version": "node scripts/version.js"
   },
   "devDependencies": {
-    "@rollup/plugin-alias": "^5.0.0",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^11.0.0",
     "@swc/cli": "^0.3.9",
     "@swc/core": "^1.4.2",
     "@swc/jest": "^0.2.36",
@@ -63,8 +55,6 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "jest": "^29.5.0",
     "prettier": "^2.8.4",
-    "rollup": "^3.18.0",
-    "rollup-plugin-polyfill-node": "^0.12.0",
     "typedoc": "^0.23.26",
     "typescript": "^5.0.4",
     "yorkie": "^2.0.0"

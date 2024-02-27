@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - `all` - Creating extra `package.json` files in the dist folder for resolving ESM and CommonJS modules
 - `all,root` - postbuild script
+- `all` - CDN distributives support
 
 ## [1.0.0-rc.10] - 2024-01-18
 ### Fixed
