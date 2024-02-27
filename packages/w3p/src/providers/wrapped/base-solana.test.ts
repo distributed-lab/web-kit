@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 
 import { CHAIN_TYPES, PROVIDER_EVENTS, SOLANA_CHAINS } from '@/enums'
-import { getSolExplorerAddressUrl, getSolExplorerTxUrl } from '@/helpers'
+import { getSolExplorerAddressUrl, getSolExplorerTxUrl } from '@/helpers/solana'
 import { BaseSolanaProvider } from '@/providers'
 import type {
   Chain,
@@ -22,7 +22,7 @@ const mockProvider: SolanaProvider = {
   request: jest.fn(),
 }
 
-jest.mock('@/helpers', () => ({
+jest.mock('@/helpers/solana', () => ({
   getSolExplorerAddressUrl: jest.fn().mockReturnValue('mockAddressUrl'),
   getSolExplorerTxUrl: jest.fn().mockReturnValue('mockTxUrl'),
   handleEthError: jest.fn(),
