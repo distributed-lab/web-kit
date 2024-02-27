@@ -35,8 +35,8 @@
   "scripts": {
     "build": "yarn clean && yarn build:types && yarn build:cjs && yarn build:esm && yarn build:tsc-alias",
     "build:types": "tsc -p tsconfig.build.json --outDir ./dist/types --declaration --emitDeclarationOnly",
-    "build:cjs": "npx swc src -d ./dist/cjs --config-file ../../.swcrc -C module.type=commonjs",
-    "build:esm": "npx swc src -d ./dist/esm --out-file-extension mjs --config-file ../../.swcrc -C module.type=es6 isModule=true",
+    "build:cjs": "npx swc src -d ./dist/cjs --strip-leading-path --config-file ../../.swcrc -C module.type=commonjs",
+    "build:esm": "npx swc src -d ./dist/esm --strip-leading-path --out-file-extension mjs --config-file ../../.swcrc -C module.type=es6 isModule=true",
     "build:tsc-alias": "tsc-alias -p tsconfig.json --outDir ./dist/types",
     "clean": "rm -rf dist",
     "test": "yarn jest --verbose",
