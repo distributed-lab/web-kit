@@ -6,12 +6,12 @@ import { isEmpty } from 'lodash'
 import { CHAIN_TYPES, PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import { errors } from '@/errors'
 import {
-  createWalletConnectEthNamespace,
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
   requestAddEthChain,
   requestSwitchEthChain,
-} from '@/helpers'
+} from '@/helpers/eth'
+import { createWalletConnectEthNamespace } from '@/helpers/wallet-connect'
 import { Provider } from '@/provider'
 import type {
   Chain,

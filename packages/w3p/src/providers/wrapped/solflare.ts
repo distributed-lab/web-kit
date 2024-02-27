@@ -6,7 +6,7 @@ import {
 } from '@solana/web3.js'
 
 import { PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
-import { decodeSolanaTx, handleSolError } from '@/helpers'
+import { decodeSolanaTx, handleSolError } from '@/helpers/solana'
 import type {
   ProviderProxy,
   RawProvider,

@@ -10,7 +10,7 @@ import {
   getSolExplorerAddressUrl,
   getSolExplorerTxUrl,
   handleSolError,
-} from '@/helpers'
+} from '@/helpers/solana'
 import type {
   Chain,
   ChainId,

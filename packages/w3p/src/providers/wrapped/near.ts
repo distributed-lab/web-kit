@@ -3,7 +3,7 @@ import {
   getNearExplorerAddressUrl,
   getNearExplorerTxUrl,
   handleNearError,
-} from '@/helpers'
+} from '@/helpers/near'
 import type {
   Chain,
   ChainId,
