@@ -22,10 +22,16 @@
     "keepClassNames": true,
     "preserveAllComments": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "exclude": ["examples","src/tests", ".test.ts"],
+  "exclude": [
+    "examples",
+    "src/tests",
+    ".test.ts"
+  ],
   "minify": false,
   "sourceMaps": "inline"
 }
