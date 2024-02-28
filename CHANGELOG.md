@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.12] - 2024-02-28
+### Removed
+- `all` - Compling output into `.mjs` extension
+
 ## [1.0.0-rc.11] - 2024-02-28
 ### Changed
 - `all`
@@ -362,7 +366,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.11...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.12...HEAD
+[1.0.0-rc.12]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.11...1.0.0-rc.12
 [1.0.0-rc.11]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.10...1.0.0-rc.11
 [1.0.0-rc.10]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.9...1.0.0-rc.10
 [1.0.0-rc.9]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.8...1.0.0-rc.9

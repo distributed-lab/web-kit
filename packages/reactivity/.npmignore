@@ -4,3 +4,4 @@ jest.config.js
 tsconfig.json
 tsconfig.build.json
 .swcrc
+postbuild.js
