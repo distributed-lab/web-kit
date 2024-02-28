@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.11] - 2024-02-28
+### Changed
+- `all`
+  - Output ESM files with `.mjs` extension
+  - Updated `swc` dependencies versions to the latest
+
+### Fixed
+- `@distributedlab/w3p` - Tree-shaking issues related to sub-dependencies
+
+### Removed
+- `all` - Creating extra `package.json` files in the dist folder for resolving ESM and CommonJS modules
+- `all,root` - postbuild script
+- `all` - CDN distributives support
+
 ## [1.0.0-rc.10] - 2024-01-18
 ### Fixed
 - `@distributedlab/jac` - possibility to throw custom error on request
@@ -348,7 +362,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.10...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.11...HEAD
+[1.0.0-rc.11]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.10...1.0.0-rc.11
 [1.0.0-rc.10]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.9...1.0.0-rc.10
 [1.0.0-rc.9]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.8...1.0.0-rc.9
 [1.0.0-rc.8]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.7...1.0.0-rc.8

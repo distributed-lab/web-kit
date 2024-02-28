@@ -1,5 +1,6 @@
 import { CHAIN_TYPES, PROVIDER_CHECKS, PROVIDERS } from '@/enums'
-import { sleep, wrapExternalEthProvider } from '@/helpers'
+import { wrapExternalEthProvider } from '@/helpers/eth'
+import { sleep } from '@/helpers/promise'
 
 import type {
   EthereumProvider,

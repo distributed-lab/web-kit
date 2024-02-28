@@ -7,14 +7,14 @@ import {
   PROVIDER_EVENT_BUS_EVENTS,
   PROVIDER_EVENTS,
 } from '@/enums'
+import { hexToDecimal } from '@/helpers/amount'
 import {
   connectEthAccounts,
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
-  hexToDecimal,
   requestAddEthChain,
   requestSwitchEthChain,
-} from '@/helpers'
+} from '@/helpers/eth'
 import type {
   Chain,
   ChainId,
