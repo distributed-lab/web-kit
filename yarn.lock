@@ -423,14 +423,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@distributedlab/fetcher@workspace:packages/fetcher"
   dependencies:
-    "@swc/cli": ^0.3.9
-    "@swc/core": ^1.4.2
-    "@swc/jest": ^0.2.36
-    "@types/jest": ^29.5.1
-    "@types/node": ^18.14.2
     "@types/uuid": ^9
     jest: ^29.5.0
-    tsc-alias: ^1.8.2
     uuid: ^9.0.0
   languageName: unknown
   linkType: soft
@@ -440,15 +434,9 @@ __metadata:
   resolution: "@distributedlab/jac@workspace:packages/jac"
   dependencies:
     "@distributedlab/fetcher": "workspace:*"
-    "@swc/cli": ^0.3.9
-    "@swc/core": ^1.4.2
-    "@swc/jest": ^0.2.36
-    "@types/jest": ^29.5.1
     "@types/lodash": ^4
-    "@types/node": ^18.14.2
     jest: ^29.5.0
     lodash: ^4.17.21
-    tsc-alias: ^1.8.2
   languageName: unknown
   linkType: soft
 
@@ -456,13 +444,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@distributedlab/reactivity@workspace:packages/reactivity"
   dependencies:
-    "@swc/cli": ^0.3.9
-    "@swc/core": ^1.4.2
-    "@swc/jest": ^0.2.36
-    "@types/jest": ^29.5.1
-    "@types/node": ^18.14.2
     jest: ^29.5.0
-    tsc-alias: ^1.8.2
   languageName: unknown
   linkType: soft
 
@@ -470,15 +452,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@distributedlab/tools@workspace:packages/tools"
   dependencies:
-    "@swc/cli": ^0.3.9
-    "@swc/core": ^1.4.2
-    "@swc/jest": ^0.2.36
-    "@types/jest": ^29.5.1
-    "@types/node": ^18.14.2
     bignumber.js: ^9.1.1
     dayjs: ^1.11.7
     jest: ^29.5.0
-    tsc-alias: ^1.8.2
     tslib: ^2.5.0
   languageName: unknown
   linkType: soft
@@ -493,18 +469,12 @@ __metadata:
     "@near-wallet-selector/core": ^7.8.2
     "@near-wallet-selector/my-near-wallet": ^7.8.2
     "@solana/web3.js": ^1.73.2
-    "@swc/cli": ^0.3.9
-    "@swc/core": ^1.4.2
-    "@swc/jest": ^0.2.36
-    "@types/jest": ^29.5.1
-    "@types/node": ^18.14.2
     "@walletconnect/modal": ^2.6.1
     "@walletconnect/universal-provider": ^2.10.0
     bs58: ^5.0.0
     ethers: ^5.7.2
     jest: ^29.5.0
     near-api-js: ^1.1.0
-    tsc-alias: ^1.8.2
   languageName: unknown
   linkType: soft
 
@@ -2118,9 +2088,9 @@ __metadata:
   linkType: hard
 
 "@types/lodash@npm:^4":
-  version: 4.14.194
-  resolution: "@types/lodash@npm:4.14.194"
-  checksum: 113f34831c461469d91feca2dde737f88487732898b4d25e9eb23b087bb193985f864d1e1e0f3b777edc5022e460443588b6000a3b2348c966f72d17eedc35ea
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: a91acf3564a568c6f199912f3eb2c76c99c5a0d7e219394294213b3f2d54f672619f0fde4da22b29dc5d4c31457cd799acc2e5cb6bd90f9af04a1578483b6ff7
   languageName: node
   linkType: hard
 
@@ -2135,13 +2105,6 @@ __metadata:
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
   checksum: e4f86785f4092706e0d3b0edff8dca5a13b45627e4b36700acd8dfe6ad53db71928c8dee914d4276c7fd3b6ccd829aa919811c9eb708a2c8e4c6eb3701178c37
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^18.14.2":
-  version: 18.16.13
-  resolution: "@types/node@npm:18.16.13"
-  checksum: ec1ffb814750fc7f7c6c7cb138ed56f24cb23a2ffe50d264a265be52b5cafca37b94b8fb3b5b420f5674baa677b0e011160aeaa1a0edd862aa4cfa11f4467918
   languageName: node
   linkType: hard
 
@@ -8233,6 +8196,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^10.0.0
     jest: ^29.5.0
     prettier: ^2.8.4
+    tsc-alias: ^1.8.2
     typedoc: ^0.23.26
     typescript: ^5.0.4
     yorkie: ^2.0.0

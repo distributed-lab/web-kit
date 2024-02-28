@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0-rc.11] - 2024-02-27
+## [1.0.0-rc.11] - 2024-02-28
 ### Changed
 - `all`
   - Output ESM files with `.mjs` extension
