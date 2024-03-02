@@ -29,25 +29,21 @@ import type {
 import { ProviderEventBus } from './_event-bus'
 
 export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
-  readonly #provider: providers.Web3Provider
-  #rawProvider: RawProvider
+  readonly provider: providers.Web3Provider
+  rawProvider: RawProvider
 
-  #chainId?: ChainId
-  #address?: string
+  chainId?: ChainId
+  address?: string
 
   constructor(provider: RawProvider) {
     super()
 
-    this.#provider = new providers.Web3Provider(
+    this.provider = new providers.Web3Provider(
       provider as providers.ExternalProvider,
       'any',
     )
 
-    this.#rawProvider = provider
-  }
-
-  get rawProvider(): RawProvider {
-    return this.#rawProvider
+    this.rawProvider = provider
   }
 
   get chainType(): CHAIN_TYPES {
@@ -55,46 +51,38 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   }
 
   get isConnected(): boolean {
-    return Boolean(this.#chainId && this.#address)
+    return Boolean(this.chainId && this.address)
   }
 
-  get chainId(): ChainId | undefined {
-    return this.#chainId
-  }
-
-  get address(): string | undefined {
-    return this.#address
-  }
-
-  get #defaultEventPayload() {
+  get defaultEventPayload() {
     return {
-      address: this.#address,
-      chainId: this.#chainId,
+      address: this.address,
+      chainId: this.chainId,
       isConnected: this.isConnected,
     }
   }
 
   async init(): Promise<void> {
-    await this.#setListeners()
-    const currentAccounts = await this.#provider.listAccounts()
-    const network = await this.#provider.getNetwork()
+    await this.setListeners()
+    const currentAccounts = await this.provider.listAccounts()
+    const network = await this.provider.getNetwork()
 
-    this.#address = currentAccounts[0]
-    this.#chainId = hexToDecimal(network.chainId as ChainId)
+    this.address = currentAccounts[0]
+    this.chainId = hexToDecimal(network.chainId as ChainId)
 
-    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.defaultEventPayload)
   }
 
   async switchChain(chainId: ChainId): Promise<void> {
-    await requestSwitchEthChain(this.#provider, chainId)
+    await requestSwitchEthChain(this.provider, chainId)
   }
 
   async addChain(chain: Chain): Promise<void> {
-    await requestAddEthChain(this.#provider, chain)
+    await requestAddEthChain(this.provider, chain)
   }
 
   async connect(): Promise<void> {
-    await connectEthAccounts(this.#provider)
+    await connectEthAccounts(this.provider)
   }
 
   getAddressUrl(chain: Chain, address: string): string {
@@ -114,7 +102,7 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
     this.emit(PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent, {
       txBody: tx,
     })
-    const transactionResponse = await this.#provider
+    const transactionResponse = await this.provider
       .getSigner()
       .sendTransaction(tx as Deferrable<TransactionRequest>)
 
@@ -132,34 +120,34 @@ export class BaseEVMProvider extends ProviderEventBus implements ProviderProxy {
   }
 
   async signMessage(message: string): Promise<string> {
-    return this.#provider.getSigner().signMessage(message)
+    return this.provider.getSigner().signMessage(message)
   }
 
-  async #setListeners() {
-    const stubProvider = this.#provider.provider as providers.BaseProvider
+  async setListeners() {
+    const stubProvider = this.provider.provider as providers.BaseProvider
 
     stubProvider.on(PROVIDER_EVENTS.AccountsChanged, async () => {
-      const currentAccounts = await this.#provider.listAccounts()
-      this.#address = currentAccounts[0] ?? ''
+      const currentAccounts = await this.provider.listAccounts()
+      this.address = currentAccounts[0] ?? ''
 
       this.emit(
         PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
-        this.#defaultEventPayload,
+        this.defaultEventPayload,
       )
       this.emit(
         this.isConnected
           ? PROVIDER_EVENT_BUS_EVENTS.Connect
           : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
-        this.#defaultEventPayload,
+        this.defaultEventPayload,
       )
     })
 
     stubProvider.on(PROVIDER_EVENTS.ChainChanged, (chainId: ChainId) => {
-      this.#chainId = hexToDecimal(chainId)
+      this.chainId = hexToDecimal(chainId)
 
       this.emit(
         PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
-        this.#defaultEventPayload,
+        this.defaultEventPayload,
       )
     })
   }

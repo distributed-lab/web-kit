@@ -6,14 +6,10 @@ import type {
 } from '@/types'
 
 export class EventEmitter<T extends EventMap> {
-  #handlers: EventHandlersMap<T> = {}
-
-  get handlers(): EventHandlersMap<T> {
-    return this.#handlers
-  }
+  handlers: EventHandlersMap<T> = {}
 
   public on<K extends EventMapKey<T>>(key: K, fn: EventHandler<T[K]>): void {
-    this.#handlers[key] = (this.#handlers[key] || [])?.concat(fn)
+    this.handlers[key] = (this.handlers[key] || [])?.concat(fn)
   }
 
   public once<K extends EventMapKey<T>>(key: K, fn: EventHandler<T[K]>): void {
@@ -25,16 +21,16 @@ export class EventEmitter<T extends EventMap> {
   }
 
   public off<K extends EventMapKey<T>>(key: K, fn: EventHandler<T[K]>): void {
-    this.#handlers[key] = (this.#handlers[key] || [])?.filter(f => f !== fn)
+    this.handlers[key] = (this.handlers[key] || [])?.filter(f => f !== fn)
   }
 
   public emit<K extends EventMapKey<T>>(key: K, data?: T[K]): void | never {
-    ;(this.#handlers[key] || [])?.forEach((fn: EventHandler<T[K]>) => {
+    ;(this.handlers[key] || [])?.forEach((fn: EventHandler<T[K]>) => {
       fn(data)
     })
   }
 
   public clear(): void {
-    this.#handlers = {}
+    this.handlers = {}
   }
 }

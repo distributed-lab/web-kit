@@ -28,16 +28,16 @@ type ProviderDetectorConfig = {
 }
 
 export class ProviderDetector<T extends keyof Record<string, string>> {
-  #providers: ProviderInstance<T>[]
-  #rawProviders: RawProvider[]
-  #isInitiated = false
+  pureProviders: ProviderInstance<T>[]
+  rawProviders: RawProvider[]
+  isInitiated = false
 
   public static errorHandlers?: ErrorHandlersMap
   public static cfg: ProviderDetectorConfig
 
   constructor() {
-    this.#providers = []
-    this.#rawProviders = []
+    this.pureProviders = []
+    this.rawProviders = []
 
     ProviderDetector.setCfg({
       isWrapDefaultProviders: true,
@@ -56,18 +56,14 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
   }
 
   public async init(): Promise<ProviderDetector<T>> {
-    this.#detectRawProviders()
-    await this.#defineProviders()
-    this.#isInitiated = true
+    this.detectRawProviders()
+    await this.defineProviders()
+    this.isInitiated = true
     return this
   }
 
-  get isInitiated(): boolean {
-    return this.#isInitiated
-  }
-
   public get providers(): Record<PROVIDERS | T, ProviderInstance> {
-    return this.#providers.reduce((acc, el) => {
+    return this.pureProviders.reduce((acc, el) => {
       const name = el.name.toLowerCase() as PROVIDERS
 
       acc[name] = {
@@ -79,7 +75,7 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
   }
 
   public get isEnabled(): boolean {
-    return Boolean(this.#providers.length)
+    return Boolean(this.pureProviders.length)
   }
 
   public getProvider(provider: PROVIDERS | T): ProviderInstance | undefined {
@@ -87,10 +83,10 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
   }
 
   public addProvider(provider: ProviderInstance<T>): void {
-    this.#providers.push(provider)
+    this.pureProviders.push(provider)
   }
 
-  #detectRawProviders(): void {
+  detectRawProviders(): void {
     const ethProviders = window?.ethereum
       ? window?.ethereum?.providers || [window?.ethereum]
       : []
@@ -104,7 +100,7 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
       ),
     )
 
-    this.#rawProviders = [
+    this.rawProviders = [
       ...(ProviderDetector.cfg?.isWrapDefaultProviders && proxyEthProviders
         ? proxyEthProviders
         : ethProviders),
@@ -113,22 +109,22 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
     ] as RawProvider[]
   }
 
-  async #defineProviders(): Promise<void> {
-    if (this.#rawProviders.length) {
-      this.#designateProviders()
+  async defineProviders(): Promise<void> {
+    if (this.rawProviders.length) {
+      this.designateProviders()
     } else {
       await sleep(3000)
-      await this.#detectRawProviders()
-      this.#designateProviders()
+      await this.detectRawProviders()
+      this.designateProviders()
     }
   }
 
-  #designateProviders(): void {
-    if (!this.#rawProviders.length) return
+  designateProviders(): void {
+    if (!this.rawProviders.length) return
 
-    const browserProviders = this.#rawProviders.map(el => {
+    const browserProviders = this.rawProviders.map(el => {
       const appropriatedProviderName: PROVIDERS =
-        this.#getAppropriateProviderName(el)
+        this.getAppropriateProviderName(el)
 
       return {
         name: appropriatedProviderName,
@@ -136,12 +132,12 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
       } as ProviderInstance
     })
 
-    this.#providers = browserProviders.filter(
+    this.pureProviders = browserProviders.filter(
       (el, idx, arr) => arr.findIndex(sec => sec.name === el.name) === idx,
     )
   }
 
-  #getAppropriateProviderName(provider: RawProvider): PROVIDERS {
+  getAppropriateProviderName(provider: RawProvider): PROVIDERS {
     const providerName = Object.entries(PROVIDER_CHECKS).find(el => {
       const [, value] = el
 

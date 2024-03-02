@@ -22,25 +22,21 @@ export class FallbackEvmProvider
   extends ProviderEventBus
   implements ProviderProxy
 {
-  #provider: providers.Web3Provider
-  #rawProvider: RawProvider
+  provider: providers.Web3Provider
+  rawProvider: RawProvider
 
-  #chainId?: ChainId
-  #address?: string
+  chainId?: ChainId
+  address?: string
 
   constructor(provider: RawProvider) {
     super()
 
-    this.#provider = provider as unknown as providers.Web3Provider
-    this.#rawProvider = provider
+    this.provider = provider as unknown as providers.Web3Provider
+    this.rawProvider = provider
   }
 
   static get providerType(): string {
     return PROVIDERS.Fallback
-  }
-
-  get rawProvider(): RawProvider {
-    return this.#rawProvider
   }
 
   get chainType(): CHAIN_TYPES {
@@ -48,31 +44,23 @@ export class FallbackEvmProvider
   }
 
   get isConnected(): boolean {
-    return Boolean(this.#chainId)
+    return Boolean(this.chainId)
   }
 
-  get chainId(): ChainId | undefined {
-    return this.#chainId
-  }
-
-  get address(): string | undefined {
-    return this.#address
-  }
-
-  get #defaultEventPayload() {
+  get defaultEventPayload() {
     return {
-      address: this.#address,
-      chainId: this.#chainId,
+      address: this.address,
+      chainId: this.chainId,
       isConnected: this.isConnected,
     }
   }
 
   async init(): Promise<void> {
-    const network = await this.#provider.getNetwork()
+    const network = await this.provider.getNetwork()
 
-    this.#chainId = hexToDecimal(network.chainId as ChainId)
+    this.chainId = hexToDecimal(network.chainId as ChainId)
 
-    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.defaultEventPayload)
   }
 
   getAddressUrl(chain: Chain, address: string): string {
