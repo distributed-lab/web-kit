@@ -11,6 +11,7 @@ import type {
   ProviderListeners,
   ProviderProxy,
   ProviderProxyConstructor,
+  RawProvider,
   TransactionResponse,
   TxRequestBody,
 } from './types'
@@ -51,7 +52,7 @@ export class Provider implements IProvider {
     this.proxyConstructor = proxyConstructor
   }
 
-  public get rawProvider() {
+  public get rawProvider(): RawProvider | undefined {
     return this.proxy?.rawProvider
   }
 
