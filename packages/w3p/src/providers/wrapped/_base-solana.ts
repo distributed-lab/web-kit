@@ -33,17 +33,17 @@ export class BaseSolanaProvider
   extends ProviderEventBus
   implements ProviderProxy
 {
-  readonly #provider: SolanaProvider
-  #rawProvider: RawProvider
+  readonly provider: SolanaProvider
+  rawProvider: RawProvider
 
-  #chainId?: ChainId
-  #address?: string
+  chainId?: ChainId
+  address?: string
 
   constructor(provider: RawProvider) {
     super()
-    this.#provider = provider as SolanaProvider
+    this.provider = provider as SolanaProvider
 
-    this.#rawProvider = provider
+    this.rawProvider = provider
   }
 
   get chainType(): CHAIN_TYPES {
@@ -51,47 +51,31 @@ export class BaseSolanaProvider
   }
 
   get isConnected(): boolean {
-    return Boolean(this.#chainId && this.#address)
+    return Boolean(this.chainId && this.address)
   }
 
-  get chainId(): ChainId | undefined {
-    return this.#chainId
-  }
-
-  get address(): string | undefined {
-    return this.#address
-  }
-
-  get provider(): SolanaProvider {
-    return this.#provider
-  }
-
-  get rawProvider(): RawProvider {
-    return this.#rawProvider
-  }
-
-  get #defaultEventPayload() {
+  get defaultEventPayload() {
     return {
-      chainId: this.#chainId,
-      address: this.#address,
+      chainId: this.chainId,
+      address: this.address,
       isConnected: this.isConnected,
     }
   }
 
   async init(): Promise<void> {
-    this.#setListeners()
-    this.#address = getAddress(this.#provider.publicKey)
-    this.#chainId = SOLANA_CHAINS.DevNet
+    this.setListeners()
+    this.address = getAddress(this.provider.publicKey)
+    this.chainId = SOLANA_CHAINS.DevNet
 
-    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.#defaultEventPayload)
+    this.emit(PROVIDER_EVENT_BUS_EVENTS.Initiated, this.defaultEventPayload)
   }
 
   async switchChain(chainId: ChainId) {
     try {
-      this.#chainId = chainId
+      this.chainId = chainId
       this.emit(
         PROVIDER_EVENT_BUS_EVENTS.ChainChanged,
-        this.#defaultEventPayload,
+        this.defaultEventPayload,
       )
     } catch (error) {
       handleSolError(error as SolanaProviderRpcError)
@@ -100,7 +84,7 @@ export class BaseSolanaProvider
 
   async connect(): Promise<void> {
     try {
-      await this.#provider.connect()
+      await this.provider.connect()
     } catch (error) {
       handleSolError(error as SolanaProviderRpcError)
     }
@@ -127,25 +111,25 @@ export class BaseSolanaProvider
     throw new TypeError('Method should be implemented in extender class')
   }
 
-  #setListeners() {
-    this.#provider.on(PROVIDER_EVENTS.Connect, () => {
-      this.#address = getAddress(this.#provider.publicKey)
+  setListeners() {
+    this.provider.on(PROVIDER_EVENTS.Connect, () => {
+      this.address = getAddress(this.provider.publicKey)
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.Connect, this.#defaultEventPayload)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Connect, this.defaultEventPayload)
     })
 
-    this.#provider.on(PROVIDER_EVENTS.Disconnect, () => {
-      this.#address = getAddress(this.#provider.publicKey)
+    this.provider.on(PROVIDER_EVENTS.Disconnect, () => {
+      this.address = getAddress(this.provider.publicKey)
 
-      this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.#defaultEventPayload)
+      this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.defaultEventPayload)
     })
 
-    this.#provider.on(PROVIDER_EVENTS.AccountChanged, () => {
-      this.#address = getAddress(this.#provider.publicKey)
+    this.provider.on(PROVIDER_EVENTS.AccountChanged, () => {
+      this.address = getAddress(this.provider.publicKey)
 
       this.emit(
         PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
-        this.#defaultEventPayload,
+        this.defaultEventPayload,
       )
     })
   }
