@@ -83,7 +83,7 @@ export class WalletConnectEvmProvider
   }
 
   get isConnected(): boolean {
-    return Boolean(this.chainId) || Boolean(this.address)
+    return Boolean(this.chainId || this.address)
   }
 
   async init(): Promise<void> {

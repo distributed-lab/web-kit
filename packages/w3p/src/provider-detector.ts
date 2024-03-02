@@ -110,13 +110,12 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
   }
 
   async defineProviders(): Promise<void> {
-    if (this.rawProviders.length) {
-      this.designateProviders()
-    } else {
+    if (!this.rawProviders.length) {
       await sleep(3000)
-      await this.detectRawProviders()
-      this.designateProviders()
+      this.detectRawProviders()
     }
+
+    this.designateProviders()
   }
 
   designateProviders(): void {
