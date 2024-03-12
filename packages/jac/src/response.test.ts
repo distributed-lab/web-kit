@@ -67,10 +67,22 @@ describe('JsonApi response data parsing unit test', () => {
       apiClient: api,
     })
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    expect(response.createLink(response.links.next)).toBe(
+    expect(response.createLink(response.links.next!)).toBe(
       '/meta-buy-orders?filter%5Bowner%5D=3d38fff3-847f-45f2-a267-891ba90dac37&include=meta_sell_order%2Cmeta_sell_order.token%2Cmeta_sell_order.token.metadata&page%5Blimit%5D=5&page%5Bnumber%5D=1&page%5Border%5D=desc',
+    )
+  })
+
+  test('should create correct link from response if link has no match with base URL', () => {
+    const { JsonApiClient } = jest.requireActual('./json-api')
+
+    const response = parseJsonApiResponse({
+      raw: MockWrapper.makeFetcherResponse(RAW_RESPONSE),
+      isNeedRaw: false,
+      apiClient: new JsonApiClient({ baseUrl: 'https://localhost:8095' }),
+    })
+
+    expect(response.createLink(response.links.next!)).toBe(
+      '/core/meta-buy-orders?filter%5Bowner%5D=3d38fff3-847f-45f2-a267-891ba90dac37&include=meta_sell_order%2Cmeta_sell_order.token%2Cmeta_sell_order.token.metadata&page%5Blimit%5D=5&page%5Bnumber%5D=1&page%5Border%5D=desc',
     )
   })
 
