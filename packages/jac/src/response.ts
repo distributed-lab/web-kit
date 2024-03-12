@@ -120,21 +120,13 @@ export class JsonApiResponse<T, U = JsonApiDefaultMeta> {
 
   public createLink(link: Endpoint): Endpoint {
     const baseUrl = this.#apiClient?.baseUrl
-
     if (!baseUrl) return link
 
-    let intersection = ''
-
-    for (const char of link) {
-      if (baseUrl.endsWith(intersection + char)) {
-        intersection += char
-        break
-      } else {
-        intersection += char
-      }
-    }
-
-    return link.replace(intersection, '')
+    const baseUrlPath = new URL(baseUrl).pathname
+    // Do not remove leading slash if baseUrl is root
+    return baseUrlPath === '/'
+      ? link
+      : link.replace(new RegExp(`^${baseUrlPath}`), '')
   }
 
   public async fetchPage(
