@@ -1,6 +1,6 @@
 {
   "name": "@distributedlab/jac",
-  "version": "1.0.0-rc.13",
+  "version": "1.0.0-rc.14",
   "description": "A library for constructing JSON-API compliant requests and responses",
   "repository": {
     "type": "git",
