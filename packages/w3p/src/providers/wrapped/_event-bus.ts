@@ -45,6 +45,12 @@ export class ProviderEventBus {
     this.emitter.on(PROVIDER_EVENT_BUS_EVENTS.ChainChanged, cb)
   }
 
+  public onWalletConnectDisplayUri(
+    cb: (e?: ProviderEventPayload) => void,
+  ): void {
+    this.emitter.on(PROVIDER_EVENT_BUS_EVENTS.WalletConnectDisplayUri, cb)
+  }
+
   public clearHandlers(): void {
     this.emitter.clear()
   }

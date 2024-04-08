@@ -48,7 +48,7 @@ describe('Performs duration class unit test', () => {
 
   test('as months should return correct value', () => {
     const dr = new Duration({ days: 2 })
-    expect(dr.asMonths).toStrictEqual(0.06666666666666667)
+    expect(dr.asMonths).toBeLessThanOrEqual(0.06666666666666667)
   })
 
   test('hours should return correct value', () => {

@@ -2,7 +2,6 @@ import { Fetcher, FetcherError } from '@distributedlab/fetcher'
 import { RuntimeError } from '@distributedlab/tools'
 
 import { errors } from '@/errors'
-import type { JsonApiResponseErrors } from '@/types'
 
 import { JsonApiClient } from './json-api'
 import { MockWrapper, PARSED_RESPONSE, RAW_RESPONSE } from './tests'
@@ -193,7 +192,7 @@ describe('performs JsonApiClient request unit test', () => {
   test('should return false if error is not instance of FetcherError', async () => {
     const error = new CustomError('')
 
-    expect(error instanceof FetcherError<JsonApiResponseErrors>).toEqual(false)
+    expect(error instanceof FetcherError).toEqual(false)
   })
 
   test('should return correct data', () => {

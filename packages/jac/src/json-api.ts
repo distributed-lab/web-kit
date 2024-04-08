@@ -138,7 +138,7 @@ export class JsonApiClient {
     try {
       raw = await this.#fetcher.request(config)
     } catch (e) {
-      if (e instanceof FetcherError<JsonApiResponseErrors>) {
+      if (e instanceof FetcherError) {
         throw parseJsonApiError(e as FetcherError<JsonApiResponseErrors>)
       }
 

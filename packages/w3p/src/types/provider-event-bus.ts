@@ -10,6 +10,7 @@ export type ProviderEventPayload = {
   txBody?: TxRequestBody
   txHash?: string
   txResponse?: TransactionResponse
+  walletConnectDisplayUri?: string
 }
 
 export type ProviderEventMap = {
@@ -22,6 +23,8 @@ export type ProviderEventMap = {
   [PROVIDER_EVENT_BUS_EVENTS.BeforeTxSent]: ProviderEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.TxSent]: ProviderEventPayload
   [PROVIDER_EVENT_BUS_EVENTS.TxConfirmed]: ProviderEventPayload
+
+  [PROVIDER_EVENT_BUS_EVENTS.WalletConnectDisplayUri]: ProviderEventPayload
 }
 
 export type ProviderEventCallback = (e?: ProviderEventPayload) => void
@@ -37,6 +40,8 @@ export interface ProviderSubscriber {
   onBeforeTxSent(cb: ProviderEventCallback): void
   onTxSent(cb: ProviderEventCallback): void
   onTxConfirmed(cb: ProviderEventCallback): void
+
+  onWalletConnectDisplayUri(cb: ProviderEventCallback): void
 }
 
 export type ProviderListeners = {
