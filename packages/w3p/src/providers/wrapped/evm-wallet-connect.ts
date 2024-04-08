@@ -272,7 +272,7 @@ export class WalletConnectEvmProvider
       address: this.address,
       chainId: this.chainId,
       isConnected: this.isConnected,
-      walletConnectDisplayUri: this.walletConnectDisplayUri, // FIXME
+      walletConnectDisplayUri: this.walletConnectDisplayUri,
     }
   }
 
