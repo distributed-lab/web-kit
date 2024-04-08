@@ -6,6 +6,7 @@ import type {
   Chain,
   ChainId,
   IProvider,
+  ProviderEventCallback,
   ProviderEventPayload,
   ProviderInstance,
   ProviderListeners,
@@ -175,6 +176,10 @@ export class Provider implements IProvider {
 
   public onTxConfirmed(cb: (e?: ProviderEventPayload) => void) {
     this.proxy?.onTxConfirmed(cb)
+  }
+
+  public onWalletConnectDisplayUri(cb: ProviderEventCallback) {
+    this.proxy?.onWalletConnectDisplayUri(cb)
   }
 
   public async disconnect() {

@@ -1,17 +1,16 @@
-import { WalletConnectModal } from '@walletconnect/modal'
 import UniversalProvider from '@walletconnect/universal-provider'
 import { providers, utils } from 'ethers'
-import isEmpty from 'lodash/isEmpty'
+import { isEmpty } from 'lodash'
 
 import { CHAIN_TYPES, PROVIDER_EVENT_BUS_EVENTS, PROVIDERS } from '@/enums'
 import { errors } from '@/errors'
 import {
+  createWalletConnectEthNamespace,
   getEthExplorerAddressUrl,
   getEthExplorerTxUrl,
   requestAddEthChain,
   requestSwitchEthChain,
-} from '@/helpers/eth'
-import { createWalletConnectEthNamespace } from '@/helpers/wallet-connect'
+} from '@/helpers'
 import { Provider } from '@/provider'
 import type {
   Chain,
@@ -21,7 +20,6 @@ import type {
   RawProvider,
   TransactionResponse,
   TxRequestBody,
-  WalletConnectInitArgs,
 } from '@/types'
 
 import { ProviderEventBus } from '../wrapped/_event-bus'
@@ -39,35 +37,30 @@ export class WalletConnectEvmProvider
   extends ProviderEventBus
   implements ProviderProxy
 {
-  universalProvider: UniversalProvider | null
-  ethProvider: providers.Web3Provider | null
-
-  w3Modal: WalletConnectModal
+  universalProvider: UniversalProvider
+  walletConnectDisplayUri = ''
 
   chainId?: ChainId
   address?: string
 
-  readonly projectId: string
-  readonly relayUrl?: string
-  readonly logger?: string
-
-  constructor(provider: RawProvider) {
+  /**
+   * import { Provider } from '@distributed/w3p'
+   * import UniversalProvider from '@walletconnect/universal-provider'
+   *
+   * const universalProvider = new UniversalProvider({
+   *   projectId,
+   *   relayUrl,
+   *   logger,
+   * })
+   *
+   * const provider = new Provider(WalletConnectEvmProvider)
+   * provider.init(providerInstance, listeners)
+   * @param universalProvider
+   */
+  constructor(universalProvider: RawProvider) {
     super()
 
-    const { projectId, relayUrl, logger } = provider as WalletConnectInitArgs
-
-    if (!projectId) {
-      throw new errors.ProviderParseError()
-    }
-
-    this.projectId = projectId
-    this.relayUrl = relayUrl
-    this.logger = logger
-    this.universalProvider = null
-    this.ethProvider = null
-    this.w3Modal = new WalletConnectModal({
-      projectId: this.projectId,
-    })
+    this.universalProvider = universalProvider as unknown as UniversalProvider
   }
 
   static get providerType(): PROVIDERS {
@@ -78,25 +71,23 @@ export class WalletConnectEvmProvider
     return this.universalProvider as unknown as RawProvider
   }
 
+  get ethProvider(): providers.Web3Provider | null {
+    if (!this.universalProvider?.session) {
+      return null
+    }
+
+    return new providers.Web3Provider(this.universalProvider)
+  }
+
   get chainType(): CHAIN_TYPES {
     return CHAIN_TYPES.EVM
   }
 
   get isConnected(): boolean {
-    return Boolean(this.chainId || this.address)
+    return Boolean(this.chainId) && Boolean(this.address)
   }
 
   async init(): Promise<void> {
-    this.universalProvider = await UniversalProvider.init({
-      logger: this.logger,
-      relayUrl: this.relayUrl,
-      projectId: this.projectId,
-    })
-
-    if (this.universalProvider?.session) {
-      this.ethProvider = new providers.Web3Provider(this.universalProvider)
-    }
-
     await this.checkForPersistedSession()
 
     await this.setListeners()
@@ -111,45 +102,36 @@ export class WalletConnectEvmProvider
       throw new errors.ProviderNotInitializedError()
     }
 
-    try {
-      await this.universalProvider.connect({
-        namespaces: createWalletConnectEthNamespace(),
-        optionalNamespaces: createWalletConnectEthNamespace(),
-        skipPairing: true,
-      })
+    await this.universalProvider.connect({
+      namespaces: createWalletConnectEthNamespace(),
+      optionalNamespaces: createWalletConnectEthNamespace(),
+      skipPairing: true,
+    })
 
-      await this.universalProvider.enable()
+    await this.universalProvider.enable()
 
-      this.ethProvider = new providers.Web3Provider(this.universalProvider)
+    const accounts = await this.universalProvider.request<string[]>({
+      method: 'eth_requestAccounts',
+    })
 
-      const accounts = await this.universalProvider.request<string[]>({
-        method: 'eth_requestAccounts',
-      })
+    this.chainId =
+      this.universalProvider?.session?.namespaces?.eip155?.chains?.[0]?.split(
+        ':',
+      )[1]
 
-      this.chainId =
-        this.universalProvider?.session?.namespaces?.eip155?.chains?.[0]?.split(
-          ':',
-        )[1]
+    this.address = accounts?.[0]
 
-      this.address = accounts?.[0]
+    this.emit(
+      PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
+      this.defaultEventPayload,
+    )
 
-      this.emit(
-        PROVIDER_EVENT_BUS_EVENTS.AccountChanged,
-        this.defaultEventPayload,
-      )
-
-      this.emit(
-        this.isConnected
-          ? PROVIDER_EVENT_BUS_EVENTS.Connect
-          : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
-        this.defaultEventPayload,
-      )
-
-      this.w3Modal.closeModal()
-    } catch (e) {
-      this.w3Modal.closeModal()
-      throw e
-    }
+    this.emit(
+      this.isConnected
+        ? PROVIDER_EVENT_BUS_EVENTS.Connect
+        : PROVIDER_EVENT_BUS_EVENTS.Disconnect,
+      this.defaultEventPayload,
+    )
   }
 
   async disconnect() {
@@ -159,7 +141,6 @@ export class WalletConnectEvmProvider
     await this.universalProvider.disconnect()
     this.chainId = undefined
     this.address = undefined
-    this.ethProvider = null
     this.emit(PROVIDER_EVENT_BUS_EVENTS.Disconnect, this.defaultEventPayload)
   }
 
@@ -291,6 +272,7 @@ export class WalletConnectEvmProvider
       address: this.address,
       chainId: this.chainId,
       isConnected: this.isConnected,
+      walletConnectDisplayUri: this.walletConnectDisplayUri, // FIXME
     }
   }
 
@@ -331,7 +313,12 @@ export class WalletConnectEvmProvider
     })
 
     this.universalProvider.on('display_uri', (uri: string) => {
-      this.w3Modal.openModal({ uri })
+      this.walletConnectDisplayUri = uri
+
+      this.emit(
+        PROVIDER_EVENT_BUS_EVENTS.WalletConnectDisplayUri,
+        this.defaultEventPayload,
+      )
     })
   }
 }
