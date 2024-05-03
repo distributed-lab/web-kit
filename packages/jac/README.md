@@ -71,7 +71,7 @@ export const refreshTokenInterceptor: FetcherErrorResponseInterceptor = async (
     const url = new URL(config.url)
 
     return new Fetcher({ baseUrl: url.origin }).request({
-      endpoint: url.pathname,
+      endpoint: config.url.replace(url.origin, ''),
       method: config.method as HTTP_METHODS,
       ...(config.body ? { body: config.body } : {}),
       headers: {
