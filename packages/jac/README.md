@@ -45,6 +45,11 @@ export const bearerAttachInterceptor: FetcherRequestInterceptor = async (
   return request
 }
 
+const refreshTokenStatus = {
+  isUpdating: false,
+  isErrored: false,
+};
+
 export const refreshTokenInterceptor: FetcherErrorResponseInterceptor = async (
   response: FetcherResponse<unknown>,
 ) => {
@@ -63,15 +68,29 @@ export const refreshTokenInterceptor: FetcherErrorResponseInterceptor = async (
   const { t } = i18n.global
 
   try {
-    const accessToken = localStorage.getItem('accessToken')
+    if (!refreshTokenStatus.isUpdating) {
+      refreshTokenStatus.isUpdating = true;
+      refreshTokenStatus.isErrored = false;
 
-    // Executes some refresh token logic in the client app
-    toolkitBus.emit(DEFAULT_BUS_EVENTS.refreshToken)
+      // Executes some refresh token logic in the client app
+      const newToken = await api.get('/refresh', {...})
+      localStorage.setItem('accessToken', newToken)
+
+      refreshTokenStatus.isUpdating = false;
+    }
+
+    while(refreshTokenStatus.isUpdating) {
+      await sleep(50);
+    };
+
+    if (refreshTokenStatus.isErrored) { return response; }
+
+    const accessToken = localStorage.getItem('accessToken')
 
     const url = new URL(config.url)
 
     return new Fetcher({ baseUrl: url.origin }).request({
-      endpoint: url.pathname,
+      endpoint: config.url.replace(url.origin, ''),
       method: config.method as HTTP_METHODS,
       ...(config.body ? { body: config.body } : {}),
       headers: {
@@ -88,6 +107,9 @@ export const refreshTokenInterceptor: FetcherErrorResponseInterceptor = async (
      * We can logout user and redirect him to the login page and
      * emit bus error event to show user that session expired
      */
+
+    refreshTokenStatus.isErrored = true;
+    refreshTokenStatus.isUpdating = false;
 
     toolkitBus.emit(DEFAULT_BUS_EVENTS.logout)
     toolkitBus.emit(DEFAULT_BUS_EVENTS.error, {
