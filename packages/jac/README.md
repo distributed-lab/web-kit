@@ -57,7 +57,7 @@ export const refreshTokenInterceptor: FetcherErrorResponseInterceptor = async (
     // Add if you use a refresh token (as 'refresh_token_url' there should be refresh token endpoint)
     // && config.url !== 'refresh_token_url'
   )
-    return Promise.reject(response)
+    return response
 
   // Some authentication store in the client app
   const { t } = i18n.global

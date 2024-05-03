@@ -131,9 +131,12 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
       } as ProviderInstance
     })
 
-    this.pureProviders = browserProviders.filter(
-      (el, idx, arr) => arr.findIndex(sec => sec.name === el.name) === idx,
-    )
+    this.pureProviders = [
+      ...this.pureProviders,
+      ...browserProviders.filter(
+        (el, idx, arr) => arr.findIndex(sec => sec.name === el.name) === idx,
+      ),
+    ]
   }
 
   getAppropriateProviderName(provider: RawProvider): PROVIDERS {
