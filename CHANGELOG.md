@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.16] - 2024-05-03
+### Fixed
+- `@distributedlab/w3p` - `ProviderDetector` resets pure providers list on init
+- `@distributedlab/jac` - example in README
+
 ## [1.0.0-rc.15] - 2024-04-08
 ### Fixed
 - `@distributedlab/jac` - `JsonApiResponse.createLink` method to handle client `baseUrl` with root path
@@ -379,7 +384,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
-[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.15...HEAD
+[Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.16...HEAD
+[1.0.0-rc.16]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.15...1.0.0-rc.16
 [1.0.0-rc.15]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.14...1.0.0-rc.15
 [1.0.0-rc.14]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.13...1.0.0-rc.14
 [1.0.0-rc.13]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.12...1.0.0-rc.13
