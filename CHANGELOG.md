@@ -1,10 +1,15 @@
-## Changelog
+# Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- `root` - `scripts/release-sanity-check.js` and `scripts/version.js` replaced with `rlx` package
+
+### Fixed
+- `root` - CHANGLOG.md according to the Keep a Changelog format
 
 ## [1.0.0-rc.16] - 2024-05-03
 ### Fixed
@@ -34,13 +39,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Output ESM files with `.mjs` extension
   - Updated `swc` dependencies versions to the latest
 
-### Fixed
-- `@distributedlab/w3p` - Tree-shaking issues related to sub-dependencies
-
 ### Removed
 - `all` - Creating extra `package.json` files in the dist folder for resolving ESM and CommonJS modules
 - `all,root` - postbuild script
 - `all` - CDN distributives support
+
+### Fixed
+- `@distributedlab/w3p` - Tree-shaking issues related to sub-dependencies
 
 ## [1.0.0-rc.10] - 2024-01-18
 ### Fixed
@@ -238,11 +243,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@distributedlab/tools` - `EventEmitter` Make emit second parameter optional
 
 ## [0.2.0-rc.5] - 2023-04-24
-### Fixed
-- `@distributedlab/fetcher` - `clone` method
-
 ### Removed
 - `@distributedlab/jac` - Dependency `@distributedlab/jsona`
+
+### Fixed
+- `@distributedlab/fetcher` - `clone` method
 
 ## [0.2.0-rc.4] - 2023-04-24
 ### Added
@@ -253,7 +258,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@distributedlab/jac` - Dependency `@distributedlab/jsona`
 
 ## [0.2.0-rc.3] - 2023-04-24
-## Added
+### Added
 - `root`: Package `@distributedlab/w3p` - wrapper for web3 providers
   - `EVN based`:
     - `MetamaskProvider`
@@ -264,7 +269,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Near based`:
     - `NearProvider`
 
-## Removed
+### Removed
 - `root` - Unused `tsconfig.eslint.json`
 
 ## [0.2.0-rc.2] - 2023-04-24
@@ -281,8 +286,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `all` - Replace type imports with `import type` syntax according to the [SWC tsc migration guide]
 - `all` - Set "browser": to "./dist/esm/index.js" to correctly resolve the package by the Webpack
 - `all` - Moved exclude tests to the `tsconfig.build.json` file to make ESLint work in the tests
-
-[SWC tsc migration guide]: https://swc.rs/docs/migrating-from-tsc
 
 ## [0.2.0-rc.1] - 2023-04-17
 ### Added
@@ -379,9 +382,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `@distributedlab/tools`: Handling big numbers
 - `@distributedlab/tools`: Add tests for time.ts and duration.ts
 
-### Changed****
+### Changed
 - `root`: Updated `README.md`
 
+
+[SWC tsc migration guide]: https://swc.rs/docs/migrating-from-tsc
 [old repo]: https://github.com/distributed-lab/web-kit-old
 
 [Unreleased]: https://github.com/distributed-lab/web-kit/compare/1.0.0-rc.16...HEAD
