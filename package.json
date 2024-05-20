@@ -40,7 +40,7 @@
     "change-log:format": "npx rlx change-log format"
   },
   "devDependencies": {
-    "@napalmpapalam/rlx": "^0.3.2",
+    "@napalmpapalam/rlx": "^0.4.0",
     "@swc/cli": "^0.3.9",
     "@swc/core": "^1.4.2",
     "@swc/jest": "^0.2.36",

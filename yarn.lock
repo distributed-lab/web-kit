@@ -1276,15 +1276,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napalmpapalam/rlx@npm:^0.3.2":
-  version: 0.3.2
-  resolution: "@napalmpapalam/rlx@npm:0.3.2"
+"@napalmpapalam/rlx@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@napalmpapalam/rlx@npm:0.4.0"
   dependencies:
     binary-install: ^1.1.0
     console.table: ^0.10.0
   bin:
     rlx: run.js
-  checksum: 48bdfd192fb756639266e09f2ae850dddee5f5227496603f0489d4e991b59bd80d1c3618b2c120ca0552857ec1380bc0a3236bc45b5531441bdbedd6e9efd130
+  checksum: 01142bf8cdd644851a911ef79bc214ae895260b245be6394a1d0abcda4b237cad4485bb95dc60104517e871efe5492382ad34dcd58752cc33f15814a4ef7a64c
   languageName: node
   linkType: hard
 
@@ -8886,7 +8886,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web-kit-monorepo-root@workspace:."
   dependencies:
-    "@napalmpapalam/rlx": ^0.3.2
+    "@napalmpapalam/rlx": ^0.4.0
     "@swc/cli": ^0.3.9
     "@swc/core": ^1.4.2
     "@swc/jest": ^0.2.36
