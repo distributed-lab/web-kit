@@ -21,7 +21,8 @@ describe('performs provider detector unit test', () => {
       expect(providerDetector.isEnabled).toBeTruthy()
     })
   })
-  describe('performs get and add providers', () => {
+
+  describe('performs get, add, and remove providers', () => {
     let providerDetector: ProviderDetector<keyof Record<string, string>>
 
     beforeEach(() => {
@@ -47,6 +48,23 @@ describe('performs provider detector unit test', () => {
       providerDetector.addProvider({ name: PROVIDERS.Metamask })
       expect(providerDetector.getProvider(PROVIDERS.Metamask)).toEqual({
         name: PROVIDERS.Metamask,
+      })
+    })
+
+    test('should remove a provider', async () => {
+      mockWindow({ ethereum: { providers: [MetamaskProvider] } })
+      providerDetector.addProvider({ name: PROVIDERS.Metamask })
+      providerDetector.addProvider({ name: PROVIDERS.Coinbase })
+
+      expect(providerDetector.providers).toEqual({
+        metamask: { name: PROVIDERS.Metamask },
+        coinbase: { name: PROVIDERS.Coinbase },
+      })
+
+      providerDetector.removeProvider({ name: PROVIDERS.Metamask })
+
+      expect(providerDetector.providers).toEqual({
+        coinbase: { name: PROVIDERS.Coinbase },
       })
     })
   })

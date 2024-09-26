@@ -86,6 +86,12 @@ export class ProviderDetector<T extends keyof Record<string, string>> {
     this.pureProviders.push(provider)
   }
 
+  public removeProvider(providerToRemove: ProviderInstance<T>): void {
+    this.pureProviders = this.pureProviders.filter(
+      provider => provider.name !== providerToRemove.name,
+    )
+  }
+
   detectRawProviders(): void {
     const ethProviders = window?.ethereum
       ? window?.ethereum?.providers || [window?.ethereum]
