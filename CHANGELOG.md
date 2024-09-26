@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.17] - 2024-09-26
+### Added
+- `@distributedlab/w3p` - `removeProvider` method to `ProviderDetector`
+
 ## [1.0.0-rc.16] - 2024-05-03
 ### Fixed
 - `@distributedlab/w3p` - `ProviderDetector` resets pure providers list on init
